@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Url} from "../../../url-project";
+import {HttpClient} from '@angular/common/http';
+import {Url} from '../../../url-project';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,6 @@ export class UserService {
   }
 
   userRegister(info) {
-    return this.http.post(Url + '/api/register', info)
+    return this.http.post(Url + '/api/register', info);
   }
 }

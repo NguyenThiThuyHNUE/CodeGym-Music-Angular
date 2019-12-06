@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {UserService} from "../../service/user.service";
+import {FormBuilder, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {UserService} from '../../service/user.service';
 
 @Component({
   selector: 'app-header',
@@ -24,14 +24,14 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  register() {
-    this.userService.userRegister(this.registerForm.value).subscribe(
-      res => {
-        this.closeModal.nativeElement.click();
-      },
-      error => console.log(error)
-    );
-  }
+  // register() {
+  //   this.userService.userRegister(this.registerForm.value).subscribe(
+  //     res => {
+  //       // this.closeModal.nativeElement.click();
+  //     },
+  //     error => console.log(error)
+  //   );
+  // }
 
   get name() {
     return this.registerForm.get('name');
