@@ -1,47 +1,26 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import {UserService} from '../../service/user.service';
+import {Component} from '@angular/core';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {RegisterComponent} from './register/register.component';
+import {LoginComponent} from './login/login.component';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
-  registerForm = this.fb.group({
-    name: ['', Validators.required],
-    email: ['', Validators.required],
-    password: ['', Validators.required]
-  });
+export class HeaderComponent {
 
-  constructor(private fb: FormBuilder,
-              private router: Router,
-              private userService: UserService
-  ) {
+  constructor(public dialog: MatDialog) {
+  }
+  showForm() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '40%';
+    this.dialog.open(RegisterComponent, dialogConfig);
   }
 
-  ngOnInit() {
-  }
-
-  // register() {
-  //   this.userService.userRegister(this.registerForm.value).subscribe(
-  //     res => {
-  //       // this.closeModal.nativeElement.click();
-  //     },
-  //     error => console.log(error)
-  //   );
-  // }
-
-  get name() {
-    return this.registerForm.get('name');
-  }
-
-  get password() {
-    return this.registerForm.get('password');
-  }
-
-  get email() {
-    return this.registerForm.get('email');
+  showFormLogin() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '40%';
+    this.dialog.open(LoginComponent, dialogConfig);
   }
 }

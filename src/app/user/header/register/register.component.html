@@ -1,8 +1,18 @@
 <mat-tab-group>
-  <mat-tab label="Login">
+  <mat-tab label="Register">
     <mat-card>
-      <form class="tp-form" [formGroup]="loginForm" (ngSubmit)="userLogin()">
+      <form class="tp-form" [formGroup]="registerForm" (ngSubmit)="register()">
         <mat-card-content>
+          <!--  Name  -->
+          <div class="">
+            <mat-form-field hideRequiredMarker class="tp-full-width" appearance="fill">
+              <mat-label>Name</mat-label>
+              <input matInput type="text" formControlName="name" required>
+              <mat-hint align="end" *ngIf="name.invalid && (name.dirty || name.touched)">
+                <span *ngIf="name.errors.required">Name is required</span>
+              </mat-hint>
+            </mat-form-field>
+          </div>
 
           <!--  Email   -->
           <div class="">
@@ -24,6 +34,19 @@
                 <span *ngIf="password.errors.required">Password can not empty!!!</span>
               </mat-hint>
             </mat-form-field>
+          </div>
+
+          <div class="">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Terms and conditions</mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>We will not share your information</p>
+            </mat-expansion-panel>
+          </div>
+
+          <div class="">
+            <mat-checkbox>I Agree</mat-checkbox>
           </div>
         </mat-card-content>
         <mat-card-actions align="end">
