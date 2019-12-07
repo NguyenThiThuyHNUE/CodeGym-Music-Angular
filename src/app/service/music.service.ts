@@ -3,6 +3,10 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IMusic} from '../interface/iMusic';
 import {IMessage} from '../interface/iMessage';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {AngularFireStorage} from '@angular/fire/storage';
+import {AngularFireDatabase} from '@angular/fire/database';
+
 
 const webBackEndUrl = 'localhost:8000';
 
@@ -10,8 +14,8 @@ const webBackEndUrl = 'localhost:8000';
   providedIn: 'root'
 })
 export class MusicService {
-  musicUrl = `http://${webBackEndUrl}/api/auth/songs`;
-  createSongUrl = `http://${webBackEndUrl}/api/auth/song/create/`;
+  musicUrl = `http://${webBackEndUrl}/api/songs`;
+  createSongUrl = `http://${webBackEndUrl}/api/song/create/`;
 
   constructor(private http: HttpClient) {
   }

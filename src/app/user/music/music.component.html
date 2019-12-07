@@ -1,0 +1,28 @@
+<hr>
+<div *ngFor="let song of musicList">
+  <div class="row">
+    <div class="container">
+      <div class="col-sx-6 col-sm-6 col-md-12 col-lg-2">
+        <div><img class="image-music" src="{{song.avatar}}" alt=""></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="container">
+      <div class="ml-5 col-sx-6 col-sm-6 col-md-12 col-lg-12">
+        <div><b><a href="">{{song.name}}</a></b></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="container">
+      <div class="col-sx-6 col-sm-6 col-md-12 col-lg-12">
+        <div><iframe class="margin-music" src="https://www.nhaccuatui.com/mh/auto/udtg0S7rRQSy" width="620" height="382"
+                             frameborder="0" allowfullscreen
+                             allow="autoplay"></iframe></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
