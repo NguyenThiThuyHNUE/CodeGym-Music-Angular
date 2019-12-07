@@ -15,10 +15,11 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {LoginComponent} from './header/login/login.component';
 
 @NgModule({
-  declarations: [UserComponent, HeaderComponent, BodyComponent, RegisterComponent],
-  entryComponents: [RegisterComponent],
+  declarations: [UserComponent, HeaderComponent, BodyComponent, RegisterComponent, LoginComponent],
+  entryComponents: [RegisterComponent, LoginComponent],
   imports: [
     MatExpansionModule,
     MatCheckboxModule,
