@@ -16,9 +16,11 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {LoginComponent} from './header/login/login.component';
+import { AuthComponent } from './header/auth/auth.component';
+import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material';
 
 @NgModule({
-  declarations: [UserComponent, HeaderComponent, BodyComponent, RegisterComponent, LoginComponent],
+  declarations: [UserComponent, HeaderComponent, BodyComponent, RegisterComponent, LoginComponent, AuthComponent],
   entryComponents: [RegisterComponent, LoginComponent],
   imports: [
     MatExpansionModule,
@@ -34,6 +36,8 @@ import {LoginComponent} from './header/login/login.component';
     ReactiveFormsModule,
     FormsModule,
     UserRoutingModule,
+    _MatMenuDirectivesModule,
+    MatMenuModule,
   ]
 })
 export class UserModule {

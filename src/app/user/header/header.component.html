@@ -91,6 +91,12 @@
           <li class="nav-item">
             <a mat-button class="nav-link" (click)="showForm()">Register</a>
           </li>
+          <li class="nav-item">
+            <a mat-button class="nav-link" href="" *ngIf="user.isLoggedIn()">
+              <app-auth></app-auth>
+            </a>
+          </li>
+
         </ul>
       </div>
     </nav>

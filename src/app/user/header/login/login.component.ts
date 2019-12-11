@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
     this.userService.userLogin(this.loginForm.value)
       .subscribe(
         data => {
-          console.log(this.loginForm.value);
           localStorage.setItem('token', data.access_token);
           this.router.navigate(['/']);
           this.resetForm();
