@@ -4,6 +4,8 @@ import {Url} from '../../../url-project';
 import {IUserResponse} from '../interface/i-user-response';
 import {map} from 'rxjs/operators';
 import {LoginResponse} from '../interface/login-response';
+import {Observable} from 'rxjs';
+import {TokenRespone} from '../interface/token-respone';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +21,17 @@ export class UserService {
   userLogin(userCredential) {
     return this.http.post<LoginResponse>(Url + '/api/login', userCredential);
   }
+
   logout() {
     localStorage.removeItem('token');
   }
+
+  isLoggedIn() {
+    return !!localStorage.getItem('token');
+  }
+
+  getUserCredential(userToken): Observable<TokenRespone> {
+    return this.http.get<TokenRespone>(Url + `/api/me?token=${userToken}`);
+  }
+
 }
