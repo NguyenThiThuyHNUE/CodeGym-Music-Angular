@@ -23,8 +23,8 @@ import {MusicComponent} from './music/music.component';
 import {MusicDetailComponent} from './body/music-detail/music-detail.component';
 
 @NgModule({
-  declarations: [UserComponent, HeaderComponent, BodyComponent, RegisterComponent, LoginComponent, AuthComponent,
-    MusicDetailComponent, CreateComponent, MusicComponent],
+  declarations: [UserComponent, HeaderComponent, BodyComponent, RegisterComponent, LoginComponent, AuthComponent, MusicDetailComponent,
+    CreateComponent, MusicComponent],
   entryComponents: [RegisterComponent, LoginComponent],
   imports: [
     MatExpansionModule,
