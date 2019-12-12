@@ -30,12 +30,10 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           localStorage.setItem('token', data.access_token);
-          this.router.navigate(['/']);
           this.resetForm();
         },
         error => {
           this.errorFromBackEnd = error;
-          return this.router.navigate(['/login']);
         });
   }
 
