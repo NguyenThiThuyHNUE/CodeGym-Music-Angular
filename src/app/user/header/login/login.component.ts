@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../service/user.service';
@@ -16,26 +16,27 @@ export class LoginComponent implements OnInit {
     email: ['', [Validators.required]],
     password: ['', [Validators.required]]
   });
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private userService: UserService,
     private dialogRef: MatDialogRef<LoginComponent>
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
   }
+
   userLogin() {
     this.userService.userLogin(this.loginForm.value)
       .subscribe(
         data => {
           localStorage.setItem('token', data.access_token);
-          this.router.navigate(['/']);
           this.resetForm();
         },
         error => {
           this.errorFromBackEnd = error;
-          return this.router.navigate(['/login']);
         });
   }
 
