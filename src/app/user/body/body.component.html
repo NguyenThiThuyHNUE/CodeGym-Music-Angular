@@ -32,7 +32,8 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
-
+    <router-outlet></router-outlet>
+    ss
     <!-- new playlists -->
     <div>
       <div class="row mt-5">
@@ -48,17 +49,15 @@
         </div>
       </div>
 
-      <div class="ml-5 mr-5 mb-5">
+      <div class="ml-5 mr-5 mb-5" *ngFor="let music of musicList">
         <div id="carouselExampleControls1" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
               <div class="row">
                 <div class="col">
-                  <img
-                    src="https://avatar-nct.nixcdn.com/song/2019/10/23/7/8/b/5/1571804802390.jpg"
-                    class="d-block w-100" alt="...">
-                  <p class="mb-0"><a>Song name</a></p>
-                  <p class="mb-0"><a>Singer</a></p>
+                  <a routerLink="/home/musics"><img src="{{music.avatar}}" class="d-block w-100" alt="..."></a>
+                  <a routerLink="/home/musics"><p class="mb-0 ml-5"><a>{{music.name}}</a></p></a>
+                  <a routerLink="/home/musics"><p class="container mb-0 ml-5"><a>{{music.singer}}</a></p></a>
                 </div>
                 <div class="col">
                   <img
