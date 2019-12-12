@@ -16,12 +16,15 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {LoginComponent} from './header/login/login.component';
-import { AuthComponent } from './header/auth/auth.component';
+import {AuthComponent} from './header/auth/auth.component';
 import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material';
 import { MusicDetailComponent } from './body/music-detail/music-detail.component';
+import {CreateComponent} from './music/create/create.component';
+import {MusicComponent} from './music/music.component';
 
 @NgModule({
-  declarations: [UserComponent, HeaderComponent, BodyComponent, RegisterComponent, LoginComponent, AuthComponent, MusicDetailComponent],
+  declarations: [UserComponent, HeaderComponent, BodyComponent, RegisterComponent, LoginComponent, AuthComponent, MusicDetailComponent,
+  CreateComponent, MusicComponent],
   entryComponents: [RegisterComponent, LoginComponent],
   imports: [
     MatExpansionModule,
