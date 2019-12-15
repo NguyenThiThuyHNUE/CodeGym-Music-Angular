@@ -1,105 +1,226 @@
-<!-- header -->
-<div class="container-fluid bg-light border border-bottom">
-  <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-      <a class="navbar-brand m-0 p-0" href="#" style="width: 150px">
-        <img src="https://ar.toneden.io/21992223/dd63b4a9-5e31-4380-8ca9-228d652b73f0" class="w-75">
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<!--&lt;!&ndash; header &ndash;&gt;-->
+<!--<div class="container-fluid bg-light border border-bottom">-->
+<!--  <div class="container">-->
+<!--    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">-->
+<!--      <a class="navbar-brand m-0 p-0" href="#" style="width: 150px">-->
+<!--        <img src="https://ar.toneden.io/21992223/dd63b4a9-5e31-4380-8ca9-228d652b73f0" class="w-75">-->
+<!--      </a>-->
+<!--      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"-->
+<!--              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--        <span class="navbar-toggler-icon"></span>-->
+<!--      </button>-->
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+<!--      <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
 
-        <!-- Left side of Navbar -->
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="playlists" role="button"
-               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Playlists
-            </a>
-            <div class="dropdown-menu" aria-labelledby="playlists">
-              <a class="dropdown-item" href="#">V-pop</a>
-              <a class="dropdown-item" href="#">US - UK</a>
-              <a class="dropdown-item" href="#">K-pop</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Others</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="songs" role="button"
-               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Songs
-            </a>
-            <div class="dropdown-menu" aria-labelledby="songs">
-              <a class="dropdown-item" href="#">V-pop</a>
-              <a class="dropdown-item" href="#">US - UK</a>
-              <a class="dropdown-item" href="#">K-pop</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Others</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="management" role="button"
-               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Management
-            </a>
-            <div class="dropdown-menu" aria-labelledby="management">
-              <a class="dropdown-item" href="#">Songs</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Singers</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Artists</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Playlists</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" routerLink="/home/musics/create">Upload</a>
-            </div>
-          </li>
-        </ul>
+<!--        &lt;!&ndash; Left side of Navbar &ndash;&gt;-->
+<!--        <ul class="navbar-nav mr-auto">-->
+<!--          <li class="nav-item active">-->
+<!--            <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>-->
+<!--          </li>-->
+<!--          <li class="nav-item dropdown">-->
+<!--            <a class="nav-link dropdown-toggle" href="#" id="playlists" role="button"-->
+<!--               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--              Playlists-->
+<!--            </a>-->
+<!--            <div class="dropdown-menu" aria-labelledby="playlists">-->
+<!--              <a class="dropdown-item" href="#">V-pop</a>-->
+<!--              <a class="dropdown-item" href="#">US - UK</a>-->
+<!--              <a class="dropdown-item" href="#">K-pop</a>-->
+<!--              <div class="dropdown-divider"></div>-->
+<!--              <a class="dropdown-item" href="#">Others</a>-->
+<!--            </div>-->
+<!--          </li>-->
+<!--          <li class="nav-item dropdown">-->
+<!--            <a class="nav-link dropdown-toggle" href="#" id="songs" role="button"-->
+<!--               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--              Songs-->
+<!--            </a>-->
+<!--            <div class="dropdown-menu" aria-labelledby="songs">-->
+<!--              <a class="dropdown-item" href="#">V-pop</a>-->
+<!--              <a class="dropdown-item" href="#">US - UK</a>-->
+<!--              <a class="dropdown-item" href="#">K-pop</a>-->
+<!--              <div class="dropdown-divider"></div>-->
+<!--              <a class="dropdown-item" href="#">Others</a>-->
+<!--            </div>-->
+<!--          </li>-->
+<!--          <li class="nav-item dropdown">-->
+<!--            <a class="nav-link dropdown-toggle" href="#" id="management" role="button"-->
+<!--               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--              Management-->
+<!--            </a>-->
+<!--            <div class="dropdown-menu" aria-labelledby="management">-->
+<!--              <a class="dropdown-item" href="#">Songs</a>-->
+<!--              <div class="dropdown-divider"></div>-->
+<!--              <a class="dropdown-item" href="#">Singers</a>-->
+<!--              <div class="dropdown-divider"></div>-->
+<!--              <a class="dropdown-item" href="#">Artists</a>-->
+<!--              <div class="dropdown-divider"></div>-->
+<!--              <a class="dropdown-item" href="#">Playlists</a>-->
+<!--              <div class="dropdown-divider"></div>-->
+<!--              <a class="dropdown-item" routerLink="/home/musics/create">Upload</a>-->
+<!--            </div>-->
+<!--          </li>-->
+<!--        </ul>-->
 
-        <!-- search bar -->
-        <form class="form-inline my-2 my-lg-0">
-                        <span>
-                        <select class="custom-select" style="border-radius: 25px 0px 0px 25px">
-                            <option value="song">Song</option>
-                            <option value="playlist">Playlist</option>
-                            <option value="singer">Singer</option>
-                        </select>
-                            </span>
-          <span>
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                        </span>
-          <span>
-                            <button class="btn btn-outline-success my-2 my-sm-0"
-                                    style="border-radius: 0px 25px 25px 0px" type="submit">
-                                <i class="fas fa-search">Search</i>
-                            </button>
-                    </span>
-        </form>
+<!--        &lt;!&ndash; search bar &ndash;&gt;-->
+<!--        <form class="form-inline my-2 my-lg-0">-->
+<!--                        <span>-->
+<!--                        <select class="custom-select" style="border-radius: 25px 0px 0px 25px">-->
+<!--                            <option value="song">Song</option>-->
+<!--                            <option value="playlist">Playlist</option>-->
+<!--                            <option value="singer">Singer</option>-->
+<!--                        </select>-->
+<!--                            </span>-->
+<!--          <span>-->
+<!--                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">-->
+<!--                        </span>-->
+<!--          <span>-->
+<!--                            <button class="btn btn-outline-success my-2 my-sm-0"-->
+<!--                                    style="border-radius: 0px 25px 25px 0px" type="submit">-->
+<!--                                <i class="fas fa-search">Search</i>-->
+<!--                            </button>-->
+<!--                    </span>-->
+<!--        </form>-->
 
-        <!-- Right Side Of Navbar -->
-        <ul class="navbar-nav ml-auto">
-          <!-- Authentication Links -->
-          <li class="nav-item" *ngIf="!user.isLoggedIn()">
-            <a mat-button class="nav-link"  (click)="showFormLogin()">Login</a>
-          </li>
-          <li class="nav-item" *ngIf="!user.isLoggedIn()">
-            <a mat-button class="nav-link" (click)="showForm()">Register</a>
-          </li>
-          <li class="nav-item" *ngIf="user.isLoggedIn()">
+<!--        &lt;!&ndash; Right Side Of Navbar &ndash;&gt;-->
+<!--        <ul class="navbar-nav ml-auto">-->
+<!--          &lt;!&ndash; Authentication Links &ndash;&gt;-->
+<!--          <li class="nav-item" *ngIf="!user.isLoggedIn()">-->
+<!--            <a mat-button class="nav-link"  (click)="showFormLogin()">Login</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item" *ngIf="!user.isLoggedIn()">-->
+<!--            <a mat-button class="nav-link" (click)="showForm()">Register</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item" *ngIf="user.isLoggedIn()">-->
 
-              <app-auth></app-auth>
+<!--              <app-auth></app-auth>-->
 
-          </li>
+<!--          </li>-->
 
-        </ul>
-      </div>
-    </nav>
+<!--        </ul>-->
+<!--      </div>-->
+<!--    </nav>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="preloader d-flex align-items-center justify-content-center">
+  <div class="circle-preloader">
+    <img src="../../../assets/img/core-img/compact-disc.png" alt="">
   </div>
 </div>
+
+<!-- ##### Header Area Start ##### -->
+<header class="header-area">
+  <!-- Navbar Area -->
+  <div class="musica-main-menu">
+    <div class="classy-nav-container breakpoint-off">
+      <div class="container-fluid">
+        <!-- Menu -->
+        <nav class="classy-navbar justify-content-between" id="musicaNav">
+
+          <!-- Nav brand -->
+          <a href="index.html" class="nav-brand"><img src="../../../assets/img/core-img/logo.png" alt=""></a>
+
+          <!-- Navbar Toggler -->
+          <div class="classy-navbar-toggler">
+            <span class="navbarToggler"><span></span><span></span><span></span></span>
+          </div>
+
+          <!-- Menu -->
+          <div class="classy-menu">
+
+            <!-- close btn -->
+            <div class="classycloseIcon">
+              <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+            </div>
+
+            <!-- Nav Start -->
+            <div class="classynav">
+              <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about-us.html">About us</a></li>
+                <li><a href="#">Pages</a>
+                </li>
+                <li><a href="#">Mega Menu</a>
+                </li>
+                <li *ngIf="!user.isLoggedIn()" ><a (click)="showFormLogin()" >Login</a></li>
+                <li *ngIf="!user.isLoggedIn()" ><a (click)="showForm()" >Resiger</a></li>
+                <li *ngIf="user.isLoggedIn()" ><app-auth></app-auth></li>
+              </ul>
+
+              <!-- Social Button -->
+              <div class="top-social-info">
+                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+              </div>
+
+            </div>
+            <!-- Nav End -->
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- ##### Header Area End ##### -->
+
+<!-- ##### Hero Area Start ##### -->
+<section class="hero-area">
+  <div class="hero-slides owl-carousel">
+
+    <!-- Single Hero Slide -->
+    <div class="single-hero-slide d-flex align-items-center justify-content-center">
+      <!-- Slide Img -->
+      <div class="slide-img bg-img" style="background-image: url(../../../assets/img/bg-img/bg-1.jpg);"></div>
+      <!-- Slide Content -->
+      <div class="hero-slides-content text-center">
+        <h2 data-animation="fadeInUp" data-delay="100ms">Musica <span>Musica</span></h2>
+        <p data-animation="fadeInUp" data-delay="300ms">Music Theme</p>
+      </div>
+      <!-- Big Text -->
+      <h2 class="big-text">Musica</h2>
+    </div>
+
+    <!-- Single Hero Slide -->
+    <div class="single-hero-slide d-flex align-items-center justify-content-center">
+      <!-- Slide Img -->
+      <div class="slide-img bg-img" style="background-image: url(../../../assets/img/bg-img/bg-2.jpg);"></div>
+      <!-- Slide Content -->
+      <div class="hero-slides-content text-center">
+        <h2 data-animation="fadeInUp" data-delay="100ms">Colorlib <span>Colorlib</span></h2>
+        <p data-animation="fadeInUp" data-delay="300ms">Music Template</p>
+      </div>
+      <!-- Big Text -->
+      <h2 class="big-text">Colorlib</h2>
+    </div>
+
+    <!-- Single Hero Slide -->
+    <div class="single-hero-slide d-flex align-items-center justify-content-center">
+      <!-- Slide Img -->
+      <div class="slide-img bg-img" style="background-image: url(../../../assets/img/bg-img/bg-3.jpg);"></div>
+      <!-- Slide Content -->
+      <div class="hero-slides-content text-center">
+        <h2 data-animation="fadeInUp" data-delay="100ms">Festival <span>Festival</span></h2>
+        <p data-animation="fadeInUp" data-delay="300ms">Free Themes</p>
+      </div>
+      <!-- Big Text -->
+      <h2 class="big-text">Festival</h2>
+    </div>
+
+  </div>
+  <!-- bg gradients -->
+  <div class="bg-gradients"></div>
+
+  <!-- Slide Down -->
+  <div class="slide-down" id="scrollDown">
+    <h6>Slide Down</h6>
+    <div class="line"></div>
+  </div>
+</section>
+<!-- ##### Hero Area End ##### -->
+
 

@@ -21,10 +21,11 @@ import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material';
 import {CreateComponent} from './music/create/create.component';
 import {MusicComponent} from './music/music.component';
 import {MusicDetailComponent} from './body/music-detail/music-detail.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [UserComponent, HeaderComponent, BodyComponent, RegisterComponent, LoginComponent, AuthComponent, MusicDetailComponent,
-    CreateComponent, MusicComponent],
+    CreateComponent, MusicComponent, FooterComponent],
   entryComponents: [RegisterComponent, LoginComponent],
   imports: [
     MatExpansionModule,

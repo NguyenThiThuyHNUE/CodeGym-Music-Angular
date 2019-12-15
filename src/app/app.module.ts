@@ -22,7 +22,6 @@ import {Song} from "./song";
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-
   ],
   providers: [Song],
   bootstrap: [AppComponent]
