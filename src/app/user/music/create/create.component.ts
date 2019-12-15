@@ -1,7 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {MusicService} from '../../../service/music.service';
-import {AngularFireList} from '@angular/fire/database';
+import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
+import {Song} from '../../../song';
+import {AngularFireStorage} from '@angular/fire/storage';
+import {finalize} from 'rxjs/operators';
+import {Router} from '@angular/router';
+
+// import {url} from 'inspector';
 
 @Component({
   selector: 'app-create',
@@ -9,8 +15,8 @@ import {AngularFireList} from '@angular/fire/database';
   styleUrls: ['./create.component.scss']
 })
 export class CreateComponent implements OnInit {
-  selectFileAvatar: FileList = null;
-  selectFileMp3: FileList = null;
+  selectFileAvatar: File = null;
+  selectFileMp3: File = null;
   databaseList: AngularFireList<any>;
   addMusicForm = this.fb.group({
     id: ['', [Validators.required]],
@@ -22,25 +28,47 @@ export class CreateComponent implements OnInit {
   });
 
   constructor(private fb: FormBuilder,
-              private musicService: MusicService) {
+              private angularFireStorage: AngularFireStorage,
+              private musicService: MusicService,
+              private angularFireDatabase: AngularFireDatabase,
+              private route: Router,
+              private song: Song) {
   }
 
   ngOnInit() {
   }
 
   onSelectFileAvatar(event) {
-    this.selectFileAvatar = event.target.files[0] as FileList;
-    console.log(event.target.files[0]);
+    this.selectFileAvatar = event.target.files[0] as File;
   }
 
   onSelectFileMp3(event) {
-    this.selectFileMp3 = event.target.files[0] as FileList;
-    console.log(event.target.files[0]);
+    this.selectFileMp3 = event.target.files[0] as File;
   }
 
-  upLoad() {
-    this.musicService.upLoad(this.selectFileAvatar, this.selectFileMp3, this.databaseList, this.addMusicForm.value);
-    // this.musicService.upLoad(this.selectFileMp3, this.databaseList, this.addMusicForm.value);
+  onUpLoad() {
+    this.song.id = this.addMusicForm.value.id;
+    this.song.name = this.addMusicForm.value.name;
+    this.song.singer = this.addMusicForm.value.singer;
+    this.song.description = this.addMusicForm.value.description;
+    const firePathAvatar = `music/${this.selectFileAvatar.name}`;
+    const firePathMp3 = `music/${this.selectFileMp3.name}`;
+    const fireRefAvatar = this.angularFireStorage.ref(firePathAvatar);
+    const fireRefMp3 = this.angularFireStorage.ref(firePathMp3);
+    this.musicService.uploadAvatar(firePathAvatar, this.selectFileAvatar).snapshotChanges().pipe(finalize(() => {
+      fireRefAvatar.getDownloadURL().subscribe((url) => {
+        this.song.avatar = url;
+      });
+    })).subscribe();
+    this.musicService.uploadMp3(firePathMp3, this.selectFileMp3).snapshotChanges().pipe(finalize(() => {
+      fireRefMp3.getDownloadURL().subscribe((url) => {
+        this.song.musicUrl = url;
+        this.databaseList.push(this.song);
+        this.route.navigate(['/home']).then(() => {
+          alert('You Created A Song Success !');
+        });
+      });
+    })).subscribe();
   }
 
   get id() {
