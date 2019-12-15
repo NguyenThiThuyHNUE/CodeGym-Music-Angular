@@ -1,5 +1,10 @@
-<button mat-button [matMenuTriggerFor]="menu">{{name}}</button>
-<mat-menu #menu="matMenu">
-  <a mat-menu-item (click)="logout()">Logout</a>
-</mat-menu>
-
+<div class="classynav">
+  <ul>
+    <li>
+      <a style="color: #ffffff" mat-button [matMenuTriggerFor]="menu">{{name}}</a>
+      <mat-menu #menu="matMenu">
+        <a mat-menu-item (click)="logout()">Logout</a>
+      </mat-menu>
+    </li>
+  </ul>
+</div>

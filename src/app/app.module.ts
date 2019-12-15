@@ -8,13 +8,15 @@ import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
-import {Song} from "./song";
+import {Song} from './song';
+import {SnotifyModule} from 'ng-snotify';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    SnotifyModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
