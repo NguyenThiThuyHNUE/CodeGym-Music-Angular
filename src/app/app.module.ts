@@ -8,7 +8,8 @@ import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
-import {Song} from "./song";
+import {Song} from './song';
+import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {Song} from "./song";
   ],
   imports: [
     BrowserModule,
+    SnotifyModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -24,7 +26,8 @@ import {Song} from "./song";
     AngularFireModule.initializeApp(environment.firebaseConfig),
 
   ],
-  providers: [Song],
+  providers: [Song, {provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+    SnotifyService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

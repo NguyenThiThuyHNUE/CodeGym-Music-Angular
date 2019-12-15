@@ -27,7 +27,7 @@
           </div>
         </mat-card-content>
         <mat-card-actions align="end">
-          <button type="submit" mat-button color="primary">Submit</button>
+          <button type="submit" [disabled]="!loginForm.valid" mat-button color="primary">Submit</button>
         </mat-card-actions>
       </form>
     </mat-card>

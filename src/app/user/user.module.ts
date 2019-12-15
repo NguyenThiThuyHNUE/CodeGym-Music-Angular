@@ -21,28 +21,30 @@ import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material';
 import {CreateComponent} from './music/create/create.component';
 import {MusicComponent} from './music/music.component';
 import {MusicDetailComponent} from './body/music-detail/music-detail.component';
+import {SnotifyModule} from 'ng-snotify';
 
 @NgModule({
   declarations: [UserComponent, HeaderComponent, BodyComponent, RegisterComponent, LoginComponent, AuthComponent, MusicDetailComponent,
     CreateComponent, MusicComponent],
   entryComponents: [RegisterComponent, LoginComponent],
-  imports: [
-    MatExpansionModule,
-    MatCheckboxModule,
-    MatTabsModule,
-    MatRadioModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatDialogModule,
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    UserRoutingModule,
-    _MatMenuDirectivesModule,
-    MatMenuModule,
-  ]
+    imports: [
+        MatExpansionModule,
+        MatCheckboxModule,
+        MatTabsModule,
+        MatRadioModule,
+        MatInputModule,
+        MatButtonModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatDialogModule,
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        UserRoutingModule,
+        _MatMenuDirectivesModule,
+        MatMenuModule,
+        SnotifyModule,
+    ]
 })
 export class UserModule {
 }
