@@ -22,10 +22,11 @@ import {CreateComponent} from './music/create/create.component';
 import {MusicComponent} from './music/music.component';
 import {MusicDetailComponent} from './body/music-detail/music-detail.component';
 import { FooterComponent } from './footer/footer.component';
+import { MainComponent } from './body/main/main.component';
 
 @NgModule({
   declarations: [UserComponent, HeaderComponent, BodyComponent, RegisterComponent, LoginComponent, AuthComponent, MusicDetailComponent,
-    CreateComponent, MusicComponent, FooterComponent],
+    CreateComponent, MusicComponent, FooterComponent, MainComponent],
   entryComponents: [RegisterComponent, LoginComponent],
   imports: [
     MatExpansionModule,
