@@ -19,6 +19,9 @@ const routes: Routes = [
     path: 'musics', component: MusicComponent, children:
       [{path: 'create', component: CreateComponent}]
   },
+  {
+    path: 'music-detail', component: MusicDetailComponent
+  }
 ];
 
 @NgModule({

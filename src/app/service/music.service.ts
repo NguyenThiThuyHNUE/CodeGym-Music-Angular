@@ -11,8 +11,7 @@ import {Router} from '@angular/router';
 export class MusicService {
 
   constructor(private angularFireDatabase: AngularFireDatabase,
-              private angularFireStorage: AngularFireStorage,
-              private router: Router) {
+              private angularFireStorage: AngularFireStorage) {
     this.list();
   }
 
