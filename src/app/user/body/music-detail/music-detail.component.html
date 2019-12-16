@@ -6,7 +6,9 @@
         <div class="featured-album-content d-flex flex-wrap">
 
           <!-- Album Thumbnail -->
-          <div class="album-thumbnail h-100 bg-img" style="background-image: url(../../../../assets/img/bg-img/bg-4.jpg);"></div>
+          <div class="album-thumbnail h-100 bg-img">
+            <img src="https://photo-2-baomoi.zadn.vn/w1000_r1m/2019_09_27_541_32349076/33efd7e669a680f8d9b7.jpg" alt="">
+          </div>
 
           <!-- Album Songs -->
           <div class="album-songs h-100">
@@ -27,112 +29,112 @@
               <!-- Music Playlist -->
               <div class="music-playlist">
                 <!-- Single Song -->
-                <div class="single-music active">
-                  <h6>Drop that beat</h6>
+                <div class="single-music active" *ngFor="let music of musicList">
+                  <h3><span style="color: white">{{music.name}}</span></h3>
                   <audio preload="auto" controls>
-                    <source src="../../../../assets/audio/dummy-audio.mp3">
+                    <source src="{{music.musicUrl}}">
                   </audio>
                 </div>
 
-                <!-- Single Song -->
-                <div class="single-music">
-                  <h6>Hey, Mister Dj</h6>
-                  <audio preload="auto" controls>
-                    <source src="../../../../assets/audio/dummy-audio.mp3">
-                  </audio>
-                </div>
+<!--                &lt;!&ndash; Single Song &ndash;&gt;-->
+<!--                <div class="single-music">-->
+<!--                  <h6>Hey, Mister Dj</h6>-->
+<!--                  <audio preload="auto" controls>-->
+<!--                    <source src="../../../../assets/audio/dummy-audio.mp3">-->
+<!--                  </audio>-->
+<!--                </div>-->
 
-                <!-- Single Song -->
-                <div class="single-music">
-                  <h6>Message to my future self</h6>
-                  <audio preload="auto" controls>
-                    <source src="../../../assets/audio/dummy-audio.mp3">
-                  </audio>
-                </div>
+<!--                &lt;!&ndash; Single Song &ndash;&gt;-->
+<!--                <div class="single-music">-->
+<!--                  <h6>Message to my future self</h6>-->
+<!--                  <audio preload="auto" controls>-->
+<!--                    <source src="../../../assets/audio/dummy-audio.mp3">-->
+<!--                  </audio>-->
+<!--                </div>-->
 
-                <!-- Single Song -->
-                <div class="single-music">
-                  <h6>Bring back the love</h6>
-                  <audio preload="auto" controls>
-                    <source src="../../../../assets/audio/dummy-audio.mp3">
-                  </audio>
-                </div>
+<!--                &lt;!&ndash; Single Song &ndash;&gt;-->
+<!--                <div class="single-music">-->
+<!--                  <h6>Bring back the love</h6>-->
+<!--                  <audio preload="auto" controls>-->
+<!--                    <source src="../../../../assets/audio/dummy-audio.mp3">-->
+<!--                  </audio>-->
+<!--                </div>-->
 
-                <!-- Single Song -->
-                <div class="single-music">
-                  <h6>Hey, Mister Dj - Remix</h6>
-                  <audio preload="auto" controls>
-                    <source src="../../../../assets/audio/dummy-audio.mp3">
-                  </audio>
-                </div>
+<!--                &lt;!&ndash; Single Song &ndash;&gt;-->
+<!--                <div class="single-music">-->
+<!--                  <h6>Hey, Mister Dj - Remix</h6>-->
+<!--                  <audio preload="auto" controls>-->
+<!--                    <source src="../../../../assets/audio/dummy-audio.mp3">-->
+<!--                  </audio>-->
+<!--                </div>-->
 
-                <!-- Single Song -->
-                <div class="single-music">
-                  <h6>Message to my future self</h6>
-                  <audio preload="auto" controls>
-                    <source src="../../../../assets/audio/dummy-audio.mp3">
-                  </audio>
-                </div>
-                <!-- Single Song -->
-                <div class="single-music">
-                  <h6>Drop that beat</h6>
-                  <audio preload="auto" controls>
-                    <source src="../../../assets/audio/dummy-audio.mp3">
-                  </audio>
-                </div>
+<!--                &lt;!&ndash; Single Song &ndash;&gt;-->
+<!--                <div class="single-music">-->
+<!--                  <h6>Message to my future self</h6>-->
+<!--                  <audio preload="auto" controls>-->
+<!--                    <source src="../../../../assets/audio/dummy-audio.mp3">-->
+<!--                  </audio>-->
+<!--                </div>-->
+<!--                &lt;!&ndash; Single Song &ndash;&gt;-->
+<!--                <div class="single-music">-->
+<!--                  <h6>Drop that beat</h6>-->
+<!--                  <audio preload="auto" controls>-->
+<!--                    <source src="../../../assets/audio/dummy-audio.mp3">-->
+<!--                  </audio>-->
+<!--                </div>-->
 
-                <!-- Single Song -->
-                <div class="single-music">
-                  <h6>Hey, Mister Dj</h6>
-                  <audio preload="auto" controls>
-                    <source src="../../../../assets/audio/dummy-audio.mp3">
-                  </audio>
-                </div>
+<!--                &lt;!&ndash; Single Song &ndash;&gt;-->
+<!--                <div class="single-music">-->
+<!--                  <h6>Hey, Mister Dj</h6>-->
+<!--                  <audio preload="auto" controls>-->
+<!--                    <source src="../../../../assets/audio/dummy-audio.mp3">-->
+<!--                  </audio>-->
+<!--                </div>-->
 
-                <!-- Single Song -->
-                <div class="single-music">
-                  <h6>Message to my future self</h6>
-                  <audio preload="auto" controls>
-                    <source src="../../../../assets/audio/dummy-audio.mp3">
-                  </audio>
-                </div>
+<!--                &lt;!&ndash; Single Song &ndash;&gt;-->
+<!--                <div class="single-music">-->
+<!--                  <h6>Message to my future self</h6>-->
+<!--                  <audio preload="auto" controls>-->
+<!--                    <source src="../../../../assets/audio/dummy-audio.mp3">-->
+<!--                  </audio>-->
+<!--                </div>-->
 
-                <!-- Single Song -->
-                <div class="single-music">
-                  <h6>Bring back the love</h6>
-                  <audio preload="auto" controls>
-                    <source src="../../../../assets/audio/dummy-audio.mp3">
-                  </audio>
-                </div>
+<!--                &lt;!&ndash; Single Song &ndash;&gt;-->
+<!--                <div class="single-music">-->
+<!--                  <h6>Bring back the love</h6>-->
+<!--                  <audio preload="auto" controls>-->
+<!--                    <source src="../../../../assets/audio/dummy-audio.mp3">-->
+<!--                  </audio>-->
+<!--                </div>-->
 
-                <!-- Single Song -->
-                <div class="single-music">
-                  <h6>Hey, Mister Dj - Remix</h6>
-                  <audio preload="auto" controls>
-                    <source src="../../../../assets/audio/dummy-audio.mp3">
-                  </audio>
-                </div>
+<!--                &lt;!&ndash; Single Song &ndash;&gt;-->
+<!--                <div class="single-music">-->
+<!--                  <h6>Hey, Mister Dj - Remix</h6>-->
+<!--                  <audio preload="auto" controls>-->
+<!--                    <source src="../../../../assets/audio/dummy-audio.mp3">-->
+<!--                  </audio>-->
+<!--                </div>-->
 
-                <!-- Single Song -->
-                <div class="single-music">
-                  <h6>Message to my future self</h6>
-                  <audio preload="auto" controls>
-                    <source src="../../../../assets/audio/dummy-audio.mp3">
-                  </audio>
-                </div>
+<!--                &lt;!&ndash; Single Song &ndash;&gt;-->
+<!--                <div class="single-music">-->
+<!--                  <h6>Message to my future self</h6>-->
+<!--                  <audio preload="auto" controls>-->
+<!--                    <source src="../../../../assets/audio/dummy-audio.mp3">-->
+<!--                  </audio>-->
+<!--                </div>-->
               </div>
             </div>
 
             <!-- Now Playing -->
-            <div class="now-playing d-flex flex-wrap align-items-center justify-content-between">
-              <div class="songs-name">
-                <p>Playing</p>
-                <h6>Drop that beat</h6>
-              </div>
-              <audio preload="auto" controls>
-                <source src="../../../../assets/audio/dummy-audio.mp3">
-              </audio>
-            </div>
+<!--            <div class="now-playing d-flex flex-wrap align-items-center justify-content-between">-->
+<!--              <div class="songs-name">-->
+<!--                <p>Playing</p>-->
+<!--                <h3><span style="color: white"></span></h3>-->
+<!--              </div>-->
+<!--              <audio preload="auto" controls>-->
+<!--                <source src="">-->
+<!--              </audio>-->
+<!--            </div>-->
           </div>
         </div>
       </div>
@@ -386,7 +388,6 @@
 </div>
 
 <!-- ##### Music Player Area End ##### -->
-
 
 
 <!--&lt;!&ndash; ##### Music Artists Area Start ##### &ndash;&gt;-->

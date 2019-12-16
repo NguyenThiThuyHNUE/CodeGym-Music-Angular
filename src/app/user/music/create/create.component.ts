@@ -55,12 +55,15 @@ export class CreateComponent implements OnInit {
     const firePathMp3 = `music/${this.selectFileMp3.name}`;
     const fireRefAvatar = this.angularFireStorage.ref(firePathAvatar);
     const fireRefMp3 = this.angularFireStorage.ref(firePathMp3);
-    this.musicService.uploadAvatar(firePathAvatar, this.selectFileAvatar).snapshotChanges().pipe(finalize(() => {
+    this.databaseList = this.angularFireDatabase.list('/list');
+    this.musicService.uploadAvatar(firePathAvatar, this.selectFileAvatar).snapshotChanges().pipe(
+      finalize(() => {
       fireRefAvatar.getDownloadURL().subscribe((url) => {
         this.song.avatar = url;
       });
     })).subscribe();
-    this.musicService.uploadMp3(firePathMp3, this.selectFileMp3).snapshotChanges().pipe(finalize(() => {
+    this.musicService.uploadMp3(firePathMp3, this.selectFileMp3).snapshotChanges().pipe(
+      finalize(() => {
       fireRefMp3.getDownloadURL().subscribe((url) => {
         this.song.musicUrl = url;
         this.databaseList.push(this.song);
