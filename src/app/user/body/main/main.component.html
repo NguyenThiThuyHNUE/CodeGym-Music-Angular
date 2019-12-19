@@ -1,6 +1,6 @@
-
 <!-- ##### About Us Area Start ##### -->
-<div class="about-us-area section-padding-100-0 bg-img bg-overlay" style="background-image: url(../../../assets/img/bg-img/bg-4.jpg);" id="about">
+<div class="about-us-area section-padding-100-0 bg-img bg-overlay"
+     style="background-image: url(../../../assets/img/bg-img/bg-4.jpg);" id="about">
   <div class="container">
     <div class="row">
       <div class="col-12">
@@ -22,7 +22,13 @@
       <div class="col-12 col-lg-6">
         <div class="about-content mb-100">
           <h4>Hello, It’s Michael Smithson</h4>
-          <p>Nulla pretium tincidunt felis, nec sollicitudin mauris lobortis in. Aliquam eu feugiat ligula, laoreet efficitur nulla. Morbi nec neque porta, elementum massa at, vehicula nunc. Nulla facilisi. Donec id purus eu lectus imperdiet varius. Curabitur consectetur nunc sem, vitae cursus enim tempor eget. Praesent pellentesque nisi urna, sit amet suscipit ligula posuere id. Aenean id tortor vel quam ornare gravida. Phasellus luctus feugiat nunc, quis vulputate ipsum convallis quis. Integer vel nulla erat. Donec erat metus, luctus quis maximus quis, volutpat eu tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+          <p>Nulla pretium tincidunt felis, nec sollicitudin mauris lobortis in. Aliquam eu feugiat ligula, laoreet
+            efficitur nulla. Morbi nec neque porta, elementum massa at, vehicula nunc. Nulla facilisi. Donec id purus eu
+            lectus imperdiet varius. Curabitur consectetur nunc sem, vitae cursus enim tempor eget. Praesent
+            pellentesque nisi urna, sit amet suscipit ligula posuere id. Aenean id tortor vel quam ornare gravida.
+            Phasellus luctus feugiat nunc, quis vulputate ipsum convallis quis. Integer vel nulla erat. Donec erat
+            metus, luctus quis maximus quis, volutpat eu tellus. Interdum et malesuada fames ac ante ipsum primis in
+            faucibus.</p>
           <img src="../../../assets/img/core-img/signature.png" alt="">
         </div>
       </div>
@@ -82,7 +88,7 @@
               <p>20:30</p>
             </div>
             <div class="buy-tickets">
-              <a routerLink="detail/music"  class="btn musica-btn">Buy Tikets</a>
+              <a routerLink="detail/music" class="btn musica-btn">Buy Tikets</a>
             </div>
           </div>
 
@@ -290,7 +296,8 @@
         <div class="featured-album-content d-flex flex-wrap">
 
           <!-- Album Thumbnail -->
-          <div class="album-thumbnail h-100 bg-img" style="background-image: url(../../../assets/img/bg-img/bg-4.jpg);"></div>
+          <div class="album-thumbnail h-100 bg-img"
+               style="background-image: url(../../../assets/img/bg-img/bg-4.jpg);"></div>
 
           <!-- Album Songs -->
           <div class="album-songs h-100">
@@ -314,7 +321,8 @@
                 <div class="single-music active">
                   <h6>Drop that beat</h6>
                   <audio preload="auto" controls>
-                    <source src="https://firebasestorage.googleapis.com/v0/b/codegym-music-4e4b1.appspot.com/o/music%2FThayToiYeuCoAyDinhLongRemix-ThanhHungIdolDJ-6054427.mp3?alt=media&token=c3ba35d2-3e8c-411b-8cda-3326a79a6b7c">
+                    <source
+                      src="https://firebasestorage.googleapis.com/v0/b/codegym-music-4e4b1.appspot.com/o/music%2FThayToiYeuCoAyDinhLongRemix-ThanhHungIdolDJ-6054427.mp3?alt=media&token=c3ba35d2-3e8c-411b-8cda-3326a79a6b7c">
                   </audio>
                 </div>
 
@@ -408,14 +416,40 @@
             </div>
 
             <!-- Now Playing -->
-            <div class="now-playing d-flex flex-wrap align-items-center justify-content-between">
-              <div class="songs-name">
-                <p>Playing</p>
-                <h6>Drop that beat</h6>
+            <div class="pl-5 d-flex flex-wrap align-items-center justify-content-between">
+              <div style="" class="now-playing">
+                <div class="control-box">
+                  <button (click)="playMusic()" class="btn btnControl"
+                          [ngClass]="{'play': isPlay == 1, 'pause': isPlay == 0}">
+                    <i class="fa fa-play"></i>
+                    <i class="fa fa-pause"></i>
+                  </button>
+                </div>
+
+                <div class="info">
+                  <div class="audioName">
+                    Music Name
+                  </div>
+                  <div class="seekBar">
+                    <div class="outer">
+                      <span class="inner"></span>
+                    </div>
+                  </div>
+                  <div class="timing">
+                    <div class="start">0.00</div>
+                    <div class="end">0.00</div>
+                  </div>
+                </div>
+
+                <div class="volume-control" (mouseleave)="volumeHide()" (mouseenter)="volumeShow()">
+                  <i class="fa fa-volume-up"></i>
+                  <div class="seekBar" *ngIf="showVolume">
+                    <div class="outer">
+                      <span class="inner"></span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <audio preload="auto" controls>
-                <source src="../../../assets/audio/dummy-audio.mp3">
-              </audio>
             </div>
 
           </div>
