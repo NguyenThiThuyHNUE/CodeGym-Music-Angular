@@ -27,7 +27,7 @@
           </div>
         </mat-card-content>
         <mat-card-actions align="end">
-          <button type="submit" mat-button color="primary">Submit</button>
+          <button type="submit" [hidden]="!buttonStatus" mat-button color="primary">Login</button>
         </mat-card-actions>
       </form>
     </mat-card>
