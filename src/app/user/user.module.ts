@@ -24,6 +24,7 @@ import {MusicDetailComponent} from './body/music-detail/music-detail.component';
 import {FooterComponent} from './footer/footer.component';
 import {MainComponent} from './body/main/main.component';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
+import {MatSliderModule} from '@angular/material/slider';
 
 @NgModule({
   declarations: [UserComponent, HeaderComponent, BodyComponent, RegisterComponent, LoginComponent, AuthComponent, MusicDetailComponent,
@@ -37,6 +38,7 @@ import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
     SnotifyModule,
     MatExpansionModule,
     MatCheckboxModule,
+    MatSliderModule,
     MatTabsModule,
     MatRadioModule,
     MatInputModule,
