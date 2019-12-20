@@ -6,6 +6,7 @@ import {first} from 'rxjs/operators';
 import {MatDialogRef} from '@angular/material';
 import {SnotifyService} from "ng-snotify";
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -62,7 +63,6 @@ export class LoginComponent implements OnInit {
 
     localStorage.setItem('token', res.access_token);
     this.buttonStatus = true;
-    this.Notify.success(`Login Success, Welcome ${res.name}`, 'Congratulations', {timeout: 7000});
     this.resetForm();
   }
 
