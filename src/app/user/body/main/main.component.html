@@ -431,13 +431,15 @@
                     Music Name
                   </div>
                   <div class="seekBar">
-                    <div class="outer">
-                      <span class="inner"></span>
+                    <div (click)="getOffsetLeft($event)" #seekBarOuter class="outer">
+                      <span  class="inner"
+                            [ngStyle]="{'width': seekBarInner}"></span>
+                      <!--                      <mat-slider></mat-slider>-->
                     </div>
                   </div>
                   <div class="timing">
-                    <div class="start">0.00</div>
-                    <div class="end">0.00</div>
+                    <div class="start">{{startTime}}</div>
+                    <div class="end">{{remainTime}}</div>
                   </div>
                 </div>
 
