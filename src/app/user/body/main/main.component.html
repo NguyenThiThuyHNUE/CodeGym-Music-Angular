@@ -420,7 +420,7 @@
               <div style="" class="now-playing">
                 <div class="control-box">
                   <button (click)="playMusic()" class="btn btnControl"
-                          [ngClass]="{'play': isPlay == 1, 'pause': isPlay == 0}">
+                          [ngClass]="{'play': isPlay, 'pause': !isPlay}">
                     <i class="fa fa-play"></i>
                     <i class="fa fa-pause"></i>
                   </button>
@@ -432,7 +432,7 @@
                   </div>
                   <div class="seekBar">
                     <div (click)="getOffsetLeft($event)" #seekBarOuter class="outer">
-                      <span  class="inner"
+                      <span class="inner"
                             [ngStyle]="{'width': seekBarInner}"></span>
                       <!--                      <mat-slider></mat-slider>-->
                     </div>
