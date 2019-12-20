@@ -431,7 +431,7 @@
                     Music Name
                   </div>
                   <div class="seekBar">
-                    <div (click)="getOffsetLeft($event)" #seekBarOuter class="outer">
+                    <div (click)="getTimeOnClick($event)" #seekBarOuter class="outer">
                       <span class="inner"
                             [ngStyle]="{'width': seekBarInner}"></span>
                       <!--                      <mat-slider></mat-slider>-->
@@ -446,8 +446,8 @@
                 <div class="volume-control" (mouseleave)="volumeHide()" (mouseenter)="volumeShow()">
                   <i class="fa fa-volume-up"></i>
                   <div class="seekBar" *ngIf="showVolume">
-                    <div class="outer">
-                      <span class="inner"></span>
+                    <div (click)="getVolumeOnClick($event)" #seekBarVolumeOuter class="outer">
+                      <span class="inner" [ngStyle]="{'height': volumePercent}"></span>
                     </div>
                   </div>
                 </div>

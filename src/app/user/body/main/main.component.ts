@@ -7,7 +7,8 @@ import {AudioService} from '../../../service/audio.service';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  @ViewChild('seekBarOuter', {static: false}) element: ElementRef;
+  @ViewChild('seekBarOuter', {static: false}) outerSeekBarEle: ElementRef;
+  @ViewChild('seekBarVolumeOuter', {static: false}) seekBarVolumeOuter: ElementRef;
 
   isPlay = true;
   showVolume = false;
@@ -16,15 +17,16 @@ export class MainComponent implements OnInit {
   startTime: any;
   remainTime: any;
   seekBarInner: any;
+  volumePercent = '50%';
 
   constructor(private audio: AudioService, private elRef: ElementRef) {
   }
 
   ngOnInit() {
     this.setAudio(this.musicSrc);
+    this.audio.audio.volume = 0.5;
     this.setStartTime();
     this.setRemainTime();
-
   }
 
   setAudio(musicSrc) {
@@ -36,6 +38,7 @@ export class MainComponent implements OnInit {
       data => {
         this.startTime = data;
         this.seekBarInner = this.seekBarPercent(data).toFixed(2) + '%';
+        this.volumePercent = this.audio.audio.volume * 100 + '%';
       }
     );
   }
@@ -76,8 +79,8 @@ export class MainComponent implements OnInit {
     return currentTime / this.audio.getDuration() * 100;
   }
 
-  getOffsetLeft(event) {
-    const offsetWidth = this.element.nativeElement.offsetWidth;
+  getTimeOnClick(event) {
+    const offsetWidth = this.outerSeekBarEle.nativeElement.offsetWidth;
     const pageX = event.pageX;
     const position = (pageX - 750) / offsetWidth * 100;
     const timeOnClick = position * this.audio.getDuration() / 100;
@@ -87,6 +90,18 @@ export class MainComponent implements OnInit {
       pageX,
       position,
       timeOnClick
+    });
+  }
+
+  getVolumeOnClick(event) {
+    const offsetHeight = this.seekBarVolumeOuter.nativeElement.offsetHeight;
+    const pageY = event.pageY;
+    this.audio.audio.volume = (2830 - pageY) / offsetHeight;
+    this.volumePercent = this.audio.audio.volume * 100 + '%';
+    console.log({
+      volume: this.volumePercent,
+      offsetHeight,
+      pageY
     });
   }
 
