@@ -32,17 +32,17 @@
             <!-- Nav Start -->
             <div class="classynav">
               <ul>
-                <li><a mat-button href="index.html">Home</a></li>
-                <li><a mat-button href="about-us.html">About us</a></li>
-                <li><a mat-button href="#">Pages</a>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about-us.html">About us</a></li>
+                <li><a href="#">Pages</a>
                 </li>
-                <li><a mat-button href="#">Mega Menu</a>
+                <li><a href="#">Mega Menu</a>
                 </li>
-                <li *ngIf="!user.isLoggedIn()"><a mat-button (click)="showFormLogin()">Login</a></li>
-                <li *ngIf="!user.isLoggedIn()"><a mat-button (click)="showForm()">Register</a></li>
-                <li *ngIf="user.isLoggedIn()">
-                  <app-auth></app-auth>
-                </li>
+                <!--                <li *ngIf="!user.isLoggedIn()"><a mat-button (click)="showFormLogin()">Login</a></li>-->
+                <!--                <li *ngIf="!user.isLoggedIn()"><a mat-button (click)="showForm()">Register</a></li>-->
+                <!--                <li *ngIf="user.isLoggedIn()">-->
+                <!--                  <app-auth></app-auth>-->
+                <!--                </li>-->
               </ul>
 
               <!-- Social Button -->
@@ -53,6 +53,10 @@
                 <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
                 <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
                 <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                <a *ngIf="!user.isLoggedIn()" class="auth classynav" (click)="showFormLogin()">Login</a>
+                <a class="auth classynav" *ngIf="user.isLoggedIn()">
+                  <app-auth></app-auth>
+                </a>
               </div>
 
             </div>
