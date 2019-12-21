@@ -6,6 +6,7 @@ import {MusicComponent} from './music/music.component';
 import {CreateComponent} from './music/create/create.component';
 import {MusicDetailComponent} from './body/music-detail/music-detail.component';
 import {MainComponent} from './body/main/main.component';
+import {AuthGuard} from '../gurad/auth.guard';
 
 const routes: Routes = [
   {
@@ -17,7 +18,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent, pathMatch: 'full'},
   {
     path: 'musics', component: MusicComponent, children:
-      [{path: 'create', component: CreateComponent}]
+      [{path: 'create', component: CreateComponent, canActivate: [AuthGuard]}]
   },
   {
     path: 'music-detail', component: MusicDetailComponent

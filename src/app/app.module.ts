@@ -9,12 +9,16 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {Song} from './song';
-import {SnotifyModule} from 'ng-snotify';
+import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 import {ConfirmEqualValidatorDirective} from './directive/confirm-equal-validator.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
+  ],
+  providers: [
+    {provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+    SnotifyService, Song
   ],
   imports: [
     SnotifyModule,
@@ -26,7 +30,6 @@ import {ConfirmEqualValidatorDirective} from './directive/confirm-equal-validato
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
-  providers: [Song],
   exports: [],
   bootstrap: [AppComponent]
 })
