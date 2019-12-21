@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
   registerForm = this.fb.group({
     name: ['', Validators.required],
     email: ['', Validators.required],
-    password: ['', Validators.required]
+    password: ['', [Validators.required, Validators.minLength(6)]]
   });
 
   constructor(private fb: FormBuilder,
@@ -55,7 +55,6 @@ export class RegisterComponent implements OnInit {
   }
 
   handleError(error) {
-    console.log(error);
     this.buttonStatus = true;
     // tslint:disable-next-line:triple-equals
     if (error.status == 0) {
