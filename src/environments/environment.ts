@@ -5,14 +5,14 @@
 export const environment = {
     production: false,
     firebaseConfig: {
-      apiKey: 'AIzaSyCQgnkaAJMIOMu4Z9CY6YX6mgOd05WDXJ4',
-      authDomain: 'codegym-music-4e4b1.firebaseapp.com',
-      databaseURL: 'https://codegym-music-4e4b1.firebaseio.com',
-      projectId: 'codegym-music-4e4b1',
-      storageBucket: 'codegym-music-4e4b1.appspot.com',
-      messagingSenderId: '172151307595',
-      appId: '1:172151307595:web:738a23caa61aae4dcc7cce',
-      measurementId: 'G-14XFWYKX9L'
+      apiKey: 'AIzaSyB9_sDzw_5A_ytaW8ib2VSJW3vfgdMegT8',
+      authDomain: 'codegym-music-d1055.firebaseapp.com',
+      databaseURL: 'https://codegym-music-d1055.firebaseio.com',
+      projectId: 'codegym-music-d1055',
+      storageBucket: 'codegym-music-d1055.appspot.com',
+      messagingSenderId: '67176720719',
+      appId: '1:67176720719:web:3ec8130d68716640edfd3a',
+      measurementId: 'G-G7VW761LXL'
     },
   }
 ;

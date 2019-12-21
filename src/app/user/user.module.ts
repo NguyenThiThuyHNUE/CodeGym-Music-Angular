@@ -24,10 +24,14 @@ import {MusicDetailComponent} from './body/music-detail/music-detail.component';
 import {FooterComponent} from './footer/footer.component';
 import {MainComponent} from './body/main/main.component';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
+import {MatIconModule} from '@angular/material/icon';
+import {MatSelectModule} from '@angular/material/select';
+import { DetailComponent } from './music/detail/detail.component';
+import { EditComponent } from './music/edit/edit.component';
 
 @NgModule({
   declarations: [UserComponent, HeaderComponent, BodyComponent, RegisterComponent, LoginComponent, AuthComponent, MusicDetailComponent,
-    CreateComponent, MusicComponent, FooterComponent, MainComponent],
+    CreateComponent, MusicComponent, FooterComponent, MainComponent, DetailComponent, EditComponent],
   entryComponents: [RegisterComponent, LoginComponent],
   providers: [
     {provide: 'SnotifyToastConfig', useValue: ToastDefaults},
@@ -50,6 +54,8 @@ import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
     UserRoutingModule,
     _MatMenuDirectivesModule,
     MatMenuModule,
+    MatIconModule,
+    MatSelectModule,
   ]
 })
 export class UserModule {

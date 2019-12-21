@@ -6,22 +6,25 @@ import {MusicComponent} from './music/music.component';
 import {CreateComponent} from './music/create/create.component';
 import {MusicDetailComponent} from './body/music-detail/music-detail.component';
 import {MainComponent} from './body/main/main.component';
+import {DetailComponent} from './music/detail/detail.component';
+import {EditComponent} from './music/edit/edit.component';
 
 const routes: Routes = [
   {
     path: '', component: UserComponent, children: [
       {path: '', component: MainComponent},
-      {path: 'detail/music', component: MusicDetailComponent}
+      // {path: 'music/detail', component: MusicDetailComponent}
     ]
   },
   {path: 'login', component: LoginComponent, pathMatch: 'full'},
   {
     path: 'musics', component: MusicComponent, children:
-      [{path: 'create', component: CreateComponent}]
+      [
+        {path: 'create', component: CreateComponent},
+        {path: 'detail/:id', component: DetailComponent},
+        {path: 'edit/:id', component: EditComponent},
+      ]
   },
-  {
-    path: 'music-detail', component: MusicDetailComponent
-  }
 ];
 
 @NgModule({

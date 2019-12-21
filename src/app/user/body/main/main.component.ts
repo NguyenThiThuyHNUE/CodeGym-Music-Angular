@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {MusicService} from '../../../service/music.service';
+import {IMusic} from '../../../interface/i-music';
 
 @Component({
   selector: 'app-main',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  musicList: IMusic[];
 
-  ngOnInit() {
+  constructor(private musicService: MusicService) {
   }
 
+  // ngOnInit() {
+  //   this.musicService.list().subscribe(
+  //     list => {
+  //       this.musicList = list.map(item => {
+  //         return item.payload.val();
+  //       });
+  //       console.log(list);
+  //     },
+  //   );
+  //   console.log(this.musicList);
+  // }
+
+  ngOnInit() {
+    this.musicService.getMusic().subscribe(music => {
+      this.musicList = music;
+    });
+  }
 }
