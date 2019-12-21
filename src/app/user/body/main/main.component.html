@@ -451,6 +451,9 @@
                     </div>
                   </div>
                 </div>
+                <div (click)="repeatSong()" class="repeat-control">
+                  <i class="fas fa-redo" [ngClass]="{'repeat': isRepeat}"></i>
+                </div>
               </div>
             </div>
 

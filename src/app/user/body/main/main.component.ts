@@ -1,5 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AudioService} from '../../../service/audio.service';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-main',
@@ -10,6 +11,7 @@ export class MainComponent implements OnInit {
   @ViewChild('seekBarOuter', {static: false}) outerSeekBarEle: ElementRef;
   @ViewChild('seekBarVolumeOuter', {static: false}) seekBarVolumeOuter: ElementRef;
 
+  isRepeat = false;
   isPlay = true;
   showVolume = false;
   // tslint:disable-next-line:max-line-length
@@ -46,6 +48,7 @@ export class MainComponent implements OnInit {
   setRemainTime() {
     this.audio.getTimeRemaining().subscribe(
       data => {
+        this.audio.audio.loop = this.isRepeat;
         this.remainTime = data;
       }
     );
@@ -74,7 +77,7 @@ export class MainComponent implements OnInit {
     return (+validateTime[0]) * 60 + (+validateTime[1]);
   }
 
-  private seekBarPercent(data) {
+  seekBarPercent(data) {
     const currentTime = this.convertToSecond(data);
     return currentTime / this.audio.getDuration() * 100;
   }
@@ -105,4 +108,10 @@ export class MainComponent implements OnInit {
     });
   }
 
+  repeatSong(): boolean {
+    if (!this.isRepeat) {
+      return this.isRepeat = true;
+    }
+    return this.isRepeat = false;
+  }
 }
