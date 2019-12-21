@@ -1,9 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserService} from '../../../service/user.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {SnotifyService} from 'ng-snotify';
+
+const REGISTER = 0;
+const LOGIN = 1;
 
 @Component({
   selector: 'app-register',
@@ -12,11 +15,17 @@ import {SnotifyService} from 'ng-snotify';
 })
 export class RegisterComponent implements OnInit {
   buttonStatus = true;
+  selectTab = REGISTER;
   registerForm = this.fb.group({
     name: ['', Validators.required],
     email: ['', Validators.required],
     password: ['', [Validators.required, Validators.minLength(6)]],
     confirmPassword: ['', [Validators.required]],
+  });
+
+  loginForm = this.fb.group({
+    emailLogin: ['', [Validators.required]],
+    passwordLogin: ['', [Validators.required]]
   });
 
   constructor(private fb: FormBuilder,
@@ -39,6 +48,13 @@ export class RegisterComponent implements OnInit {
     );
   }
 
+  userLogin() {
+    this.buttonStatus = false;
+    this.Notify.info('Wait...', {timeout: 1000});
+    this.userService.userLogin(this.loginForm.value)
+      .subscribe();
+  }
+
   get name() {
     return this.registerForm.get('name');
   }
@@ -55,8 +71,21 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get('email');
   }
 
+  get passwordLogin() {
+    return this.loginForm.get('passwordLogin');
+  }
+
+  get emailLogin() {
+    return this.loginForm.get('emailLogin');
+  }
+
   resetForm() {
-    this.dialogRef.close();
+    this.registerForm = this.fb.group({
+      name: [''],
+      email: [''],
+      password: [''],
+      confirmPassword: [''],
+    });
   }
 
   handleError(error) {
@@ -75,7 +104,8 @@ export class RegisterComponent implements OnInit {
 
   handleResponse(res) {
     this.buttonStatus = true;
-    this.Notify.success(`Register Success, Welcome ${res.data.name}`, 'Congratulations', {timeout: 7000});
+    this.selectTab = LOGIN;
+    this.Notify.success(`Register Success, Please Login ${res.data.name}`, 'Congratulations', {timeout: 7000});
     this.resetForm();
   }
 
