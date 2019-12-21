@@ -1,11 +1,11 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {AudioService} from '../../../service/audio.service';
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss']
+  styleUrls: ['./main.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MainComponent implements OnInit {
   @ViewChild('seekBarOuter', {static: false}) outerSeekBarEle: ElementRef;

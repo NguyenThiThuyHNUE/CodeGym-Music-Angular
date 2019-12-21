@@ -1,3 +1,27 @@
+.custom-mat-tab {
+  .mat-tab-body-content {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .mat-tab-labels {
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .mat-tab-label {
+    margin-right: 0.5rem;
+    font-size: 2rem;
+    font-weight: 900;
+    color: #ffffff;
+  }
+
+  .mat-ink-bar {
+    background-color: #bd177a !important;
+  }
+}
+
+
 .now-playing {
   display: flex;
   align-items: stretch;
