@@ -16,8 +16,9 @@ const webBackEndUrl = 'localhost:8000';
 })
 export class MusicService {
   getMusicUrl = `http://${webBackEndUrl}/api/musics/`;
-  createMusicUrl = `http://${webBackEndUrl}/api/musics/create/`;
-  editMusicUrl = `http://${webBackEndUrl}/api/musics/edit/`;
+  createMusicUrl = `http://${webBackEndUrl}/api/music/create/`;
+  editMusicUrl = `http://${webBackEndUrl}/api/music/edit/`;
+  deleteMusicUrl = `http://${webBackEndUrl}/api/music/delete/}`;
   music: AngularFireList<any>;
 
   constructor(private angularFireDatabase: AngularFireDatabase,
@@ -38,15 +39,19 @@ export class MusicService {
     return this.angularFireDatabase.list('/list').snapshotChanges();
   }
 
-  upLoadDataSong(song): Observable<IMessage> {
-    return this.http.post<IMessage>(this.createMusicUrl, song);
+  upLoadDataMusic(music): Observable<IMessage> {
+    return this.http.post<IMessage>(this.createMusicUrl, music);
   }
 
-  getMusic(): Observable<IMusic[]> {
+  getMusics(): Observable<IMusic[]> {
     return this.http.get<IMusic[]>(this.getMusicUrl);
   }
 
-  updateMusic(idMusic, music): Observable<IMessage> {
+  editMusic(idMusic, music): Observable<IMessage> {
     return this.http.put<IMessage>(this.editMusicUrl + idMusic, music);
+  }
+
+  deleteMusic(idMusic): Observable<IMessage> {
+    return this.http.delete<IMessage>(this.deleteMusicUrl + idMusic);
   }
 }

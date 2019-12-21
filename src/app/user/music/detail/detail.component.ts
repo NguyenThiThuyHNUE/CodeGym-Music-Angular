@@ -21,10 +21,10 @@ export class DetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.musicService.getMusic().subscribe(musics => {
+    this.musicService.getMusics().subscribe(musics => {
       this.musicDetail = musics.find(music => music.id === this.idMusic);
     });
-    this.musicService.getMusic().subscribe(musics => {
+    this.musicService.getMusics().subscribe(musics => {
       this.musicList = musics;
     });
   }

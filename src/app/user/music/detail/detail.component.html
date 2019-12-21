@@ -61,12 +61,39 @@
         <div class="container">
           <div class="row">
             <div class="col-2 ml-5">
-              <img src="{{music.avatar}}" alt="" class="image-music-detail" routerLink="/home/musics/detail/{{music.id}}">
+              <img src="{{music.avatar}}" alt="" class="image-music-detail" routerLink="/home/music/detail/{{music.id}}">
             </div>
             <div class="col-7 pt-4">
-              <h4><span style="color: white" class="container" routerLink="/home/musics/detail/{{music.id}}">{{music.name}} - {{music.singer}}</span>
+              <h4><span style="color: white" class="container" routerLink="/home/music/detail/{{music.id}}">{{music.name}} - {{music.singer}}</span>
               </h4>
             </div>
+           <div class="row">
+             <tr class="mt-4">
+               <td class="col-2">
+                 <a routerLink="/home/music/detail/{{music.id}}" class="table-link">
+          <span class="fa-stack">
+          <i class="fa fa-square fa-stack-2x"></i>
+          <i class="fa fa-search fa-stack-1x fa-inverse"></i>
+        </span>
+                 </a>
+               </td>
+               <td class="col-2">
+                 <a routerLink="/home/music/edit/{{music.id}}" class="table-link">
+          <span class="fa-stack">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+          </span>
+                 </a></td>
+               <td class="col-2">
+                 <a routerLink="/home/music/delete/{{music.id}}" class="table-link danger">
+          <span class="fa-stack">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+          </span>
+                 </a>
+               </td>
+             </tr>
+           </div>
           </div>
         </div>
       </div>

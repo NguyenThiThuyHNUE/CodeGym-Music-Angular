@@ -6,4 +6,133 @@
 .audio-main {
   padding-top: 8%;
   width: 100%;
+
+  .now-playing {
+    display: flex;
+    align-items: stretch;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    .control-box {
+      margin-right: 2rem;
+      display: flex;
+      width: 3rem;
+      height: 3rem;
+      justify-content: center;
+      align-items: center;
+      color: #bd177a;
+      font-size: 1.5rem;
+
+      .btnControl {
+        background-color: #1d1633;
+        color: #bd177a;
+        font-size: 1.5rem;
+        border: none;
+        outline: 0;
+        transition: all ease 0.5s;
+
+        &.play {
+          .fa-pause {
+            transform: rotate(180deg);
+            display: none;
+          }
+        }
+
+        &.pause {
+          .fa-play {
+            transform: rotate(180deg);
+            display: none;
+          }
+        }
+      }
+    }
+
+    .info {
+      flex-basis: 70%;
+      color: rgba(255, 255, 255, 0.5);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+
+      .seekBar {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 1rem;
+
+        .outer {
+          overflow: hidden;
+          border-radius: 5px;
+          display: flex;
+          height: 0.5rem;
+          flex-basis: 100%;
+          justify-content: flex-start;
+          background-color: black;
+
+          .inner {
+            border-radius: 5px;
+            background-color: white;
+            height: 100%;
+            display: inline-block;
+          }
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+
+      .timing {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0.5rem;
+      }
+    }
+
+    .volume-control {
+      margin-left: 1rem;
+      display: flex;
+      width: 3rem;
+      height: 3rem;
+      align-items: center;
+      color: #bd177a;
+      font-size: 1.5rem;
+
+      .seekBar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: 20px;
+        height: 90px;
+        bottom: 65px;
+        right: 22px;
+
+        .outer {
+          flex-direction: column-reverse;
+          overflow: hidden;
+          border-radius: 5px;
+          display: flex;
+          height: 100%;
+          width: 45%;
+          justify-content: flex-start;
+          background-color: black;
+
+          .inner {
+            border-radius: 5px;
+            background-color: white;
+            width: 100%;
+            display: inline-block;
+            height: 20%;
+          }
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
 }

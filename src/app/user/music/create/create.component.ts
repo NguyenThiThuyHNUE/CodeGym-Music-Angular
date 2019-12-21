@@ -48,6 +48,7 @@ export class CreateComponent implements OnInit {
     this.selectFileMp3 = event.target.files[0] as File;
   }
 
+  // noinspection DuplicatedCode
   onUpLoad() {
     this.song.id = this.addMusicForm.value.id;
     this.song.name = this.addMusicForm.value.name;
@@ -68,7 +69,7 @@ export class CreateComponent implements OnInit {
       finalize(() => {
         fireRefMp3.getDownloadURL().subscribe((url) => {
           this.song.musicUrl = url;
-          this.musicService.upLoadDataSong(this.song).subscribe();
+          this.musicService.upLoadDataMusic(this.song).subscribe();
           this.route.navigate(['/home']).then(() => {
             alert('You Created A Song Success !');
           });

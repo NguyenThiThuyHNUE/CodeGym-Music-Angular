@@ -20,7 +20,6 @@ import {AuthComponent} from './header/auth/auth.component';
 import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material';
 import {CreateComponent} from './music/create/create.component';
 import {MusicComponent} from './music/music.component';
-import {MusicDetailComponent} from './body/music-detail/music-detail.component';
 import {FooterComponent} from './footer/footer.component';
 import {MainComponent} from './body/main/main.component';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
@@ -28,10 +27,12 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import { DetailComponent } from './music/detail/detail.component';
 import { EditComponent } from './music/edit/edit.component';
+import {MatSliderModule} from '@angular/material/slider';
+import { DeleteComponent } from './music/delete/delete.component';
 
 @NgModule({
-  declarations: [UserComponent, HeaderComponent, BodyComponent, RegisterComponent, LoginComponent, AuthComponent, MusicDetailComponent,
-    CreateComponent, MusicComponent, FooterComponent, MainComponent, DetailComponent, EditComponent],
+  declarations: [UserComponent, HeaderComponent, BodyComponent, RegisterComponent, LoginComponent, AuthComponent,
+    CreateComponent, MusicComponent, FooterComponent, MainComponent, DetailComponent, EditComponent, DeleteComponent],
   entryComponents: [RegisterComponent, LoginComponent],
   providers: [
     {provide: 'SnotifyToastConfig', useValue: ToastDefaults},
@@ -41,6 +42,7 @@ import { EditComponent } from './music/edit/edit.component';
     SnotifyModule,
     MatExpansionModule,
     MatCheckboxModule,
+    MatSliderModule,
     MatTabsModule,
     MatRadioModule,
     MatInputModule,
