@@ -15,7 +15,8 @@ export class RegisterComponent implements OnInit {
   registerForm = this.fb.group({
     name: ['', Validators.required],
     email: ['', Validators.required],
-    password: ['', [Validators.required, Validators.minLength(6)]]
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    confirmPassword: ['', [Validators.required]],
   });
 
   constructor(private fb: FormBuilder,
@@ -44,6 +45,10 @@ export class RegisterComponent implements OnInit {
 
   get password() {
     return this.registerForm.get('password');
+  }
+
+  get confirmPassword() {
+    return this.registerForm.get('confirmPassword');
   }
 
   get email() {

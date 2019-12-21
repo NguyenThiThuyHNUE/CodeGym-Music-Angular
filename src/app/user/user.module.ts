@@ -25,34 +25,35 @@ import {FooterComponent} from './footer/footer.component';
 import {MainComponent} from './body/main/main.component';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 import {MatSliderModule} from '@angular/material/slider';
+import {ConfirmEqualValidatorDirective} from '../directive/confirm-equal-validator.directive';
 
 @NgModule({
   declarations: [UserComponent, HeaderComponent, BodyComponent, RegisterComponent, LoginComponent, AuthComponent, MusicDetailComponent,
-    CreateComponent, MusicComponent, FooterComponent, MainComponent],
+    CreateComponent, MusicComponent, FooterComponent, MainComponent, ConfirmEqualValidatorDirective],
   entryComponents: [RegisterComponent, LoginComponent],
   providers: [
     {provide: 'SnotifyToastConfig', useValue: ToastDefaults},
     SnotifyService
   ],
-  imports: [
-    SnotifyModule,
-    MatExpansionModule,
-    MatCheckboxModule,
-    MatSliderModule,
-    MatTabsModule,
-    MatRadioModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatDialogModule,
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    UserRoutingModule,
-    _MatMenuDirectivesModule,
-    MatMenuModule,
-  ]
+    imports: [
+        SnotifyModule,
+        MatExpansionModule,
+        MatCheckboxModule,
+        MatSliderModule,
+        MatTabsModule,
+        MatRadioModule,
+        MatInputModule,
+        MatButtonModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatDialogModule,
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        UserRoutingModule,
+        _MatMenuDirectivesModule,
+        MatMenuModule,
+    ]
 })
 export class UserModule {
 }
