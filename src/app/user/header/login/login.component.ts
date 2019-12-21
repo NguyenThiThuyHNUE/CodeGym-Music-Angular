@@ -71,13 +71,17 @@ export class LoginComponent implements OnInit {
     // tslint:disable-next-line:triple-equals
     if (error.status == 0) {
       return this.Notify.error('Disconnect to Server, Please try again later', 'Register Error',
-        {timeout: 10000});
+        {timeout: 5000});
     }
     if (error.error.errors.email) {
-      return this.Notify.error(error.error.errors.email[0], 'Login Error',
-        {timeout: 10000});
+      return this.Notify.error(error.error.errors.email, 'Login Error',
+        {timeout: 5000});
     }
-    return this.Notify.error('Please check your account or password', 'Login Error', {timeout: 7000});
+    if (error.error.errors.password) {
+      return this.Notify.error(error.error.errors.password, 'Login Error',
+        {timeout: 5000});
+    }
+    return this.Notify.error('Please check your account or password', 'Login Error', {timeout: 5000});
   }
 
 }
