@@ -1,41 +1,31 @@
 import {Injectable} from '@angular/core';
-import {AngularFireDatabase} from '@angular/fire/database';
+import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
 import {Song} from '../song';
 import {Router} from '@angular/router';
+import {IMusic} from '../interface/i-music';
+import {Observable} from 'rxjs';
+import {IMessage} from '../interface/i-message';
+import {HttpClient} from '@angular/common/http';
+
+const webBackEndUrl = 'localhost:8000';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MusicService {
+  getMusicUrl = `http://${webBackEndUrl}/api/musics/`;
+  createMusicUrl = `http://${webBackEndUrl}/api/music/create/`;
+  editMusicUrl = `http://${webBackEndUrl}/api/music/edit/`;
+  deleteMusicUrl = `http://${webBackEndUrl}/api/music/delete/}`;
+  music: AngularFireList<any>;
 
   constructor(private angularFireDatabase: AngularFireDatabase,
-              private angularFireStorage: AngularFireStorage) {
+              private angularFireStorage: AngularFireStorage,
+              private http: HttpClient) {
     this.list();
   }
-
-  // upLoad(selectFileAvatar, selectFileMp3, firePathAvatar, firePathMp3, fireRefMp3, fireRefAvatar,
-  //        databaseList, song) {
-  //   this.angularFireStorage.upload(firePathAvatar, selectFileAvatar).snapshotChanges().pipe(
-  //     finalize(() => {
-  //       fireRefAvatar.getDownloadURL().subscribe((url) => {
-  //         song.avatar = url;
-  //       });
-  //     })
-  //   ).subscribe();
-  //   this.angularFireStorage.upload(firePathMp3, selectFileMp3).snapshotChanges().pipe(
-  //     finalize(() => {
-  //       fireRefMp3.getDownloadURL().subscribe((url) => {
-  //         song.musicUrl = url;
-  //         databaseList.push(song);
-  //         this.router.navigate(['/home']).then(() => {
-  //           alert('Add Success ! ^^');
-  //         });
-  //       });
-  //     })
-  //   ).subscribe();
-  // }
 
   uploadAvatar(firePathAvatar, selectFileAvatar) {
     return this.angularFireStorage.upload(firePathAvatar, selectFileAvatar);
@@ -47,5 +37,21 @@ export class MusicService {
 
   list() {
     return this.angularFireDatabase.list('/list').snapshotChanges();
+  }
+
+  upLoadDataMusic(music): Observable<IMessage> {
+    return this.http.post<IMessage>(this.createMusicUrl, music);
+  }
+
+  getMusics(): Observable<IMusic[]> {
+    return this.http.get<IMusic[]>(this.getMusicUrl);
+  }
+
+  editMusic(idMusic, music): Observable<IMessage> {
+    return this.http.put<IMessage>(this.editMusicUrl + idMusic, music);
+  }
+
+  deleteMusic(idMusic): Observable<IMessage> {
+    return this.http.delete<IMessage>(this.deleteMusicUrl + idMusic);
   }
 }
