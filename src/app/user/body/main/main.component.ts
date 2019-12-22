@@ -3,6 +3,7 @@ import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angu
 import {MusicService} from '../../../service/music.service';
 import {IMusic} from '../../../interface/i-music';
 import {AudioService} from '../../../service/audio.service';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-main',
@@ -138,7 +139,7 @@ export class MainComponent implements OnInit {
       pageY
     });
   }
-
+    
   repeatSong(): boolean {
     if (!this.isRepeat) {
       return this.isRepeat = true;
