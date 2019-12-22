@@ -29,10 +29,11 @@ import { DetailComponent } from './music/detail/detail.component';
 import { EditComponent } from './music/edit/edit.component';
 import {MatSliderModule} from '@angular/material/slider';
 import { DeleteComponent } from './music/delete/delete.component';
+import {ConfirmEqualValidatorDirective} from '../directive/confirm-equal-validator.directive';
 
 @NgModule({
-  declarations: [UserComponent, HeaderComponent, BodyComponent, RegisterComponent, LoginComponent, AuthComponent,
-    CreateComponent, MusicComponent, FooterComponent, MainComponent, DetailComponent, EditComponent, DeleteComponent],
+  declarations: [UserComponent, HeaderComponent, BodyComponent, RegisterComponent, LoginComponent, AuthComponent, MusicDetailComponent,
+    CreateComponent, MusicComponent, FooterComponent, MainComponent, ConfirmEqualValidatorDirective, DetailComponent, EditComponent, DeleteComponent],
   entryComponents: [RegisterComponent, LoginComponent],
   providers: [
     {provide: 'SnotifyToastConfig', useValue: ToastDefaults},
@@ -59,6 +60,7 @@ import { DeleteComponent } from './music/delete/delete.component';
     MatIconModule,
     MatSelectModule,
   ]
+
 })
 export class UserModule {
 }

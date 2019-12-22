@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../../service/user.service';
 import {SnotifyService} from "ng-snotify";
 
@@ -8,11 +8,11 @@ import {SnotifyService} from "ng-snotify";
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
-    name: string;
+  name: string;
 
   constructor(public user: UserService,
               public Notify: SnotifyService
-              ) {
+  ) {
   }
 
   ngOnInit() {

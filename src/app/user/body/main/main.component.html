@@ -311,7 +311,7 @@
               <div style="" class="now-playing">
                 <div class="control-box">
                   <button (click)="playMusic()" class="btn btnControl"
-                          [ngClass]="{'play': isPlay == 1, 'pause': isPlay == 0}">
+                          [ngClass]="{'play': isPlay, 'pause': !isPlay}">
                     <i class="fa fa-play"></i>
                     <i class="fa fa-pause"></i>
                   </button>
@@ -322,8 +322,8 @@
                     Music Name
                   </div>
                   <div class="seekBar">
-                    <div (click)="getOffsetLeft($event)" #seekBarOuter class="outer">
-                      <span  class="inner"
+                    <div (click)="getTimeOnClick($event)" #seekBarOuter class="outer">
+                      <span class="inner"
                             [ngStyle]="{'width': seekBarInner}"></span>
                       <!--<mat-slider></mat-slider>-->
                     </div>
@@ -337,8 +337,8 @@
                 <div class="volume-control" (mouseleave)="volumeHide()" (mouseenter)="volumeShow()">
                   <i class="fa fa-volume-up"></i>
                   <div class="seekBar" *ngIf="showVolume">
-                    <div class="outer">
-                      <span class="inner"></span>
+                    <div (click)="getVolumeOnClick($event)" #seekBarVolumeOuter class="outer">
+                      <span class="inner" [ngStyle]="{'height': volumePercent}"></span>
                     </div>
                   </div>
                 </div>
