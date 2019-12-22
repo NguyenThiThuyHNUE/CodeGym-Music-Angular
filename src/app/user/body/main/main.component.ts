@@ -14,8 +14,10 @@ export class MainComponent implements OnInit {
   @ViewChild('seekBarVolumeOuter', {static: false}) seekBarVolumeOuter: ElementRef;
 
   musicList: IMusic[];
-  isPlay: number = 1;
-  showVolume: boolean = false;
+  isPlay = true;
+  showVolume = false;
+  // tslint:disable-next-line:max-line-length
+
   musicSrc = 'https://firebasestorage.googleapis.com/v0/b/codegym-music.appspot.com/o/NguoiEmKhongYeu-QuangVinh-2430593.mp3?alt=media&token=903c5d4c-6b07-4481-8fcb-2c49944370de';
   startTime: any;
   remainTime: any;
@@ -107,7 +109,7 @@ export class MainComponent implements OnInit {
     console.log({currentTime: seekPosition * this.audio.getDuration() / innerWidth});
 
     return {offsetLeft: offsetLeft};
-    
+
   getTimeOnClick(event) {
     const offsetWidth = this.outerSeekBarEle.nativeElement.offsetWidth;
     const pageX = event.pageX;

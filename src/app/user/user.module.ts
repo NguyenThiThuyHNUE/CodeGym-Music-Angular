@@ -28,11 +28,12 @@ import {MatSelectModule} from '@angular/material/select';
 import { DetailComponent } from './music/detail/detail.component';
 import { EditComponent } from './music/edit/edit.component';
 import {MatSliderModule} from '@angular/material/slider';
+import { DeleteComponent } from './music/delete/delete.component';
 import {ConfirmEqualValidatorDirective} from '../directive/confirm-equal-validator.directive';
 import { DeleteComponent } from './music/delete/delete.component';
 
 @NgModule({
-  declarations: [UserComponent, HeaderComponent, BodyComponent, RegisterComponent, LoginComponent, AuthComponent,
+  declarations: [UserComponent, HeaderComponent, BodyComponent, RegisterComponent, LoginComponent, AuthComponent, MusicDetailComponent,
     CreateComponent, MusicComponent, FooterComponent, MainComponent, ConfirmEqualValidatorDirective, DetailComponent, EditComponent, DeleteComponent],
   entryComponents: [RegisterComponent, LoginComponent],
   providers: [
