@@ -4,9 +4,7 @@ import {Router} from '@angular/router';
 import {UserService} from '../../../service/user.service';
 import {MatDialogRef} from '@angular/material';
 import {SnotifyService} from 'ng-snotify';
-
-const REGISTER = 0;
-const LOGIN = 1;
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +13,6 @@ const LOGIN = 1;
 })
 export class LoginComponent implements OnInit {
   buttonStatus = true;
-  selectTab = LOGIN;
   registerForm = this.fb.group({
     name: ['', Validators.required],
     email: ['', Validators.required],
@@ -31,6 +28,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    public dialog: MatDialog,
     private Notify: SnotifyService,
     private userService: UserService,
     private dialogRef: MatDialogRef<LoginComponent>
@@ -89,6 +87,7 @@ export class LoginComponent implements OnInit {
   }
 
   resetRegisterForm() {
+    this.dialogRef.close();
     this.registerForm = this.fb.group({
       name: [''],
       email: [''],
@@ -98,7 +97,6 @@ export class LoginComponent implements OnInit {
   }
 
   handleLoginResponse(res) {
-
     localStorage.setItem('token', res.access_token);
     this.buttonStatus = true;
     this.resetLoginForm();
@@ -122,7 +120,6 @@ export class LoginComponent implements OnInit {
     return this.Notify.error('Please check your account or password', 'Login Error', {timeout: 5000});
   }
 
-
   handleRegisterError(error) {
     this.buttonStatus = true;
     // tslint:disable-next-line:triple-equals
@@ -139,8 +136,14 @@ export class LoginComponent implements OnInit {
 
   handleRegisterResponse(res) {
     this.buttonStatus = true;
-    this.selectTab = LOGIN;
     this.Notify.success(`Register Success, Please Login ${res.data.name}`, 'Congratulations', {timeout: 7000});
     this.resetRegisterForm();
+    this.showFormLogin();
+  }
+
+  showFormLogin() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '40%';
+    this.dialog.open(LoginComponent, dialogConfig);
   }
 }

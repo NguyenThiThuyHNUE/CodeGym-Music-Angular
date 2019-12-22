@@ -15,7 +15,7 @@ const LOGIN = 1;
 })
 export class RegisterComponent implements OnInit {
   buttonStatus = true;
-  selectTab = REGISTER;
+  selectTab = LOGIN;
   registerForm = this.fb.group({
     name: ['', Validators.required],
     email: ['', Validators.required],
