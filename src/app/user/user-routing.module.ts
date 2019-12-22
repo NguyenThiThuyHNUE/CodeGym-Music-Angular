@@ -5,6 +5,7 @@ import {LoginComponent} from './header/login/login.component';
 import {MusicComponent} from './music/music.component';
 import {CreateComponent} from './music/create/create.component';
 import {MainComponent} from './body/main/main.component';
+import {AuthGuard} from '../gurad/auth.guard';
 import {DetailComponent} from './music/detail/detail.component';
 import {EditComponent} from './music/edit/edit.component';
 import {DeleteComponent} from './music/delete/delete.component';

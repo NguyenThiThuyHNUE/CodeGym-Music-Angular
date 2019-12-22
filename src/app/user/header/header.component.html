@@ -54,12 +54,8 @@
 
               <!-- Social Button -->
               <div class="top-social-info">
-                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                <a href="#"><i class="fab fa-twitter-square"></i></a>
+                <a href="#"><i class="fab fa-facebook-square"></i></a>
                 <a *ngIf="!user.isLoggedIn()" class="auth classynav" (click)="showFormLogin()">Login</a>
                 <a class="auth classynav" *ngIf="user.isLoggedIn()">
                   <app-auth></app-auth>

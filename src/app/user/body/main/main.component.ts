@@ -1,5 +1,5 @@
+import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 /* tslint:disable */
-import {Component, OnInit, ElementRef, ViewChild} from '@angular/core';
 import {MusicService} from '../../../service/music.service';
 import {IMusic} from '../../../interface/i-music';
 import {AudioService} from '../../../service/audio.service';
@@ -7,12 +7,14 @@ import {AudioService} from '../../../service/audio.service';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss']
+  styleUrls: ['./main.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MainComponent implements OnInit {
   @ViewChild('seekBarOuter', {static: false}) outerSeekBarEle: ElementRef;
   @ViewChild('seekBarVolumeOuter', {static: false}) seekBarVolumeOuter: ElementRef;
 
+  isRepeat = false;
   musicList: IMusic[];
   isPlay = true;
   showVolume = false;
@@ -56,6 +58,7 @@ export class MainComponent implements OnInit {
   setRemainTime() {
     this.audio.getTimeRemaining().subscribe(
       data => {
+        this.audio.audio.loop = this.isRepeat;
         this.remainTime = data;
       }
     );
@@ -84,7 +87,7 @@ export class MainComponent implements OnInit {
     return (+validateTime[0]) * 60 + (+validateTime[1]);
   }
 
-  private seekBarPercent(data) {
+  seekBarPercent(data) {
     const currentTime = this.convertToSecond(data);
     return currentTime / this.audio.getDuration() * 100;
   }
@@ -134,5 +137,12 @@ export class MainComponent implements OnInit {
       offsetHeight,
       pageY
     });
+  }
+
+  repeatSong(): boolean {
+    if (!this.isRepeat) {
+      return this.isRepeat = true;
+    }
+    return this.isRepeat = false;
   }
 }
