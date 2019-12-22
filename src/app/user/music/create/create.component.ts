@@ -6,18 +6,20 @@ import {Song} from '../../../song';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {IMusic} from '../../../interface/i-music';
 
 // import {url} from 'inspector';
 
+// noinspection JSDuplicatedDeclaration
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
-  styleUrls: ['./create.component.scss']
+  styleUrls: ['./create.component.scss'],
 })
 export class CreateComponent implements OnInit {
   selectFileAvatar: File = null;
   selectFileMp3: File = null;
-  databaseList: AngularFireList<any>;
+  // databaseList: AngularFireList<any>;
   addMusicForm = this.fb.group({
     id: ['', [Validators.required]],
     name: ['', [Validators.required]],
@@ -46,6 +48,7 @@ export class CreateComponent implements OnInit {
     this.selectFileMp3 = event.target.files[0] as File;
   }
 
+  // noinspection DuplicatedCode
   onUpLoad() {
     this.song.id = this.addMusicForm.value.id;
     this.song.name = this.addMusicForm.value.name;
@@ -55,23 +58,23 @@ export class CreateComponent implements OnInit {
     const firePathMp3 = `music/${this.selectFileMp3.name}`;
     const fireRefAvatar = this.angularFireStorage.ref(firePathAvatar);
     const fireRefMp3 = this.angularFireStorage.ref(firePathMp3);
-    this.databaseList = this.angularFireDatabase.list('/list');
+    // this.databaseList = this.angularFireDatabase.list('/list');
     this.musicService.uploadAvatar(firePathAvatar, this.selectFileAvatar).snapshotChanges().pipe(
       finalize(() => {
-      fireRefAvatar.getDownloadURL().subscribe((url) => {
-        this.song.avatar = url;
-      });
-    })).subscribe();
+        fireRefAvatar.getDownloadURL().subscribe((url) => {
+          this.song.avatar = url;
+        });
+      })).subscribe();
     this.musicService.uploadMp3(firePathMp3, this.selectFileMp3).snapshotChanges().pipe(
       finalize(() => {
-      fireRefMp3.getDownloadURL().subscribe((url) => {
-        this.song.musicUrl = url;
-        this.databaseList.push(this.song);
-        this.route.navigate(['/home']).then(() => {
-          alert('You Created A Song Success !');
+        fireRefMp3.getDownloadURL().subscribe((url) => {
+          this.song.musicUrl = url;
+          this.musicService.upLoadDataMusic(this.song).subscribe();
+          this.route.navigate(['/home']).then(() => {
+            alert('You Created A Song Success !');
+          });
         });
-      });
-    })).subscribe();
+      })).subscribe();
   }
 
   get id() {
