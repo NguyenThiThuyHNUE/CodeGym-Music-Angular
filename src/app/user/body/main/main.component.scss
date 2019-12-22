@@ -1,3 +1,26 @@
+.custom-mat-tab {
+  .mat-tab-body-content {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .mat-tab-labels {
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .mat-tab-label {
+    margin-right: 0.5rem;
+    font-size: 2rem;
+    font-weight: 900;
+    color: #ffffff;
+  }
+
+  .mat-ink-bar {
+    background-color: #bd177a !important;
+  }
+}
+
 .image-music-main {
   width: 90px;
   height: 100px;
@@ -7,7 +30,22 @@
   padding-top: 8%;
   width: 100%;
 
+.now-playing {
+  display: flex;
+  align-items: stretch;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  .control-box {
+    margin-right: 2rem;
+
+
+
+
   .now-playing {
+
     display: flex;
     align-items: stretch;
     padding-top: 0;
