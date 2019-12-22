@@ -10,10 +10,11 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {Song} from './song';
 import {SnotifyModule} from 'ng-snotify';
+import {ConfirmEqualValidatorDirective} from './directive/confirm-equal-validator.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     SnotifyModule,
@@ -26,6 +27,7 @@ import {SnotifyModule} from 'ng-snotify';
     AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
   providers: [Song],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

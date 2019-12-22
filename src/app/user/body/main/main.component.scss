@@ -127,7 +127,10 @@
             display: inline-block;
             height: 20%;
           }
-
+          background-color: white;
+          width: 100%;
+          display: inline-block;
+        }
           &:hover {
             cursor: pointer;
           }

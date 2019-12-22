@@ -1,0 +1,9 @@
+.auth {
+  text-transform: capitalize;
+  color: #ffffff;
+
+  &:hover {
+    cursor: pointer;
+    color: deeppink;
+  }
+}
