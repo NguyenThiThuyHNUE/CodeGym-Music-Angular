@@ -1,4 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+/* tslint:disable */
+import {MusicService} from '../../../service/music.service';
+import {IMusic} from '../../../interface/i-music';
 import {AudioService} from '../../../service/audio.service';
 
 @Component({
@@ -12,16 +15,20 @@ export class MainComponent implements OnInit {
   @ViewChild('seekBarVolumeOuter', {static: false}) seekBarVolumeOuter: ElementRef;
 
   isRepeat = false;
+  musicList: IMusic[];
   isPlay = true;
   showVolume = false;
   // tslint:disable-next-line:max-line-length
+
   musicSrc = 'https://firebasestorage.googleapis.com/v0/b/codegym-music.appspot.com/o/NguoiEmKhongYeu-QuangVinh-2430593.mp3?alt=media&token=903c5d4c-6b07-4481-8fcb-2c49944370de';
   startTime: any;
   remainTime: any;
   seekBarInner: any;
   volumePercent = '50%';
 
-  constructor(private audio: AudioService, private elRef: ElementRef) {
+  constructor(private musicService: MusicService,
+              private audio: AudioService,
+              private elRef: ElementRef) {
   }
 
   ngOnInit() {
@@ -29,6 +36,9 @@ export class MainComponent implements OnInit {
     this.audio.audio.volume = 0.5;
     this.setStartTime();
     this.setRemainTime();
+    this.musicService.getMusics().subscribe(music => {
+      this.musicList = music;
+    });
   }
 
   setAudio(musicSrc) {
@@ -81,6 +91,27 @@ export class MainComponent implements OnInit {
     const currentTime = this.convertToSecond(data);
     return currentTime / this.audio.getDuration() * 100;
   }
+
+  clickSeekBar(event) {
+    let offsetLeft = 0;
+    let innerWidth = 0;
+    let el = event.target;
+
+    while (el) {
+      offsetLeft += el.offsetLeft;
+      innerWidth = el.offsetWidth;
+
+      el = el.parentElement;
+    }
+
+    const seekPosition = offsetLeft - event.pageX;
+    console.log({offsetLeft: offsetLeft});
+    console.log({seekPosition: seekPosition});
+    console.log({innerWidth: innerWidth});
+    console.log({pageX: event.pageX});
+    console.log({currentTime: seekPosition * this.audio.getDuration() / innerWidth});
+
+    return {offsetLeft: offsetLeft};
 
   getTimeOnClick(event) {
     const offsetWidth = this.outerSeekBarEle.nativeElement.offsetWidth;
