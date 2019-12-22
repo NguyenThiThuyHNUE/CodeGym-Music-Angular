@@ -172,33 +172,6 @@
     </div>
   </div>
 </div>
-<!-- ##### Upcoming Shows Area End ##### -->
-
-<!--    &lt;!&ndash; space &ndash;&gt;-->
-<!--    <div style="background-color: #EEEEEE; height: 50px"></div>-->
-
-<!--    &lt;!&ndash; new song & popular song &ndash;&gt;-->
-<!--    <div style="background-color: white">-->
-<!--      <div class="row mt-5 mb-4">-->
-
-<!--        &lt;!&ndash; new songs &ndash;&gt;-->
-<!--        <div class="col-6 border-right">-->
-<!--          <div class="font-weight-bold ml-5 mb-3">-->
-<!--            <h3>New Songs</h3>-->
-<!--          </div>-->
-<!--          <div class="ml-4">-->
-<!--            <div class="ml-5 mb-3">-->
-<!--              <div class="row">-->
-<!--                <div class="col-1">-->
-<!--                  <img src="https://avatar-nct.nixcdn.com/song/2019/10/23/7/8/b/5/1571804802390.jpg"-->
-<!--                       style="width: 50px; height: 50px">-->
-<!--                </div>-->
-<!--                <div class="col-11">-->
-<!--                  <div class="ml-3">-->
-<!--                    <a routerLink="detail/music">Nghe nói anh sắp kết hôn</a>-->
-<!--                    <div>Văn Mai Hương, Hà Anh Tuấn</div>-->
-
-<!-- ##### Music Player Area Start ##### -->
 <div class="music-player-area section-padding-100">
   <div class="container-fluid">
     <div class="row">
@@ -296,9 +269,10 @@
         <div class="featured-album-content d-flex flex-wrap">
 
           <!-- Album Thumbnail -->
-          <div class="album-thumbnail h-100 bg-img"
-               style="background-image: url(../../../assets/img/bg-img/bg-4.jpg);"></div>
+          <div class="album-thumbnail h-100"
+               style="background-image: url(https://thumbs.gfycat.com/JovialSecondhandIbadanmalimbe-size_restricted.gif);">
 
+          </div>
           <!-- Album Songs -->
           <div class="album-songs h-100">
 
@@ -316,105 +290,22 @@
             <div class="album-all-songs">
 
               <!-- Music Playlist -->
-              <div class="music-playlist">
+              <div class="music-playlist" *ngFor="let music of musicList">
                 <!-- Single Song -->
                 <div class="single-music active">
-                  <h6>Drop that beat</h6>
-                  <audio preload="auto" controls>
-                    <source
-                      src="https://firebasestorage.googleapis.com/v0/b/codegym-music-4e4b1.appspot.com/o/music%2FThayToiYeuCoAyDinhLongRemix-ThanhHungIdolDJ-6054427.mp3?alt=media&token=c3ba35d2-3e8c-411b-8cda-3326a79a6b7c">
-                  </audio>
+                  <h4><span style="color: white" class="container" routerLink="/home/music/detail/{{music.id}}">{{music.name}} - {{music.singer}}</span>
+                  </h4>
+                  <div class="row">
+                   <div class="container">
+                     <div class="col-12">
+                       <img src="{{music.avatar}}" alt="" class="image-music-main" routerLink="/home/music/detail/{{music.id}}">
+                     </div>
+                   </div>
+                  </div>
                 </div>
-
-                <!-- Single Song -->
-                <div class="single-music">
-                  <h6>Hey, Mister Dj</h6>
-                  <audio preload="auto" controls>
-                    <source src="../../../assets/audio/dummy-audio.mp3">
-                  </audio>
-                </div>
-
-                <!-- Single Song -->
-                <div class="single-music">
-                  <h6>Message to my future self</h6>
-                  <audio preload="auto" controls>
-                    <source src="../../../assets/audio/dummy-audio.mp3">
-                  </audio>
-                </div>
-
-                <!-- Single Song -->
-                <div class="single-music">
-                  <h6>Bring back the love</h6>
-                  <audio preload="auto" controls>
-                    <source src="../../../assets/audio/dummy-audio.mp3">
-                  </audio>
-                </div>
-
-                <!-- Single Song -->
-                <div class="single-music">
-                  <h6>Hey, Mister Dj - Remix</h6>
-                  <audio preload="auto" controls>
-                    <source src="../../../assets/audio/dummy-audio.mp3">
-                  </audio>
-                </div>
-
-                <!-- Single Song -->
-                <div class="single-music">
-                  <h6>Message to my future self</h6>
-                  <audio preload="auto" controls>
-                    <source src="../../../assets/audio/dummy-audio.mp3">
-                  </audio>
-                </div>
-                <!-- Single Song -->
-                <div class="single-music">
-                  <h6>Drop that beat</h6>
-                  <audio preload="auto" controls>
-                    <source src="../../../assets/audio/dummy-audio.mp3">
-                  </audio>
-                </div>
-
-                <!-- Single Song -->
-                <div class="single-music">
-                  <h6>Hey, Mister Dj</h6>
-                  <audio preload="auto" controls>
-                    <source src="../../../assets/audio/dummy-audio.mp3">
-                  </audio>
-                </div>
-
-                <!-- Single Song -->
-                <div class="single-music">
-                  <h6>Message to my future self</h6>
-                  <audio preload="auto" controls>
-                    <source src="../../../assets/audio/dummy-audio.mp3">
-                  </audio>
-                </div>
-
-                <!-- Single Song -->
-                <div class="single-music">
-                  <h6>Bring back the love</h6>
-                  <audio preload="auto" controls>
-                    <source src="../../../assets/audio/dummy-audio.mp3">
-                  </audio>
-                </div>
-
-                <!-- Single Song -->
-                <div class="single-music">
-                  <h6>Hey, Mister Dj - Remix</h6>
-                  <audio preload="auto" controls>
-                    <source src="../../../assets/audio/dummy-audio.mp3">
-                  </audio>
-                </div>
-
-                <!-- Single Song -->
-                <div class="single-music">
-                  <h6>Message to my future self</h6>
-                  <audio preload="auto" controls>
-                    <source src="../../../assets/audio/dummy-audio.mp3">
-                  </audio>
-                </div>
+                <hr>
               </div>
             </div>
-
             <!-- Now Playing -->
             <div class="pl-5 d-flex flex-wrap align-items-center justify-content-between">
               <div style="" class="now-playing">
@@ -434,7 +325,7 @@
                     <div (click)="getTimeOnClick($event)" #seekBarOuter class="outer">
                       <span class="inner"
                             [ngStyle]="{'width': seekBarInner}"></span>
-                      <!--                      <mat-slider></mat-slider>-->
+                      <!--<mat-slider></mat-slider>-->
                     </div>
                   </div>
                   <div class="timing">
@@ -456,7 +347,6 @@
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>

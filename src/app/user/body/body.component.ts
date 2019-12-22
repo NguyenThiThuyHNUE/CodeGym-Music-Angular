@@ -13,12 +13,6 @@ export class BodyComponent implements OnInit {
   constructor(private musicService: MusicService) {
   }
 
-  ngOnInit() {
-    this.musicService.list().subscribe(musicList => {
-      this.musicList = musicList.map(item => {
-        return item.payload.val();
-      });
-    });
-  }
+  ngOnInit() {}
 
 }
