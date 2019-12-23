@@ -36,20 +36,10 @@
                 <li><a href="about-us.html">About us</a></li>
                 <li><a href="#">Pages</a>
                 </li>
-                <li><a mat-button routerLink="/home/music/create">Upload Music</a>
+                <li><a routerLink="/home/music/create">Upload Music</a>
                 </li>
-                <li *ngIf="!user.isLoggedIn()"><a mat-button (click)="showFormLogin()">Login</a></li>
-                <li *ngIf="!user.isLoggedIn()"><a mat-button (click)="showForm()">Register</a></li>
-                <li *ngIf="user.isLoggedIn()">
-                  <app-auth></app-auth>
                 <li><a href="#">Mega Menu</a>
-
                 </li>
-                <!--                <li *ngIf="!user.isLoggedIn()"><a mat-button (click)="showFormLogin()">Login</a></li>-->
-                <!--                <li *ngIf="!user.isLoggedIn()"><a mat-button (click)="showForm()">Register</a></li>-->
-                <!--                <li *ngIf="user.isLoggedIn()">-->
-                <!--                  <app-auth></app-auth>-->
-                <!--                </li>-->
               </ul>
 
               <!-- Social Button -->

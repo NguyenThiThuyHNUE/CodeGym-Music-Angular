@@ -93,27 +93,6 @@ export class MainComponent implements OnInit {
     return currentTime / this.audio.getDuration() * 100;
   }
 
-  clickSeekBar(event) {
-    let offsetLeft = 0;
-    let innerWidth = 0;
-    let el = event.target;
-
-    while (el) {
-      offsetLeft += el.offsetLeft;
-      innerWidth = el.offsetWidth;
-
-      el = el.parentElement;
-    }
-
-    const seekPosition = offsetLeft - event.pageX;
-    console.log({offsetLeft: offsetLeft});
-    console.log({seekPosition: seekPosition});
-    console.log({innerWidth: innerWidth});
-    console.log({pageX: event.pageX});
-    console.log({currentTime: seekPosition * this.audio.getDuration() / innerWidth});
-
-    return {offsetLeft: offsetLeft};
-
   getTimeOnClick(event) {
     const offsetWidth = this.outerSeekBarEle.nativeElement.offsetWidth;
     const pageX = event.pageX;

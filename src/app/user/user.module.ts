@@ -5,7 +5,6 @@ import {UserComponent} from './user.component';
 import {HeaderComponent} from './header/header.component';
 import {BodyComponent} from './body/body.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {RegisterComponent} from './header/register/register.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -25,22 +24,23 @@ import {MainComponent} from './body/main/main.component';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
-import { DetailComponent } from './music/detail/detail.component';
-import { EditComponent } from './music/edit/edit.component';
+import {DetailComponent} from './music/detail/detail.component';
+import {EditComponent} from './music/edit/edit.component';
 import {MatSliderModule} from '@angular/material/slider';
-import { DeleteComponent } from './music/delete/delete.component';
+import {DeleteComponent} from './music/delete/delete.component';
 import {ConfirmEqualValidatorDirective} from '../directive/confirm-equal-validator.directive';
-import { DeleteComponent } from './music/delete/delete.component';
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 @NgModule({
-  declarations: [UserComponent, HeaderComponent, BodyComponent, RegisterComponent, LoginComponent, AuthComponent, MusicDetailComponent,
-    CreateComponent, MusicComponent, FooterComponent, MainComponent, ConfirmEqualValidatorDirective, DetailComponent, EditComponent, DeleteComponent],
-  entryComponents: [RegisterComponent, LoginComponent],
+  declarations: [UserComponent, HeaderComponent, BodyComponent, LoginComponent, AuthComponent,
+    CreateComponent, MusicComponent, FooterComponent, MainComponent, ConfirmEqualValidatorDirective, DetailComponent,
+    EditComponent, DeleteComponent],
+  entryComponents: [LoginComponent],
   providers: [
     {provide: 'SnotifyToastConfig', useValue: ToastDefaults},
     SnotifyService
   ],
   imports: [
+    MatProgressBarModule,
     SnotifyModule,
     MatExpansionModule,
     MatCheckboxModule,

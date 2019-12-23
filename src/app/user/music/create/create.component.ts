@@ -19,6 +19,8 @@ import {IMusic} from '../../../interface/i-music';
 export class CreateComponent implements OnInit {
   selectFileAvatar: File = null;
   selectFileMp3: File = null;
+  uploadPercent: any;
+  uploadPercentMp3 = 0;
   // databaseList: AngularFireList<any>;
   addMusicForm = this.fb.group({
     id: ['', [Validators.required]],
@@ -59,13 +61,22 @@ export class CreateComponent implements OnInit {
     const fireRefAvatar = this.angularFireStorage.ref(firePathAvatar);
     const fireRefMp3 = this.angularFireStorage.ref(firePathMp3);
     // this.databaseList = this.angularFireDatabase.list('/list');
-    this.musicService.uploadAvatar(firePathAvatar, this.selectFileAvatar).snapshotChanges().pipe(
+    const taskUploadAvatar = this.musicService.uploadAvatar(firePathAvatar, this.selectFileAvatar);
+    const taskUploadMp3 = this.musicService.uploadMp3(firePathMp3, this.selectFileMp3);
+    taskUploadAvatar.percentageChanges().subscribe(percent => {
+      this.uploadPercent = percent;
+    });
+    taskUploadAvatar.snapshotChanges().pipe(
       finalize(() => {
         fireRefAvatar.getDownloadURL().subscribe((url) => {
           this.song.avatar = url;
         });
       })).subscribe();
-    this.musicService.uploadMp3(firePathMp3, this.selectFileMp3).snapshotChanges().pipe(
+    taskUploadMp3.percentageChanges().subscribe(percent => {
+      this.uploadPercentMp3 = percent;
+      console.log(this.uploadPercentMp3);
+    });
+    taskUploadMp3.snapshotChanges().pipe(
       finalize(() => {
         fireRefMp3.getDownloadURL().subscribe((url) => {
           this.song.musicUrl = url;
