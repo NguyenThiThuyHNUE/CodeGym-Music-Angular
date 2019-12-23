@@ -1,0 +1,39 @@
+<mat-tab-group selectedIndex="">
+  <mat-tab label="Update">
+    <mat-card>
+      <form class="tp-form" [formGroup]="updateForm" (ngSubmit)="userUpdate()">
+        <mat-card-content>
+
+          <!--  Email   -->
+          <div class="">
+            <mat-form-field appearance="fill" hideRequiredMarker class="tp-full-width">
+              <mat-label>Email</mat-label>
+              <input matInput type="email" formControlName="emailUpdate" email required>
+              <mat-hint align="end" *ngIf="emailUpdate.invalid && (emailUpdate.dirty || emailUpdate.touched)">
+                <span class="text-danger" *ngIf="emailUpdate.errors.required">Email is required</span>
+                <span class="text-danger" *ngIf="emailUpdate.errors.email">Email Format incorrectly</span>
+              </mat-hint>
+            </mat-form-field>
+          </div>
+
+          <!--  Password    -->
+          <div class="">
+            <mat-form-field appearance="fill" class="tp-full-width">
+              <mat-label>Password</mat-label>
+              <input type="password" matInput formControlName="passwordUpdate" required>
+              <mat-hint align="end" *ngIf="passwordUpdate.invalid && (passwordUpdate.dirty || passwordUpdate.touched)">
+                <span class="text-danger" *ngIf="passwordUpdate.errors.required">Password can not empty!!!</span>
+              </mat-hint>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button [disabled]="!updateForm.valid" type="submit" mat-button color="primary">
+            Update
+          </button>
+
+        </mat-card-actions>
+      </form>
+    </mat-card>
+  </mat-tab>
+</mat-tab-group>
