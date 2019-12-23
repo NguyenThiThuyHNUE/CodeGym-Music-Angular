@@ -5,7 +5,6 @@ import {UserComponent} from './user.component';
 import {HeaderComponent} from './header/header.component';
 import {BodyComponent} from './body/body.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {RegisterComponent} from './header/register/register.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -32,10 +31,10 @@ import {DeleteComponent} from './music/delete/delete.component';
 import {ConfirmEqualValidatorDirective} from '../directive/confirm-equal-validator.directive';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 @NgModule({
-  declarations: [UserComponent, HeaderComponent, BodyComponent, RegisterComponent, LoginComponent, AuthComponent,
+  declarations: [UserComponent, HeaderComponent, BodyComponent, LoginComponent, AuthComponent,
     CreateComponent, MusicComponent, FooterComponent, MainComponent, ConfirmEqualValidatorDirective, DetailComponent,
     EditComponent, DeleteComponent],
-  entryComponents: [RegisterComponent, LoginComponent],
+  entryComponents: [LoginComponent],
   providers: [
     {provide: 'SnotifyToastConfig', useValue: ToastDefaults},
     SnotifyService
