@@ -9,11 +9,13 @@ import {AuthGuard} from '../gurad/auth.guard';
 import {DetailComponent} from './music/detail/detail.component';
 import {EditComponent} from './music/edit/edit.component';
 import {DeleteComponent} from './music/delete/delete.component';
+import {InfoComponent} from './body/info/info.component';
 
 const routes: Routes = [
   {
     path: '', component: UserComponent, children: [
       {path: '', component: MainComponent},
+      {path: 'info', component: InfoComponent}
     ]
   },
   {

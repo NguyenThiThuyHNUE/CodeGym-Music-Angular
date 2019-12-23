@@ -30,11 +30,14 @@ import {MatSliderModule} from '@angular/material/slider';
 import {DeleteComponent} from './music/delete/delete.component';
 import {ConfirmEqualValidatorDirective} from '../directive/confirm-equal-validator.directive';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { InfoComponent } from './body/info/info.component';
+import { ProfileComponent } from './body/info/profile/profile.component';
+
 @NgModule({
   declarations: [UserComponent, HeaderComponent, BodyComponent, LoginComponent, AuthComponent,
     CreateComponent, MusicComponent, FooterComponent, MainComponent, ConfirmEqualValidatorDirective, DetailComponent,
-    EditComponent, DeleteComponent],
-  entryComponents: [LoginComponent],
+    EditComponent, DeleteComponent, InfoComponent, ProfileComponent],
+  entryComponents: [LoginComponent, ProfileComponent],
   providers: [
     {provide: 'SnotifyToastConfig', useValue: ToastDefaults},
     SnotifyService
