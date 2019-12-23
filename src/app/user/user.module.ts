@@ -30,7 +30,7 @@ import {EditComponent} from './music/edit/edit.component';
 import {MatSliderModule} from '@angular/material/slider';
 import {DeleteComponent} from './music/delete/delete.component';
 import {ConfirmEqualValidatorDirective} from '../directive/confirm-equal-validator.directive';
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 @NgModule({
   declarations: [UserComponent, HeaderComponent, BodyComponent, RegisterComponent, LoginComponent, AuthComponent,
     CreateComponent, MusicComponent, FooterComponent, MainComponent, ConfirmEqualValidatorDirective, DetailComponent,
@@ -41,6 +41,7 @@ import {ConfirmEqualValidatorDirective} from '../directive/confirm-equal-validat
     SnotifyService
   ],
   imports: [
+    MatProgressBarModule,
     SnotifyModule,
     MatExpansionModule,
     MatCheckboxModule,

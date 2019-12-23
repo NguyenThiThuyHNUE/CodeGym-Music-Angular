@@ -16,7 +16,6 @@ const routes: Routes = [
       {path: '', component: MainComponent},
     ]
   },
-  {path: 'login', component: LoginComponent, pathMatch: 'full'},
   {
     path: 'music', component: MusicComponent, children:
       [

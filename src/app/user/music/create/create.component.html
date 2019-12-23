@@ -42,8 +42,8 @@
         </div>
         <div class="form-group">
           <label><b>Description:</b></label>
-<!-- <input type="text" class="form-control" formControlName="description">-->
-          <textarea  class="form-control" formControlName="description" cols="30" rows="10"></textarea>
+          <!-- <input type="text" class="form-control" formControlName="description">-->
+          <textarea class="form-control" formControlName="description" cols="30" rows="10"></textarea>
           <div *ngIf="description.invalid && (description.dirty || description.touched)"
                class="alert alert-danger">
             <div *ngIf="description.errors.required">
@@ -70,6 +70,7 @@
               File mp3 không được để trống !
             </div>
           </div>
+          <mat-progress-bar mode="determinate" value="{{uploadPercentMp3}}"></mat-progress-bar>
         </div>
         <button type="submit" class="btn btn-primary" [disabled]="!addMusicForm.valid">+ UpLoad</button>
         <button class="btn btn-danger ml-2" routerLink="/home">Cancel</button>
@@ -78,4 +79,3 @@
   </div>
 </div>
 <hr>
-
