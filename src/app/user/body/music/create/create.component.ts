@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
-import {MusicService} from '../../../service/music.service';
+import {MusicService} from '../../../../service/music.service';
 import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
-import {Song} from '../../../song';
+import {Song} from '../../../../song';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
 import {Router} from '@angular/router';
-import {IMusic} from '../../../interface/i-music';
+import {IMusic} from '../../../../interface/i-music';
 
 // import {url} from 'inspector';
 

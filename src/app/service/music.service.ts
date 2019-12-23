@@ -43,8 +43,8 @@ export class MusicService {
     return this.http.post<IMessage>(this.createMusicUrl, music);
   }
 
-  getMusics(): Observable<IMusic[]> {
-    return this.http.get<IMusic[]>(this.getMusicUrl);
+  getMusics() {
+    return this.http.get<{ data }>(this.getMusicUrl);
   }
 
   editMusic(idMusic, music): Observable<IMessage> {

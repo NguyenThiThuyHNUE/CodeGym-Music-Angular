@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {MusicService} from '../../../service/music.service';
+import {MusicService} from '../../../../service/music.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {IMusic} from '../../../interface/i-music';
+import {IMusic} from '../../../../interface/i-music';
 
 @Component({
   selector: 'app-detail',
@@ -22,10 +22,10 @@ export class DetailComponent implements OnInit {
 
   ngOnInit() {
     this.musicService.getMusics().subscribe(musics => {
-      this.musicDetail = musics.find(music => music.id === this.idMusic);
+      this.musicDetail = musics.data.find(music => music.id === this.idMusic);
     });
     this.musicService.getMusics().subscribe(musics => {
-      this.musicList = musics;
+      this.musicList = musics.data;
     });
   }
 

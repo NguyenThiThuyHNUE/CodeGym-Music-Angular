@@ -61,18 +61,18 @@
         <div class="container">
           <div class="row">
             <div class="col-2 ml-5">
-              <img src="{{music.avatar}}" alt="" class="image-music-detail" routerLink="/home/music/detail/{{music.id}}">
+              <img src="{{music.avatar}}" alt="" class="image-music-detail" routerLink="music/detail/{{music.id}}">
             </div>
             <div class="col-7 pt-4">
-              <h4><span style="color: white" class="container" routerLink="/home/music/detail/{{music.id}}">{{music.name}} - {{music.singer}}</span>
+              <h4><span style="color: white" class="container" routerLink="music/detail/{{music.id}}">{{music.name}} - {{music.singer}}</span>
               </h4>
             </div>
            <div class="row">
              <tr class="mt-4">
                <td class="col-2">
-                 <a routerLink="/home/music/detail/{{music.id}}" class="table-link">
+                 <a routerLink="detail/{{music.id}}" class="table-link">
           <span class="fa-stack">
-          <i class="fa fa-square fa-stack-2x"></i>
+<!--          <i class="fa fa-square fa-stack-2x"></i>-->
           <i class="fa fa-search fa-stack-1x fa-inverse"></i>
         </span>
                  </a>
@@ -80,14 +80,14 @@
                <td class="col-2">
                  <a routerLink="/home/music/edit/{{music.id}}" class="table-link">
           <span class="fa-stack">
-            <i class="fa fa-square fa-stack-2x"></i>
+<!--            <i class="fa fa-square fa-stack-2x"></i>-->
             <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
           </span>
                  </a></td>
                <td class="col-2">
                  <a routerLink="/home/music/delete/{{music.id}}" class="table-link danger">
           <span class="fa-stack">
-            <i class="fa fa-square fa-stack-2x"></i>
+<!--            <i class="fa fa-square fa-stack-2x"></i>-->
             <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
           </span>
                  </a>
@@ -101,48 +101,7 @@
     </div>
   </div>
 </div>
-<!--##### Featured Album Area End #####-->
-<!--<app-header></app-header>-->
-<!--##### About Us Area Start #####-->
-<div class="about-us-area section-padding-100-0 bg-img bg-overlay"
-     style="background-image: url(../../../../assets/img/bg-img/bg-4.jpg);" id="about">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="section-heading">
-          <h2>Artist Bio</h2>
-          <h6>Sed porta cursus enim, vitae maximus felis luctus iaculis.</h6>
-        </div>
-      </div>
-    </div>
 
-    <div class="row">
-      <!-- About Thumbnail -->
-      <div class="col-12 col-lg-6">
-        <div class="about-thumbnail mb-100">
-          <img src="../../../assets/img/bg-img/bg-5.jpg" alt="">
-        </div>
-      </div>
-      <!-- About Content -->
-      <div class="col-12 col-lg-6">
-        <div class="about-content mb-100">
-          <h4>Hello, It’s Michael Smithson</h4>
-          <p>Nulla pretium tincidunt felis, nec sollicitudin mauris lobortis in. Aliquam eu feugiat ligula, laoreet
-            efficitur nulla. Morbi nec neque porta, elementum massa at, vehicula nunc. Nulla facilisi. Donec id purus eu
-            lectus imperdiet varius. Curabitur consectetur nunc sem, vitae cursus enim tempor eget. Praesent
-            pellentesque nisi urna, sit amet suscipit ligula posuere id. Aenean id tortor vel quam ornare gravida.
-            Phasellus luctus feugiat nunc, quis vulputate ipsum convallis quis. Integer vel nulla erat. Donec erat
-            metus, luctus quis maximus quis, volutpat eu tellus. Interdum et malesuada fames ac ante ipsum primis in
-            faucibus.</p>
-          <img src="../../../assets/img/core-img/signature.png" alt="">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!--##### About Us Area End #####-->
-
-<!--##### Upcoming Shows Area Start #####-->
 <div class="upcoming-shows-area section-padding-100">
   <div class="container">
     <div class="row">
@@ -166,7 +125,7 @@
             </div>
             <div class="shows-desc d-flex align-items-center">
               <div class="shows-img">
-                <img src="../../../../assets/img/bg-img/s1.jpg" alt="">
+                <img src="../../../../../assets/img/bg-img/s1.jpg" alt="">
               </div>
               <div class="shows-name">
                 <h6>Electric castle Festival</h6>
@@ -191,7 +150,7 @@
             </div>
             <div class="shows-desc d-flex align-items-center">
               <div class="shows-img">
-                <img src="../../../../assets/img/bg-img/s2.jpg" alt="">
+                <img src="../../../../../assets/img/bg-img/s2.jpg" alt="">
               </div>
               <div class="shows-name">
                 <h6>Electric Festival</h6>
@@ -216,7 +175,7 @@
             </div>
             <div class="shows-desc d-flex align-items-center">
               <div class="shows-img">
-                <img src="../../../../assets/img/bg-img/s3.jpg" alt="">
+                <img src="../../../../../assets/img/bg-img/s3.jpg" alt="">
               </div>
               <div class="shows-name">
                 <h6>Sunflower festival</h6>
@@ -241,7 +200,7 @@
             </div>
             <div class="shows-desc d-flex align-items-center">
               <div class="shows-img">
-                <img src="../../../../assets/img/bg-img/s4.jpg" alt="">
+                <img src="../../../../../assets/img/bg-img/s4.jpg" alt="">
               </div>
               <div class="shows-name">
                 <h6>Electric castle Festival</h6>
@@ -353,3 +312,4 @@
     </div>
   </div>
 </div>
+<h1>Test</h1>
