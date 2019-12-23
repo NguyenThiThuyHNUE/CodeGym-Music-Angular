@@ -80,9 +80,10 @@ export class CreateComponent implements OnInit {
       finalize(() => {
         fireRefMp3.getDownloadURL().subscribe((url) => {
           this.song.musicUrl = url;
-          this.musicService.upLoadDataMusic(this.song).subscribe();
-          this.route.navigate(['/home']).then(() => {
-            alert('You Created A Song Success !');
+          this.musicService.upLoadDataMusic(this.song).subscribe(response => {
+            this.route.navigate(['/home']).then(() => {
+              alert(response.message);
+            });
           });
         });
       })).subscribe();
