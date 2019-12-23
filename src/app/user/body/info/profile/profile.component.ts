@@ -10,7 +10,8 @@ export class ProfileComponent implements OnInit {
 
   updateForm = this.fb.group({
     emailUpdate: ['', [Validators.required]],
-    passwordUpdate: ['', [Validators.required]]
+    passwordUpdate: ['', [Validators.required]],
+    confirmPassword: ['', [Validators.required]],
   });
 
   constructor(private fb: FormBuilder) {
@@ -26,7 +27,9 @@ export class ProfileComponent implements OnInit {
   get passwordUpdate() {
     return this.updateForm.get('passwordUpdate');
   }
-
+  get confirmPassword() {
+    return this.updateForm.get('confirmPassword');
+  }
   get emailUpdate() {
     return this.updateForm.get('emailUpdate');
   }
