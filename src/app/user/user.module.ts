@@ -43,6 +43,7 @@ import {ProfileComponent} from './body/info/profile/profile.component';
     FooterComponent
   ],
   imports: [
+    UserRoutingModule,
     MatProgressBarModule,
     SnotifyModule,
     MatExpansionModule,
@@ -58,7 +59,6 @@ import {ProfileComponent} from './body/info/profile/profile.component';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    UserRoutingModule,
     _MatMenuDirectivesModule,
     MatMenuModule,
     MatIconModule,

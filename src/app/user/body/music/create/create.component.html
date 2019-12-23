@@ -1,81 +1,84 @@
-<hr>
-<div class="container">
-  <p class="page-title">ADD A SONG</p>
-  <hr>
-  <div class="row">
-    <div class="col-lg-12">
-      <form [formGroup]="addMusicForm" (ngSubmit)="onUpLoad()">
-        <div class="form-group">
-          <label><b>Id Song:</b></label>
-          <input id="id" class="form-control"
-                 formControlName="id" required>
-          <div *ngIf="id.invalid && (id.dirty || id.touched)"
-               class="alert alert-danger">
-            <div *ngIf="id.errors.required">
-              Mã bài hát không được để trống !
+<div class="about-us-area section-padding-100-0 bg-img bg-overlay">
+  <div class="container">
+    <p class="page-title">ADD A SONG</p>
+    <hr>
+    <div class="row">
+      <div class="col-lg-12">
+        <form [formGroup]="addMusicForm" (ngSubmit)="onUpLoad()">
+          <div class="form-group">
+            <label><b>Id Song:</b></label>
+            <input id="id" class="form-control"
+                   formControlName="id" required>
+            <div *ngIf="id.invalid && (id.dirty || id.touched)"
+                 class="alert alert-danger">
+              <div *ngIf="id.errors.required">
+                Mã bài hát không được để trống !
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label><b>Name Song:</b></label>
-          <input class="form-control"
-                 formControlName="name" required>
-          <div *ngIf="name.invalid && (name.dirty || name.touched)"
-               class="alert alert-danger">
-            <div *ngIf="name.errors.required">
-              Tên bài hát không được để trống !
-            </div>
-            <div *ngIf="name.errors.minlength">
-              Tên bài hát không được dưới 4 ký tự !
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label><b>Avatar:</b></label>
-          <input type="file" class="form-control" formControlName="avatar" (change)="onSelectFileAvatar($event)">
-          <div *ngIf="avatar.invalid && (avatar.dirty || avatar.touched)"
-               class="alert alert-danger">
-            <div *ngIf="avatar.errors.required">
-              Ảnh đại diện bài hát không được để trống !
+          <div class="form-group">
+            <label><b>Name Song:</b></label>
+            <input class="form-control"
+                   formControlName="name" required>
+            <div *ngIf="name.invalid && (name.dirty || name.touched)"
+                 class="alert alert-danger">
+              <div *ngIf="name.errors.required">
+                Tên bài hát không được để trống !
+              </div>
+              <div *ngIf="name.errors.minlength">
+                Tên bài hát không được dưới 4 ký tự !
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label><b>Description:</b></label>
-          <!-- <input type="text" class="form-control" formControlName="description">-->
-          <textarea class="form-control" formControlName="description" cols="30" rows="10"></textarea>
-          <div *ngIf="description.invalid && (description.dirty || description.touched)"
-               class="alert alert-danger">
-            <div *ngIf="description.errors.required">
-              Mô tả bài hát không được để trống !
+          <div class="form-group">
+            <label><b>Avatar:</b></label>
+            <input type="file" class="form-control" formControlName="avatar" (change)="onSelectFileAvatar($event)">
+            <div *ngIf="avatar.invalid && (avatar.dirty || avatar.touched)"
+                 class="alert alert-danger">
+              <div *ngIf="avatar.errors.required">
+                Ảnh đại diện bài hát không được để trống !
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label><b>Singer:</b></label>
-          <input type="text" class="form-control" formControlName="singer">
-          <div *ngIf="singer.invalid && (singer.dirty || singer.touched)"
-               class="alert alert-danger">
-            <div *ngIf="singer.errors.required">
-              Tên ca sĩ không được để trống !
+          <div class="form-group">
+            <label><b>Description:</b></label>
+            <!-- <input type="text" class="form-control" formControlName="description">-->
+            <textarea class="form-control" formControlName="description" cols="30" rows="10"></textarea>
+            <div *ngIf="description.invalid && (description.dirty || description.touched)"
+                 class="alert alert-danger">
+              <div *ngIf="description.errors.required">
+                Mô tả bài hát không được để trống !
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label><b>File-MP3:</b></label>
-          <input type="file" class="form-control" formControlName="file_mp3" (change)="onSelectFileMp3($event)">
-          <div *ngIf="file_mp3.invalid && (file_mp3.dirty || file_mp3.touched)"
-               class="alert alert-danger">
-            <div *ngIf="file_mp3.errors.required">
-              File mp3 không được để trống !
+          <div class="form-group">
+            <label><b>Singer:</b></label>
+            <input type="text" class="form-control" formControlName="singer">
+            <div *ngIf="singer.invalid && (singer.dirty || singer.touched)"
+                 class="alert alert-danger">
+              <div *ngIf="singer.errors.required">
+                Tên ca sĩ không được để trống !
+              </div>
             </div>
           </div>
-          <mat-progress-bar mode="determinate" value="{{uploadPercentMp3}}"></mat-progress-bar>
-        </div>
-        <button type="submit" class="btn btn-primary" [disabled]="!addMusicForm.valid">+ UpLoad</button>
-        <button class="btn btn-danger ml-2" routerLink="/home">Cancel</button>
-      </form>
+          <div class="form-group">
+            <label><b>File-MP3:</b></label>
+            <input type="file" class="form-control" formControlName="file_mp3" (change)="onSelectFileMp3($event)">
+            <div *ngIf="file_mp3.invalid && (file_mp3.dirty || file_mp3.touched)"
+                 class="alert alert-danger">
+              <div *ngIf="file_mp3.errors.required">
+                File mp3 không được để trống !
+              </div>
+            </div>
+            <mat-progress-bar mode="determinate" value="{{uploadPercentMp3}}"></mat-progress-bar>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!addMusicForm.valid">+ UpLoad</button>
+          <button class="btn btn-danger ml-2" routerLink="/home">Cancel</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
-<hr>
+
+
+

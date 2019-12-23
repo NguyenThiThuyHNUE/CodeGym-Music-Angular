@@ -7,16 +7,13 @@ import {DetailComponent} from './detail/detail.component';
 import {EditComponent} from './edit/edit.component';
 import {DeleteComponent} from './delete/delete.component';
 
-
 const routes: Routes = [
-  {
-    path: '', component: MusicComponent, children: [
-      {path: 'create', component: CreateComponent, canActivate: [AuthGuard]},
-      {path: 'detail/:id', component: DetailComponent},
-      {path: 'edit/:id', component: EditComponent, canActivate: [AuthGuard]},
-      {path: 'delete/:id', component: DeleteComponent},
-    ]
-  }
+  {path: '', component: MusicComponent},
+  {path: 'create', component: CreateComponent},
+  {path: 'detail/:id', component: DetailComponent},
+  {path: 'edit/:id', component: EditComponent},
+  {path: 'delete/:id', component: DeleteComponent},
+
 ];
 
 @NgModule({
