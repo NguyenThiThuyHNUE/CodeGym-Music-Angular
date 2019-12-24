@@ -2,56 +2,7 @@
 <div class="featured-album-area section-padding-100 clearfix">
   <div class="container">
     <div class="row">
-      <div class="col-12">
-        <div class="featured-album-content d-flex flex-wrap">
-
-          <!-- Album Thumbnail -->
-          <div class="album-thumbnail h-100 bg-img">
-            <img src="{{musicDetail.avatar}}" alt="" class="musicDetail">
-          </div>
-
-          <!-- Album Songs -->
-          <div class="album-songs h-100">
-
-            <!-- Album Info -->
-            <div class="album-info mb-50 d-flex flex-wrap align-items-center justify-content-between">
-              <div class="album-title">
-                <h6>Featured album</h6>
-                <h4>Love is all Around</h4>
-              </div>
-              <div class="album-buy-now">
-                <a href="#" class="btn musica-btn">Buy it on Itunes</a>
-              </div>
-            </div>
-
-            <div class="album-all-songs">
-
-              <!-- Music Playlist -->
-              <div class="music-playlist">
-                <!-- Single Song -->
-                <div class="single-music active">
-                  <h3><span style="color: white">{{musicDetail.name}} - {{musicDetail.singer}}</span></h3>
-<!--                  <audio preload="auto" controls src="{{musicDetail.musicUrl}}">-->
-<!--                  </audio>-->
-                  <p>{{musicDetail.description}}</p>
-                </div>
-              </div>
-            </div>
-            <!-- Now Playing -->
-            <div class="now-playing d-flex flex-wrap align-items-center justify-content-between">
-              <div class="songs-name mb-2">
-               <div class="row">
-                 <p><b>Playing</b></p>
-                 <img class="ml-2 mb-2" src="https://s7.upanh.pro/2019/10/28/vinyl-lp-vn.gif" alt="" width="25px">
-               </div>
-                <span style="color: white" class="">{{musicDetail.name}}</span>
-              </div>
-              <audio preload="auto" controls class="audio-detail" src="{{musicDetail.musicUrl}}">
-              </audio>
-            </div>
-          </div>
-        </div>
-      </div>
+      <app-now-playing [nowPlaying]="musicDetail"></app-now-playing>
     </div>
     <hr>
     <!-- Music Playlist -->
@@ -64,36 +15,37 @@
               <img src="{{music.avatar}}" alt="" class="image-music-detail" routerLink="music/detail/{{music.id}}">
             </div>
             <div class="col-7 pt-4">
-              <h4><span style="color: white" class="container" routerLink="music/detail/{{music.id}}">{{music.name}} - {{music.singer}}</span>
+              <h4><span style="color: white" class="container" routerLink="music/detail/{{music.id}}">{{music.name}}
+                - {{music.singer}}</span>
               </h4>
             </div>
-           <div class="row">
-             <tr class="mt-4">
-               <td class="col-2">
-                 <a routerLink="detail/{{music.id}}" class="table-link">
+            <div class="row">
+              <tr class="mt-4">
+                <td class="col-2">
+                  <a routerLink="/home/music/detail/{{music.id}}" class="table-link">
           <span class="fa-stack">
 <!--          <i class="fa fa-square fa-stack-2x"></i>-->
           <i class="fa fa-search fa-stack-1x fa-inverse"></i>
         </span>
-                 </a>
-               </td>
-               <td class="col-2">
-                 <a routerLink="/home/music/edit/{{music.id}}" class="table-link">
+                  </a>
+                </td>
+                <td class="col-2">
+                  <a (click)="getUrl()" routerLink="/home/music/edit/{{music.id}}" class="table-link">
           <span class="fa-stack">
 <!--            <i class="fa fa-square fa-stack-2x"></i>-->
             <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
           </span>
-                 </a></td>
-               <td class="col-2">
-                 <a routerLink="/home/music/delete/{{music.id}}" class="table-link danger">
+                  </a></td>
+                <td class="col-2">
+                  <a routerLink="/home/music/delete/{{music.id}}" class="table-link danger">
           <span class="fa-stack">
 <!--            <i class="fa fa-square fa-stack-2x"></i>-->
             <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
           </span>
-                 </a>
-               </td>
-             </tr>
-           </div>
+                  </a>
+                </td>
+              </tr>
+            </div>
           </div>
         </div>
       </div>

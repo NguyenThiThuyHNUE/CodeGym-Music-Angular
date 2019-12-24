@@ -20,10 +20,11 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialogModule} from '@angular/material/dialog';
+import { NowPlayingComponent } from './detail/now-playing/now-playing.component';
 
 
 @NgModule({
-  declarations: [MusicComponent, CreateComponent, DeleteComponent, EditComponent, DetailComponent,
+  declarations: [MusicComponent, CreateComponent, DeleteComponent, EditComponent, DetailComponent, NowPlayingComponent,
   ],
   imports: [
     MusicRoutingModule,

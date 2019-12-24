@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MusicService} from '../../../../service/music.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {IMusic} from '../../../../interface/i-music';
 
 @Component({
@@ -17,7 +17,8 @@ export class DetailComponent implements OnInit {
   constructor(private musicService: MusicService,
               private activatedRoute: ActivatedRoute,
               private router: Router) {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+
   }
 
   ngOnInit() {
@@ -27,6 +28,19 @@ export class DetailComponent implements OnInit {
     this.musicService.getMusics().subscribe(musics => {
       this.musicList = musics.data;
     });
+    this.getUrl();
   }
 
+  getUrl() {
+    this.router.events.subscribe(val => {
+      this.idMusic = +this.activatedRoute.snapshot.paramMap.get('id');
+      this.getMusics();
+    });
+  }
+
+  getMusics() {
+    this.musicService.getMusics().subscribe(musics => {
+      this.musicDetail = musics.data.find(music => music.id === this.idMusic);
+    });
+  }
 }
