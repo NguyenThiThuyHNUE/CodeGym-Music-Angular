@@ -34,4 +34,7 @@ export class UserService {
     return this.http.get<TokenRespone>(Url + `/api/me?token=${userToken}`);
   }
 
+  updateUser(userToken, updateInfo) {
+    return this.http.post(Url + `/api/update?token=${userToken}`, updateInfo);
+  }
 }

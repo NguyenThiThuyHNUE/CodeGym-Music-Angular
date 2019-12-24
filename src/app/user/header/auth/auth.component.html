@@ -1,5 +1,6 @@
 <a style="color: #ffffff" [matMenuTriggerFor]="menu">{{name}}</a>
 <mat-menu #menu="matMenu">
   <a mat-menu-item (click)="logout()">Logout</a>
+  <a mat-menu-item routerLink="/home/info">Profile</a>
 </mat-menu>
 
