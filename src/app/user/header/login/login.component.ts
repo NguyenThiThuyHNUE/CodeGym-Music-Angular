@@ -5,7 +5,7 @@ import {UserService} from '../../../service/user.service';
 import {MatDialogRef} from '@angular/material';
 import {SnotifyService} from 'ng-snotify';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {AuthService, SocialUser, FacebookLoginProvider } from 'angularx-social-login';
+import {AuthService, SocialUser, FacebookLoginProvider} from 'angularx-social-login';
 
 @Component({
   selector: 'app-login',
@@ -38,13 +38,19 @@ export class LoginComponent implements OnInit {
     private socialAuthService: AuthService
   ) {
   }
+
   facebooklogin() {
     this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then((userData) => {
       this.user = userData;
-      // this.resetLoginForm();
-      console.log(this.user);
+      this.resetLoginForm();
+      console.log(userData);
+      this.userService.userLoginFacebook(userData).subscribe((data) => {
+        localStorage.setItem('token', data.access_token);
+      });
+      // console.log(this.user);
     });
   }
+
   ngOnInit() {
   }
 
