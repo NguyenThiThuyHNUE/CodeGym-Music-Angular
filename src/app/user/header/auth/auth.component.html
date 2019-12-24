@@ -1,4 +1,6 @@
-<a style="color: #ffffff" [matMenuTriggerFor]="menu">{{name}}</a>
+<!--<div *ngIf="loggedIn; then name else loggedIn"></div>-->
+<a style="color: #ffffff" [matMenuTriggerFor]="menu"  >{{name}}</a>
+<!--<a style="color: #ffffff" [matMenuTriggerFor]="menu" #loggedIn >{{users.name}}</a>-->
 <mat-menu #menu="matMenu">
   <a mat-menu-item (click)="logout()">Logout</a>
 </mat-menu>

@@ -47,7 +47,7 @@
                 <a href="#"><i class="fab fa-twitter-square"></i></a>
                 <a href="#"><i class="fab fa-facebook-square"></i></a>
                 <a *ngIf="!user.isLoggedIn()" class="auth classynav" (click)="showFormLogin()">Login</a>
-                <a class="auth classynav" *ngIf="user.isLoggedIn()">
+                <a class="auth classynav" *ngIf="user.isLoggedIn() ">
                   <app-auth></app-auth>
                 </a>
               </div>
