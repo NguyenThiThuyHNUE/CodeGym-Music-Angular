@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'], encapsulation: ViewEncapsulation.None
+
 })
 export class ProfileComponent implements OnInit {
 
@@ -27,9 +28,11 @@ export class ProfileComponent implements OnInit {
   get passwordUpdate() {
     return this.updateForm.get('passwordUpdate');
   }
+
   get confirmPassword() {
     return this.updateForm.get('confirmPassword');
   }
+
   get emailUpdate() {
     return this.updateForm.get('emailUpdate');
   }

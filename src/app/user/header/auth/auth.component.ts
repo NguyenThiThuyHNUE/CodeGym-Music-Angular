@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../../service/user.service';
-import {SnotifyService} from "ng-snotify";
+import {SnotifyService} from 'ng-snotify';
 import {AuthService} from 'angularx-social-login';
 import {SocialUser} from 'angularx-social-login';
 
@@ -23,6 +23,7 @@ export class AuthComponent implements OnInit {
     return this.user.getUserCredential(localStorage.getItem('token'))
       .subscribe((data: any) => {
         this.Notify.success(`Login Success, Welcome ${data.name}`, 'Congratulations', {timeout: 3000});
+        localStorage.setItem('id', data.id);
         this.name = data.name;
       });
   }

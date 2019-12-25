@@ -27,12 +27,13 @@ import {ConfirmEqualValidatorDirective} from '../directive/confirm-equal-validat
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {InfoComponent} from './body/info/info.component';
 import {ProfileComponent} from './body/info/profile/profile.component';
+import { PlaylistComponent } from './body/info/playlist/playlist.component';
 
 @NgModule({
   declarations: [UserComponent, HeaderComponent, BodyComponent, LoginComponent, AuthComponent,
     FooterComponent, MainComponent, ConfirmEqualValidatorDirective,
-    InfoComponent, ProfileComponent],
-  entryComponents: [LoginComponent, ProfileComponent],
+    InfoComponent, ProfileComponent, PlaylistComponent],
+  entryComponents: [LoginComponent, ProfileComponent, PlaylistComponent],
   providers: [
     {provide: 'SnotifyToastConfig', useValue: ToastDefaults},
     SnotifyService
