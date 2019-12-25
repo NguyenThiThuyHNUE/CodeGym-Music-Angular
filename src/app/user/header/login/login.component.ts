@@ -47,7 +47,6 @@ export class LoginComponent implements OnInit {
       this.userService.userLoginFacebook(userData).subscribe((data) => {
         localStorage.setItem('token', data.access_token);
       });
-      // console.log(this.user);
     });
   }
 
