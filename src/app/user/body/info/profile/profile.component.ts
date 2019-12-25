@@ -13,8 +13,8 @@ export class ProfileComponent implements OnInit {
 
   updateForm = this.fb.group({
     id: localStorage.getItem('id'),
-    emailUpdate: ['', [Validators.required]],
-    passwordUpdate: ['', [Validators.required]],
+    newEmail: ['', [Validators.required]],
+    newPassword: ['', [Validators.required]],
     confirmPassword: ['', [Validators.required]],
   });
 
@@ -34,16 +34,16 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  get passwordUpdate() {
-    return this.updateForm.get('passwordUpdate');
+  get newPassword() {
+    return this.updateForm.get('newPassword');
   }
 
   get confirmPassword() {
     return this.updateForm.get('confirmPassword');
   }
 
-  get emailUpdate() {
-    return this.updateForm.get('emailUpdate');
+  get newEmail() {
+    return this.updateForm.get('newEmail');
   }
 
   handleUpdateResponse(res) {
