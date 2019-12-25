@@ -17,29 +17,33 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {LoginComponent} from './header/login/login.component';
 import {AuthComponent} from './header/auth/auth.component';
 import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material';
-import {CreateComponent} from './music/create/create.component';
-import {MusicComponent} from './music/music.component';
 import {FooterComponent} from './footer/footer.component';
 import {MainComponent} from './body/main/main.component';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
-import {DetailComponent} from './music/detail/detail.component';
-import {EditComponent} from './music/edit/edit.component';
 import {MatSliderModule} from '@angular/material/slider';
-import {DeleteComponent} from './music/delete/delete.component';
 import {ConfirmEqualValidatorDirective} from '../directive/confirm-equal-validator.directive';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {InfoComponent} from './body/info/info.component';
+import {ProfileComponent} from './body/info/profile/profile.component';
+
 @NgModule({
   declarations: [UserComponent, HeaderComponent, BodyComponent, LoginComponent, AuthComponent,
-    CreateComponent, MusicComponent, FooterComponent, MainComponent, ConfirmEqualValidatorDirective, DetailComponent,
-    EditComponent, DeleteComponent],
-  entryComponents: [LoginComponent],
+    FooterComponent, MainComponent, ConfirmEqualValidatorDirective,
+    InfoComponent, ProfileComponent],
+  entryComponents: [LoginComponent, ProfileComponent],
   providers: [
     {provide: 'SnotifyToastConfig', useValue: ToastDefaults},
     SnotifyService
   ],
+  exports: [
+    HeaderComponent,
+    BodyComponent,
+    FooterComponent
+  ],
   imports: [
+    UserRoutingModule,
     MatProgressBarModule,
     SnotifyModule,
     MatExpansionModule,
@@ -55,7 +59,6 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    UserRoutingModule,
     _MatMenuDirectivesModule,
     MatMenuModule,
     MatIconModule,

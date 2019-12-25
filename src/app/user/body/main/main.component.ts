@@ -16,7 +16,9 @@ export class MainComponent implements OnInit {
   @ViewChild('seekBarVolumeOuter', {static: false}) seekBarVolumeOuter: ElementRef;
 
   isRepeat = false;
-  musicList: IMusic[];
+  musicList: {
+    data: any
+  };
   isPlay = true;
   showVolume = false;
   // tslint:disable-next-line:max-line-length
@@ -38,7 +40,7 @@ export class MainComponent implements OnInit {
     this.setStartTime();
     this.setRemainTime();
     this.musicService.getMusics().subscribe(music => {
-      this.musicList = music;
+      this.musicList = music.data;
     });
   }
 
@@ -118,7 +120,7 @@ export class MainComponent implements OnInit {
       pageY
     });
   }
-    
+
   repeatSong(): boolean {
     if (!this.isRepeat) {
       return this.isRepeat = true;

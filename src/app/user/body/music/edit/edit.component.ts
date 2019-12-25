@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {MusicService} from '../../../service/music.service';
-import {IMusic} from '../../../interface/i-music';
+import {MusicService} from '../../../../service/music.service';
+import {IMusic} from '../../../../interface/i-music';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, Validators} from '@angular/forms';
-import {Song} from '../../../song';
+import {Song} from '../../../../song';
 import {finalize} from 'rxjs/operators';
 import {AngularFireStorage} from '@angular/fire/storage';
 
@@ -38,7 +38,7 @@ export class EditComponent implements OnInit {
 
   ngOnInit() {
     this.musicService.getMusics().subscribe(musics => {
-      this.musicEdit = musics.find(music => music.id === this.idMusic);
+      this.musicEdit = musics.data.find(music => music.id === this.idMusic);
     });
   }
 
@@ -71,9 +71,10 @@ export class EditComponent implements OnInit {
       finalize(() => {
         fireRefMp3.getDownloadURL().subscribe((url) => {
           this.song.musicUrl = url;
-          this.musicService.editMusic(this.idMusic, this.song).subscribe();
-          this.router.navigate(['/home']).then(() => {
-            alert('You Edited A Song Success !');
+          this.musicService.editMusic(this.idMusic, this.song).subscribe(response => {
+            this.router.navigate(['/home']).then(() => {
+              alert(response.message);
+            });
           });
         });
       })).subscribe();
