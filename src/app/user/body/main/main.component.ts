@@ -3,7 +3,8 @@ import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angu
 import {MusicService} from '../../../service/music.service';
 import {IMusic} from '../../../interface/i-music';
 import {AudioService} from '../../../service/audio.service';
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
+import {MatSliderChange} from '@angular/material';
 
 @Component({
   selector: 'app-main',
@@ -12,7 +13,6 @@ import {Observable} from "rxjs";
   encapsulation: ViewEncapsulation.None
 })
 export class MainComponent implements OnInit {
-  @ViewChild('seekBarOuter', {static: false}) outerSeekBarEle: ElementRef;
   @ViewChild('seekBarVolumeOuter', {static: false}) seekBarVolumeOuter: ElementRef;
 
   isRepeat = false;
@@ -52,8 +52,7 @@ export class MainComponent implements OnInit {
     this.audio.getTimeElapsed().subscribe(
       data => {
         this.startTime = data;
-        this.seekBarInner = this.seekBarPercent(data).toFixed(2) + '%';
-        this.volumePercent = this.audio.audio.volume * 100 + '%';
+        this.seekBarInner = this.convertToSecond(data);
       }
     );
   }
@@ -90,41 +89,20 @@ export class MainComponent implements OnInit {
     return (+validateTime[0]) * 60 + (+validateTime[1]);
   }
 
-  seekBarPercent(data) {
-    const currentTime = this.convertToSecond(data);
-    return currentTime / this.audio.getDuration() * 100;
-  }
-
-  getTimeOnClick(event) {
-    const offsetWidth = this.outerSeekBarEle.nativeElement.offsetWidth;
-    const pageX = event.pageX;
-    const position = (pageX - 750) / offsetWidth * 100;
-    const timeOnClick = position * this.audio.getDuration() / 100;
-    this.audio.seekAudio(timeOnClick);
-    console.log({
-      offsetWidth,
-      pageX,
-      position,
-      timeOnClick
-    });
-  }
-
-  getVolumeOnClick(event) {
-    const offsetHeight = this.seekBarVolumeOuter.nativeElement.offsetHeight;
-    const pageY = event.pageY;
-    this.audio.audio.volume = (2830 - pageY) / offsetHeight;
-    this.volumePercent = this.audio.audio.volume * 100 + '%';
-    console.log({
-      volume: this.volumePercent,
-      offsetHeight,
-      pageY
-    });
-  }
 
   repeatSong(): boolean {
     if (!this.isRepeat) {
       return this.isRepeat = true;
     }
     return this.isRepeat = false;
+  }
+
+  scrollTime(event) {
+    this.audio.seekAudio(event.value);
+  }
+
+  scrollVolume(event) {
+    this.audio.audio.volume = event.value / 10;
+    console.log(this.audio.audio.volume);
   }
 }
