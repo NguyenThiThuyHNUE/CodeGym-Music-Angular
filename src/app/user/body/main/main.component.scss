@@ -1,3 +1,12 @@
+i.fas.fa-ellipsis-h {
+  color: white;
+
+  &:hover {
+    cursor: pointer;
+    color: #bd177a;
+  }
+}
+
 .custom-mat-tab {
   .mat-tab-body-content {
     height: 100%;
@@ -151,7 +160,7 @@
       //}
     }
 
-    .ng-star-inserted{
+    .ng-star-inserted {
       display: flex;
       justify-content: center;
       align-items: center;

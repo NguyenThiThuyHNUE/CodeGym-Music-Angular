@@ -5,6 +5,9 @@ import {IMusic} from '../../../interface/i-music';
 import {AudioService} from '../../../service/audio.service';
 import {Observable} from 'rxjs';
 import {MatSliderChange} from '@angular/material';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {PlaylistComponent} from '../info/playlist/playlist.component';
+import {EtcComponent} from './etc/etc.component';
 
 @Component({
   selector: 'app-main',
@@ -30,6 +33,7 @@ export class MainComponent implements OnInit {
   volumePercent = '50%';
 
   constructor(private musicService: MusicService,
+              public dialog: MatDialog,
               private audio: AudioService,
               private elRef: ElementRef) {
   }
@@ -104,5 +108,11 @@ export class MainComponent implements OnInit {
   scrollVolume(event) {
     this.audio.audio.volume = event.value / 10;
     console.log(this.audio.audio.volume);
+  }
+
+  showEtc() {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.width = '30%';
+      this.dialog.open(EtcComponent, dialogConfig);
   }
 }
