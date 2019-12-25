@@ -1,4 +1,6 @@
-<a style="color: #ffffff" [matMenuTriggerFor]="menu">{{name}}</a>
+<ng-template [ngIf]="user.isLoggedIn()"><div><a style="color: #ffffff" [matMenuTriggerFor]="menu"  >{{name}}</a></div></ng-template>
+<ng-template [ngIf]="user.isLoggedInFacebook()"><div><a style="color: #ffffff" [matMenuTriggerFor]="menu"  >{{users.name}}</a></div></ng-template>
+
 <mat-menu #menu="matMenu">
   <a mat-menu-item (click)="logout()">Logout</a>
 </mat-menu>

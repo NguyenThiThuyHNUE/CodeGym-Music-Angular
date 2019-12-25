@@ -22,12 +22,20 @@ export class UserService {
     return this.http.post<LoginResponse>(Url + '/api/login', userCredential);
   }
 
+  userLoginFacebook(userCredential) {
+    return this.http.post<LoginResponse>(Url + '/api/facebook/login', userCredential);
+  }
+
   logout() {
     localStorage.removeItem('token');
   }
 
   isLoggedIn() {
     return !!localStorage.getItem('token');
+  }
+
+  isLoggedInFacebook() {
+    return !!localStorage.getItem('authToken');
   }
 
   getUserCredential(userToken): Observable<TokenRespone> {

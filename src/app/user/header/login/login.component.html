@@ -33,7 +33,15 @@
           </button>
 
         </mat-card-actions>
+
       </form>
+      <mat-card-actions align="end">
+        <button  [hidden]="!buttonStatus" (click)="facebooklogin()" type="submit" mat-button color="primary">
+          Login facebook
+        </button>
+<!--        {{user.name}}-->
+
+      </mat-card-actions>
     </mat-card>
   </mat-tab>
   <mat-tab label="Register">

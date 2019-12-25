@@ -5,6 +5,7 @@ import {UserService} from '../../../service/user.service';
 import {MatDialogRef} from '@angular/material';
 import {SnotifyService} from 'ng-snotify';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {AuthService, SocialUser, FacebookLoginProvider} from 'angularx-social-login';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,8 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 })
 export class LoginComponent implements OnInit {
   buttonStatus = true;
+  title = 'app';
+  public user: any = SocialUser;
   registerForm = this.fb.group({
     name: ['', Validators.required],
     email: ['', Validators.required],
@@ -31,8 +34,20 @@ export class LoginComponent implements OnInit {
     public dialog: MatDialog,
     private Notify: SnotifyService,
     private userService: UserService,
-    private dialogRef: MatDialogRef<LoginComponent>
+    private dialogRef: MatDialogRef<LoginComponent>,
+    private socialAuthService: AuthService
   ) {
+  }
+
+  facebooklogin() {
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then((userData) => {
+      this.user = userData;
+      this.resetLoginForm();
+      console.log(userData);
+      this.userService.userLoginFacebook(userData).subscribe((data) => {
+        localStorage.setItem('token', data.access_token);
+      });
+    });
   }
 
   ngOnInit() {
