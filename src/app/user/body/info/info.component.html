@@ -1,7 +1,7 @@
 <div class="breadcumb-area bg-img bg-overlay2"
      style="background-image: url(../../../../assets/img/bg-img/breadcumb.jpg);">
   <div class="bradcumbContent">
-    <h2>Artist Bio</h2>
+    <h2>{{name}}</h2>
   </div>
 </div>
 <div class="about-us-area section-padding-100-0">
@@ -16,8 +16,8 @@
       <!-- About Content -->
       <div class="col-12 col-lg-6">
         <div class="about--content mb-100">
-          <h4>Hello, <br>
-            <div class="d-flex justify-content-between">It’s Michael Smithson
+          <h4>{{email}} <br>
+            <div class="d-flex justify-content-between">I’m  {{name}}
               <button (click)="showFormUpdate()" mat-button class="btn-update">Update</button>
             </div>
           </h4>

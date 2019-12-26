@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
+import {UserService} from '../../../../service/user.service';
+import {MatDialogRef} from '@angular/material';
+import {SnotifyService} from 'ng-snotify';
 
 @Component({
   selector: 'app-profile',
@@ -9,30 +12,53 @@ import {FormBuilder, Validators} from '@angular/forms';
 export class ProfileComponent implements OnInit {
 
   updateForm = this.fb.group({
-    emailUpdate: ['', [Validators.required]],
-    passwordUpdate: ['', [Validators.required]],
+    id: localStorage.getItem('id'),
+    newName: ['', [Validators.required]],
+    newImage: ['', [Validators.required]],
+    newEmail: ['', [Validators.required]],
+    newPassword: ['', [Validators.required]],
     confirmPassword: ['', [Validators.required]],
   });
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private dialogRef: MatDialogRef<ProfileComponent>,
+              private Notify: SnotifyService,
+              private userService: UserService) {
   }
 
   ngOnInit() {
   }
 
   userUpdate() {
-
+    return this.userService.updateUser(localStorage.getItem('token'), this.updateForm.value)
+      .subscribe((response) => {
+        this.handleUpdateResponse(response);
+      });
+  }
+  get newName() {
+    return this.updateForm.get('newName');
+  }
+  get newImage() {
+    return this.updateForm.get('newImage');
+  }
+  get newPassword() {
+    return this.updateForm.get('newPassword');
   }
 
-  get passwordUpdate() {
-    return this.updateForm.get('passwordUpdate');
-  }
   get confirmPassword() {
     return this.updateForm.get('confirmPassword');
   }
-  get emailUpdate() {
-    return this.updateForm.get('emailUpdate');
+
+  get newEmail() {
+    return this.updateForm.get('newEmail');
+  }
+  handleUpdateResponse(res) {
+    this.Notify.success(res.message, 'Congratulations', {timeout: 7000});
+    this.resetUpdateForm();
   }
 
+  resetUpdateForm() {
+    this.dialogRef.close();
+  }
 
 }
