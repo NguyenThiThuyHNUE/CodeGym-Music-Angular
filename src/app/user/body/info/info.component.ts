@@ -11,6 +11,7 @@ import {UserService} from '../../../service/user.service';
 export class InfoComponent implements OnInit {
   name: string;
   email: string;
+  image: string;
   password: string;
   constructor(public dialog: MatDialog,
               public user: UserService) { }
@@ -21,6 +22,7 @@ export class InfoComponent implements OnInit {
         localStorage.setItem('id', data.id);
         this.name = data.name;
         this.email = data.email;
+        this.image = data.image;
         this.password = data.password;
       });
   }
