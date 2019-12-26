@@ -1,3 +1,23 @@
+.avatar {
+  background-size: cover;
+}
+
+.songTitle {
+  display: flex;
+  justify-content: space-between;
+
+  .songTitleItem {
+    color: white;
+  }
+
+  .namePlaylist {
+    margin-bottom: 0;
+    padding-top: .7rem;
+    color: white;
+
+  }
+}
+
 .cdk-global-scrollblock {
   position: static !important;
   width: initial !important;
@@ -9,3 +29,4 @@
   background: linear-gradient(to right, #cc1573, #5722a9) !important;
   color: white;
 }
+

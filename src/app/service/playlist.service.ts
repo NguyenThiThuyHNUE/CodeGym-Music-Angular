@@ -22,4 +22,8 @@ export class PlaylistService {
   putSongToPlaylist(order) {
     return this.http.post(Url + '/api/playlist/song', order);
   }
+
+  getSongsInPlaylist(playlistId) {
+    return this.http.get(`api/playlist/songs/${playlistId}`);
+  }
 }

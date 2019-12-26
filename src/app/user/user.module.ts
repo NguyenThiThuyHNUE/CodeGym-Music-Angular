@@ -30,6 +30,8 @@ import {ProfileComponent} from './body/info/profile/profile.component';
 import {PlaylistComponent} from './body/info/playlist/playlist.component';
 import {EtcComponent} from './body/main/etc/etc.component';
 import {NewComponent} from './body/info/playlist/new/new.component';
+import {SongsComponent} from './body/music/songs/songs.component';
+import {MusicModule} from './body/music/music.module';
 
 @NgModule({
   declarations: [UserComponent, HeaderComponent, BodyComponent, LoginComponent, AuthComponent,
@@ -47,6 +49,7 @@ import {NewComponent} from './body/info/playlist/new/new.component';
   ],
   imports: [
     UserRoutingModule,
+    MusicModule,
     MatListModule,
     MatProgressBarModule,
     SnotifyModule,
