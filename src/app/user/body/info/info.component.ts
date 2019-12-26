@@ -24,7 +24,6 @@ export class InfoComponent implements OnInit {
 
   showPlaylistCreateForm() {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '30%';
     this.dialog.open(PlaylistComponent, dialogConfig);
   }
 }

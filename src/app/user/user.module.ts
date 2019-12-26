@@ -29,12 +29,13 @@ import {InfoComponent} from './body/info/info.component';
 import {ProfileComponent} from './body/info/profile/profile.component';
 import {PlaylistComponent} from './body/info/playlist/playlist.component';
 import {EtcComponent} from './body/main/etc/etc.component';
+import {NewComponent} from './body/info/playlist/new/new.component';
 
 @NgModule({
   declarations: [UserComponent, HeaderComponent, BodyComponent, LoginComponent, AuthComponent,
     FooterComponent, MainComponent, ConfirmEqualValidatorDirective,
-    InfoComponent, ProfileComponent, PlaylistComponent, EtcComponent],
-  entryComponents: [LoginComponent, ProfileComponent, PlaylistComponent, EtcComponent],
+    InfoComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent,],
+  entryComponents: [LoginComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent],
   providers: [
     {provide: 'SnotifyToastConfig', useValue: ToastDefaults},
     SnotifyService

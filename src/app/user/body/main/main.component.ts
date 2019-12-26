@@ -18,6 +18,8 @@ import {EtcComponent} from './etc/etc.component';
 export class MainComponent implements OnInit {
   @ViewChild('seekBarVolumeOuter', {static: false}) seekBarVolumeOuter: ElementRef;
 
+  songs: IMusic[];
+  inputSongId: number;
   isRepeat = false;
   musicList: {
     data: any
@@ -30,7 +32,6 @@ export class MainComponent implements OnInit {
   startTime: any;
   remainTime: any;
   seekBarInner: any;
-  volumePercent = '50%';
 
   constructor(private musicService: MusicService,
               public dialog: MatDialog,
@@ -43,8 +44,12 @@ export class MainComponent implements OnInit {
     this.audio.audio.volume = 0.5;
     this.setStartTime();
     this.setRemainTime();
-    this.musicService.getMusics().subscribe(music => {
-      this.musicList = music.data;
+    this.getSongs();
+  }
+
+  getSongs() {
+    return this.musicService.getMusics().subscribe(musics => {
+      this.songs = musics.data;
     });
   }
 
@@ -110,9 +115,10 @@ export class MainComponent implements OnInit {
     console.log(this.audio.audio.volume);
   }
 
-  showEtc() {
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.width = '30%';
-      this.dialog.open(EtcComponent, dialogConfig);
+  showEtc(songId) {
+    this.inputSongId = songId;
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = songId;
+    this.dialog.open(EtcComponent, dialogConfig);
   }
 }
