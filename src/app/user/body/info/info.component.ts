@@ -23,6 +23,9 @@ export class InfoComponent implements OnInit {
               public userService: UserService,
               private playlistService: PlaylistService
   ) {
+    if (!this.user) {
+      this.user = {};
+    }
   }
 
   ngOnInit() {
@@ -34,7 +37,6 @@ export class InfoComponent implements OnInit {
         this.user.name = data.name;
         this.user.email = data.email;
         this.user.image = data.image;
-        this.user.password = data.password;
       });
   }
 
