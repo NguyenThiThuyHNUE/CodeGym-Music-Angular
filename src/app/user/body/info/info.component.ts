@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ProfileComponent} from './profile/profile.component';
+import {UserService} from '../../../service/user.service';
 
 @Component({
   selector: 'app-info',
@@ -8,10 +9,22 @@ import {ProfileComponent} from './profile/profile.component';
   styleUrls: ['./info.component.scss']
 })
 export class InfoComponent implements OnInit {
-
-  constructor(public dialog: MatDialog) { }
+  name: string;
+  email: string;
+  image: string;
+  password: string;
+  constructor(public dialog: MatDialog,
+              public user: UserService) { }
 
   ngOnInit() {
+    return this.user.getUserCredential(localStorage.getItem('token'))
+      .subscribe((data: any) => {
+        localStorage.setItem('id', data.id);
+        this.name = data.name;
+        this.email = data.email;
+        this.image = data.image;
+        this.password = data.password;
+      });
   }
 
   showFormUpdate() {
