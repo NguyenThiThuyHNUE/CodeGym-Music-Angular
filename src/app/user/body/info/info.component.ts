@@ -64,6 +64,8 @@ export class InfoComponent implements OnInit {
   showSongsInPlaylist(playlistId) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '50%';
+    dialogConfig.height = '70%';
+    dialogConfig.data = playlistId;
     this.dialog.open(SongsComponent, dialogConfig);
   }
 }

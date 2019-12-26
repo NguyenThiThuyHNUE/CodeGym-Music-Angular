@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {IUserResponse} from '../interface/i-user-response';
 import {Url} from '../../../url-project';
 import {IMessage} from '../interface/i-message';
+import {SongResponse} from '../interface/song-response';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,6 @@ export class PlaylistService {
   }
 
   getSongsInPlaylist(playlistId) {
-    return this.http.get(`api/playlist/songs/${playlistId}`);
+    return this.http.get<SongResponse>(Url + `/api/playlist/songs/${playlistId}`);
   }
 }
