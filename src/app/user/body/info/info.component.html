@@ -1,7 +1,7 @@
 <div class="breadcumb-area bg-img bg-overlay2"
      style="background-image: url(../../../../assets/img/bg-img/breadcumb.jpg);">
   <div class="bradcumbContent">
-    <h2>Artist Bio</h2>
+    <h2>{{user.name}}</h2>
   </div>
 </div>
 <div class="about-us-area section-padding-100-0">
@@ -10,14 +10,15 @@
       <!-- About Thumbnail -->
       <div class="col-12 col-lg-6">
         <div class="about-thumbnail mb-100">
-          <img src="../../../../assets/img/bg-img/bg-7.jpg" alt="">
+          <img src="{{user.image}}" alt="">
+
         </div>
       </div>
       <!-- About Content -->
       <div class="col-12 col-lg-6">
         <div class="about--content mb-100">
-          <h4>Hello, <br>
-            <div class="d-flex justify-content-between">It’s Michael Smithson
+          <h4>{{user.email}} <br>
+            <div class="d-flex justify-content-between">I’m  {{user.name}}
               <button (click)="showFormUpdate()" mat-button class="btn-update">Update</button>
             </div>
           </h4>

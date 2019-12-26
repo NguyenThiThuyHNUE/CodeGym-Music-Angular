@@ -4,6 +4,7 @@ import {SnotifyService} from 'ng-snotify';
 import {AuthService} from 'angularx-social-login';
 import {SocialUser} from 'angularx-social-login';
 
+
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
