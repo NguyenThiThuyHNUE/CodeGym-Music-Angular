@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MusicService} from '../../../../service/music.service';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {ActivatedRoute, Event, NavigationEnd, NavigationStart, Router} from '@angular/router';
 import {IMusic} from '../../../../interface/i-music';
 
 @Component({
@@ -23,18 +23,22 @@ export class DetailComponent implements OnInit {
 
   ngOnInit() {
     this.musicService.getMusics().subscribe(musics => {
+      this.musicList = musics.data;
       this.musicDetail = musics.data.find(music => music.id === this.idMusic);
     });
-    this.musicService.getMusics().subscribe(musics => {
-      this.musicList = musics.data;
-    });
+    // this.musicService.getMusics().subscribe(musics => {
+    //   this.musicList = musics.data;
+    // });
     this.getCurrentUrl();
   }
 
   getCurrentUrl() {
-    this.router.events.subscribe(val => {
-      this.idMusic = +this.activatedRoute.snapshot.paramMap.get('id');
-      this.getMusics();
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        this.idMusic = +this.activatedRoute.snapshot.paramMap.get('id');
+        console.log(this.idMusic);
+        this.getMusics();
+      }
     });
   }
 
