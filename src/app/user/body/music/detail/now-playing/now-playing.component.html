@@ -1,50 +1,176 @@
-<div class="col-12">
-  <div class="featured-album-content d-flex flex-wrap">
+<div class="row">
+  <div class="col-md-12">
+    <div class="row" style="height: 430px;">
+      <div class="col-md-6 npl-image">
+        <img src="../../../../../../assets/img/bg-img/s1.jpg" alt="">
+      </div>
 
-    <!-- Album Thumbnail -->
-    <div class="album-thumbnail h-100 bg-img">
-      <img src="{{nowPlaying.avatar}}" alt="" class="musicDetail">
+      <div class="col-md-6 npl-playlist">
+        <div class="row npl-playlist-title">
+          <div class="">
+            <h6>Playlist Name</h6>
+            <h3>Album</h3>
+          </div>
+          <div class="">
+            <span>Icon</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="album-all-songs">
+            <div class="col-md-12">
+              <div class="row mb-1 song-item">
+                <img class="thumb" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
+                <div class="col-md-8">
+                  <h6>Song Name</h6>
+                  <span>Singer Name</span>
+                </div>
+              </div>
+              <div class="row mb-1 song-item">
+                <img class="thumb" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
+                <div class="col-md-8">
+                  <h6>Song Name</h6>
+                  <span>Singer Name</span>
+                </div>
+              </div>
+              <div class="row mb-1 song-item">
+                <img class="thumb" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
+                <div class="col-md-8">
+                  <h6>Song Name</h6>
+                  <span>Singer Name</span>
+                </div>
+              </div>
+              <div class="row mb-1 song-item">
+                <img class="thumb" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
+                <div class="col-md-8">
+                  <h6>Song Name</h6>
+                  <span>Singer Name</span>
+                </div>
+              </div>
+              <div class="row mb-1 song-item">
+                <img class="thumb" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
+                <div class="col-md-8">
+                  <h6>Song Name</h6>
+                  <span>Singer Name</span>
+                </div>
+              </div>
+              <div class="row mb-1 song-item">
+                <img class="thumb" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
+                <div class="col-md-8">
+                  <h6>Song Name</h6>
+                  <span>Singer Name</span>
+                </div>
+              </div>
+              <div class="row mb-1 song-item">
+                <img class="thumb" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
+                <div class="col-md-8">
+                  <h6>Song Name</h6>
+                  <span>Singer Name</span>
+                </div>
+              </div>
+              <div class="row mb-1 song-item">
+                <img class="thumb" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
+                <div class="col-md-8">
+                  <h6>Song Name</h6>
+                  <span>Singer Name</span>
+                </div>
+              </div>
+              <div class="row mb-1 song-item">
+                <img class="thumb" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
+                <div class="col-md-8">
+                  <h6>Song Name</h6>
+                  <span>Singer Name</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Album Songs -->
-    <div class="album-songs h-100">
+    <div class="row">
+        <div style="" class="now-playing">
+          <div class="control-box">
+            <button (click)="playMusic()" class="btn btnControl"
+                    [ngClass]="{'play': isPlay, 'pause': !isPlay}">
+              <i class="fa fa-play"></i>
+              <i class="fa fa-pause"></i>
+            </button>
+          </div>
 
-      <!-- Album Info -->
-      <div class="album-info mb-50 d-flex flex-wrap align-items-center justify-content-between">
-        <div class="album-title">
-          <h6>Featured album</h6>
-          <h4>Love is all Around</h4>
-        </div>
-        <div class="album-buy-now">
-          <a href="#" class="btn musica-btn">Buy it on Itunes</a>
-        </div>
-      </div>
+          <div class="info">
+            <div class="audioName">
+              Music Name
+            </div>
+            <div class="seekBar">
+              <mat-slider (change)="scrollTime($event)" class="mat-outer" min="1" max="{{audio.getDuration()}}"
+                          step="0.5"
+                          value="{{seekBarInner}}"></mat-slider>
+            </div>
+            <div class="timing">
+              <div class="start">{{startTime}}</div>
+              <div class="end">{{remainTime}}</div>
+            </div>
+          </div>
 
-      <div class="album-all-songs">
-
-        <!-- Music Playlist -->
-        <div class="music-playlist">
-          <!-- Single Song -->
-          <div class="single-music active">
-            <h3><span style="color: white">{{nowPlaying.name}} - {{nowPlaying.singer}}</span></h3>
-            <!--                  <audio preload="auto" controls src="{{musicDetail.musicUrl}}">-->
-            <!--                  </audio>-->
-            <p>{{nowPlaying.description}}</p>
+          <div class="volume-control" (mouseleave)="volumeHide()" (mouseenter)="volumeShow()">
+            <i class="fa fa-volume-up"></i>
+            <div class="" *ngIf="showVolume">
+              <mat-slider min="0" max="10" vertical
+                          value="{{audio.audio.volume * 10}}"
+                          (change)="scrollVolume($event)"
+              ></mat-slider>
+            </div>
+          </div>
+          <div (click)="repeatSong()" class="repeat-control">
+            <i class="fas fa-redo" [ngClass]="{'repeat': isRepeat}"></i>
           </div>
         </div>
-      </div>
-      <!-- Now Playing -->
-      <div class="now-playing d-flex flex-wrap align-items-center justify-content-between">
-        <div class="songs-name mb-2">
-          <div class="row">
-            <p><b>Playing</b></p>
-            <img class="ml-2 mb-2" src="https://s7.upanh.pro/2019/10/28/vinyl-lp-vn.gif" alt="" width="25px">
-          </div>
-          <span style="color: white" class="">{{nowPlaying.name}}</span>
-        </div>
-        <audio preload="auto" controls class="audio-detail" src="{{nowPlaying.musicUrl}}">
-        </audio>
       </div>
     </div>
   </div>
-</div>
+
+
+<!--<div class="featured-album-content d-flex flex-wrap">-->
+
+<!--  &lt;!&ndash; Album Thumbnail &ndash;&gt;-->
+<!--  <div class="album-thumbnail h-100 bg-img">-->
+<!--    <img src="{{nowPlaying.avatar}}" alt="" class="musicDetail">-->
+<!--  </div>-->
+
+<!--  &lt;!&ndash; Album Songs &ndash;&gt;-->
+<!--  <div class="album-songs h-100">-->
+
+<!--    &lt;!&ndash; Album Info &ndash;&gt;-->
+<!--    <div class="album-info mb-50 d-flex flex-wrap align-items-center justify-content-between">-->
+<!--      <div class="album-title">-->
+<!--        <h6>Featured album</h6>-->
+<!--        <h4>Love is all Around</h4>-->
+<!--      </div>-->
+<!--      <div class="album-buy-now">-->
+<!--        <a href="#" class="btn musica-btn">Buy it on Itunes</a>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="album-all-songs">-->
+
+<!--      &lt;!&ndash; Music Playlist &ndash;&gt;-->
+<!--      <div class="music-playlist">-->
+<!--        &lt;!&ndash; Single Song &ndash;&gt;-->
+<!--        <div class="single-music active">-->
+<!--          <h3><span style="color: white">{{nowPlaying.name}} - {{nowPlaying.singer}}</span></h3>-->
+<!--          &lt;!&ndash;                  <audio preload="auto" controls src="{{musicDetail.musicUrl}}">&ndash;&gt;-->
+<!--          &lt;!&ndash;                  </audio>&ndash;&gt;-->
+<!--          <p>{{nowPlaying.description}}</p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!-- Now Playing -->
+<!--<div class="pl-5 d-flex flex-wrap align-items-center justify-content-between">-->
+
+<!--</div>-->
+
+
+<!--  </div>-->
+<!--</div>-->
