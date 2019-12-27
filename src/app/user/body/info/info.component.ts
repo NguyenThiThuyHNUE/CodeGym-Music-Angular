@@ -39,9 +39,7 @@ export class InfoComponent implements OnInit {
     return this.userService.getUserCredential(localStorage.getItem('token'))
       .subscribe((data: any) => {
         localStorage.setItem('id', data.id);
-        this.user.name = data.name;
-        this.user.email = data.email;
-        this.user.image = data.image;
+        this.user = data;
       });
   }
 
