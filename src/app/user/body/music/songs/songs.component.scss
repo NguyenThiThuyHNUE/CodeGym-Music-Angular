@@ -30,3 +30,9 @@
   color: white;
 }
 
+.fa-pencil-alt {
+  &:hover {
+    cursor: pointer;
+    color: deeppink;
+  }
+}

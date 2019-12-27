@@ -3,6 +3,8 @@ import {IMusic} from '../../../../interface/i-music';
 import {PlaylistService} from '../../../../service/playlist.service';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {SongResponse} from '../../../../interface/song-response';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {ChangeNamePLComponent} from './change-name-pl/change-name-pl.component';
 
 @Component({
   selector: 'app-songs',
@@ -12,17 +14,20 @@ import {SongResponse} from '../../../../interface/song-response';
 })
 export class SongsComponent implements OnInit {
   songs: IMusic[];
+  private playlistName: string;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public songId: any,
+  constructor(@Inject(MAT_DIALOG_DATA) public playlist: any,
+              public dialog: MatDialog,
               private playlistService: PlaylistService) {
   }
 
   ngOnInit() {
+    this.playlistName = this.playlist.playlistName;
     this.getSongsInPlaylist();
   }
 
   getSongsInPlaylist() {
-    this.playlistService.getSongsInPlaylist(this.songId)
+    this.playlistService.getSongsInPlaylist(this.playlist.playlistId)
       .subscribe((response) => {
         this.handleGetSongsInPlaylistResponse(response);
       });
@@ -30,5 +35,11 @@ export class SongsComponent implements OnInit {
 
   private handleGetSongsInPlaylistResponse(response: SongResponse) {
     this.songs = response.data;
+  }
+
+  changeName() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = this.playlist.playlistId;
+    this.dialog.open(ChangeNamePLComponent, dialogConfig);
   }
 }

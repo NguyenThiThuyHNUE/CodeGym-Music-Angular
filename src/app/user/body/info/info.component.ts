@@ -62,10 +62,13 @@ export class InfoComponent implements OnInit {
   }
 
   showSongsInPlaylist(playlistId) {
+    // tslint:disable-next-line:no-shadowed-variable
+    const playlist = this.playlists.find(playlist => playlist.id === playlistId);
+    const playlistName = playlist.namePlaylist;
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '50%';
     dialogConfig.height = '70%';
-    dialogConfig.data = playlistId;
+    dialogConfig.data = {playlistId, playlistName};
     this.dialog.open(SongsComponent, dialogConfig);
   }
 }

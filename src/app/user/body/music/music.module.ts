@@ -22,17 +22,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialogModule} from '@angular/material/dialog';
 import {NowPlayingComponent} from './detail/now-playing/now-playing.component';
 import {SongsComponent} from './songs/songs.component';
-import {LoginComponent} from '../../header/login/login.component';
-import {ProfileComponent} from '../info/profile/profile.component';
-import {PlaylistComponent} from '../info/playlist/playlist.component';
-import {EtcComponent} from '../main/etc/etc.component';
-import {NewComponent} from '../info/playlist/new/new.component';
+import {ChangeNamePLComponent} from './songs/change-name-pl/change-name-pl.component';
 
 
 @NgModule({
-  declarations: [MusicComponent, CreateComponent, DeleteComponent, EditComponent, DetailComponent, NowPlayingComponent, SongsComponent,
+  declarations: [MusicComponent, CreateComponent, DeleteComponent, EditComponent, DetailComponent,
+    NowPlayingComponent, SongsComponent, ChangeNamePLComponent,
   ],
-  entryComponents: [SongsComponent],
+  entryComponents: [SongsComponent, ChangeNamePLComponent],
   imports: [
     MusicRoutingModule,
     ReactiveFormsModule,
