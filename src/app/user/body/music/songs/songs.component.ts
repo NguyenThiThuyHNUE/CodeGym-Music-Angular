@@ -5,6 +5,7 @@ import {MAT_DIALOG_DATA} from '@angular/material';
 import {SongResponse} from '../../../../interface/song-response';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ChangeNamePLComponent} from './change-name-pl/change-name-pl.component';
+import {timer} from 'rxjs';
 
 @Component({
   selector: 'app-songs',
@@ -22,6 +23,8 @@ export class SongsComponent implements OnInit {
   }
 
   ngOnInit() {
+    const timer$ = timer(2000, 5000);
+    timer$.subscribe(() => this.getNewName());
     this.playlistName = this.playlist.playlistName;
     this.getSongsInPlaylist();
   }
@@ -41,5 +44,12 @@ export class SongsComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = this.playlist.playlistId;
     this.dialog.open(ChangeNamePLComponent, dialogConfig);
+  }
+
+  getNewName() {
+    if (localStorage.getItem('newNamePlaylist')) {
+      this.playlistName = localStorage.getItem('newNamePlaylist');
+    }
+    localStorage.removeItem('newNamePlaylist');
   }
 }

@@ -23,6 +23,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {NowPlayingComponent} from './detail/now-playing/now-playing.component';
 import {SongsComponent} from './songs/songs.component';
 import {ChangeNamePLComponent} from './songs/change-name-pl/change-name-pl.component';
+import {UserModule} from '../../user.module';
 
 
 @NgModule({

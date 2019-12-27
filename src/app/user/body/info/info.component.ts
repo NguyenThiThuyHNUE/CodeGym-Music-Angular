@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {Component, NgZone, OnInit} from '@angular/core';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {ProfileComponent} from './profile/profile.component';
 import {NewComponent} from './playlist/new/new.component';
 import {PlaylistService} from '../../../service/playlist.service';
@@ -7,6 +7,7 @@ import {Playlist} from '../../../interface/playlist';
 import {SongsComponent} from '../music/songs/songs.component';
 import {UserService} from '../../../service/user.service';
 import {User} from '../../../interface/user';
+import {Observable, timer} from 'rxjs';
 
 @Component({
   selector: 'app-info',
@@ -18,9 +19,12 @@ export class InfoComponent implements OnInit {
   playlists: Playlist[];
   userId = localStorage.getItem('id');
   user: User;
+  playlist: any;
 
   constructor(public dialog: MatDialog,
+              private zone: NgZone,
               public userService: UserService,
+              public dialogRef: MatDialogRef<SongsComponent>,
               private playlistService: PlaylistService
   ) {
     if (!this.user) {
@@ -29,8 +33,9 @@ export class InfoComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.getPlaylists();
+    const timer$ = timer(2000, 5000);
+    timer$.subscribe(() => this.getPlaylists());
     return this.userService.getUserCredential(localStorage.getItem('token'))
       .subscribe((data: any) => {
         localStorage.setItem('id', data.id);
@@ -53,11 +58,13 @@ export class InfoComponent implements OnInit {
 
   getPlaylists() {
     this.playlistService.getPlaylists(this.userId).subscribe((response) => {
-      this.handleGetMusicsResponse(response);
+      this.zone.run(() => {
+        this.handleGetPlaylistsResponse(response);
+      });
     });
   }
 
-  private handleGetMusicsResponse(response) {
+  private handleGetPlaylistsResponse(response) {
     return this.playlists = response.data;
   }
 
@@ -71,4 +78,6 @@ export class InfoComponent implements OnInit {
     dialogConfig.data = {playlistId, playlistName};
     this.dialog.open(SongsComponent, dialogConfig);
   }
+
+
 }

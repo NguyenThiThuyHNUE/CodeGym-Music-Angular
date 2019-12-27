@@ -9,7 +9,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -40,7 +40,11 @@ import {MusicModule} from './body/music/music.module';
   entryComponents: [LoginComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent],
   providers: [
     {provide: 'SnotifyToastConfig', useValue: ToastDefaults},
-    SnotifyService
+    SnotifyService,
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    },
   ],
   exports: [
     HeaderComponent,
@@ -49,8 +53,8 @@ import {MusicModule} from './body/music/music.module';
   ],
   imports: [
     UserRoutingModule,
-    MusicModule,
     MatListModule,
+    MusicModule,
     MatProgressBarModule,
     SnotifyModule,
     MatExpansionModule,
