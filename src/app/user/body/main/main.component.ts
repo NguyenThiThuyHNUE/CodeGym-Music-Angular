@@ -38,10 +38,6 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.setAudio(this.musicSrc);
-    this.audio.audio.volume = 0.5;
-    this.setStartTime();
-    this.setRemainTime();
     this.getSongs();
   }
 
@@ -49,68 +45,6 @@ export class MainComponent implements OnInit {
     return this.musicService.getMusics().subscribe(musics => {
       this.songs = musics.data;
     });
-  }
-
-  setAudio(musicSrc) {
-    return this.audio.setAudio(musicSrc);
-  }
-
-  setStartTime() {
-    this.audio.getTimeElapsed().subscribe(
-      data => {
-        this.startTime = data;
-        this.seekBarInner = this.convertToSecond(data);
-      }
-    );
-  }
-
-  setRemainTime() {
-    this.audio.getTimeRemaining().subscribe(
-      data => {
-        this.audio.audio.loop = this.isRepeat;
-        this.remainTime = data;
-      }
-    );
-  }
-
-  playMusic() {
-    if (!this.isPlay) {
-      this.audio.pauseAudio();
-      return this.isPlay = true;
-    }
-    this.audio.playAudio();
-    return this.isPlay = false;
-  }
-
-  volumeShow() {
-    return this.showVolume = true;
-  }
-
-  volumeHide() {
-    return this.showVolume = false;
-  }
-
-  convertToSecond(time) {
-    const validateTime = time.split(':');
-
-    return (+validateTime[0]) * 60 + (+validateTime[1]);
-  }
-
-
-  repeatSong(): boolean {
-    if (!this.isRepeat) {
-      return this.isRepeat = true;
-    }
-    return this.isRepeat = false;
-  }
-
-  scrollTime(event) {
-    this.audio.seekAudio(event.value);
-  }
-
-  scrollVolume(event) {
-    this.audio.audio.volume = event.value / 10;
-    console.log(this.audio.audio.volume);
   }
 
   showEtc(songId) {
