@@ -22,11 +22,9 @@ export class AuthComponent implements OnInit {
 
   ngOnInit() {
     return this.user.getUserCredential(localStorage.getItem('token'))
-      .subscribe((data: any) => {
-        this.Notify.success(`Login Success, Welcome ${data.name}`, 'Congratulations', {timeout: 3000});
-        localStorage.setItem('id', data.id);
-        this.name = data.name;
-      });
+      .subscribe((response: any) => {
+        this.handleResponse(response);
+      }, (error) => this.handleResponseError());
   }
 
   logout() {
@@ -37,5 +35,13 @@ export class AuthComponent implements OnInit {
     this.user.logout();
   }
 
+  handleResponse(response) {
+    this.Notify.success(`Login Success, Welcome ${response.name}`, 'Congratulations', {timeout: 3000});
+    localStorage.setItem('id', response.id);
+    this.name = response.name;
+  }
 
+  handleResponseError() {
+    localStorage.removeItem('token');
+  }
 }
