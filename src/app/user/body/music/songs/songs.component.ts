@@ -53,8 +53,8 @@ export class SongsComponent implements OnInit {
     }
     localStorage.removeItem('newNamePlaylist');
   }
-
   closeDialog() {
     this.dialogRef.close();
   }
+
 }
