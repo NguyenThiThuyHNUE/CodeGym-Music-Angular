@@ -12,34 +12,35 @@
         <div class="container">
           <div class="row">
             <div class="col-2 ml-5">
-              <img src="{{music.avatar}}" alt="" class="image-music-detail" routerLink="music/detail/{{music.id}}">
+              <img src="{{music.avatar}}" alt="" class="image-music-detail" routerLink="/home/music/detail/{{music.id}}">
             </div>
             <div class="col-7 pt-4">
-              <h4><span style="color: white" class="container" routerLink="music/detail/{{music.id}}">{{music.name}}
+              <h4><span style="color: white" class="container" routerLink="/home/music/detail/{{music.id}}">{{music.name}}
                 - {{music.singer}}</span>
               </h4>
             </div>
             <div class="row">
               <tr class="mt-4">
+                <!--detail-song-->
                 <td class="col-2">
                   <a routerLink="/home/music/detail/{{music.id}}" class="table-link">
           <span class="fa-stack">
-<!--          <i class="fa fa-square fa-stack-2x"></i>-->
           <i class="fa fa-search fa-stack-1x fa-inverse"></i>
         </span>
                   </a>
                 </td>
+                <!--edit-song-->
                 <td class="col-2">
                   <a (click)="getUrl()" routerLink="/home/music/edit/{{music.id}}" class="table-link">
           <span class="fa-stack">
-<!--            <i class="fa fa-square fa-stack-2x"></i>-->
             <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
           </span>
-                  </a></td>
+                  </a>
+                </td>
+                <!--delete-song-->
                 <td class="col-2">
                   <a routerLink="/home/music/delete/{{music.id}}" class="table-link danger">
           <span class="fa-stack">
-<!--            <i class="fa fa-square fa-stack-2x"></i>-->
             <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
           </span>
                   </a>

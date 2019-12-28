@@ -49,7 +49,7 @@
             <div class="upcoming-shows-content">
 
               <!-- Single Upcoming Shows -->
-              <div class="single-upcoming-shows d-flex align-items-center flex-wrap">
+              <div *ngFor="let song of songs" class="single-upcoming-shows d-flex align-items-center flex-wrap">
                 <div class="shows-date">
                   <h2>17 <span>July</span></h2>
                 </div>
@@ -58,15 +58,15 @@
                     <img src="../../../assets/img/bg-img/s1.jpg" alt="">
                   </div>
                   <div class="shows-name">
-                    <h6>Electric castle Festival</h6>
-                    <p>Cluj, Romania</p>
+                    <h6>{{song.name}}</h6>
+                    <p>{{song.singer}}</p>
                   </div>
                 </div>
                 <div class="shows-location">
                   <p>At the Castle</p>
                 </div>
                 <div class="shows-time">
-                  <p>20:30</p>
+                  <i (click)="showEtc(song.id)" class="fas fa-ellipsis-h"></i>
                 </div>
                 <div class="buy-tickets">
                   <a routerLink="detail/music" class="btn musica-btn">Buy Tikets</a>
@@ -497,7 +497,7 @@
             <div class="album-all-songs">
 
               <!-- Music Playlist -->
-              <div class="music-playlist" *ngFor="let music of musicList">
+              <div class="music-playlist" *ngFor="let music of songs">
                 <!-- Single Song -->
                 <div class="single-music active">
                   <h4>

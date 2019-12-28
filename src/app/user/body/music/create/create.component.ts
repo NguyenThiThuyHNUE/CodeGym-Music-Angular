@@ -8,9 +8,6 @@ import {finalize} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {IMusic} from '../../../../interface/i-music';
 
-// import {url} from 'inspector';
-
-// noinspection JSDuplicatedDeclaration
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -80,6 +77,7 @@ export class CreateComponent implements OnInit {
       finalize(() => {
         fireRefMp3.getDownloadURL().subscribe((url) => {
           this.song.musicUrl = url;
+          console.log(url);
           this.musicService.upLoadDataMusic(this.song).subscribe(response => {
             this.route.navigate(['/home']).then(() => {
               alert(response.message);

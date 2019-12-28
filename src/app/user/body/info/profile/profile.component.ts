@@ -72,6 +72,17 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  handleUpdateResponse(res) {
+    this.Notify.success(res.message, 'Congratulations', {timeout: 3000});
+    this.resetUpdateForm();
+    location.reload();
+  }
+
+  resetUpdateForm() {
+    this.dialogRef.close();
+  }
+
+
   get newName() {
     return this.updateForm.get('newName');
   }
@@ -91,19 +102,8 @@ export class ProfileComponent implements OnInit {
   get newEmail() {
     return this.updateForm.get('newEmail');
   }
-
-  handleUpdateResponse(res) {
-    this.Notify.success(res.message, 'Congratulations', {timeout: 3000});
-    this.resetUpdateForm();
-    location.reload();
-  }
-  get
-  emailUpdate() {
+  get emailUpdate() {
     return this.updateForm.get('emailUpdate');
-  }
-
-  resetUpdateForm() {
-    this.dialogRef.close();
   }
 }
 

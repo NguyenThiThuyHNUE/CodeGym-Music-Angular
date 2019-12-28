@@ -28,10 +28,10 @@ export class DetailComponent implements OnInit {
     this.musicService.getMusics().subscribe(musics => {
       this.musicList = musics.data;
     });
-    this.getUrl();
+    this.getCurrentUrl();
   }
 
-  getUrl() {
+  getCurrentUrl() {
     this.router.events.subscribe(val => {
       this.idMusic = +this.activatedRoute.snapshot.paramMap.get('id');
       this.getMusics();
@@ -42,5 +42,8 @@ export class DetailComponent implements OnInit {
     this.musicService.getMusics().subscribe(musics => {
       this.musicDetail = musics.data.find(music => music.id === this.idMusic);
     });
+  }
+
+  getUrl() {
   }
 }

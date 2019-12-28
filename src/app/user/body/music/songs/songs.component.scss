@@ -1,10 +1,32 @@
+.avatar {
+  background-size: cover;
+}
+
+.songTitle {
+  display: flex;
+  justify-content: space-between;
+
+  .songTitleItem {
+    color: white;
+  }
+
+  .namePlaylist {
+    margin-bottom: 0;
+    padding-top: .7rem;
+    color: white;
+
+  }
+}
+
 .cdk-global-scrollblock {
   position: static !important;
   width: initial !important;
   overflow-y: inherit !important;
 }
+
 .mat-dialog-container {
   box-shadow: 0 11px 15px -7px rgba(0, 0, 0, .2), 0 24px 38px 3px rgba(0, 0, 0, .14), 0 9px 46px 8px rgba(0, 0, 0, .12);
   background: linear-gradient(to right, #cc1573, #5722a9) !important;
   color: white;
 }
+

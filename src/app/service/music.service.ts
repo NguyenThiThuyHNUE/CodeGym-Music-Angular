@@ -44,7 +44,7 @@ export class MusicService {
   }
 
   getMusics() {
-    return this.http.get<{ data }>(this.getMusicUrl);
+    return this.http.get<{data}>(this.getMusicUrl);
   }
 
   editMusic(idMusic, music): Observable<IMessage> {

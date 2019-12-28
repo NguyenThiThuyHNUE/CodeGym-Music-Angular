@@ -16,7 +16,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {LoginComponent} from './header/login/login.component';
 import {AuthComponent} from './header/auth/auth.component';
-import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material';
+import {_MatMenuDirectivesModule, MatListModule, MatMenuModule} from '@angular/material';
 import {FooterComponent} from './footer/footer.component';
 import {MainComponent} from './body/main/main.component';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
@@ -27,13 +27,17 @@ import {ConfirmEqualValidatorDirective} from '../directive/confirm-equal-validat
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {InfoComponent} from './body/info/info.component';
 import {ProfileComponent} from './body/info/profile/profile.component';
-import { PlaylistComponent } from './body/info/playlist/playlist.component';
+import {PlaylistComponent} from './body/info/playlist/playlist.component';
+import {EtcComponent} from './body/main/etc/etc.component';
+import {NewComponent} from './body/info/playlist/new/new.component';
+import {SongsComponent} from './body/music/songs/songs.component';
+import {MusicModule} from './body/music/music.module';
 
 @NgModule({
   declarations: [UserComponent, HeaderComponent, BodyComponent, LoginComponent, AuthComponent,
     FooterComponent, MainComponent, ConfirmEqualValidatorDirective,
-    InfoComponent, ProfileComponent, PlaylistComponent],
-  entryComponents: [LoginComponent, ProfileComponent, PlaylistComponent],
+    InfoComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent,],
+  entryComponents: [LoginComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent],
   providers: [
     {provide: 'SnotifyToastConfig', useValue: ToastDefaults},
     SnotifyService
@@ -45,6 +49,8 @@ import { PlaylistComponent } from './body/info/playlist/playlist.component';
   ],
   imports: [
     UserRoutingModule,
+    MusicModule,
+    MatListModule,
     MatProgressBarModule,
     SnotifyModule,
     MatExpansionModule,

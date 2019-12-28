@@ -5,6 +5,9 @@ import {IMusic} from '../../../interface/i-music';
 import {AudioService} from '../../../service/audio.service';
 import {Observable} from 'rxjs';
 import {MatSliderChange} from '@angular/material';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {PlaylistComponent} from '../info/playlist/playlist.component';
+import {EtcComponent} from './etc/etc.component';
 
 @Component({
   selector: 'app-main',
@@ -15,6 +18,8 @@ import {MatSliderChange} from '@angular/material';
 export class MainComponent implements OnInit {
   @ViewChild('seekBarVolumeOuter', {static: false}) seekBarVolumeOuter: ElementRef;
 
+  songs: IMusic[];
+  inputSongId: number;
   isRepeat = false;
   musicList: {
     data: any
@@ -23,13 +28,13 @@ export class MainComponent implements OnInit {
   showVolume = false;
   // tslint:disable-next-line:max-line-length
 
-  musicSrc = 'https://firebasestorage.googleapis.com/v0/b/codegym-music.appspot.com/o/NguoiEmKhongYeu-QuangVinh-2430593.mp3?alt=media&token=903c5d4c-6b07-4481-8fcb-2c49944370de';
+  musicSrc = 'https://firebasestorage.googleapis.com/v0/b/codegym-music-d1055.appspot.com/o/music%2FReal%20Friends%20-%20Camila%20Cabello%20(NhacPro.net).mp3?alt=media&token=b01da520-9303-4290-b551-e58dff7e0741';
   startTime: any;
   remainTime: any;
   seekBarInner: any;
-  volumePercent = '50%';
 
   constructor(private musicService: MusicService,
+              public dialog: MatDialog,
               private audio: AudioService,
               private elRef: ElementRef) {
   }
@@ -39,8 +44,12 @@ export class MainComponent implements OnInit {
     this.audio.audio.volume = 0.5;
     this.setStartTime();
     this.setRemainTime();
-    this.musicService.getMusics().subscribe(music => {
-      this.musicList = music.data;
+    this.getSongs();
+  }
+
+  getSongs() {
+    return this.musicService.getMusics().subscribe(musics => {
+      this.songs = musics.data;
     });
   }
 
@@ -104,5 +113,12 @@ export class MainComponent implements OnInit {
   scrollVolume(event) {
     this.audio.audio.volume = event.value / 10;
     console.log(this.audio.audio.volume);
+  }
+
+  showEtc(songId) {
+    this.inputSongId = songId;
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = songId;
+    this.dialog.open(EtcComponent, dialogConfig);
   }
 }
