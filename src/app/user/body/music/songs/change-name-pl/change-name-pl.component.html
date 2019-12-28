@@ -1,0 +1,13 @@
+<mat-card>
+  <form [formGroup]="updateForm" (ngSubmit)="updatePlaylist()">
+    <mat-form-field>
+      <input formControlName="newNamePlaylist" matInput placeholder="Enter Playlist Name">
+      <mat-hint align="end" *ngIf="newNamePlaylist.invalid && (newNamePlaylist.dirty || newNamePlaylist.touched)">
+        <span class="text-danger" *ngIf="newNamePlaylist.errors.required">Playlist Name</span>
+      </mat-hint>
+    </mat-form-field>
+    <button [disabled]="!updateForm.valid" type="submit" mat-button color="primary">
+      Rename
+    </button>
+  </form>
+</mat-card>

@@ -17,7 +17,12 @@ button.mat-button.mat-button-base {
   color: #ffffff;
   text-transform: uppercase;
   margin-bottom: 15px;
-  font-family: "Raleway", sans-serif
+  font-family: "Raleway", sans-serif;
+
+  &:hover {
+    color: deeppink;
+    cursor: pointer;
+  }
 }
 
 .playDescription {

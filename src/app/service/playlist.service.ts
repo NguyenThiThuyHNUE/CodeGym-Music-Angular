@@ -21,6 +21,10 @@ export class PlaylistService {
     return this.http.post<IMessage>(Url + '/api/playlist/create', info);
   }
 
+  updatePlaylist(playlistId, data) {
+    return this.http.post(Url + `/api/playlist/update/${playlistId}`, data);
+  }
+
   putSongToPlaylist(order) {
     return this.http.post(Url + '/api/playlist/song', order);
   }
