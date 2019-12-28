@@ -33,11 +33,13 @@ import {NewComponent} from './body/info/playlist/new/new.component';
 import {SongsComponent} from './body/music/songs/songs.component';
 import {MusicModule} from './body/music/music.module';
 
+
 @NgModule({
   declarations: [UserComponent, HeaderComponent, BodyComponent, LoginComponent, AuthComponent,
     FooterComponent, MainComponent, ConfirmEqualValidatorDirective,
     InfoComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent,],
   entryComponents: [LoginComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent],
+
   providers: [
     {provide: 'SnotifyToastConfig', useValue: ToastDefaults},
     SnotifyService,

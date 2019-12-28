@@ -30,8 +30,7 @@ export class PlaylistComponent implements OnInit {
     private Notify: SnotifyService,
     public dialog: MatDialog,
     private dialogRefPlaylist: MatDialogRef<PlaylistComponent>,
-    private playListService: PlaylistService
-  ) {
+    private playListService: PlaylistService) {
   }
 
   ngOnInit() {
@@ -54,6 +53,7 @@ export class PlaylistComponent implements OnInit {
       .subscribe((response) => {
         this.handleGetPlaylist(response);
       });
+
   }
 
   createPlaylist() {
@@ -66,6 +66,7 @@ export class PlaylistComponent implements OnInit {
   get namePlaylist() {
     return this.createForm.get('namePlaylist');
   }
+
 
   handleAddSongToPlaylistResponse(response) {
     this.Notify.success(response.message, 'Add Song To Playlist', {timeout: 3000});
