@@ -20,12 +20,19 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialogModule} from '@angular/material/dialog';
-import { NowPlayingComponent } from './detail/now-playing/now-playing.component';
+import {NowPlayingComponent} from './detail/now-playing/now-playing.component';
+import {SongsComponent} from './songs/songs.component';
+import {LoginComponent} from '../../header/login/login.component';
+import {ProfileComponent} from '../info/profile/profile.component';
+import {PlaylistComponent} from '../info/playlist/playlist.component';
+import {EtcComponent} from '../main/etc/etc.component';
+import {NewComponent} from '../info/playlist/new/new.component';
 
 
 @NgModule({
-  declarations: [MusicComponent, CreateComponent, DeleteComponent, EditComponent, DetailComponent, NowPlayingComponent,
+  declarations: [MusicComponent, CreateComponent, DeleteComponent, EditComponent, DetailComponent, NowPlayingComponent, SongsComponent,
   ],
+  entryComponents: [SongsComponent],
   imports: [
     MusicRoutingModule,
     ReactiveFormsModule,

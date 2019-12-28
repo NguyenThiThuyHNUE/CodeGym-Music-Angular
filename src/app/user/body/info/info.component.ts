@@ -1,8 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ProfileComponent} from './profile/profile.component';
+import {NewComponent} from './playlist/new/new.component';
+import {PlaylistService} from '../../../service/playlist.service';
+import {Playlist} from '../../../interface/playlist';
+import {SongsComponent} from '../music/songs/songs.component';
 import {PlaylistComponent} from './playlist/playlist.component';
 import {UserService} from '../../../service/user.service';
+import {User} from '../../../interface/user';
 
 @Component({
   selector: 'app-info',
@@ -11,22 +16,31 @@ import {UserService} from '../../../service/user.service';
 })
 export class InfoComponent implements OnInit {
 
-
+  playlists: Playlist[];
+  userId = localStorage.getItem('id');
+  user: User;
   name: string;
   email: string;
   image: string;
   password: string;
   constructor(public dialog: MatDialog,
-              public user: UserService) { }
+              public userService: UserService,
+              private playlistService: PlaylistService
+  ) {
+    if (!this.user) {
+      this.user = {};
+    }
+  }
 
   ngOnInit() {
-    return this.user.getUserCredential(localStorage.getItem('token'))
+
+    this.getPlaylists();
+    return this.userService.getUserCredential(localStorage.getItem('token'))
       .subscribe((data: any) => {
         localStorage.setItem('id', data.id);
-        this.name = data.name;
-        this.email = data.email;
-        this.image = data.image;
-        this.password = data.password;
+        this.user.name = data.name;
+        this.user.email = data.email;
+        this.user.image = data.image;
       });
   }
 
@@ -38,7 +52,24 @@ export class InfoComponent implements OnInit {
 
   showPlaylistCreateForm() {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '30%';
-    this.dialog.open(PlaylistComponent, dialogConfig);
+    this.dialog.open(NewComponent, dialogConfig);
+  }
+
+  getPlaylists() {
+    this.playlistService.getPlaylists(this.userId).subscribe((response) => {
+      this.handleGetMusicsResponse(response);
+    });
+  }
+
+  private handleGetMusicsResponse(response) {
+    return this.playlists = response.data;
+  }
+
+  showSongsInPlaylist(playlistId) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '50%';
+    dialogConfig.height = '70%';
+    dialogConfig.data = playlistId;
+    this.dialog.open(SongsComponent,PlaylistComponent, dialogConfig);
   }
 }

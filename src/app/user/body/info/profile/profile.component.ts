@@ -72,6 +72,17 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  handleUpdateResponse(res) {
+    this.Notify.success(res.message, 'Congratulations', {timeout: 3000});
+    this.resetUpdateForm();
+    location.reload();
+  }
+
+  resetUpdateForm() {
+    this.dialogRef.close();
+  }
+
+
   get newName() {
     return this.updateForm.get('newName');
   }
@@ -88,23 +99,12 @@ export class ProfileComponent implements OnInit {
     return this.updateForm.get('confirmPassword');
   }
 
-
   get emailUpdate() {
     return this.updateForm.get('emailUpdate');
   }
 
   get newEmail() {
     return this.updateForm.get('newEmail');
-  }
-
-  handleUpdateResponse(res) {
-    this.Notify.success(res.message, 'Congratulations', {timeout: 3000});
-    this.resetUpdateForm();
-    location.reload();
-  }
-
-  resetUpdateForm() {
-    this.dialogRef.close();
   }
 
 }
