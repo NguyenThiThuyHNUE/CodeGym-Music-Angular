@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {IMusic} from '../../../../interface/i-music';
 import {PlaylistService} from '../../../../service/playlist.service';
-import {MAT_DIALOG_DATA} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {SongResponse} from '../../../../interface/song-response';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ChangeNamePLComponent} from './change-name-pl/change-name-pl.component';
@@ -19,6 +19,7 @@ export class SongsComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public playlist: any,
               public dialog: MatDialog,
+              public  dialogRef: MatDialogRef<SongsComponent>,
               private playlistService: PlaylistService) {
   }
 
@@ -51,5 +52,9 @@ export class SongsComponent implements OnInit {
       this.playlistName = localStorage.getItem('newNamePlaylist');
     }
     localStorage.removeItem('newNamePlaylist');
+  }
+
+  closeDialog() {
+    this.dialogRef.close();
   }
 }

@@ -3,6 +3,9 @@ import {IMusic} from '../../../../../interface/i-music';
 import {MusicService} from '../../../../../service/music.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AudioService} from '../../../../../service/audio.service';
+import {timer} from 'rxjs';
+
+const DEFAULT_VOLUME = 0.5;
 
 @Component({
   selector: 'app-now-playing',
@@ -11,15 +14,14 @@ import {AudioService} from '../../../../../service/audio.service';
 })
 export class NowPlayingComponent implements OnInit, OnChanges {
   @Input() nowPlaying: IMusic;
-  // tslint:disable-next-line:max-line-length
-  musicSrc = 'https://firebasestorage.googleapis.com/v0/b/codegym-music-d1055.appspot.com/o/music%2FReal%20Friends%20-%20Camila%20Cabello%20(NhacPro.net).mp3?alt=media&token=b01da520-9303-4290-b551-e58dff7e0741';
+  musicSrc: string;
   showVolume = false;
   startTime: any;
   remainTime: any;
   seekBarInner: any;
   isRepeat = false;
-  songs: IMusic[];
   isPlay = true;
+  pageLoad = 0;
 
   constructor(private musicService: MusicService,
               private audio: AudioService,
@@ -28,27 +30,25 @@ export class NowPlayingComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log(this.nowPlaying.name);
-    console.log(this.musicSrc);
+
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
     this.getCurrentSong();
-    this.setAudio(this.musicSrc);
-    this.audio.audio.volume = 0.5;
+    this.audio.audio.volume = DEFAULT_VOLUME;
     this.setStartTime();
     this.setRemainTime();
-    this.getSongs();
-    this.playMusic();
+    this.audio.audio.muted = false;
+    this.audio.audio.autoplay = true;
+    this.changeIconToPlay();
   }
 
   getCurrentSong() {
-    if (this.nowPlaying) {
+    if (this.nowPlaying.musicUrl) {
+      this.isPlay = false;
       this.musicSrc = this.nowPlaying.musicUrl;
+      this.setAudio(this.musicSrc);
     }
-  }
-
-  getSongs() {
-    return this.musicService.getMusics().subscribe(musics => {
-      this.songs = musics.data;
-    });
   }
 
   setRemainTime() {
@@ -107,12 +107,18 @@ export class NowPlayingComponent implements OnInit, OnChanges {
       this.audio.pauseAudio();
       return this.isPlay = true;
     }
+    this.audio.audio.preload = 'none';
     this.audio.playAudio();
     return this.isPlay = false;
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.getCurrentSong();
-    this.ngOnInit();
+  changeIconToPlay() {
+    const timer$ = timer(2000, 5000);
+    timer$.subscribe(() => {
+      if (!(this.convertToSecond(this.remainTime) > 0)) {
+        console.log(this.seekBarInner);
+        this.isPlay = true;
+      }
+    });
   }
 }

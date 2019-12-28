@@ -100,33 +100,16 @@
         height: 48px;
         width: 100%;
       }
-
-      .outer {
-        overflow: hidden;
-        border-radius: 5px;
-        display: flex;
-        height: 0.5rem;
-        flex-basis: 100%;
-        justify-content: flex-start;
-        //background-color: black;
-
-        .inner {
-          border-radius: 5px;
-          background-color: white;
-          height: 100%;
-          display: inline-block;
-        }
-
-        &:hover {
-          cursor: pointer;
-        }
-      }
     }
 
-    .timing {
-      display: flex;
-      justify-content: space-between;
+    &:hover {
+      cursor: pointer;
     }
+  }
+
+  .timing {
+    display: flex;
+    justify-content: space-between;
   }
 
   .volume-control {
@@ -148,39 +131,42 @@
       height: 90px;
       bottom: 5rem;
       right: 2.5rem;
-      //
-      //.outer {
-      //  flex-direction: column-reverse;
-      //  overflow: hidden;
-      //  border-radius: 5px;
-      //  display: flex;
-      //  height: 100%;
-      //  width: 45%;
-      //  justify-content: flex-start;
-      //  background-color: black;
-      //
-      //.inner {
-      //  border-radius: 5px;
-      //  background-color: white;
-      //  width: 100%;
-      //  display: inline-block;
-      //  height: 20%;
-      //}
     }
 
     .ng-star-inserted {
+      background-color: #1d1633;
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
       width: 3rem;
-      height: 90px;
-      bottom: 5rem;
+      top: 5rem;
       right: 2.5rem;
     }
 
     &:hover {
       cursor: pointer;
+    }
+  }
+
+  .repeat-control {
+    display: flex;
+    width: 3rem;
+    height: 3rem;
+    align-items: center;
+    color: white;
+    font-size: 1.5rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    .repeat {
+      color: #bd177a;
+    }
+
+    .fa-redo {
+      font-size: 1rem;
     }
   }
 }

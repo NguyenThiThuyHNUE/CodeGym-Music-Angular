@@ -36,7 +36,6 @@ export class DetailComponent implements OnInit {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         this.idMusic = +this.activatedRoute.snapshot.paramMap.get('id');
-        console.log(this.idMusic);
         this.getMusics();
       }
     });

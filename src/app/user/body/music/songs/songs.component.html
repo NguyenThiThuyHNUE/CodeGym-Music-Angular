@@ -5,8 +5,8 @@
 <mat-card class="matCard">
   <mat-card-header *ngFor="let song of songs">
     <img mat-card-avatar src="https://material.angular.io/assets/img/examples/shiba1.jpg" class="avatar">
-    <mat-card-title>
-      {{song.name}}
+    <mat-card-title class="playlistItem">
+      <a (click)="closeDialog()" routerLink="home/music/detail/{{song.id}}">{{song.name}}</a>
     </mat-card-title>
     <mat-card-subtitle>
       {{song.singer}}

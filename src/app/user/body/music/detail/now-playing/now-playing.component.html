@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" style="margin-bottom: 3rem">
   <div class="col-md-12">
     <div class="row" style="height: 430px;">
       <div class="col-md-6 npl-image">
@@ -89,43 +89,43 @@
     </div>
 
     <div class="row">
-        <div style="" class="now-playing">
-          <div class="control-box">
-            <button (click)="playMusic()" class="btn btnControl"
-                    [ngClass]="{'play': isPlay, 'pause': !isPlay}">
-              <i class="fa fa-play"></i>
-              <i class="fa fa-pause"></i>
-            </button>
-          </div>
+      <div style="" class="now-playing">
+        <div class="control-box">
+          <button (click)="playMusic()" class="btn btnControl"
+                  [ngClass]="{'play': isPlay, 'pause': !isPlay}">
+            <i class="fa fa-play"></i>
+            <i class="fa fa-pause"></i>
+          </button>
+        </div>
 
-          <div class="info">
-            <div class="audioName">
-              Music Name
-            </div>
-            <div class="seekBar">
-              <mat-slider (change)="scrollTime($event)" class="mat-outer" min="1" max="{{audio.getDuration()}}"
-                          step="0.5"
-                          value="{{seekBarInner}}"></mat-slider>
-            </div>
-            <div class="timing">
-              <div class="start">{{startTime}}</div>
-              <div class="end">{{remainTime}}</div>
-            </div>
+        <div class="info">
+          <div class="audioName">
+            Music Name
           </div>
+          <div class="seekBar">
+            <mat-slider (change)="scrollTime($event)" class="mat-outer" min="1" max="{{audio.getDuration()}}"
+                        step="0.5"
+                        value="{{seekBarInner}}"></mat-slider>
+          </div>
+          <div class="timing">
+            <div class="start">{{startTime}}</div>
+            <div class="end">{{remainTime}}</div>
+          </div>
+        </div>
 
-          <div class="volume-control" (mouseleave)="volumeHide()" (mouseenter)="volumeShow()">
-            <i class="fa fa-volume-up"></i>
-            <div class="" *ngIf="showVolume">
-              <mat-slider min="0" max="10" vertical
-                          value="{{audio.audio.volume * 10}}"
-                          (change)="scrollVolume($event)"
-              ></mat-slider>
-            </div>
+        <div class="volume-control" (mouseleave)="volumeHide()" (mouseenter)="volumeShow()">
+          <i class="fa fa-volume-up"></i>
+          <div class="" *ngIf="showVolume">
+            <mat-slider min="0" max="10" vertical invert
+                        value="{{audio.audio.volume * 10}}"
+                        (change)="scrollVolume($event)"
+            ></mat-slider>
           </div>
-          <div (click)="repeatSong()" class="repeat-control">
-            <i class="fas fa-redo" [ngClass]="{'repeat': isRepeat}"></i>
-          </div>
+        </div>
+        <div (click)="repeatSong()" class="repeat-control">
+          <i class="fas fa-redo" [ngClass]="{'repeat': isRepeat}"></i>
         </div>
       </div>
     </div>
   </div>
+</div>
