@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {IUserResponse} from '../interface/i-user-response';
 import {Url} from '../../../url-project';
@@ -31,4 +32,5 @@ export class PlaylistService {
   getSongsInPlaylist(playlistId) {
     return this.http.get<SongResponse>(Url + `/api/playlist/songs/${playlistId}`);
   }
+
 }
