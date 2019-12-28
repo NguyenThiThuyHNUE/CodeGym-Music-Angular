@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ProfileComponent} from './profile/profile.component';
+import {PlaylistComponent} from './playlist/playlist.component';
 import {UserService} from '../../../service/user.service';
 
 @Component({
@@ -9,6 +10,8 @@ import {UserService} from '../../../service/user.service';
   styleUrls: ['./info.component.scss']
 })
 export class InfoComponent implements OnInit {
+
+
   name: string;
   email: string;
   image: string;
@@ -31,5 +34,11 @@ export class InfoComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '40%';
     this.dialog.open(ProfileComponent, dialogConfig);
+  }
+
+  showPlaylistCreateForm() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '30%';
+    this.dialog.open(PlaylistComponent, dialogConfig);
   }
 }

@@ -2,3 +2,31 @@
   background: linear-gradient(to right, #cc1573, #5722a9);
   color: white;
 }
+
+button.mat-button.mat-button-base {
+  position: relative;
+  display: flex;
+  background: linear-gradient(to right, #cc1573, #5722a9);
+  bottom: 3.5rem;
+  color: white;
+}
+
+.playListName {
+  font-size: 18px;
+  font-weight: 900;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  font-family: "Raleway", sans-serif
+}
+
+.playDescription {
+  margin-bottom: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: "Raleway", sans-serif
+}
+
+

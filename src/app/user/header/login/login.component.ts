@@ -15,7 +15,18 @@ import {AuthService, SocialUser, FacebookLoginProvider} from 'angularx-social-lo
 export class LoginComponent implements OnInit {
   buttonStatus = true;
   title = 'app';
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    public dialog: MatDialog,
+    private Notify: SnotifyService,
+    private userService: UserService,
+    private dialogRef: MatDialogRef<LoginComponent>,
+    private socialAuthService: AuthService
+  ) {
+  }
   public user: any = SocialUser;
+
   registerForm = this.fb.group({
     name: ['', Validators.required],
     email: ['', Validators.required],
@@ -27,17 +38,6 @@ export class LoginComponent implements OnInit {
     emailLogin: ['', [Validators.required]],
     passwordLogin: ['', [Validators.required]]
   });
-
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    public dialog: MatDialog,
-    private Notify: SnotifyService,
-    private userService: UserService,
-    private dialogRef: MatDialogRef<LoginComponent>,
-    private socialAuthService: AuthService
-  ) {
-  }
 
   facebooklogin() {
     this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then((userData) => {
