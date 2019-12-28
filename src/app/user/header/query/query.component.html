@@ -1,0 +1,14 @@
+<form [formGroup]="form">
+  <mat-form-field>
+    <input
+      formControlName="searchInput"
+      [(ngModel)]="searchValue"
+      autocomplete="off"
+      matInput placeholder="Search Singer or Songs"
+      type="text">
+  </mat-form-field>
+  <button mat-button><i class="fas fa-search"></i></button>
+</form>
+<div *ngIf="searchValue && !searchInput.touched" class="query-result">
+  <app-result></app-result>
+</div>

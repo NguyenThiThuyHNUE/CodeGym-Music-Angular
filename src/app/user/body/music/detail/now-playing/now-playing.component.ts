@@ -20,7 +20,7 @@ export class NowPlayingComponent implements OnInit, OnChanges, OnDestroy {
   startTime: any;
   remainTime: any;
   seekBarInner: any;
-  isRepeat = false;
+  isRepeat = true;
   isPlay = true;
   pageLoad = 0;
 
