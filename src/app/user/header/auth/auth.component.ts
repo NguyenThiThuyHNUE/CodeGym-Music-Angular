@@ -21,14 +21,14 @@ export class AuthComponent implements OnInit {
   }
 
   ngOnInit() {
-    return this.user.getUserCredential(localStorage.getItem('token'))
+    return this.user.getUserCredential()
       .subscribe((response: any) => {
         this.handleResponse(response);
       }, (error) => this.handleResponseError());
   }
 
   logout() {
-    this.user.getUserCredential(localStorage.getItem('token'))
+    this.user.getUserCredential()
       .subscribe((data: any) => {
         this.Notify.success(`Logout Success, Goodbye ${data.name}`, 'Congratulations', {timeout: 3000});
       });

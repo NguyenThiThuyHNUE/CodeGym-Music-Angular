@@ -18,17 +18,13 @@ import {Observable, timer} from 'rxjs';
 export class InfoComponent implements OnInit {
 
   playlists: Playlist[];
-  userId = localStorage.getItem('id');
+  userId: number;
   user: User;
-  playlist: any;
-  name: string;
-  email: string;
-  image: string;
-  password: string;
+  playlist: Playlist;
+
   constructor(public dialog: MatDialog,
               private zone: NgZone,
               public userService: UserService,
-              public dialogRef: MatDialogRef<SongsComponent>,
               private playlistService: PlaylistService
   ) {
     if (!this.user) {
@@ -37,14 +33,10 @@ export class InfoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getUserId();
     this.getPlaylists();
-    const timer$ = timer(2000, 5000);
-    timer$.subscribe(() => this.getPlaylists());
-    return this.userService.getUserCredential(localStorage.getItem('token'))
-      .subscribe((data: any) => {
-        localStorage.setItem('id', data.id);
-        this.user = data;
-      });
+    this.updatePlaylistAfterFiveSecond();
+    this.getUserCredentialForUpdate();
   }
 
   showFormUpdate() {
@@ -66,19 +58,46 @@ export class InfoComponent implements OnInit {
     });
   }
 
-  private handleGetPlaylistsResponse(response) {
+  handleGetPlaylistsResponse(response) {
     return this.playlists = response.data;
   }
 
   showSongsInPlaylist(playlistId) {
-    // tslint:disable-next-line:no-shadowed-variable
-    const playlist = this.playlists.find(playlist => playlist.id === playlistId);
-    const playlistName = playlist.namePlaylist;
+    const playlist = this.getPlaylistPassToChildrenComponent(playlistId);
+    const playlistName = this.getNamePlaylist(playlist);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '50%';
     dialogConfig.height = '70%';
     dialogConfig.data = {playlistId, playlistName};
+    this.openSongDiaLog(dialogConfig);
+  }
+
+  private updatePlaylistAfterFiveSecond() {
+    const timer$ = timer(2000, 5000);
+    timer$.subscribe(() => this.getPlaylists());
+  }
+
+  private getUserCredentialForUpdate() {
+    this.userService.getUserCredential()
+      .subscribe((data: any) => {
+        localStorage.setItem('id', data.id);
+        this.user = data;
+      });
+  }
+
+  private getPlaylistPassToChildrenComponent(playlistId: any) {
+    return this.playlists.find(playlist => playlist.id === playlistId);
+  }
+
+  public getNamePlaylist(playlist) {
+    return playlist.namePlaylist;
+  }
+
+  private openSongDiaLog(dialogConfig) {
     this.dialog.open(SongsComponent, dialogConfig);
   }
 
+  private getUserId() {
+    this.userId = +localStorage.getItem('id');
+  }
 }

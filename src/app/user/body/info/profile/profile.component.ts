@@ -3,7 +3,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {UserService} from '../../../../service/user.service';
 import {MatDialogRef} from '@angular/material';
 import {SnotifyService} from 'ng-snotify';
-import {AngularFireStorage} from '@angular/fire/storage';
+import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
 import {MusicService} from '../../../../service/music.service';
 import {finalize} from 'rxjs/operators';
 import {Song} from '../../../../song';
@@ -17,7 +17,7 @@ import {Song} from '../../../../song';
 export class ProfileComponent implements OnInit {
   name: string;
   email: string;
-  selectFileAvatar: File = null;
+  selectFileImg: File = null;
   uploadPercent: any;
   updateForm = this.fb.group({
     id: localStorage.getItem('id'),
@@ -33,35 +33,23 @@ export class ProfileComponent implements OnInit {
               private angularFireStorage: AngularFireStorage,
               private Notify: SnotifyService,
               private userService: UserService,
-              private musicService: MusicService,
+              private songService: MusicService,
               private song: Song) {
   }
 
-  onSelectFileAvatar(event) {
-    this.selectFileAvatar = event.target.files[0] as File;
-  }
 
   ngOnInit() {
-    return this.userService.getUserCredential(localStorage.getItem('token'))
-      .subscribe((data: any) => {
-        this.Notify.success(`Login Success, Welcome ${data.name}`, 'Congratulations', {timeout: 3000});
-        localStorage.setItem('id', data.id);
-
-        this.name = data.name;
-        this.email = data.email;
-      });
+    this.getUserCredentialToFillUpFormUpdate();
   }
 
   userUpdate() {
-    const firePathAvatar = `music/${this.selectFileAvatar.name}`;
-    const fireRefAvatar = this.angularFireStorage.ref(firePathAvatar);
-    const taskUploadAvatar = this.musicService.uploadAvatar(firePathAvatar, this.selectFileAvatar);
-    taskUploadAvatar.percentageChanges().subscribe(percent => {
-      this.uploadPercent = percent;
-    });
-    taskUploadAvatar.snapshotChanges().pipe(
+    const firePathImg = this.setUpPathToImgInFireBase();
+    const fireRefImg = this.setUpFileRefInFireBase(firePathImg);
+    const taskUploadImg = this.startUploadImageToFireBase(firePathImg);
+    this.getPercentWhileUploading(taskUploadImg);
+    taskUploadImg.snapshotChanges().pipe(
       finalize(() => {
-        fireRefAvatar.getDownloadURL().subscribe((url) => {
+        fireRefImg.getDownloadURL().subscribe((url) => {
           this.updateForm.value.newImage = url;
           this.userService.updateUser(localStorage.getItem('token'), this.updateForm.value)
             .subscribe((response) => {
@@ -70,6 +58,10 @@ export class ProfileComponent implements OnInit {
         });
       })).subscribe();
 
+  }
+
+  onSelectFileImg(event) {
+    this.selectFileImg = event.target.files[0] as File;
   }
 
   handleUpdateResponse(res) {
@@ -99,12 +91,44 @@ export class ProfileComponent implements OnInit {
     return this.updateForm.get('confirmPassword');
   }
 
-  get emailUpdate() {
-    return this.updateForm.get('emailUpdate');
-  }
-
   get newEmail() {
     return this.updateForm.get('newEmail');
   }
 
+  private handleGetUserCredentialResponse(response: any) {
+    this.NotifyForUserThatLoginSuccess(response);
+    localStorage.setItem('id', response.id);
+
+    this.name = response.name;
+    this.email = response.email;
+  }
+
+  private NotifyForUserThatLoginSuccess(response: any) {
+    this.Notify.success(`Login Success, Welcome ${response.name}`, 'Congratulations', {timeout: 3000});
+  }
+
+  private getUserCredentialToFillUpFormUpdate() {
+    this.userService.getUserCredential()
+      .subscribe((response: any) => {
+        this.handleGetUserCredentialResponse(response);
+      });
+  }
+
+  private setUpPathToImgInFireBase() {
+    return `music/${this.selectFileImg.name}`;
+  }
+
+  private setUpFileRefInFireBase(firePathImg) {
+    return this.angularFireStorage.ref(firePathImg);
+  }
+
+  private startUploadImageToFireBase(firePathImg) {
+    return this.songService.uploadAvatar(firePathImg, this.selectFileImg);
+  }
+
+  private getPercentWhileUploading(taskUploadImg: AngularFireUploadTask) {
+    taskUploadImg.percentageChanges().subscribe(percent => {
+      this.uploadPercent = percent;
+    });
+  }
 }

@@ -38,8 +38,10 @@ export class UserService {
     return !!localStorage.getItem('authToken');
   }
 
-  getUserCredential(userToken): Observable<TokenRespone> {
-    return this.http.get<TokenRespone>(Url + `/api/me?token=${userToken}`);
+  getUserCredential(): Observable<TokenRespone> {
+    if (localStorage.getItem('token')) {
+      return this.http.get<TokenRespone>(Url + `/api/me?token=${localStorage.getItem('token')}`);
+    }
   }
 
   updateUser(userToken, updateInfo) {

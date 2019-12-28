@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MusicService} from '../../service/music.service';
+import {SongService} from '../../service/song.service';
 
 @Component({
   selector: 'app-body',
@@ -8,11 +9,10 @@ import {MusicService} from '../../service/music.service';
 })
 export class BodyComponent implements OnInit {
 
-  musicList: any[];
-
-  constructor(private musicService: MusicService) {
+  constructor() {
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
 }
