@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -33,19 +33,19 @@ export class AudioService {
     this.setTimeElapsed(ct);
     this.setPercentElapsed(d, ct);
     this.setTimeRemaining(d, ct);
-  }
+  };
 
   private calculatePercentLoaded = (evt) => {
     if (this.audio.duration > 0) {
       for (var i = 0; i < this.audio.buffered.length; i++) {
         if (this.audio.buffered.start(this.audio.buffered.length - 1 - i) < this.audio.currentTime) {
           let percent = (this.audio.buffered.end(this.audio.buffered.length - 1 - i) / this.audio.duration) * 100;
-          this.setPercentLoaded(percent)
+          this.setPercentLoaded(percent);
           break;
         }
       }
     }
-  }
+  };
 
   private setPlayerStatus = (evt) => {
     switch (evt.type) {
@@ -65,7 +65,7 @@ export class AudioService {
         this.playerStatus.next('paused');
         break;
     }
-  }
+  };
 
   /**
    * If you need the audio instance in your component for some reason, use this.
@@ -86,7 +86,18 @@ export class AudioService {
    * The method to play audio
    */
   public playAudio(): void {
-    this.audio.play();
+    const promise = this.audio.play();
+    if (promise !== undefined) {
+      promise.then(_ => {
+        // Automatic playback started!
+        // Show playing UI.
+      })
+        .catch(error => {
+          console.log(error);
+          // Auto-play was prevented
+          // Show paused UI.
+        });
+    }
   }
 
   /**

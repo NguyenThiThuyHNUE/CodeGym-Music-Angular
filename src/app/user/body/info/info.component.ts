@@ -79,5 +79,6 @@ export class InfoComponent implements OnInit {
     dialogConfig.height = '70%';
     dialogConfig.data = {playlistId, playlistName};
     this.dialog.open(SongsComponent, dialogConfig);
+  }
 
 }

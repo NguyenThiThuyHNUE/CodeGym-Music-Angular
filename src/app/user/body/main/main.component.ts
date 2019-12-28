@@ -16,8 +16,6 @@ import {EtcComponent} from './etc/etc.component';
   encapsulation: ViewEncapsulation.None
 })
 export class MainComponent implements OnInit {
-  @ViewChild('seekBarVolumeOuter', {static: false}) seekBarVolumeOuter: ElementRef;
-
   songs: IMusic[];
   inputSongId: number;
   isRepeat = false;
