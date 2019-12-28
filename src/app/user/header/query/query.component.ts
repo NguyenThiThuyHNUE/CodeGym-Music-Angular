@@ -1,6 +1,8 @@
 import {Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation} from '@angular/core';
 import {timer} from 'rxjs';
 import {FormBuilder, Validators} from '@angular/forms';
+import {MusicService} from '../../../service/music.service';
+import {IMusic} from '../../../interface/i-music';
 
 @Component({
   selector: 'app-query',
@@ -15,13 +17,15 @@ export class QueryComponent implements OnInit, OnChanges {
     searchInput: ['', Validators.required],
   });
 
+  songs: IMusic[];
+  private willShowResult: boolean;
+
   constructor(private fb: FormBuilder,
+              private songService: MusicService,
   ) {
   }
 
   ngOnInit() {
-    const timer$ = timer(2000, 5000);
-    timer$.subscribe();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -29,5 +33,17 @@ export class QueryComponent implements OnInit, OnChanges {
 
   get searchInput() {
     return this.form.get('searchInput');
+  }
+
+  onClick() {
+    console.log('onclick');
+  }
+
+  showResult() {
+    this.willShowResult = true;
+  }
+
+  hideResult() {
+    this.willShowResult = false;
   }
 }

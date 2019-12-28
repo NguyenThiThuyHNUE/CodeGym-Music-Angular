@@ -1,6 +1,7 @@
 <form [formGroup]="form">
-  <mat-form-field>
+  <mat-form-field (click)="showResult()">
     <input
+      (blur)="hideResult()"
       formControlName="searchInput"
       [(ngModel)]="searchValue"
       autocomplete="off"
@@ -9,6 +10,6 @@
   </mat-form-field>
   <button mat-button><i class="fas fa-search"></i></button>
 </form>
-<div *ngIf="searchValue && !searchInput.touched" class="query-result">
-  <app-result></app-result>
+<div *ngIf="searchValue && willShowResult" class="query-result">
+  <app-result [queryValue]="searchValue"></app-result>
 </div>
