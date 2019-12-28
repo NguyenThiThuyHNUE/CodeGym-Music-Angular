@@ -5,6 +5,7 @@ import {NewComponent} from './playlist/new/new.component';
 import {PlaylistService} from '../../../service/playlist.service';
 import {Playlist} from '../../../interface/playlist';
 import {SongsComponent} from '../music/songs/songs.component';
+import {PlaylistComponent} from './playlist/playlist.component';
 import {UserService} from '../../../service/user.service';
 import {User} from '../../../interface/user';
 
@@ -18,7 +19,10 @@ export class InfoComponent implements OnInit {
   playlists: Playlist[];
   userId = localStorage.getItem('id');
   user: User;
-
+  name: string;
+  email: string;
+  image: string;
+  password: string;
   constructor(public dialog: MatDialog,
               public userService: UserService,
               private playlistService: PlaylistService
@@ -66,6 +70,6 @@ export class InfoComponent implements OnInit {
     dialogConfig.width = '50%';
     dialogConfig.height = '70%';
     dialogConfig.data = playlistId;
-    this.dialog.open(SongsComponent, dialogConfig);
+    this.dialog.open(SongsComponent,PlaylistComponent, dialogConfig);
   }
 }
