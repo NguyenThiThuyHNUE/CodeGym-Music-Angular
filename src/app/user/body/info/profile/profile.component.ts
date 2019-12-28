@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {UserService} from '../../../../service/user.service';
 import {MatDialogRef} from '@angular/material';
@@ -11,7 +11,8 @@ import {Song} from '../../../../song';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'], encapsulation: ViewEncapsulation.None
+
 })
 export class ProfileComponent implements OnInit {
   name: string;
@@ -96,9 +97,13 @@ export class ProfileComponent implements OnInit {
     this.resetUpdateForm();
     location.reload();
   }
+  get
+  emailUpdate() {
+    return this.updateForm.get('emailUpdate');
+  }
 
   resetUpdateForm() {
     this.dialogRef.close();
   }
-
 }
+

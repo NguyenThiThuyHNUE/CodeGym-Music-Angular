@@ -11,9 +11,7 @@ import {NowPlayingComponent} from './detail/now-playing/now-playing.component';
 const routes: Routes = [
   {path: '', component: MusicComponent},
   {path: 'create', component: CreateComponent},
-  {
-    path: 'detail/:id', component: DetailComponent
-  },
+  {path: 'detail/:id', component: DetailComponent},
   {path: 'edit/:id', component: EditComponent},
   {path: 'delete/:id', component: DeleteComponent},
 

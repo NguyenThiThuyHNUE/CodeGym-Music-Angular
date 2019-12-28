@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ProfileComponent} from './profile/profile.component';
 import {UserService} from '../../../service/user.service';
+import {PlaylistComponent} from './playlist/playlist.component';
 
 @Component({
   selector: 'app-info',
@@ -31,5 +32,11 @@ export class InfoComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '40%';
     this.dialog.open(ProfileComponent, dialogConfig);
+  }
+
+  showPlaylistCreateForm() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '30%';
+    this.dialog.open(PlaylistComponent, dialogConfig);
   }
 }
