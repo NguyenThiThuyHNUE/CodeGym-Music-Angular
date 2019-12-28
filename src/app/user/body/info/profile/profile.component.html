@@ -3,15 +3,36 @@
     <mat-card>
       <form class="tp-form" [formGroup]="updateForm" (ngSubmit)="userUpdate()">
         <mat-card-content>
+          <!--  Name   -->
+          <div class="">
+            <mat-form-field appearance="fill" hideRequiredMarker class="tp-full-width">
+              <mat-label>Name</mat-label>
+              <input matInput type="text" formControlName="newName" email required value="{{name}}">
+              <mat-hint align="end" *ngIf="newName.invalid && (newName.dirty || newName.touched)">
+                <span class="text-danger" *ngIf="newName.errors.required">Name is required</span>
+              </mat-hint>
+            </mat-form-field>
+          </div>
+
+          <!--  Image  -->
+          <div class="">
+
+              <mat-label>Image</mat-label>
+              <input type="file" formControlName="newImage" email required (change)="onSelectFileAvatar($event)">
+              <div align="end" *ngIf="newImage.invalid && (newImage.dirty || newImage.touched)">
+                <span class="text-danger" *ngIf="newImage.errors.required">Name is required</span>
+              </div>
+
+          </div>
 
           <!--  Email   -->
           <div class="">
             <mat-form-field appearance="fill" hideRequiredMarker class="tp-full-width">
               <mat-label>Email</mat-label>
-              <input matInput type="email" formControlName="emailUpdate" email required>
-              <mat-hint align="end" *ngIf="emailUpdate.invalid && (emailUpdate.dirty || emailUpdate.touched)">
-                <span class="text-danger" *ngIf="emailUpdate.errors.required">Email is required</span>
-                <span class="text-danger" *ngIf="emailUpdate.errors.email">Email Format incorrectly</span>
+              <input matInput type="email" formControlName="newEmail" email required value="{{email}}">
+              <mat-hint align="end" *ngIf="newEmail.invalid && (newEmail.dirty || newEmail.touched)">
+                <span class="text-danger" *ngIf="newEmail.errors.required">Email is required</span>
+                <span class="text-danger" *ngIf="newEmail.errors.email">Email Format incorrectly</span>
               </mat-hint>
             </mat-form-field>
           </div>
@@ -20,9 +41,9 @@
           <div class="">
             <mat-form-field appearance="fill" class="tp-full-width">
               <mat-label>Password</mat-label>
-              <input type="password" matInput formControlName="passwordUpdate" required>
-              <mat-hint align="end" *ngIf="passwordUpdate.invalid && (passwordUpdate.dirty || passwordUpdate.touched)">
-                <span class="text-danger" *ngIf="passwordUpdate.errors.required">Password can not empty!!!</span>
+              <input type="password" matInput formControlName="newPassword" required>
+              <mat-hint align="end" *ngIf="newPassword.invalid && (newPassword.dirty || newPassword.touched)">
+                <span class="text-danger" *ngIf="newPassword.errors.required">Password can not empty!!!</span>
               </mat-hint>
             </mat-form-field>
           </div>
@@ -31,7 +52,7 @@
           <div class="">
             <mat-form-field appearance="fill" class="tp-full-width">
               <mat-label>Confirm Password</mat-label>
-              <input appConfirmEqualValidator="passwordUpdate" type="password" matInput formControlName="confirmPassword"
+              <input appConfirmEqualValidator="newPassword" type="password" matInput formControlName="confirmPassword"
                      required>
               <mat-hint align="end"
                         *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
@@ -44,7 +65,8 @@
           </div>
         </mat-card-content>
         <mat-card-actions align="end">
-          <button [disabled]="!updateForm.valid" type="submit" mat-button color="primary">
+          <button  type="submit" mat-button color="primary">
+<!--            [disabled]="!updateForm.valid"-->
             Update
           </button>
 
