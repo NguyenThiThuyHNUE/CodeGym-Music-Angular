@@ -44,7 +44,7 @@ export class UserService {
     }
   }
 
-  updateUser(userToken, updateInfo) {
-    return this.http.post(Url + `/api/update?token=${userToken}`, updateInfo);
+  updateUser(updateInfo) {
+    return this.http.post(Url + `/api/update?token=${localStorage.getItem('token')}`, updateInfo);
   }
 }

@@ -7,7 +7,7 @@
           <div class="">
             <mat-form-field appearance="fill" hideRequiredMarker class="tp-full-width">
               <mat-label>Name</mat-label>
-              <input matInput type="text" formControlName="newName" email required value="{{name}}">
+              <input matInput type="text" formControlName="newName" required value="{{name}}">
               <mat-hint align="end" *ngIf="newName.invalid && (newName.dirty || newName.touched)">
                 <span class="text-danger" *ngIf="newName.errors.required">Name is required</span>
               </mat-hint>
@@ -16,13 +16,8 @@
 
           <!--  Image  -->
           <div class="">
-
-              <mat-label>Image</mat-label>
-              <input type="file" formControlName="newImage" email required (change)="onSelectFileAvatar($event)">
-              <div align="end" *ngIf="newImage.invalid && (newImage.dirty || newImage.touched)">
-                <span class="text-danger" *ngIf="newImage.errors.required">Name is required</span>
-              </div>
-
+            <mat-label>Image</mat-label>
+            <input type="file" formControlName="newImage" (change)="onSelectFileImg($event)">
           </div>
 
           <!--  Email   -->
@@ -65,8 +60,7 @@
           </div>
         </mat-card-content>
         <mat-card-actions align="end">
-          <button  type="submit" mat-button color="primary">
-<!--            [disabled]="!updateForm.valid"-->
+          <button type="submit" mat-button color="primary">
             Update
           </button>
 

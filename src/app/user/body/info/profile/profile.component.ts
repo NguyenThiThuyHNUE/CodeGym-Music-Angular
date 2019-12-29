@@ -3,10 +3,10 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {UserService} from '../../../../service/user.service';
 import {MatDialogRef} from '@angular/material';
 import {SnotifyService} from 'ng-snotify';
-import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
-import {MusicService} from '../../../../service/music.service';
+import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
 import {Song} from '../../../../song';
+import {SongService} from '../../../../service/song.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,11 +15,11 @@ import {Song} from '../../../../song';
 
 })
 export class ProfileComponent implements OnInit {
-  name: string;
-  email: string;
-  selectFileImg: File = null;
-  uploadPercent: any;
-  updateForm = this.fb.group({
+  name = localStorage.getItem('name');  // Name to fill up form update
+  email = localStorage.getItem('email'); // Name to fill up form update
+  selectFileImg: File = null; // Catch event select Image
+  uploadPercent: any; // Show Percent While Upload
+  updateForm = this.fb.group({ // Form update
     id: localStorage.getItem('id'),
     newName: ['', [Validators.required]],
     newImage: ['', [Validators.required]],
@@ -27,37 +27,26 @@ export class ProfileComponent implements OnInit {
     newPassword: ['', [Validators.required]],
     confirmPassword: ['', [Validators.required]],
   });
+  private firePathImg: string;
+  private fireRefImg: AngularFireStorageReference;
+  private taskUploadImg: AngularFireUploadTask;
 
   constructor(private fb: FormBuilder,
               private dialogRef: MatDialogRef<ProfileComponent>,
               private angularFireStorage: AngularFireStorage,
               private Notify: SnotifyService,
               private userService: UserService,
-              private songService: MusicService,
-              private song: Song) {
+              private songService: SongService,
+  ) {
   }
 
-
   ngOnInit() {
-    this.getUserCredentialToFillUpFormUpdate();
   }
 
   userUpdate() {
-    const firePathImg = this.setUpPathToImgInFireBase();
-    const fireRefImg = this.setUpFileRefInFireBase(firePathImg);
-    const taskUploadImg = this.startUploadImageToFireBase(firePathImg);
-    this.getPercentWhileUploading(taskUploadImg);
-    taskUploadImg.snapshotChanges().pipe(
-      finalize(() => {
-        fireRefImg.getDownloadURL().subscribe((url) => {
-          this.updateForm.value.newImage = url;
-          this.userService.updateUser(localStorage.getItem('token'), this.updateForm.value)
-            .subscribe((response) => {
-              this.handleUpdateResponse(response);
-            });
-        });
-      })).subscribe();
-
+    this.setUpDataToUpdate();
+    this.getPercentWhileUploading(this.taskUploadImg);
+    this.getCallBackFromFireBase(this.taskUploadImg, this.fireRefImg);
   }
 
   onSelectFileImg(event) {
@@ -65,7 +54,7 @@ export class ProfileComponent implements OnInit {
   }
 
   handleUpdateResponse(res) {
-    this.Notify.success(res.message, 'Congratulations', {timeout: 3000});
+    this.notifyForUserThatIsUpdateInfoSuccess(res);
     this.resetUpdateForm();
     location.reload();
   }
@@ -73,7 +62,6 @@ export class ProfileComponent implements OnInit {
   resetUpdateForm() {
     this.dialogRef.close();
   }
-
 
   get newName() {
     return this.updateForm.get('newName');
@@ -107,13 +95,6 @@ export class ProfileComponent implements OnInit {
     this.Notify.success(`Login Success, Welcome ${response.name}`, 'Congratulations', {timeout: 3000});
   }
 
-  private getUserCredentialToFillUpFormUpdate() {
-    this.userService.getUserCredential()
-      .subscribe((response: any) => {
-        this.handleGetUserCredentialResponse(response);
-      });
-  }
-
   private setUpPathToImgInFireBase() {
     return `music/${this.selectFileImg.name}`;
   }
@@ -123,12 +104,47 @@ export class ProfileComponent implements OnInit {
   }
 
   private startUploadImageToFireBase(firePathImg) {
-    return this.songService.uploadAvatar(firePathImg, this.selectFileImg);
+    return this.songService.uploadImg(firePathImg, this.selectFileImg);
   }
 
   private getPercentWhileUploading(taskUploadImg: AngularFireUploadTask) {
     taskUploadImg.percentageChanges().subscribe(percent => {
       this.uploadPercent = percent;
     });
+  }
+
+  private getCallBackFromFireBase(taskUploadImg: AngularFireUploadTask, fireRefImg: AngularFireStorageReference) {
+    taskUploadImg.snapshotChanges().pipe(
+      finalize(() => {
+        this.getImgDownloadUrl(fireRefImg);
+      })).subscribe();
+  }
+
+  private getImgDownloadUrl(fireRefImg) {
+    fireRefImg.getDownloadURL().subscribe((url) => {
+      this.setUrlImgInUpdateForm(url);
+      this.startUpdateUserInfo();
+    });
+  }
+
+  private setUrlImgInUpdateForm(url) {
+    this.updateForm.value.newImage = url;
+  }
+
+  private startUpdateUserInfo() {
+    this.userService.updateUser(this.updateForm.value)
+      .subscribe((response) => {
+        this.handleUpdateResponse(response);
+      });
+  }
+
+  private notifyForUserThatIsUpdateInfoSuccess(res) {
+    this.Notify.success(res.message, 'Congratulations', {timeout: 3000});
+  }
+
+  private setUpDataToUpdate() {
+    this.firePathImg = this.setUpPathToImgInFireBase();
+    this.fireRefImg = this.setUpFileRefInFireBase(this.firePathImg);
+    this.taskUploadImg = this.startUploadImageToFireBase(this.firePathImg);
   }
 }

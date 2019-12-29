@@ -37,11 +37,17 @@ export class AuthComponent implements OnInit {
 
   handleResponse(response) {
     this.Notify.success(`Login Success, Welcome ${response.name}`, 'Congratulations', {timeout: 3000});
-    localStorage.setItem('id', response.id);
+    this.saveDataToLocalStorage(response);
     this.name = response.name;
   }
 
   handleResponseError() {
     localStorage.removeItem('token');
+  }
+
+  saveDataToLocalStorage(response: any) {
+    localStorage.setItem('id', response.id);
+    localStorage.setItem('name', response.name);
+    localStorage.setItem('email', response.email);
   }
 }
