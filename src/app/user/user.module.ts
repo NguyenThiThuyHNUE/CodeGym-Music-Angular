@@ -34,11 +34,12 @@ import {SongsComponent} from './body/music/songs/songs.component';
 import {MusicModule} from './body/music/music.module';
 import { QueryComponent } from './header/query/query.component';
 import { ResultComponent } from './header/query/result/result.component';
+import { HeartComponent } from './icon/heart/heart.component';
 
 @NgModule({
   declarations: [UserComponent, HeaderComponent, BodyComponent, LoginComponent, AuthComponent,
     FooterComponent, MainComponent, ConfirmEqualValidatorDirective,
-    InfoComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent, QueryComponent, ResultComponent,],
+    InfoComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent, QueryComponent, ResultComponent, HeartComponent,],
   entryComponents: [LoginComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent],
   providers: [
     {provide: 'SnotifyToastConfig', useValue: ToastDefaults},

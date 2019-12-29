@@ -17,19 +17,7 @@ import {EtcComponent} from './etc/etc.component';
 })
 export class MainComponent implements OnInit {
   songs: IMusic[];
-  inputSongId: number;
-  isRepeat = false;
-  musicList: {
-    data: any
-  };
-  isPlay = true;
-  showVolume = false;
-  // tslint:disable-next-line:max-line-length
-
-  musicSrc = 'https://firebasestorage.googleapis.com/v0/b/codegym-music-d1055.appspot.com/o/music%2FReal%20Friends%20-%20Camila%20Cabello%20(NhacPro.net).mp3?alt=media&token=b01da520-9303-4290-b551-e58dff7e0741';
-  startTime: any;
-  remainTime: any;
-  seekBarInner: any;
+  private inputSongId: any;
 
   constructor(private musicService: MusicService,
               public dialog: MatDialog,
@@ -44,11 +32,11 @@ export class MainComponent implements OnInit {
   getSongs() {
     return this.musicService.getMusics().subscribe(musics => {
       this.songs = musics.data;
+      console.log(this.songs);
     });
   }
 
   showEtc(songId) {
-    this.inputSongId = songId;
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = songId;
     this.dialog.open(EtcComponent, dialogConfig);
