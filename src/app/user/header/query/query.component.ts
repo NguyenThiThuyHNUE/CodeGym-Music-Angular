@@ -19,6 +19,7 @@ export class QueryComponent implements OnInit, OnChanges {
 
   songs: IMusic[];
   private willShowResult: boolean;
+  private isFocusInput: boolean;
 
   constructor(private fb: FormBuilder,
               private songService: MusicService,
@@ -45,5 +46,13 @@ export class QueryComponent implements OnInit, OnChanges {
 
   hideResult() {
     this.willShowResult = false;
+  }
+
+  unFocusInput() {
+    this.isFocusInput = false;
+  }
+
+  FocusInput() {
+    this.isFocusInput = true;
   }
 }

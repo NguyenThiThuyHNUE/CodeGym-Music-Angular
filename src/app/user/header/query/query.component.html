@@ -1,7 +1,7 @@
 <form [formGroup]="form">
-  <mat-form-field (click)="showResult()">
+  <mat-form-field (click)="FocusInput()">
     <input
-      (blur)="hideResult()"
+      (blur)="unFocusInput()"
       formControlName="searchInput"
       [(ngModel)]="searchValue"
       autocomplete="off"
@@ -10,6 +10,7 @@
   </mat-form-field>
   <button mat-button><i class="fas fa-search"></i></button>
 </form>
-<div *ngIf="searchValue && willShowResult" class="query-result">
+<div *ngIf="searchValue && (willShowResult || isFocusInput)" (mouseenter)="showResult()" (mouseleave)="hideResult()"
+     class="query-result">
   <app-result [queryValue]="searchValue"></app-result>
 </div>
