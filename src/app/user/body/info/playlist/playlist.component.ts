@@ -21,7 +21,12 @@ export class PlaylistComponent implements OnInit {
     namePlaylist: ['', Validators.required],
   });
 
-  userId: number = +localStorage.getItem('id');
+  data: {
+    userId: number,
+    playlistId: number,
+    songId: number
+  };
+  userId = +localStorage.getItem('id');
   playlists: Playlist[];
 
   constructor(
@@ -37,12 +42,9 @@ export class PlaylistComponent implements OnInit {
     this.getPlaylists();
   }
 
-  selectPlaylist(id: number) {
-    const order = {
-      playlistId: id,
-      songId: this.songId
-    };
-    this.playListService.putSongToPlaylist(order)
+  putSongToPlaylist(id: number) {
+    this.setUpDataToSendToServer(id);
+    this.playListService.putSongToPlaylist(this.data)
       .subscribe((response) => {
         this.handleAddSongToPlaylistResponse(response);
       });
@@ -51,7 +53,7 @@ export class PlaylistComponent implements OnInit {
   getPlaylists() {
     return this.playListService.getPlaylists(this.userId)
       .subscribe((response) => {
-        this.handleGetPlaylist(response);
+        this.handleGetPlaylistResponse(response);
       });
 
   }
@@ -67,10 +69,8 @@ export class PlaylistComponent implements OnInit {
     return this.createForm.get('namePlaylist');
   }
 
-
   handleAddSongToPlaylistResponse(response) {
     this.Notify.success(response.message, 'Add Song To Playlist', {timeout: 3000});
-
   }
 
   private handleResponse(response: IMessage) {
@@ -88,9 +88,13 @@ export class PlaylistComponent implements OnInit {
     this.dialog.open(NewComponent, dialogConfig);
   }
 
-  private handleGetPlaylist(response) {
+  private handleGetPlaylistResponse(response) {
     return this.playlists = response.data;
   }
 
-
+  private setUpDataToSendToServer(id: number) {
+    this.data.userId = this.userId;
+    this.data.playlistId = id;
+    this.data.songId = this.songId;
+  }
 }

@@ -12,7 +12,7 @@
   <mat-card-content>
     <mat-list>
       <mat-list-item *ngFor="let playlist of playlists">
-        <button mat-button (click)="selectPlaylist(playlist.id)">{{playlist.namePlaylist}}</button>
+        <button mat-button (click)="putSongToPlaylist(playlist.id)">{{playlist.namePlaylist}}</button>
       </mat-list-item>
     </mat-list>
   </mat-card-content>
