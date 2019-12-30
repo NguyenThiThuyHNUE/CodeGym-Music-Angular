@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {SongService} from '../../../service/song.service';
 import {SnotifyService} from 'ng-snotify';
-import {IMusic} from '../../../interface/i-music';
 
 @Component({
   selector: 'app-heart',
@@ -22,8 +21,7 @@ export class HeartComponent implements OnInit {
 
   clickOnIcon() {
     this.changeColorInInterface();
-    console.log(this.isLike);
-    // this.changeDataInServer();
+    this.changeDataInServer();
   }
 
   private checkIconIsLikeOrUnlike() {
@@ -48,8 +46,9 @@ export class HeartComponent implements OnInit {
   private changeDataInServer() {
     if (this.checkIconIsLikeOrUnlike()) {
       this.changeDataInToLike();
+    } else {
+      this.changeDataInToDisLike();
     }
-    this.changeDataInToDisLike();
   }
 
   private handleResponse(response) {
@@ -60,12 +59,20 @@ export class HeartComponent implements OnInit {
     this.Notify.success('Like a Song', {timeout: 3000});
   }
 
-  private handleError(error: any) {
-    this.notifyForUserThatIsSomeThingWrongHappen();
+  private handleDisLikeError(error: any) {
+    this.notifyForUserThatDisLikeIsSomeThingWrongHappen();
   }
 
-  private notifyForUserThatIsSomeThingWrongHappen() {
-    this.Notify.error('Some Thing Wrong Was Happened, Please Try Again Later', {timeout: 3000});
+  private handleLikeError(error: any) {
+    this.notifyForUserThatLikeIsSomeThingWrongHappen();
+  }
+
+  private notifyForUserThatLikeIsSomeThingWrongHappen() {
+    this.Notify.error(`Song id ${this.songId} Some Thing Wrong Was Happened When you like a song`, {timeout: 3000});
+  }
+
+  private notifyForUserThatDisLikeIsSomeThingWrongHappen() {
+    this.Notify.error(`Song id ${this.songId} Some Thing Wrong Was Happened When you dislike a song`, {timeout: 3000});
   }
 
   private changeDataInToLike() {
@@ -73,7 +80,7 @@ export class HeartComponent implements OnInit {
         this.handleResponse(response);
       },
       (error) => {
-        this.handleError(error);
+        this.handleLikeError(error);
       });
   }
 
@@ -82,7 +89,7 @@ export class HeartComponent implements OnInit {
         this.handleDisLikeResponse();
       },
       (error) => {
-        this.handleError(error);
+        this.handleDisLikeError(error);
       });
   }
 
