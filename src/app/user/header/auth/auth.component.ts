@@ -49,5 +49,6 @@ export class AuthComponent implements OnInit {
     localStorage.setItem('id', response.id);
     localStorage.setItem('name', response.name);
     localStorage.setItem('email', response.email);
+    localStorage.setItem('image', response.image);
   }
 }

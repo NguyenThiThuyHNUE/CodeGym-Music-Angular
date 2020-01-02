@@ -1,14 +1,10 @@
 import {Component, NgZone, OnInit} from '@angular/core';
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
-import {ProfileComponent} from './profile/profile.component';
-import {NewComponent} from './playlist/new/new.component';
+import {MatDialog} from '@angular/material/dialog';
 import {PlaylistService} from '../../../service/playlist.service';
 import {Playlist} from '../../../interface/playlist';
-import {SongsComponent} from '../music/songs/songs.component';
-import {PlaylistComponent} from './playlist/playlist.component';
-import {UserService} from '../../../service/user.service';
 import {User} from '../../../interface/user';
-import {Observable, timer} from 'rxjs';
+import {timer} from 'rxjs';
+import {InfoService} from '../../../service/info.service';
 
 @Component({
   selector: 'app-info',
@@ -18,14 +14,13 @@ import {Observable, timer} from 'rxjs';
 export class InfoComponent implements OnInit {
 
   playlists: Playlist[];
-  userId: number;
   user: User;
   playlist: Playlist;
 
   constructor(public dialog: MatDialog,
               private zone: NgZone,
-              public userService: UserService,
-              private playlistService: PlaylistService
+              private playlistService: PlaylistService,
+              private infoService: InfoService
   ) {
     if (!this.user) {
       this.user = {};
@@ -33,25 +28,26 @@ export class InfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getUserId();
+    this.getUserCredentialForUpdate();
     this.getPlaylists();
     this.updatePlaylistAfterFiveSecond();
-    this.getUserCredentialForUpdate();
   }
 
   showFormUpdate() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '40%';
-    this.dialog.open(ProfileComponent, dialogConfig);
+    this.infoService.showFormUpdate();
   }
 
   showPlaylistCreateForm() {
-    const dialogConfig = new MatDialogConfig();
-    this.dialog.open(NewComponent, dialogConfig);
+    this.infoService.showPlaylistCreateForm();
+  }
+
+
+  showSongsInPlaylist(playlistId) {
+    this.infoService.showSongsInPlaylist(playlistId, this.playlists);
   }
 
   getPlaylists() {
-    this.playlistService.getPlaylists(this.userId).subscribe((response) => {
+    this.playlistService.getPlaylists(this.user.id).subscribe((response) => {
       this.zone.run(() => {
         this.handleGetPlaylistsResponse(response);
       });
@@ -62,42 +58,15 @@ export class InfoComponent implements OnInit {
     return this.playlists = response.data;
   }
 
-  showSongsInPlaylist(playlistId) {
-    const playlist = this.getPlaylistPassToChildrenComponent(playlistId);
-    const playlistName = this.getNamePlaylist(playlist);
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '50%';
-    dialogConfig.height = '70%';
-    dialogConfig.data = {playlistId, playlistName};
-    this.openSongDiaLog(dialogConfig);
-  }
-
   private updatePlaylistAfterFiveSecond() {
     const timer$ = timer(2000, 5000);
     timer$.subscribe(() => this.getPlaylists());
   }
 
   private getUserCredentialForUpdate() {
-    this.userService.getUserCredential()
-      .subscribe((data: any) => {
-        localStorage.setItem('id', data.id);
-        this.user = data;
-      });
-  }
-
-  private getPlaylistPassToChildrenComponent(playlistId: any) {
-    return this.playlists.find(playlist => playlist.id === playlistId);
-  }
-
-  public getNamePlaylist(playlist) {
-    return playlist.namePlaylist;
-  }
-
-  private openSongDiaLog(dialogConfig) {
-    this.dialog.open(SongsComponent, dialogConfig);
-  }
-
-  private getUserId() {
-    this.userId = +localStorage.getItem('id');
+    this.user.id = +localStorage.getItem('id');
+    this.user.email = localStorage.getItem('email');
+    this.user.name = localStorage.getItem('name');
+    this.user.image = localStorage.getItem('image');
   }
 }
