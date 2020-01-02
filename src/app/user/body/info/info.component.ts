@@ -5,6 +5,7 @@ import {Playlist} from '../../../interface/playlist';
 import {User} from '../../../interface/user';
 import {timer} from 'rxjs';
 import {InfoService} from '../../../service/info.service';
+import {UserService} from '../../../service/user.service';
 
 @Component({
   selector: 'app-info',
@@ -20,7 +21,7 @@ export class InfoComponent implements OnInit {
   constructor(public dialog: MatDialog,
               private zone: NgZone,
               private playlistService: PlaylistService,
-              private infoService: InfoService
+              private infoService: InfoService,
   ) {
     if (!this.user) {
       this.user = {};
@@ -28,7 +29,7 @@ export class InfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getUserCredentialForUpdate();
+    this.getUserCredentialToFillUpInterface();
     this.getPlaylists();
     this.updatePlaylistAfterFiveSecond();
   }
@@ -60,13 +61,16 @@ export class InfoComponent implements OnInit {
 
   private updatePlaylistAfterFiveSecond() {
     const timer$ = timer(2000, 5000);
-    timer$.subscribe(() => this.getPlaylists());
+    timer$.subscribe(() => {
+      this.getUserCredentialToFillUpInterface();
+      this.getPlaylists();
+    });
   }
 
-  private getUserCredentialForUpdate() {
-    this.user.id = +localStorage.getItem('id');
-    this.user.email = localStorage.getItem('email');
-    this.user.name = localStorage.getItem('name');
-    this.user.image = localStorage.getItem('image');
+  private getUserCredentialToFillUpInterface() {
+    this.user.id = UserService.getUserId();
+    this.user.email = UserService.getUserEmail();
+    this.user.name = UserService.getUserName();
+    this.user.image = UserService.getUserImage();
   }
 }

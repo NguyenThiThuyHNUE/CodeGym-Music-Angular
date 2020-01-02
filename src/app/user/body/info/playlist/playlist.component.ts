@@ -3,10 +3,9 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {PlaylistService} from '../../../../service/playlist.service';
 import {IMessage} from '../../../../interface/i-message';
 import {SnotifyService} from 'ng-snotify';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {NewComponent} from './new/new.component';
+import {MAT_DIALOG_DATA} from '@angular/material';
 import {Playlist} from '../../../../interface/playlist';
+import {UserService} from '../../../../service/user.service';
 
 @Component({
   selector: 'app-playlist',
@@ -17,41 +16,35 @@ import {Playlist} from '../../../../interface/playlist';
 })
 export class PlaylistComponent implements OnInit {
   createForm = this.fb.group({
-    user_id: localStorage.getItem('id'),
+    user_id: UserService.getUserId(),
     namePlaylist: ['', Validators.required],
   });
 
-  data: {
-    userId: number,
-    playlistId: number,
-    songId: number
-  };
-  userId = +localStorage.getItem('id');
+  userId: number;
   playlists: Playlist[];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public songId: any,
     private fb: FormBuilder,
     private Notify: SnotifyService,
-    public dialog: MatDialog,
-    private dialogRefPlaylist: MatDialogRef<PlaylistComponent>,
     private playListService: PlaylistService) {
   }
 
   ngOnInit() {
+    this.setUserId();
     this.getPlaylists();
   }
 
-  putSongToPlaylist(id: number) {
-    this.setUpDataToSendToServer(id);
-    this.playListService.putSongToPlaylist(this.data)
+  putSongToPlaylist(playlistId: number) {
+    this.playListService.setUpDataSongToPutToPlaylist(playlistId, this.songId);
+    this.playListService.putSongToPlaylist()
       .subscribe((response) => {
         this.handleAddSongToPlaylistResponse(response);
       });
   }
 
   getPlaylists() {
-    return this.playListService.getPlaylists(this.userId)
+    this.playListService.getPlaylists(this.userId)
       .subscribe((response) => {
         this.handleGetPlaylistResponse(response);
       });
@@ -59,7 +52,7 @@ export class PlaylistComponent implements OnInit {
   }
 
   createPlaylist() {
-    return this.playListService.createPlaylist(this.createForm.value)
+    this.playListService.createPlaylist(this.createForm.value)
       .subscribe((response) => {
         this.handleResponse(response);
       });
@@ -75,26 +68,18 @@ export class PlaylistComponent implements OnInit {
 
   private handleResponse(response: IMessage) {
     this.Notify.success(`${response.message}`, 'Congratulations', {timeout: 5000});
-    this.resetForm();
-  }
-
-  private resetForm() {
-    return this.dialogRefPlaylist.close();
+    this.playListService.resetForm();
   }
 
   newPlaylist() {
-    this.dialogRefPlaylist.close();
-    const dialogConfig = new MatDialogConfig();
-    this.dialog.open(NewComponent, dialogConfig);
+   this.playListService.showFormCreatePlaylist();
   }
 
   private handleGetPlaylistResponse(response) {
     return this.playlists = response.data;
   }
 
-  private setUpDataToSendToServer(id: number) {
-    this.data.userId = this.userId;
-    this.data.playlistId = id;
-    this.data.songId = this.songId;
+  private setUserId() {
+    this.userId = UserService.getUserId();
   }
 }

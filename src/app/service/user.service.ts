@@ -14,6 +14,22 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
+  static getUserName() {
+    return localStorage.getItem('name');
+  }
+
+  static getUserEmail() {
+   return  localStorage.getItem('email');
+  }
+
+  static getUserId() {
+   return  +localStorage.getItem('id');
+  }
+
+  static getUserImage() {
+   return  localStorage.getItem('image');
+  }
+
   userRegister(info) {
     return this.http.post<IUserResponse>(Url + '/api/register', info);
   }
