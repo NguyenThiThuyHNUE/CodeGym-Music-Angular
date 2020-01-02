@@ -11,11 +11,9 @@ import {NowPlayingComponent} from './detail/now-playing/now-playing.component';
 const routes: Routes = [
   {path: '', component: MusicComponent},
   {path: 'create', component: CreateComponent, canActivate: [AuthGuard]},
-  {
-    path: 'detail/:id', component: DetailComponent
-  },
-  {path: 'edit/:id', component: EditComponent, canActivate: [AuthGuard]},
-  {path: 'delete/:id', component: DeleteComponent, canActivate: [AuthGuard]},
+  {path: 'detail/:id', component: DetailComponent},
+  {path: 'edit/:id', component: EditComponent},
+  {path: 'delete/:id', component: DeleteComponent},
 
 ];
 
