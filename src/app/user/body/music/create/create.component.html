@@ -70,8 +70,17 @@
                 File mp3 không được để trống !
               </div>
             </div>
-            <mat-progress-bar mode="determinate" value="{{uploadPercentMp3}}"></mat-progress-bar>
+            <hr>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75"
+                   aria-valuemin="0" aria-valuemax="100" style=""><b>{{uploadPercentMp3}}%</b></div>
+              <mat-progress-bar mode="determinate" value="{{uploadPercentMp3}}"></mat-progress-bar>
+            </div>
+
           </div>
+
+
+
           <button type="submit" class="btn btn-primary" [disabled]="!addMusicForm.valid">+ UpLoad</button>
           <button class="btn btn-danger ml-2" routerLink="/home">Cancel</button>
         </form>

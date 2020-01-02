@@ -1,8 +1,8 @@
 <div class="row" style="margin-bottom: 3rem">
   <div class="col-md-12">
     <div class="row" style="height: 430px;">
-      <div class="col-md-6 npl-image">
-        <img src="../../../../../../assets/img/bg-img/s1.jpg" alt="">
+      <div class="col-lg-6 mt-5">
+        <img src="{{song.avatar}}}" alt="" class="image-music-now-playing">
       </div>
 
       <div class="col-md-6 npl-playlist">
@@ -15,71 +15,40 @@
             <span>Icon</span>
           </div>
         </div>
-
-        <div class="row">
-          <div class="album-all-songs">
-            <div class="col-md-12">
-              <div class="row mb-1 song-item">
-                <img class="thumb" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
-                <div class="col-md-8">
-                  <h6>Song Name</h6>
-                  <span>Singer Name</span>
-                </div>
+        <div class="album-all-songs">
+          <!-- Music Playlist -->
+          <div class="mb-1 song-item" *ngFor="let song of songs">
+            <div class="row">
+              <div class="col-lg-2">
+                <a routerLink="/home/music/detail/{{song.id}}"><img class="thumb" src="{{song.avatar}}}" alt=""></a>
               </div>
-              <div class="row mb-1 song-item">
-                <img class="thumb" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
-                <div class="col-md-8">
-                  <h6>Song Name</h6>
-                  <span>Singer Name</span>
-                </div>
+              <div class="col-lg-8 mt-3">
+                <a routerLink="/home/music/detail/{{song.id}}"><h6>{{song.name}}-{{song.singer}}</h6></a>
               </div>
-              <div class="row mb-1 song-item">
-                <img class="thumb" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
-                <div class="col-md-8">
-                  <h6>Song Name</h6>
-                  <span>Singer Name</span>
-                </div>
-              </div>
-              <div class="row mb-1 song-item">
-                <img class="thumb" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
-                <div class="col-md-8">
-                  <h6>Song Name</h6>
-                  <span>Singer Name</span>
-                </div>
-              </div>
-              <div class="row mb-1 song-item">
-                <img class="thumb" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
-                <div class="col-md-8">
-                  <h6>Song Name</h6>
-                  <span>Singer Name</span>
-                </div>
-              </div>
-              <div class="row mb-1 song-item">
-                <img class="thumb" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
-                <div class="col-md-8">
-                  <h6>Song Name</h6>
-                  <span>Singer Name</span>
-                </div>
-              </div>
-              <div class="row mb-1 song-item">
-                <img class="thumb" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
-                <div class="col-md-8">
-                  <h6>Song Name</h6>
-                  <span>Singer Name</span>
-                </div>
-              </div>
-              <div class="row mb-1 song-item">
-                <img class="thumb" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
-                <div class="col-md-8">
-                  <h6>Song Name</h6>
-                  <span>Singer Name</span>
-                </div>
-              </div>
-              <div class="row mb-1 song-item">
-                <img class="thumb" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
-                <div class="col-md-8">
-                  <h6>Song Name</h6>
-                  <span>Singer Name</span>
+              <div class="col-lg-2 mt-2 d-flex">
+                <div class="dropdown mr-1">
+                  <a class="dropdown-toggle" id="dropdownMenuOffset"
+                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset" style="background: #655177">
+                    <tr class="mt-2">
+                      <td class="">
+                        <a routerLink="/home/music/edit/{{song.id}}" class="dropdown-item">
+                      <span class="fa-stack">
+                      <i class="fa fa-pencil fa-stack-1x fa-inverse" style="color: #000000"></i>
+                      </span>
+                        </a>
+                      </td>
+                      <td class="">
+                        <a routerLink="/home/music/delete/{{song.id}}" class="table-link danger dropdown-item"
+                           (click)="onClick(song.id)">
+                      <span class="fa-stack">
+                      <i class="fa fa-trash-o fa-stack-1x fa-inverse" style="color: red"></i>
+                      </span>
+                        </a>
+                      </td>
+                    </tr>
+                  </div>
                 </div>
               </div>
             </div>
@@ -87,7 +56,6 @@
         </div>
       </div>
     </div>
-
     <div class="row">
       <div style="" class="now-playing">
         <div class="control-box">
@@ -99,8 +67,8 @@
         </div>
 
         <div class="info">
-          <div class="audioName">
-            Music Name
+          <div class="audioName mt-2">
+            <span style="color: white"> {{song.name}}</span>
           </div>
           <div class="seekBar">
             <mat-slider (change)="scrollTime($event)" class="mat-outer" min="1" max="{{audio.getDuration()}}"

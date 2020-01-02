@@ -18,7 +18,7 @@ export class MusicService {
   getMusicUrl = `http://${webBackEndUrl}/api/musics/`;
   createMusicUrl = `http://${webBackEndUrl}/api/music/create/`;
   editMusicUrl = `http://${webBackEndUrl}/api/music/edit/`;
-  deleteMusicUrl = `http://${webBackEndUrl}/api/music/delete/}`;
+  deleteMusicUrl = `http://${webBackEndUrl}/api/music/delete/`;
   music: AngularFireList<any>;
 
   constructor(private angularFireDatabase: AngularFireDatabase,
