@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, OnChanges, SimpleChanges} from '@angular/core';
 import {IMusic} from '../../../../../interface/i-music';
 import {MusicService} from '../../../../../service/music.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Event, NavigationEnd, Router} from '@angular/router';
 import {AudioService} from '../../../../../service/audio.service';
 import {timer} from 'rxjs';
 
@@ -22,16 +22,40 @@ export class NowPlayingComponent implements OnInit, OnChanges {
   isRepeat = false;
   isPlay = true;
   pageLoad = 0;
+  song: IMusic;
+  songs: IMusic[];
+  idSong: number = +this.activatedRoute.snapshot.paramMap.get('id');
 
   constructor(private musicService: MusicService,
               private audio: AudioService,
               private activatedRoute: ActivatedRoute,
+              private router: Router
   ) {
   }
 
   ngOnInit() {
-
+    this.musicService.getMusics().subscribe(songs => {
+      this.songs = songs.data;
+      this.song = songs.data.find(song => song.id === this.idSong);
+    });
+    this.getCurrentUrl();
   }
+
+  getCurrentUrl() {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        this.idSong = +this.activatedRoute.snapshot.paramMap.get('id');
+        this.getMusics();
+      }
+    });
+  }
+
+  getMusics() {
+    this.musicService.getMusics().subscribe(songs => {
+      this.song = songs.data.find(song => song.id === this.idSong);
+    });
+  }
+
 
   ngOnChanges(changes: SimpleChanges): void {
     this.getCurrentSong();
@@ -120,5 +144,15 @@ export class NowPlayingComponent implements OnInit, OnChanges {
         this.isPlay = true;
       }
     });
+  }
+
+  onClick(idSong) {
+    if (confirm('Delete ! Are You Sure ?') === true) {
+      return this.musicService.deleteMusic(idSong).subscribe(response => {
+        this.router.navigate([`/home/music/detail/${this.idSong}`]).then(() => alert(response.message));
+      });
+    } else {
+      this.router.navigate([`/home/music/detail/${this.idSong}`]).then();
+    }
   }
 }

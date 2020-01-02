@@ -10,40 +10,36 @@ import {IMusic} from '../../../../interface/i-music';
 })
 export class DetailComponent implements OnInit {
 
-  musicDetail: IMusic;
-  musicList: IMusic[];
-  idMusic: number = +this.activatedRoute.snapshot.paramMap.get('id');
+  song: IMusic;
+  songs: IMusic[];
+  idSong: number = +this.activatedRoute.snapshot.paramMap.get('id');
+
 
   constructor(private musicService: MusicService,
               private activatedRoute: ActivatedRoute,
               private router: Router) {
-    // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-
   }
 
   ngOnInit() {
-    this.musicService.getMusics().subscribe(musics => {
-      this.musicList = musics.data;
-      this.musicDetail = musics.data.find(music => music.id === this.idMusic);
+    this.musicService.getMusics().subscribe(songs => {
+      this.songs = songs.data;
+      this.song = songs.data.find(song => song.id === this.idSong);
     });
-    // this.musicService.getMusics().subscribe(musics => {
-    //   this.musicList = musics.data;
-    // });
     this.getCurrentUrl();
   }
 
   getCurrentUrl() {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
-        this.idMusic = +this.activatedRoute.snapshot.paramMap.get('id');
+        this.idSong = +this.activatedRoute.snapshot.paramMap.get('id');
         this.getMusics();
       }
     });
   }
 
   getMusics() {
-    this.musicService.getMusics().subscribe(musics => {
-      this.musicDetail = musics.data.find(music => music.id === this.idMusic);
+    this.musicService.getMusics().subscribe(songs => {
+      this.song = songs.data.find(song => song.id === this.idSong);
     });
   }
 }
