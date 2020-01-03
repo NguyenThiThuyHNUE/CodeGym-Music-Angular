@@ -10,7 +10,6 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {Song} from './song';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
-import {ConfirmEqualValidatorDirective} from './directive/confirm-equal-validator.directive';
 import {SocialLoginModule, AuthServiceConfig} from 'angularx-social-login';
 import {GoogleLoginProvider, FacebookLoginProvider} from 'angularx-social-login';
 import {UserModule} from './user/user.module';
