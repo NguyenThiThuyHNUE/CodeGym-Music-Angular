@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {PlaylistService} from '../../../../service/playlist.service';
-import {IMessage} from '../../../../interface/i-message';
 import {SnotifyService} from 'ng-snotify';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {Playlist} from '../../../../interface/playlist';
@@ -35,7 +34,7 @@ export class PlaylistComponent implements OnInit {
     this.getPlaylists();
   }
 
-  putSongToPlaylist(playlistId: number) {
+  putSongToPlaylist(playlistId) {
     this.playListService.setUpDataSongToPutToPlaylist(playlistId, this.songId);
     this.playListService.putSongToPlaylist()
       .subscribe((response) => {
@@ -63,16 +62,16 @@ export class PlaylistComponent implements OnInit {
   }
 
   handleAddSongToPlaylistResponse(response) {
-    this.Notify.success(response.message, 'Add Song To Playlist', {timeout: 3000});
+    this.Notify.success(`${response.message}`, 'Congratulations', {timeout: 1000});
   }
 
-  private handleResponse(response: IMessage) {
-    this.Notify.success(`${response.message}`, 'Congratulations', {timeout: 5000});
-    this.playListService.resetForm();
+  private handleResponse(response) {
+    this.Notify.success(`${response.message}`, 'Congratulations', {timeout: 1000});
+    this.playListService.closePlaylist();
   }
 
   newPlaylist() {
-   this.playListService.showFormCreatePlaylist();
+    this.playListService.showFormCreatePlaylist();
   }
 
   private handleGetPlaylistResponse(response) {

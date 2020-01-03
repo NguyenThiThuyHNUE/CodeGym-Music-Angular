@@ -1,26 +1,30 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {IUserResponse} from '../interface/i-user-response';
 import {Url} from '../../../url-project';
-import {IMessage} from '../interface/i-message';
 import {SongResponse} from '../interface/song-response';
 import {SongData} from '../interface/song-data';
 import {UserService} from './user.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {NewComponent} from '../user/body/info/playlist/new/new.component';
 import {MatDialogRef} from '@angular/material';
+import {NewComponent} from '../user/body/info/playlist/new/new.component';
 import {PlaylistComponent} from '../user/body/info/playlist/playlist.component';
+import {Response} from '../interface/response';
+import {SnotifyService} from 'ng-snotify';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlaylistService {
-  private data: SongData;
+  data: SongData;
 
   constructor(private http: HttpClient,
               public dialog: MatDialog,
+              private Notify: SnotifyService,
               private dialogRefPlaylist: MatDialogRef<PlaylistComponent>
   ) {
+    if (!this.data) {
+      this.data = {};
+    }
   }
 
   getPlaylists(userId) {
@@ -28,7 +32,7 @@ export class PlaylistService {
   }
 
   createPlaylist(info) {
-    return this.http.post<IMessage>(Url + '/api/playlist/create', info);
+    return this.http.post<Response>(Url + '/api/playlist/create', info);
   }
 
   updatePlaylist(playlistId, data) {
@@ -44,8 +48,8 @@ export class PlaylistService {
   }
 
   setUpDataSongToPutToPlaylist(playlistId, songId) {
-    this.data.userId = UserService.getUserId();
     this.data.playlistId = playlistId;
+    this.data.userId = UserService.getUserId();
     this.data.songId = songId;
   }
 
@@ -54,7 +58,16 @@ export class PlaylistService {
     const dialogConfig = new MatDialogConfig();
     this.dialog.open(NewComponent, dialogConfig);
   }
-  resetForm() {
-    return this.dialogRefPlaylist.close();
+
+  closePlaylist() {
+    this.dialogRefPlaylist.close();
+  }
+
+  showPlaylist() {
+    this.dialog.open(PlaylistComponent);
+  }
+
+  notifySuccess(message) {
+    this.Notify.success(`${message}`, 'Congratulations', {timeout: 1000});
   }
 }
