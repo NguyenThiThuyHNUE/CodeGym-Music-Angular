@@ -32,12 +32,13 @@ import {EtcComponent} from './body/main/etc/etc.component';
 import {NewComponent} from './body/info/playlist/new/new.component';
 import {SongsComponent} from './body/music/songs/songs.component';
 import {MusicModule} from './body/music/music.module';
+import {SingerModule} from './body/singer/singer.module';
 
 
 @NgModule({
   declarations: [UserComponent, HeaderComponent, BodyComponent, LoginComponent, AuthComponent,
     FooterComponent, MainComponent, ConfirmEqualValidatorDirective,
-    InfoComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent,],
+    InfoComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent],
   entryComponents: [LoginComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent],
 
   providers: [
@@ -57,6 +58,7 @@ import {MusicModule} from './body/music/music.module';
     UserRoutingModule,
     MatListModule,
     MusicModule,
+    SingerModule,
     MatProgressBarModule,
     SnotifyModule,
     MatExpansionModule,

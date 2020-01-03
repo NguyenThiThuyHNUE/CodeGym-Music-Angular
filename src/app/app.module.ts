@@ -13,6 +13,9 @@ import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 import {ConfirmEqualValidatorDirective} from './directive/confirm-equal-validator.directive';
 import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
+import {SingerComponent} from './user/body/singer/singer.component';
+import { SingerRoutingModule } from './user/body/singer/singer-routing.module';
+
 
 const config = new AuthServiceConfig([
   {
@@ -42,7 +45,8 @@ export function provideConfig() {
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    SocialLoginModule
+    SocialLoginModule,
+    SingerRoutingModule
   ],
   exports: [],
   bootstrap: [AppComponent]
