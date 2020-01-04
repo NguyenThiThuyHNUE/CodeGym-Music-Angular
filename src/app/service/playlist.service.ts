@@ -30,7 +30,6 @@ export class PlaylistService {
   getPlaylists(userId) {
     return this.http.get(Url + `/api/playlists/${userId}`);
   }
-
   createPlaylist(info) {
     return this.http.post<Response>(Url + '/api/playlist/create', info);
   }
@@ -65,9 +64,5 @@ export class PlaylistService {
 
   showPlaylist() {
     this.dialog.open(PlaylistComponent);
-  }
-
-  notifySuccess(message) {
-    this.Notify.success(`${message}`, 'Congratulations', {timeout: 1000});
   }
 }

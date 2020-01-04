@@ -11,7 +11,7 @@ import {environment} from '../environments/environment';
 import {Song} from './song';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 import {SocialLoginModule, AuthServiceConfig} from 'angularx-social-login';
-import {GoogleLoginProvider, FacebookLoginProvider} from 'angularx-social-login';
+import {FacebookLoginProvider} from 'angularx-social-login';
 import {UserModule} from './user/user.module';
 
 const config = new AuthServiceConfig([
