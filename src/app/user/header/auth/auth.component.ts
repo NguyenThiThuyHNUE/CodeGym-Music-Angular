@@ -21,10 +21,7 @@ export class AuthComponent implements OnInit {
   }
 
   ngOnInit() {
-    return this.user.getUserCredential()
-      .subscribe((response: any) => {
-        this.handleResponse(response);
-      }, (error) => this.handleResponseError());
+    this.getUserCredential();
   }
 
   logout() {
@@ -38,7 +35,7 @@ export class AuthComponent implements OnInit {
   handleResponse(response) {
     this.Notify.success(`Login Success, Welcome ${response.name}`, 'Congratulations', {timeout: 3000});
     this.saveDataToLocalStorage(response);
-    this.name = response.name;
+    this.setUserName();
   }
 
   handleResponseError() {
@@ -50,5 +47,20 @@ export class AuthComponent implements OnInit {
     localStorage.setItem('name', response.name);
     localStorage.setItem('email', response.email);
     localStorage.setItem('image', response.image);
+  }
+
+  private getUserCredential() {
+    if (!this.user.isLoggedIn()) {
+      return this.user.getUserCredential()
+        .subscribe((response: any) => {
+          this.handleResponse(response);
+        }, (error) => this.handleResponseError());
+    }
+    return this.setUserName();
+
+  }
+
+  private setUserName() {
+    this.name = UserService.getUserName();
   }
 }
