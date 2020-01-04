@@ -25,10 +25,11 @@ export class AuthComponent implements OnInit {
   }
 
   logout() {
-    this.user.getUserCredential()
-      .subscribe((data: any) => {
-        this.Notify.success(`Logout Success, Goodbye ${data.name}`, 'Congratulations', {timeout: 3000});
-      });
+    // this.user.getUserCredential()
+    //   .subscribe((data: any) => {
+    //     this.Notify.success(`Logout Success, Goodbye ${data.name}`, 'Congratulations', {timeout: 3000});
+    //   });
+    this.Notify.success(`Logout Success, Goodbye ${this.name}`, 'Congratulations', {timeout: 3000});
     this.user.logout();
   }
 
@@ -39,25 +40,25 @@ export class AuthComponent implements OnInit {
   }
 
   handleResponseError() {
-    localStorage.removeItem('token');
+    this.user.logout();
   }
 
   saveDataToLocalStorage(response: any) {
-    localStorage.setItem('id', response.id);
-    localStorage.setItem('name', response.name);
-    localStorage.setItem('email', response.email);
-    localStorage.setItem('image', response.image);
+    this.user.saveDataToLocalStorage(response);
   }
 
   private getUserCredential() {
-    if (!this.user.isLoggedIn()) {
+    if (this.checkTokenOrUserIdExist()) {
       return this.user.getUserCredential()
         .subscribe((response: any) => {
           this.handleResponse(response);
         }, (error) => this.handleResponseError());
     }
     return this.setUserName();
+  }
 
+  private checkTokenOrUserIdExist() {
+    return !this.user.isLoggedIn() || !UserService.getUserId();
   }
 
   private setUserName() {

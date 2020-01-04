@@ -19,15 +19,15 @@ export class UserService {
   }
 
   static getUserEmail() {
-   return  localStorage.getItem('email');
+    return localStorage.getItem('email');
   }
 
   static getUserId() {
-   return  +localStorage.getItem('id');
+    return +localStorage.getItem('id');
   }
 
   static getUserImage() {
-   return  localStorage.getItem('image');
+    return localStorage.getItem('image');
   }
 
   userRegister(info) {
@@ -44,6 +44,10 @@ export class UserService {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('id');
+    localStorage.removeItem('email');
+    localStorage.removeItem('name');
+    localStorage.removeItem('image');
   }
 
   isLoggedIn() {
@@ -62,5 +66,17 @@ export class UserService {
 
   updateUser(updateInfo) {
     return this.http.post(Url + `/api/update?token=${localStorage.getItem('token')}`, updateInfo);
+  }
+
+  saveDataToLocalStorage(response: any) {
+    localStorage.setItem('id', response.id);
+    localStorage.setItem('name', response.name);
+    localStorage.setItem('email', response.email);
+    localStorage.setItem('avatar', response.image);
+    console.log(response.name);
+  }
+
+  saveToken(res) {
+    localStorage.setItem('token', res.access_token);
   }
 }

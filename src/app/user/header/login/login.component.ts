@@ -15,6 +15,7 @@ import {AuthService, SocialUser, FacebookLoginProvider} from 'angularx-social-lo
 export class LoginComponent implements OnInit {
   buttonStatus = true;
   title = 'app';
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
     private socialAuthService: AuthService
   ) {
   }
+
   public user: any = SocialUser;
 
   registerForm = this.fb.group({
@@ -112,7 +114,7 @@ export class LoginComponent implements OnInit {
   }
 
   handleLoginResponse(res) {
-    localStorage.setItem('token', res.access_token);
+    this.userService.saveToken(res);
     this.buttonStatus = true;
     this.resetLoginForm();
   }
