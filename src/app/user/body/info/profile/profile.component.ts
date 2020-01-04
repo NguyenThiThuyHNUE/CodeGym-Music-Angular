@@ -20,11 +20,11 @@ export class ProfileComponent implements OnInit {
   selectFileImg: File = null; // Catch event select Image
   updateForm = this.fb.group({ // Form update
     id: localStorage.getItem('id'),
-    newName: ['', [Validators.required]],
-    newImage: ['', [Validators.required]],
-    newEmail: ['', [Validators.required]],
-    newPassword: ['', [Validators.required]],
-    confirmPassword: ['', [Validators.required]],
+    newName: [''],
+    newImage: [''],
+    newEmail: [''],
+    newPassword: [''],
+    confirmPassword: [''],
   });
 
   constructor(private fb: FormBuilder,
@@ -41,9 +41,12 @@ export class ProfileComponent implements OnInit {
   }
 
   userUpdate() {
-    this.setUpFileImageInUploadService();
-    this.startUpload();
-    this.getCallBack();
+    if (this.isUpdateImage()) {
+      this.setUpFileImageInUploadService();
+      this.startUpload();
+      this.getCallBack();
+    }
+    this.startUpdateUserInfo();
   }
 
   onSelectFileImg(event) {
@@ -114,7 +117,10 @@ export class ProfileComponent implements OnInit {
     this.uploadService.taskUploadImg.snapshotChanges().pipe(
       finalize(() => {
         this.getImgDownloadUrl(this.uploadService.fireRefImg);
-
       })).subscribe();
+  }
+
+  private isUpdateImage() {
+    return this.updateForm.value.newImage !== '';
   }
 }
