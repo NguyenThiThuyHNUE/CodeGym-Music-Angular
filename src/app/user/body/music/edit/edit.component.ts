@@ -8,6 +8,7 @@ import {finalize} from 'rxjs/operators';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {UserService} from '../../../../service/user.service';
 import {SongService} from '../../../../service/song.service';
+import {UploadService} from '../../../../service/upload.service';
 
 @Component({
   selector: 'app-edit',
@@ -15,32 +16,34 @@ import {SongService} from '../../../../service/song.service';
   styleUrls: ['./edit.component.scss']
 })
 export class EditComponent implements OnInit {
-  musicEdit: IMusic;
-  idMusic: number = +this.activatedRoute.snapshot.paramMap.get('id');
-  editFormMusic = this.fb.group(
-    {
-      id: [this.idMusic, [Validators.required]],
-      name: ['', [Validators.required]],
-      singer: ['', [Validators.required]],
-      description: ['', [Validators.required]],
-      avatar: ['', [Validators.required]],
-      file_mp3: ['', [Validators.required]],
-    });
+  oldSong: IMusic;
+  songId: number;
+  editFormMusic: any;
   selectFileAvatar: File = null;
   selectFileMp3: File = null;
 
   constructor(private songService: SongService,
+              private uploadService: UploadService,
               private activatedRoute: ActivatedRoute,
               private fb: FormBuilder,
               private router: Router,
               private angularFireStorage: AngularFireStorage,
               private song: Song) {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit() {
-    this.songService.getAll().subscribe(musics => {
-      this.musicEdit = musics.data.find(music => music.id === this.idMusic);
+    this.setMusicId();
+    this.setForm();
+    this.getSongToFillUpInterface();
+  }
+
+  setMusicId() {
+    this.songId = +this.activatedRoute.snapshot.paramMap.get('id');
+  }
+
+  getSongToFillUpInterface() {
+    this.songService.getSong(this.songId).subscribe(response => {
+      this.oldSong = response.data;
     });
   }
 
@@ -54,32 +57,66 @@ export class EditComponent implements OnInit {
 
   // noinspection DuplicatedCode
   onEdit() {
-    this.song.id = this.editFormMusic.value.id;
-    this.song.name = this.editFormMusic.value.name;
-    this.song.singer = this.editFormMusic.value.singer;
-    this.song.description = this.editFormMusic.value.description;
-    const firePathAvatar = `music/${this.selectFileAvatar.name}`;
-    const firePathMp3 = `music/${this.selectFileMp3.name}`;
-    const fireRefAvatar = this.angularFireStorage.ref(firePathAvatar);
-    const fireRefMp3 = this.angularFireStorage.ref(firePathMp3);
+    this.setUpFileAndImageService();
+    this.startUpload();
+    this.getCallBackImage();
+    // this.song.id = this.editFormMusic.value.id;
+    // this.song.name = this.editFormMusic.value.name;
+    // this.song.singer = this.editFormMusic.value.singer;
+    // this.song.description = this.editFormMusic.value.description;
+    // const firePathAvatar = `music/${this.selectFileAvatar.name}`;
+    // const firePathMp3 = `music/${this.selectFileMp3.name}`;
+    // const fireRefAvatar = this.angularFireStorage.ref(firePathAvatar);
+    // const fireRefMp3 = this.angularFireStorage.ref(firePathMp3);
     // this.databaseList = this.angularFireDatabase.list('/list');
-    this.songService.uploadImg(firePathAvatar, this.selectFileAvatar).snapshotChanges().pipe(
+    // this.songService.uploadImg(firePathAvatar, this.selectFileAvatar).snapshotChanges().pipe(
+    //   finalize(() => {
+    //     fireRefAvatar.getDownloadURL().subscribe((url) => {
+    //       this.song.avatar = url;
+    //     });
+    //   })).subscribe();
+    // this.songService.uploadMp3(firePathMp3, this.selectFileMp3).snapshotChanges().pipe(
+    //   finalize(() => {
+    //     fireRefMp3.getDownloadURL().subscribe((url) => {
+    //       this.song.musicUrl = url;
+    //       this.songService.edit(this.songId, this.song).subscribe(response => {
+    //         this.router.navigate(['/home']).then(() => {
+    //           alert(response.message);
+    //         });
+    //       });
+    //     });
+    //   })).subscribe();
+  }
+
+  getCallBackImage() {
+    this.uploadService.taskUploadImg.snapshotChanges().pipe(
       finalize(() => {
-        fireRefAvatar.getDownloadURL().subscribe((url) => {
-          this.song.avatar = url;
-        });
+        this.getImgDownloadUrl(this.uploadService.fireRefImg);
       })).subscribe();
-    this.songService.uploadMp3(firePathMp3, this.selectFileMp3).snapshotChanges().pipe(
-      finalize(() => {
-        fireRefMp3.getDownloadURL().subscribe((url) => {
-          this.song.musicUrl = url;
-          this.songService.edit(this.idMusic, this.song).subscribe(response => {
-            this.router.navigate(['/home']).then(() => {
-              alert(response.message);
-            });
-          });
-        });
-      })).subscribe();
+  }
+
+  getImgDownloadUrl(fireRefImg) {
+    fireRefImg.getDownloadURL().subscribe((url) => {
+      this.editFormMusic.value.avatar = url;
+      this.startUpdateSong();
+    });
+  }
+
+  startUpdateSong() {
+    this.songService.edit(this.songId, this.editFormMusic.value).subscribe(response => {
+      this.router.navigate(['/home']).then(() => {
+        alert(response.message);
+      });
+    });
+  }
+
+  startUpload() {
+    this.uploadService.startUpload(true, false);
+  }
+
+  setUpFileAndImageService() {
+    console.log(this.selectFileAvatar);
+    this.uploadService.setSelectFileImg(this.selectFileAvatar);
   }
 
   get id() {
@@ -104,6 +141,16 @@ export class EditComponent implements OnInit {
 
   get file_mp3() {
     return this.editFormMusic.get('file_mp3');
+  }
+
+  setForm() {
+    this.editFormMusic = this.fb.group(
+      {
+        name: ['', [Validators.required]],
+        singer: ['', [Validators.required]],
+        description: ['', [Validators.required]],
+        avatar: ['', [Validators.required]],
+      });
   }
 
 }

@@ -72,8 +72,7 @@ export class UserService {
     localStorage.setItem('id', response.id);
     localStorage.setItem('name', response.name);
     localStorage.setItem('email', response.email);
-    localStorage.setItem('avatar', response.image);
-    console.log(response.name);
+    localStorage.setItem('image', response.image);
   }
 
   saveToken(res) {

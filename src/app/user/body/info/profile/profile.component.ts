@@ -55,9 +55,10 @@ export class ProfileComponent implements OnInit {
     this.selectFileImg = event.target.files[0] as File;
   }
 
-  handleUpdateResponse(res) {
-    this.updateUserCredentialInInterface();
+  handleUpdateResponse(response) {
+    // this.updateUserCredentialInInterface();
     this.resetUpdateForm();
+    this.updateUserCredentialInInterface();
   }
 
   updateUserCredentialInInterface() {
@@ -70,7 +71,6 @@ export class ProfileComponent implements OnInit {
   handleResponse(response) {
     this.notifyForUserThatIsUpdateInfoSuccess(response);
     this.saveDataToLocalStorage(response);
-    location.reload();
   }
 
   saveDataToLocalStorage(response: any) {
@@ -132,7 +132,7 @@ export class ProfileComponent implements OnInit {
   }
 
   private startUpload() {
-    this.uploadService.startUpload();
+    this.uploadService.startUpload(true);
   }
 
   private getCallBack() {

@@ -33,6 +33,10 @@ export class SongService {
     return this.http.get<Response>(Url + '/api/musics');
   }
 
+  getSong(songId) {
+    return this.http.get<Response>(Url + `/api/song/${songId}`);
+  }
+
   edit(songId, musicInfo): Observable<Response> {
     return this.http.put<Response>(Url + `/api/music/edit/${songId}`, musicInfo);
   }
