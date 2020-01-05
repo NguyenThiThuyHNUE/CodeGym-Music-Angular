@@ -72,86 +72,24 @@
     <div class="row">
       <div class="col-12">
         <div class="row mb-4" *ngFor="let playlist of playlists">
-        <div class="row">
-          <div class="col-md-2 ml-5">
-            <img src="../../../../assets/img/bg-img/bg-7.jpg" alt="">
+          <div class="row">
+            <div class="col-md-2 ml-5">
+              <img src="../../../../assets/img/bg-img/bg-7.jpg" alt="">
+            </div>
+            <div class="cold-md-8">
+              <p (click)="showSongsInPlaylist(playlist.id)" class="playListName">{{playlist.namePlaylist}}</p>
+              <p class="playDescription">Playlist Description</p>
+            </div>
           </div>
-          <div class="cold-md-8">
-            <p (click)="showSongsInPlaylist(playlist.id)" class="playListName">{{playlist.namePlaylist}}</p>
-            <p class="playListName">Playlist Name</p>
-            <p class="playDescription">Playlist Description</p>
-          </div>
-        </div>
-
-        <!-- Single Timeline Area -->
-        <div class="single-timeline-area d-flex">
-          <!-- Timeline Date -->
-          <div class="timeline-date">
-            <h2>25 <span>May 2004</span></h2>
-          </div>
-          <!-- Timeline Content -->
-          <div class="timeline-content">
-            <h5>Early career years</h5>
-            <p>Nulla facilisi. Donec id purus eu lectus imperdiet varius. Curabitur consectetur nunc sem, vitae cursus
-              enim tempor eget. Praesent pellentesque nisi urna, sit amet suscipit ligula posuere id. Aenean id tortor
-              vel quam ornare gravida. Phasellus luctus feugiat nunc, quis vulputate ipsum convallis quis. Integer vel
-              nulla erat. Donec erat metus, luctus quis maximus quis, volutpat eu tellus. Interdum et malesuada fames ac
-              ante ipsum primis in faucibus. </p>
-          </div>
-        </div>
-
-        <!-- Single Timeline Area -->
-        <div class="single-timeline-area d-flex">
-          <!-- Timeline Date -->
-          <div class="timeline-date">
-            <h2>08 <span>May 2007</span></h2>
-          </div>
-          <!-- Timeline Content -->
-          <div class="timeline-content">
-            <h5>First Album Release</h5>
-            <p>Nulla facilisi. Donec id purus eu lectus imperdiet varius. Curabitur consectetur nunc sem, vitae cursus
-              enim tempor eget. Praesent pellentesque nisi urna, sit amet suscipit ligula posuere id. Aenean id tortor
-              vel quam ornare gravida. Phasellus luctus feugiat nunc, quis vulputate ipsum convallis quis. Integer vel
-              nulla erat. Donec erat metus, luctus quis maximus quis, volutpat eu tellus. Interdum et malesuada fames ac
-              ante ipsum primis in faucibus. </p>
-          </div>
-        </div>
-
-        <!-- Single Timeline Area -->
-        <div class="single-timeline-area d-flex">
-          <!-- Timeline Date -->
-          <div class="timeline-date">
-            <h2>30 <span>May 2009</span></h2>
-          </div>
-          <!-- Timeline Content -->
-          <div class="timeline-content">
-            <h5>My First Live Concert</h5>
-            <p>Nulla facilisi. Donec id purus eu lectus imperdiet varius. Curabitur consectetur nunc sem, vitae cursus
-              enim tempor eget. Praesent pellentesque nisi urna, sit amet suscipit ligula posuere id. Aenean id tortor
-              vel quam ornare gravida. Phasellus luctus feugiat nunc, quis vulputate ipsum convallis quis. Integer vel
-              nulla erat. Donec erat metus, luctus quis maximus quis, volutpat eu tellus. Interdum et malesuada fames ac
-              ante ipsum primis in faucibus. </p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-12">
-        <div class="timeline-btn text-center mt-100">
-          <a href="#" class="btn musica-btn">Load More</a>
         </div>
       </div>
     </div>
 
+    <!-- Side Thumbs -->
+    <div class="first-img">
+      <img src="../../../../assets/img/bg-img/man.png" alt="">
+    </div>
+    <div class="second-img">
+      <img src="../../../../assets/img/bg-img/microphone.png" alt="">
+    </div>
   </div>
-
-  <!-- Side Thumbs -->
-  <div class="first-img">
-    <img src="../../../../assets/img/bg-img/man.png" alt="">
-  </div>
-  <div class="second-img">
-    <img src="../../../../assets/img/bg-img/microphone.png" alt="">
-  </div>
-</div>

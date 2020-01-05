@@ -13,6 +13,7 @@ import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 import {SocialLoginModule, AuthServiceConfig} from 'angularx-social-login';
 import {FacebookLoginProvider} from 'angularx-social-login';
 import {UserModule} from './user/user.module';
+import {MatDialogRef} from '@angular/material/dialog';
 
 const config = new AuthServiceConfig([
   {
@@ -31,8 +32,12 @@ export function provideConfig() {
   ],
   providers: [
     {provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+    SnotifyService,
     {provide: AuthServiceConfig, useFactory: provideConfig},
-    SnotifyService, Song
+    Song, {
+      provide: MatDialogRef,
+      useValue: {}
+    },
   ],
   imports: [
     AppRoutingModule,

@@ -7,6 +7,7 @@ import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} 
 import {finalize} from 'rxjs/operators';
 import {SongService} from '../../../../service/song.service';
 import {UploadService} from '../../../../service/upload.service';
+import {ProfileService} from '../../../../service/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -33,6 +34,7 @@ export class ProfileComponent implements OnInit {
               private Notify: SnotifyService,
               private userService: UserService,
               private songService: SongService,
+              private profileService: ProfileService,
               private uploadService: UploadService
   ) {
   }
@@ -54,9 +56,29 @@ export class ProfileComponent implements OnInit {
   }
 
   handleUpdateResponse(res) {
-    this.notifyForUserThatIsUpdateInfoSuccess(res);
+    this.updateUserCredentialInInterface();
     this.resetUpdateForm();
+  }
+
+  updateUserCredentialInInterface() {
+    this.userService.getUserCredential()
+      .subscribe((response: any) => {
+        this.handleResponse(response);
+      }, (error) => this.handleResponseError());
+  }
+
+  handleResponse(response) {
+    this.notifyForUserThatIsUpdateInfoSuccess(response);
+    this.saveDataToLocalStorage(response);
     location.reload();
+  }
+
+  saveDataToLocalStorage(response: any) {
+    this.userService.saveDataToLocalStorage(response);
+  }
+
+  handleResponseError() {
+    this.userService.logout();
   }
 
   resetUpdateForm() {
@@ -82,7 +104,7 @@ export class ProfileComponent implements OnInit {
   }
 
   private notifyForUserThatIsUpdateInfoSuccess(res) {
-    this.Notify.success(res.message, 'Congratulations', {timeout: 3000});
+    this.Notify.success(`Update Success`, {timeout: 3000});
   }
 
   get newName() {

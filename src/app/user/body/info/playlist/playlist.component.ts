@@ -5,6 +5,7 @@ import {SnotifyService} from 'ng-snotify';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {Playlist} from '../../../../interface/playlist';
 import {UserService} from '../../../../service/user.service';
+import {timer} from 'rxjs';
 
 @Component({
   selector: 'app-playlist',
@@ -31,6 +32,7 @@ export class PlaylistComponent implements OnInit {
 
   ngOnInit() {
     this.setUserId();
+    this.updatePlaylistFromTwoToFiveSeconds();
     this.getPlaylists();
   }
 
@@ -50,24 +52,12 @@ export class PlaylistComponent implements OnInit {
 
   }
 
-  createPlaylist() {
-    this.playListService.createPlaylist(this.createForm.value)
-      .subscribe((response) => {
-        this.handleResponse(response);
-      });
-  }
-
   get namePlaylist() {
     return this.createForm.get('namePlaylist');
   }
 
   handleAddSongToPlaylistResponse(response) {
-    this.Notify.success(`${response.message}`, 'Congratulations', {timeout: 1000});
-  }
-
-  private handleResponse(response) {
-    this.Notify.success(`${response.message}`, 'Congratulations', {timeout: 1000});
-    this.playListService.closePlaylist();
+    this.Notify.success(`${response.message}`, {timeout: 1000});
   }
 
   newPlaylist() {
@@ -80,5 +70,12 @@ export class PlaylistComponent implements OnInit {
 
   private setUserId() {
     this.userId = UserService.getUserId();
+  }
+
+  private updatePlaylistFromTwoToFiveSeconds() {
+    const time$ = timer(2000, 5000);
+    time$.subscribe(() => {
+      this.getPlaylists();
+    });
   }
 }

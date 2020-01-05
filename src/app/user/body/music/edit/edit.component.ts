@@ -7,6 +7,7 @@ import {Song} from '../../../../song';
 import {finalize} from 'rxjs/operators';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {UserService} from '../../../../service/user.service';
+import {SongService} from '../../../../service/song.service';
 
 @Component({
   selector: 'app-edit',
@@ -28,7 +29,7 @@ export class EditComponent implements OnInit {
   selectFileAvatar: File = null;
   selectFileMp3: File = null;
 
-  constructor(private musicService: MusicService,
+  constructor(private songService: SongService,
               private activatedRoute: ActivatedRoute,
               private fb: FormBuilder,
               private router: Router,
@@ -38,7 +39,7 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.musicService.getMusics().subscribe(musics => {
+    this.songService.getAll().subscribe(musics => {
       this.musicEdit = musics.data.find(music => music.id === this.idMusic);
     });
   }
@@ -62,17 +63,17 @@ export class EditComponent implements OnInit {
     const fireRefAvatar = this.angularFireStorage.ref(firePathAvatar);
     const fireRefMp3 = this.angularFireStorage.ref(firePathMp3);
     // this.databaseList = this.angularFireDatabase.list('/list');
-    this.musicService.uploadAvatar(firePathAvatar, this.selectFileAvatar).snapshotChanges().pipe(
+    this.songService.uploadImg(firePathAvatar, this.selectFileAvatar).snapshotChanges().pipe(
       finalize(() => {
         fireRefAvatar.getDownloadURL().subscribe((url) => {
           this.song.avatar = url;
         });
       })).subscribe();
-    this.musicService.uploadMp3(firePathMp3, this.selectFileMp3).snapshotChanges().pipe(
+    this.songService.uploadMp3(firePathMp3, this.selectFileMp3).snapshotChanges().pipe(
       finalize(() => {
         fireRefMp3.getDownloadURL().subscribe((url) => {
           this.song.musicUrl = url;
-          this.musicService.editMusic(this.idMusic, this.song).subscribe(response => {
+          this.songService.edit(this.idMusic, this.song).subscribe(response => {
             this.router.navigate(['/home']).then(() => {
               alert(response.message);
             });

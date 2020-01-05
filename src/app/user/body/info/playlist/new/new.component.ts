@@ -4,6 +4,7 @@ import {MatDialogRef} from '@angular/material';
 import {PlaylistService} from '../../../../../service/playlist.service';
 import {UserService} from '../../../../../service/user.service';
 import {SnotifyService} from 'ng-snotify';
+import {Response} from '../../../../../interface/response';
 
 @Component({
   selector: 'app-new',
@@ -20,15 +21,13 @@ export class NewComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<NewComponent>,
-    private playListService: PlaylistService, private Notify: SnotifyService,
+    private playListService: PlaylistService,
+    private Notify: SnotifyService,
   ) {
   }
 
-  ngOnInit() {
-  }
-
   createPlaylist() {
-    this.playListService.createPlaylist(this.createForm.value)
+    return this.playListService.createPlaylist(this.createForm.value)
       .subscribe((response) => {
         this.handleResponse(response);
       });
@@ -38,14 +37,15 @@ export class NewComponent implements OnInit {
     return this.createForm.get('namePlaylist');
   }
 
-  private handleResponse(response) {
-    this.Notify.success(`${response.message}`, 'Congratulations', {timeout: 1000});
+  private handleResponse(response: Response) {
+    this.Notify.success(`${response.message}`, {timeout: 1000});
     this.resetForm();
   }
 
   private resetForm() {
     this.dialogRef.close();
-    this.playListService.closePlaylist();
-    this.playListService.showPlaylist();
+  }
+
+  ngOnInit(): void {
   }
 }

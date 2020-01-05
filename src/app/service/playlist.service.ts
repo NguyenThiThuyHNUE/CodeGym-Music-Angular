@@ -30,6 +30,7 @@ export class PlaylistService {
   getPlaylists(userId) {
     return this.http.get(Url + `/api/playlists/${userId}`);
   }
+
   createPlaylist(info) {
     return this.http.post<Response>(Url + '/api/playlist/create', info);
   }
@@ -53,7 +54,6 @@ export class PlaylistService {
   }
 
   showFormCreatePlaylist() {
-    this.dialogRefPlaylist.close();
     const dialogConfig = new MatDialogConfig();
     this.dialog.open(NewComponent, dialogConfig);
   }

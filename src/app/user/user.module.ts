@@ -40,15 +40,6 @@ import {SingerModule} from './body/singer/singer.module';
     FooterComponent, MainComponent, ConfirmEqualValidatorDirective,
     InfoComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent],
   entryComponents: [LoginComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent],
-
-  providers: [
-    {provide: 'SnotifyToastConfig', useValue: ToastDefaults},
-    SnotifyService,
-    {
-      provide: MatDialogRef,
-      useValue: {}
-    },
-  ],
   exports: [
     HeaderComponent,
     BodyComponent,
