@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {SingerService} from '../../../service/singer.service';
 
 @Component({
   selector: 'app-singer',
@@ -6,10 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./singer.component.scss']
 })
 export class SingerComponent implements OnInit {
+  singers: any;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private singerService: SingerService) {
   }
 
+  ngOnInit() {
+    this.getSingers();
+  }
+
+  getSingers() {
+    this.singerService.getSingers().subscribe(
+      (response) => {
+        this.handleGetSingerResponse(response);
+      }
+    );
+  }
+
+  handleGetSingerResponse(response) {
+    this.singers = response.data;
+  }
 }

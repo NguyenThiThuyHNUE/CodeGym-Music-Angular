@@ -96,6 +96,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/ng-snotify/styles/simple.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],

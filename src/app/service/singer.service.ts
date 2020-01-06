@@ -22,15 +22,15 @@ export class SingerService {
   constructor(private angularFireDatabase: AngularFireDatabase,
               private angularFireStorage: AngularFireStorage,
               private http: HttpClient) {
-    this.list();
+
   }
 
   uploadAvatar(firePathAvatar, selectFileAvatar) {
     return this.angularFireStorage.upload(firePathAvatar, selectFileAvatar);
   }
 
-  list() {
-    return this.angularFireDatabase.list('/singers').snapshotChanges();
+  getSingers() {
+    return this.http.get(this.getSingerUrl);
   }
 
   upLoadDataMusic(music): Observable<IMessage> {
