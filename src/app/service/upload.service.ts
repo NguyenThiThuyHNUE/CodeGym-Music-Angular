@@ -23,7 +23,6 @@ export class UploadService {
       this.firePathImg = this.setUpPathToImgInFireBase();
       this.fireRefImg = this.setUpFileRefInFireBase(this.firePathImg);
       this.taskUploadImg = this.startUploadImageToFireBase(this.firePathImg);
-      console.log('update image');
     }
     if (file) {
       console.log('update file');

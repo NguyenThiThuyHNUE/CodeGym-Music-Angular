@@ -98,11 +98,11 @@ export class EditComponent implements OnInit {
   getImgDownloadUrl(fireRefImg) {
     fireRefImg.getDownloadURL().subscribe((url) => {
       this.editFormMusic.value.avatar = url;
-      this.startUpdateSong();
+      this.startUpdateSongToServer();
     });
   }
 
-  startUpdateSong() {
+  startUpdateSongToServer() {
     this.songService.edit(this.songId, this.editFormMusic.value).subscribe(response => {
       this.router.navigate(['/home']).then(() => {
         alert(response.message);
@@ -115,7 +115,6 @@ export class EditComponent implements OnInit {
   }
 
   setUpFileAndImageService() {
-    console.log(this.selectFileAvatar);
     this.uploadService.setSelectFileImg(this.selectFileAvatar);
   }
 

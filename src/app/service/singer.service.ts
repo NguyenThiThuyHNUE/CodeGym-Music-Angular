@@ -1,11 +1,13 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IMessage} from '../interface/i-message';
+import {Response} from "../interface/response";
 
 const webBackEndUrl = 'localhost:8000';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,8 +28,9 @@ export class SingerService {
   uploadAvatar(firePathAvatar, selectFileAvatar) {
     return this.angularFireStorage.upload(firePathAvatar, selectFileAvatar);
   }
+
   list() {
-    return this.angularFireDatabase.list('/list').snapshotChanges();
+    return this.angularFireDatabase.list('/singers').snapshotChanges();
   }
 
   upLoadDataMusic(music): Observable<IMessage> {
@@ -36,6 +39,10 @@ export class SingerService {
 
   getMusics() {
     return this.http.get<{ data }>(this.getSingerUrl);
+  }
+
+  create(data) {
+    return this.http.post<Response>(this.createSingerUrl, data);
   }
 
   // editMusic(idMusic, music): Observable<IMessage> {
