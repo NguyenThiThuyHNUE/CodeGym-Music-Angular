@@ -8,7 +8,7 @@ import {Song} from '../../../../song';
 import {finalize} from 'rxjs/operators';
 import {SingerService} from '../../../../service/singer.service';
 import {UploadService} from '../../../../service/upload.service';
-import {SongService} from "../../../../service/song.service";
+import {SongService} from '../../../../service/song.service';
 
 @Component({
   selector: 'app-create',
@@ -106,6 +106,7 @@ export class CreateComponent implements OnInit {
   getImgDownloadUrl(fireRefImg) {
     fireRefImg.getDownloadURL().subscribe((url) => {
       this.addSingerForm.value.avatar = url;
+      this.startUpdateSongToServer();
     });
   }
 
