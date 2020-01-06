@@ -10,13 +10,10 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {Song} from './song';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
-import {ConfirmEqualValidatorDirective} from './directive/confirm-equal-validator.directive';
-import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
-import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
-import {SingerComponent} from './user/body/singer/singer.component';
-import { SingerRoutingModule } from './user/body/singer/singer-routing.module';
+import {SocialLoginModule, AuthServiceConfig} from 'angularx-social-login';
+import {FacebookLoginProvider} from 'angularx-social-login';
 import {UserModule} from './user/user.module';
-
+import {MatDialogRef} from '@angular/material/dialog';
 
 const config = new AuthServiceConfig([
   {
@@ -28,14 +25,19 @@ const config = new AuthServiceConfig([
 export function provideConfig() {
   return config;
 }
+
 @NgModule({
   declarations: [
     AppComponent,
   ],
   providers: [
     {provide: 'SnotifyToastConfig', useValue: ToastDefaults},
-    {provide : AuthServiceConfig, useFactory: provideConfig },
-    SnotifyService, Song
+    SnotifyService,
+    {provide: AuthServiceConfig, useFactory: provideConfig},
+    Song, {
+      provide: MatDialogRef,
+      useValue: {}
+    },
   ],
   imports: [
     AppRoutingModule,
@@ -47,7 +49,7 @@ export function provideConfig() {
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     SocialLoginModule,
-    UserModule
+    UserModule,
   ],
   exports: [],
   bootstrap: [AppComponent]

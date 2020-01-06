@@ -4,6 +4,7 @@ import {PlaylistComponent} from '../../info/playlist/playlist.component';
 import {MatDialogRef} from '@angular/material';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {Inject} from '@angular/core';
+import {MainService} from '../../../../service/main.service';
 
 @Component({
   selector: 'app-etc',
@@ -15,6 +16,7 @@ export class EtcComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialog: MatDialog,
+    private mainService: MainService,
     private dialogRef: MatDialogRef<PlaylistComponent>,
   ) {
   }
@@ -26,10 +28,8 @@ export class EtcComponent implements OnInit {
     return this.dialogRef.close();
   }
 
-  showListPlaylist() {
+  showPlaylists() {
     this.closeEtc();
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = this.data;
-    this.dialog.open(PlaylistComponent, dialogConfig);
+    this.mainService.showPlaylists(this.data);
   }
 }

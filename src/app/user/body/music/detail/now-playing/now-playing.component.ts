@@ -4,6 +4,9 @@ import {MusicService} from '../../../../../service/music.service';
 import {ActivatedRoute, Event, NavigationEnd, Router} from '@angular/router';
 import {AudioService} from '../../../../../service/audio.service';
 import {timer} from 'rxjs';
+import {AuthGuard} from '../../../../../gurad/auth.guard';
+import {canActivate} from '@angular/fire/auth-guard';
+import {UserService} from '../../../../../service/user.service';
 
 const DEFAULT_VOLUME = 0.5;
 
@@ -29,7 +32,8 @@ export class NowPlayingComponent implements OnInit, OnChanges {
   constructor(private musicService: MusicService,
               private audio: AudioService,
               private activatedRoute: ActivatedRoute,
-              private router: Router
+              private router: Router,
+              private userService: UserService,
   ) {
   }
 
@@ -63,7 +67,7 @@ export class NowPlayingComponent implements OnInit, OnChanges {
     this.setStartTime();
     this.setRemainTime();
     this.audio.audio.muted = false;
-    this.audio.audio.autoplay = true;
+    this.audio.audio.autoplay = false;
     this.changeIconToPlay();
   }
 
@@ -147,12 +151,28 @@ export class NowPlayingComponent implements OnInit, OnChanges {
   }
 
   onClick(idSong) {
-    if (confirm('Delete ! Are You Sure ?') === true) {
-      return this.musicService.deleteMusic(idSong).subscribe(response => {
-        this.router.navigate([`/home/music/detail/${this.idSong}`]).then(() => alert(response.message));
-      });
+    if (this.userService.isLoggedIn()) {
+      if (confirm('Delete ! Are You Sure ?') === true) {
+        return this.musicService.deleteMusic(idSong).subscribe(response => {
+          this.router.navigate([`/home/music/detail/${this.idSong}`]).then(() => alert(response.message));
+        });
+      } else {
+        this.router.navigate([`/home/music/detail/${this.idSong}`]).then();
+      }
     } else {
-      this.router.navigate([`/home/music/detail/${this.idSong}`]).then();
+      this.router.navigate([`/home/music/detail/${this.idSong}`]).then(() => {
+        return alert('Please! You need to login to use this feature.');
+      });
+    }
+  }
+
+  onClickEdit() {
+    if (this.userService.isLoggedIn()) {
+      return this.musicService.editMusic;
+    } else {
+      this.router.navigate([`/home/music/detail/${this.idSong}`]).then(() => {
+        return alert('Please ! You need to login to use this feature !');
+      });
     }
   }
 }

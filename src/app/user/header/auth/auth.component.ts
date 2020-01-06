@@ -21,27 +21,47 @@ export class AuthComponent implements OnInit {
   }
 
   ngOnInit() {
-    return this.user.getUserCredential(localStorage.getItem('token'))
-      .subscribe((response: any) => {
-        this.handleResponse(response);
-      }, (error) => this.handleResponseError());
+    this.getUserCredential();
   }
 
   logout() {
-    this.user.getUserCredential(localStorage.getItem('token'))
-      .subscribe((data: any) => {
-        this.Notify.success(`Logout Success, Goodbye ${data.name}`, 'Congratulations', {timeout: 3000});
-      });
+    // this.user.getUserCredential()
+    //   .subscribe((data: any) => {
+    //     this.Notify.success(`Logout Success, Goodbye ${data.name}`, 'Congratulations', {timeout: 3000});
+    //   });
+    this.Notify.success(`Logout Success, Goodbye ${this.name}`, 'Congratulations', {timeout: 3000});
     this.user.logout();
   }
 
   handleResponse(response) {
     this.Notify.success(`Login Success, Welcome ${response.name}`, 'Congratulations', {timeout: 3000});
-    localStorage.setItem('id', response.id);
-    this.name = response.name;
+    this.saveDataToLocalStorage(response);
+    this.setUserName();
   }
 
   handleResponseError() {
-    localStorage.removeItem('token');
+    this.user.logout();
+  }
+
+  saveDataToLocalStorage(response: any) {
+    this.user.saveDataToLocalStorage(response);
+  }
+
+  private getUserCredential() {
+    if (this.checkTokenOrUserIdExist()) {
+      return this.user.getUserCredential()
+        .subscribe((response: any) => {
+          this.handleResponse(response);
+        }, (error) => this.handleResponseError());
+    }
+    return this.setUserName();
+  }
+
+  private checkTokenOrUserIdExist() {
+    return !this.user.isLoggedIn() || !UserService.getUserId();
+  }
+
+  private setUserName() {
+    this.name = UserService.getUserName();
   }
 }
