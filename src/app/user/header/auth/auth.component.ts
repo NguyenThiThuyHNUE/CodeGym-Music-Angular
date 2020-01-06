@@ -25,11 +25,7 @@ export class AuthComponent implements OnInit {
   }
 
   logout() {
-    // this.user.getUserCredential()
-    //   .subscribe((data: any) => {
-    //     this.Notify.success(`Logout Success, Goodbye ${data.name}`, 'Congratulations', {timeout: 3000});
-    //   });
-    this.Notify.success(`Logout Success, Goodbye ${this.name}`, 'Congratulations', {timeout: 3000});
+     this.Notify.success(`Logout Success, Goodbye ${this.name}`, 'Congratulations', {timeout: 3000});
     this.user.logout();
   }
 

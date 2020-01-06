@@ -115,7 +115,6 @@ export class EditComponent implements OnInit {
   }
 
   setUpFileAndImageService() {
-    console.log(this.selectFileAvatar);
     this.uploadService.setSelectFileImg(this.selectFileAvatar);
   }
 

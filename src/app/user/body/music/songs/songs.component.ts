@@ -6,6 +6,7 @@ import {SongResponse} from '../../../../interface/song-response';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ChangeNamePLComponent} from './change-name-pl/change-name-pl.component';
 import {timer} from 'rxjs';
+import {SnotifyService} from 'ng-snotify';
 
 @Component({
   selector: 'app-songs',
@@ -19,6 +20,7 @@ export class SongsComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public playlist: any,
               public dialog: MatDialog,
+              private Notify: SnotifyService,
               public  dialogRef: MatDialogRef<SongsComponent>,
               private playlistService: PlaylistService) {
   }
@@ -53,8 +55,22 @@ export class SongsComponent implements OnInit {
     }
     localStorage.removeItem('newNamePlaylist');
   }
+
   closeDialog() {
     this.dialogRef.close();
   }
 
+  removeFromPlaylist(songId) {
+    this.playlistService.setUpDataSongToPutOrRemoveInPlaylist(this.playlist.playlistId, songId);
+    this.playlistService.removeSongFromPlaylist()
+      .subscribe((response) => {
+        this.handleAddSongToPlaylistResponse(response, songId);
+      });
+  }
+
+  handleAddSongToPlaylistResponse(response, songId) {
+    this.Notify.success('remove Song', {timeout: 1000});
+    const index = this.songs.findIndex((song) => songId === song.id);
+    this.songs.splice(index, 1);
+  }
 }
