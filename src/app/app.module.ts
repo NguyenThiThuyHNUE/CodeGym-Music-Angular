@@ -15,6 +15,7 @@ import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
 import {SingerComponent} from './user/body/singer/singer.component';
 import { SingerRoutingModule } from './user/body/singer/singer-routing.module';
+import {UserModule} from './user/user.module';
 
 
 const config = new AuthServiceConfig([
@@ -37,16 +38,16 @@ export function provideConfig() {
     SnotifyService, Song
   ],
   imports: [
+    AppRoutingModule,
     SnotifyModule,
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     SocialLoginModule,
-    SingerRoutingModule
+    UserModule
   ],
   exports: [],
   bootstrap: [AppComponent]

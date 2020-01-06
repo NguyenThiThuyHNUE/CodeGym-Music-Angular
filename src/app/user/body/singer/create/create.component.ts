@@ -6,6 +6,7 @@ import {AngularFireDatabase} from '@angular/fire/database';
 import {Router} from '@angular/router';
 import {Song} from '../../../../song';
 import {finalize} from 'rxjs/operators';
+import {SingerService} from '../../../../service/singer.service';
 
 @Component({
   selector: 'app-create',
@@ -18,7 +19,6 @@ export class CreateComponent implements OnInit {
   uploadPercent: any;
   // databaseList: AngularFireList<any>;
   addSingerForm = this.fb.group({
-    id: ['', [Validators.required]],
     name: ['', [Validators.required]],
     description: ['', [Validators.required]],
     avatar: ['', [Validators.required]],
@@ -26,7 +26,7 @@ export class CreateComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private angularFireStorage: AngularFireStorage,
-              private musicService: MusicService,
+              private singerService: SingerService,
               private angularFireDatabase: AngularFireDatabase,
               private route: Router,
               private song: Song) {
@@ -40,14 +40,13 @@ export class CreateComponent implements OnInit {
   }
   // noinspection DuplicatedCode
   onUpLoad() {
-    this.song.id = this.addSingerForm.value.id;
     this.song.name = this.addSingerForm.value.name;
     this.song.singer = this.addSingerForm.value.singer;
     this.song.description = this.addSingerForm.value.description;
     const firePathAvatar = `music/${this.selectFileAvatar.name}`;
     const fireRefAvatar = this.angularFireStorage.ref(firePathAvatar);
     // this.databaseList = this.angularFireDatabase.list('/list');
-    const taskUploadAvatar = this.musicService.uploadAvatar(firePathAvatar, this.selectFileAvatar);
+    const taskUploadAvatar = this.singerService.uploadAvatar(firePathAvatar, this.selectFileAvatar);
     taskUploadAvatar.percentageChanges().subscribe(percent => {
       this.uploadPercent = percent;
     });
@@ -58,11 +57,6 @@ export class CreateComponent implements OnInit {
         });
       })).subscribe();
   }
-
-  get id() {
-    return this.addSingerForm.get('id');
-  }
-
   get name() {
     return this.addSingerForm.get('name');
   }

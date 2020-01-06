@@ -15,28 +15,15 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialogModule} from '@angular/material/dialog';
-
-
+import {SingerRoutingModule} from './singer-routing.module';
 
 @NgModule({
   declarations: [SingerComponent, CreateComponent],
   imports: [
+    SingerRoutingModule,
     CommonModule,
     ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-    MatProgressBarModule,
-    SnotifyModule,
-    MatExpansionModule,
-    MatCheckboxModule,
-    MatSliderModule,
-    MatTabsModule,
-    MatRadioModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatDialogModule,
+    FormsModule
   ]
 })
 export class SingerModule { }

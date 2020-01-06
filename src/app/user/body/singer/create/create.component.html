@@ -6,17 +6,6 @@
       <div class="col-lg-12">
         <form [formGroup]="addSingerForm" (ngSubmit)="onUpLoad()">
           <div class="form-group">
-            <label><b>Id Singer:</b></label>
-            <input id="id" class="form-control"
-                   formControlName="id" required>
-            <div *ngIf="id.invalid && (id.dirty || id.touched)"
-                 class="alert alert-danger">
-              <div *ngIf="id.errors.required">
-                Mã ca si không được để trống !
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
             <label><b>Name Singer:</b></label>
             <input class="form-control"
                    formControlName="name" required>

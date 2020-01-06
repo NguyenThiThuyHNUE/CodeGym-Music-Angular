@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {AngularFireDatabase, AngularFireList} from "@angular/fire/database";
-import {AngularFireStorage} from "@angular/fire/storage";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {IMessage} from "../interface/i-message";
+import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
+import {AngularFireStorage} from '@angular/fire/storage';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {IMessage} from '../interface/i-message';
 
 const webBackEndUrl = 'localhost:8000';
 @Injectable({
@@ -11,11 +11,11 @@ const webBackEndUrl = 'localhost:8000';
 })
 export class SingerService {
 
-  getMusicUrl = `http://${webBackEndUrl}/api/musics/`;
-  createMusicUrl = `http://${webBackEndUrl}/api/music/create/`;
-  editMusicUrl = `http://${webBackEndUrl}/api/music/edit/`;
-  deleteMusicUrl = `http://${webBackEndUrl}/api/music/delete/`;
-  music: AngularFireList<any>;
+  getSingerUrl = `http://${webBackEndUrl}/api/singers/`;
+  createSingerUrl = `http://${webBackEndUrl}/api/singer/create/`;
+  // editMusicUrl = `http://${webBackEndUrl}/api/music/edit/`;
+  // deleteMusicUrl = `http://${webBackEndUrl}/api/music/delete/`;
+  singer: AngularFireList<any>;
 
   constructor(private angularFireDatabase: AngularFireDatabase,
               private angularFireStorage: AngularFireStorage,
@@ -31,18 +31,18 @@ export class SingerService {
   }
 
   upLoadDataMusic(music): Observable<IMessage> {
-    return this.http.post<IMessage>(this.createMusicUrl, music);
+    return this.http.post<IMessage>(this.createSingerUrl, music);
   }
 
   getMusics() {
-    return this.http.get<{ data }>(this.getMusicUrl);
+    return this.http.get<{ data }>(this.getSingerUrl);
   }
 
-  editMusic(idMusic, music): Observable<IMessage> {
-    return this.http.put<IMessage>(this.editMusicUrl + idMusic, music);
-  }
-
-  deleteMusic(idMusic): Observable<IMessage> {
-    return this.http.delete<IMessage>(this.deleteMusicUrl + idMusic);
-  }
+  // editMusic(idMusic, music): Observable<IMessage> {
+  //   return this.http.put<IMessage>(this.editMusicUrl + idMusic, music);
+  // }
+  //
+  // deleteMusic(idMusic): Observable<IMessage> {
+  //   return this.http.delete<IMessage>(this.deleteMusicUrl + idMusic);
+  // }
 }
