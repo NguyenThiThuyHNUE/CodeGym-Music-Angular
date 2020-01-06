@@ -10,7 +10,8 @@ const routes: Routes = [
     path: '', component: UserComponent, children: [
       {path: '', component: MainComponent},
       {path: 'info', component: InfoComponent, canActivate: [AuthGuard]},
-      {path: 'music', loadChildren: './body/music/music.module#MusicModule'}
+      {path: 'music', loadChildren: './body/music/music.module#MusicModule'},
+      {path: 'singer', loadChildren: './body/singer/singer.module#SingerModule'}
     ]
   },
 ];

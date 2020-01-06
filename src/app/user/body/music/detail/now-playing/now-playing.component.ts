@@ -67,7 +67,7 @@ export class NowPlayingComponent implements OnInit, OnChanges {
     this.setStartTime();
     this.setRemainTime();
     this.audio.audio.muted = false;
-    this.audio.audio.autoplay = true;
+    this.audio.audio.autoplay = false;
     this.changeIconToPlay();
   }
 

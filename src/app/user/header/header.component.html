@@ -36,6 +36,8 @@
                 </li>
                 <li><a href="#">Mega Menu</a>
                 </li>
+                <li><a [matMenuTriggerFor]="singer">Singer</a>
+                </li>
               </ul>
 
               <!-- Social Button -->
@@ -114,3 +116,7 @@
 <!-- ##### Hero Area End ##### -->
 
 
+<mat-menu #singer="matMenu">
+  <a mat-menu-item routerLink="/home/singer">List</a>
+  <a mat-menu-item routerLink="/home/singer/create">Create Singer</a>
+</mat-menu>

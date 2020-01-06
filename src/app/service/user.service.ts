@@ -14,6 +14,22 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
+  static getUserName() {
+    return localStorage.getItem('name');
+  }
+
+  static getUserEmail() {
+    return localStorage.getItem('email');
+  }
+
+  static getUserId() {
+    return +localStorage.getItem('id');
+  }
+
+  static getUserImage() {
+    return localStorage.getItem('image');
+  }
+
   userRegister(info) {
     return this.http.post<IUserResponse>(Url + '/api/register', info);
   }
@@ -28,6 +44,10 @@ export class UserService {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('id');
+    localStorage.removeItem('email');
+    localStorage.removeItem('name');
+    localStorage.removeItem('image');
   }
 
   isLoggedIn() {
@@ -38,11 +58,24 @@ export class UserService {
     return !!localStorage.getItem('authToken');
   }
 
-  getUserCredential(userToken): Observable<TokenRespone> {
-    return this.http.get<TokenRespone>(Url + `/api/me?token=${userToken}`);
+  getUserCredential(): Observable<TokenRespone> {
+    if (localStorage.getItem('token')) {
+      return this.http.get<TokenRespone>(Url + `/api/me?token=${localStorage.getItem('token')}`);
+    }
   }
 
-  updateUser(userToken, updateInfo) {
-    return this.http.post(Url + `/api/update?token=${userToken}`, updateInfo);
+  updateUser(updateInfo) {
+    return this.http.post(Url + `/api/update?token=${localStorage.getItem('token')}`, updateInfo);
+  }
+
+  saveDataToLocalStorage(response: any) {
+    localStorage.setItem('id', response.id);
+    localStorage.setItem('name', response.name);
+    localStorage.setItem('email', response.email);
+    localStorage.setItem('image', response.image);
+  }
+
+  saveToken(res) {
+    localStorage.setItem('token', res.access_token);
   }
 }

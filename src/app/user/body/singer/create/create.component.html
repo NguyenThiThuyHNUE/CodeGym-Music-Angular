@@ -1,0 +1,52 @@
+<div class="about-us-area section-padding-100-0 bg-img bg-overlay">
+  <div class="container">
+    <p class="page-title">Create Singer</p>
+    <hr>
+    <div class="row">
+      <div class="col-lg-12">
+        <form [formGroup]="addSingerForm" (ngSubmit)="onUpLoad()">
+          <div class="form-group">
+            <label><b>Name Singer:</b></label>
+            <input class="form-control"
+                   formControlName="name" required>
+            <div *ngIf="name.invalid && (name.dirty || name.touched)"
+                 class="alert alert-danger">
+              <div *ngIf="name.errors.required">
+                Tên Ca si không được để trống !
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label><b>Avatar:</b></label>
+            <input type="file" class="form-control" formControlName="avatar" (change)="onSelectFileAvatar($event)">
+            <div *ngIf="avatar.invalid && (avatar.dirty || avatar.touched)"
+                 class="alert alert-danger">
+              <div *ngIf="avatar.errors.required">
+                Ảnh đại diện ca si không được để trống !
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label><b>Description:</b></label>
+            <!-- <input type="text" class="form-control" formControlName="description">-->
+            <textarea class="form-control" formControlName="description" cols="30" rows="10"></textarea>
+            <div *ngIf="description.invalid && (description.dirty || description.touched)"
+                 class="alert alert-danger">
+              <div *ngIf="description.errors.required">
+                Gioi thieu ca si không được để trống !
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" [disabled]="!addSingerForm.valid">Create</button>
+          <button class="btn btn-danger ml-2" routerLink="/home">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

@@ -3,10 +3,11 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {UserService} from '../../../../service/user.service';
 import {MatDialogRef} from '@angular/material';
 import {SnotifyService} from 'ng-snotify';
-import {AngularFireStorage} from '@angular/fire/storage';
-import {MusicService} from '../../../../service/music.service';
+import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
-import {Song} from '../../../../song';
+import {SongService} from '../../../../service/song.service';
+import {UploadService} from '../../../../service/upload.service';
+import {ProfileService} from '../../../../service/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,17 +16,16 @@ import {Song} from '../../../../song';
 
 })
 export class ProfileComponent implements OnInit {
-  name: string;
-  email: string;
-  selectFileAvatar: File = null;
-  uploadPercent: any;
-  updateForm = this.fb.group({
+  oldName = localStorage.getItem('name');  // Name to fill up form update
+  oldEmail = localStorage.getItem('email'); // Name to fill up form update
+  selectFileImg: File = null; // Catch event select Image
+  updateForm = this.fb.group({ // Form update
     id: localStorage.getItem('id'),
-    newName: ['', [Validators.required]],
-    newImage: ['', [Validators.required]],
-    newEmail: ['', [Validators.required]],
-    newPassword: ['', [Validators.required]],
-    confirmPassword: ['', [Validators.required]],
+    newName: [''],
+    newImage: [''],
+    newEmail: [''],
+    newPassword: [''],
+    confirmPassword: [''],
   });
 
   constructor(private fb: FormBuilder,
@@ -33,55 +33,79 @@ export class ProfileComponent implements OnInit {
               private angularFireStorage: AngularFireStorage,
               private Notify: SnotifyService,
               private userService: UserService,
-              private musicService: MusicService,
-              private song: Song) {
-  }
-
-  onSelectFileAvatar(event) {
-    this.selectFileAvatar = event.target.files[0] as File;
+              private songService: SongService,
+              private profileService: ProfileService,
+              private uploadService: UploadService
+  ) {
   }
 
   ngOnInit() {
-    return this.userService.getUserCredential(localStorage.getItem('token'))
-      .subscribe((data: any) => {
-        this.Notify.success(`Login Success, Welcome ${data.name}`, 'Congratulations', {timeout: 3000});
-        localStorage.setItem('id', data.id);
-
-        this.name = data.name;
-        this.email = data.email;
-      });
   }
 
   userUpdate() {
-    const firePathAvatar = `music/${this.selectFileAvatar.name}`;
-    const fireRefAvatar = this.angularFireStorage.ref(firePathAvatar);
-    const taskUploadAvatar = this.musicService.uploadAvatar(firePathAvatar, this.selectFileAvatar);
-    taskUploadAvatar.percentageChanges().subscribe(percent => {
-      this.uploadPercent = percent;
-    });
-    taskUploadAvatar.snapshotChanges().pipe(
-      finalize(() => {
-        fireRefAvatar.getDownloadURL().subscribe((url) => {
-          this.updateForm.value.newImage = url;
-          this.userService.updateUser(localStorage.getItem('token'), this.updateForm.value)
-            .subscribe((response) => {
-              this.handleUpdateResponse(response);
-            });
-        });
-      })).subscribe();
-
+    if (this.isUpdateImage()) {
+      this.setUpFileImageInUploadService();
+      this.startUpload();
+      this.getCallBack();
+    }
+    this.startUpdateUserInfo();
   }
 
-  handleUpdateResponse(res) {
-    this.Notify.success(res.message, 'Congratulations', {timeout: 3000});
+  onSelectFileImg(event) {
+    this.selectFileImg = event.target.files[0] as File;
+  }
+
+  handleUpdateResponse(response) {
+    // this.updateUserCredentialInInterface();
     this.resetUpdateForm();
-    location.reload();
+    this.updateUserCredentialInInterface();
+  }
+
+  updateUserCredentialInInterface() {
+    this.userService.getUserCredential()
+      .subscribe((response: any) => {
+        this.handleResponse(response);
+      }, (error) => this.handleResponseError());
+  }
+
+  handleResponse(response) {
+    this.notifyForUserThatIsUpdateInfoSuccess(response);
+    this.saveDataToLocalStorage(response);
+  }
+
+  saveDataToLocalStorage(response: any) {
+    this.userService.saveDataToLocalStorage(response);
+  }
+
+  handleResponseError() {
+    this.userService.logout();
   }
 
   resetUpdateForm() {
     this.dialogRef.close();
   }
 
+  private getImgDownloadUrl(fireRefImg) {
+    fireRefImg.getDownloadURL().subscribe((url) => {
+      this.setUrlImgInUpdateForm(url);
+      this.startUpdateUserInfo();
+    });
+  }
+
+  private setUrlImgInUpdateForm(url) {
+    this.updateForm.value.newImage = url;
+  }
+
+  private startUpdateUserInfo() {
+    this.userService.updateUser(this.updateForm.value)
+      .subscribe((response) => {
+        this.handleUpdateResponse(response);
+      });
+  }
+
+  private notifyForUserThatIsUpdateInfoSuccess(res) {
+    this.Notify.success(`Update Success`, {timeout: 3000});
+  }
 
   get newName() {
     return this.updateForm.get('newName');
@@ -99,12 +123,26 @@ export class ProfileComponent implements OnInit {
     return this.updateForm.get('confirmPassword');
   }
 
-  get emailUpdate() {
-    return this.updateForm.get('emailUpdate');
-  }
-
   get newEmail() {
     return this.updateForm.get('newEmail');
   }
 
+  private setUpFileImageInUploadService() {
+    this.uploadService.setSelectFileImg(this.selectFileImg);
+  }
+
+  private startUpload() {
+    this.uploadService.startUpload(true);
+  }
+
+  private getCallBack() {
+    this.uploadService.taskUploadImg.snapshotChanges().pipe(
+      finalize(() => {
+        this.getImgDownloadUrl(this.uploadService.fireRefImg);
+      })).subscribe();
+  }
+
+  private isUpdateImage() {
+    return this.updateForm.value.newImage !== '';
+  }
 }

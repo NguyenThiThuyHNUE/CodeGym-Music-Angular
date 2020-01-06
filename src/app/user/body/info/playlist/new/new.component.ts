@@ -1,11 +1,10 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
-import {SnotifyService} from 'ng-snotify';
 import {MatDialogRef} from '@angular/material';
 import {PlaylistService} from '../../../../../service/playlist.service';
-import {IMessage} from '../../../../../interface/i-message';
-import {PlaylistComponent} from '../playlist.component';
-import {MatDialog} from '@angular/material/dialog';
+import {UserService} from '../../../../../service/user.service';
+import {SnotifyService} from 'ng-snotify';
+import {Response} from '../../../../../interface/response';
 
 @Component({
   selector: 'app-new',
@@ -15,21 +14,16 @@ import {MatDialog} from '@angular/material/dialog';
 })
 export class NewComponent implements OnInit {
   createForm = this.fb.group({
-    user_id: localStorage.getItem('id'),
+    user_id: UserService.getUserId(),
     namePlaylist: ['', Validators.required],
   });
 
   constructor(
     private fb: FormBuilder,
-    private Notify: SnotifyService,
-    public dialog: MatDialog,
     private dialogRef: MatDialogRef<NewComponent>,
-    private dialogRefPlaylist: MatDialogRef<PlaylistComponent>,
-    private playListService: PlaylistService
+    private playListService: PlaylistService,
+    private Notify: SnotifyService,
   ) {
-  }
-
-  ngOnInit() {
   }
 
   createPlaylist() {
@@ -43,14 +37,15 @@ export class NewComponent implements OnInit {
     return this.createForm.get('namePlaylist');
   }
 
-  private handleResponse(response: IMessage) {
-    this.Notify.success(`${response.message}`, 'Congratulations', {timeout: 5000});
+  private handleResponse(response: Response) {
+    this.Notify.success(`${response.message}`, {timeout: 1000});
     this.resetForm();
   }
 
   private resetForm() {
     this.dialogRef.close();
-    this.dialogRefPlaylist.close();
-    this.dialog.open(PlaylistComponent);
+  }
+
+  ngOnInit(): void {
   }
 }
