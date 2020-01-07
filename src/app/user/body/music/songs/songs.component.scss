@@ -1,3 +1,19 @@
+.mat-card-header-text {
+  width: 100%;
+
+  .song-item-title {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .trash-icon {
+    &:hover {
+      cursor: pointer;
+      color: deeppink;
+    }
+  }
+}
+
 .avatar {
   background-size: cover;
 }
@@ -34,11 +50,5 @@
   &:hover {
     cursor: pointer;
     color: deeppink;
-  }
-}
-
-.playlistItem {
-  &:hover {
-    cursor: pointer;
   }
 }

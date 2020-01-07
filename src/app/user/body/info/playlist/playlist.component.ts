@@ -37,7 +37,7 @@ export class PlaylistComponent implements OnInit {
   }
 
   putSongToPlaylist(playlistId) {
-    this.playListService.setUpDataSongToPutToPlaylist(playlistId, this.songId);
+    this.playListService.setUpDataSongToPutOrRemoveInPlaylist(playlistId, this.songId);
     this.playListService.putSongToPlaylist()
       .subscribe((response) => {
         this.handleAddSongToPlaylistResponse(response);
