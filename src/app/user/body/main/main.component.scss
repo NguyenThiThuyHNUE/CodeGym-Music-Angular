@@ -1,16 +1,17 @@
-.image-main {
-  width: 84px;
-  height: 84px;
+.songs-list-02 {
+  margin-top: 5rem;
 }
 
-i.fas.fa-ellipsis-h {
-  color: white;
+.upcoming-shows-area.section-padding-100 {
+  padding-left: 7rem;
 
-  &:hover {
-    cursor: pointer;
-    color: #bd177a;
+  .col-md-2.col-lg-2 {
+    max-height: 10rem;
   }
+
 }
+
+
 
 .custom-mat-tab {
   .mat-tab-body-content {

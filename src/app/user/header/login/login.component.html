@@ -28,7 +28,8 @@
           </div>
         </mat-card-content>
         <mat-card-actions align="end">
-          <button [disabled]="!loginForm.valid" [hidden]="!buttonStatus" type="submit" mat-button color="primary">
+          <button [disabled]="!loginForm.valid" [hidden]="!buttonStatus" class="login-btn" type="submit" mat-button
+                  color="primary">
             Login
           </button>
 
@@ -36,10 +37,12 @@
 
       </form>
       <mat-card-actions align="end">
-        <button  [hidden]="!buttonStatus" (click)="facebooklogin()" type="submit" mat-button color="primary">
-          Login facebook
+        <button [hidden]="!buttonStatus" (click)="facebooklogin()" class="loginFb-btn" type="submit" mat-button
+                color="primary">
+          <span class="login-btn-item">Login facebook</span>
+          <div><i class="fab fa-facebook-f"></i></div>
         </button>
-<!--        {{user.name}}-->
+        <!--        {{user.name}}-->
 
       </mat-card-actions>
     </mat-card>

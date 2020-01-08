@@ -1,0 +1,63 @@
+.play-icon.ng-star-inserted {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  bottom: 7rem;
+  color: white;
+  font-size: 3rem;
+  max-height: 0;
+}
+
+img.singer-avatar {
+  width: 155px;
+  height: 159px;
+}
+
+.singer-avatar {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.song-singer {
+  width: 10rem !important;
+  height: 10rem !important;
+  max-width: 10rem !important;
+  max-height: 10rem !important;
+  position: absolute;
+  top: 10rem;
+
+  span {
+    color: white;
+    font-size: .8rem;
+
+    &:hover {
+      color: deeppink;
+      cursor: pointer;
+    }
+  }
+}
+
+h6 {
+  color: white;
+  margin-bottom: -6px;
+
+  &:hover {
+    color: deeppink;
+    cursor: pointer;
+  }
+}
+
+i.fas.fa-ellipsis-h {
+  color: white;
+
+  &:hover {
+    cursor: pointer;
+    color: #bd177a;
+  }
+}
+
+.image-main {
+  width: 84px;
+  height: 84px;
+}

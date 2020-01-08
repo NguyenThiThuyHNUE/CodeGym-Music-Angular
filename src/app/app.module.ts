@@ -14,6 +14,7 @@ import {SocialLoginModule, AuthServiceConfig} from 'angularx-social-login';
 import {FacebookLoginProvider} from 'angularx-social-login';
 import {UserModule} from './user/user.module';
 import {MatDialogRef} from '@angular/material/dialog';
+import {SharedService} from './service/shared.service';
 
 const config = new AuthServiceConfig([
   {
@@ -34,7 +35,7 @@ export function provideConfig() {
     {provide: 'SnotifyToastConfig', useValue: ToastDefaults},
     SnotifyService,
     {provide: AuthServiceConfig, useFactory: provideConfig},
-    Song, {
+    Song, SharedService, {
       provide: MatDialogRef,
       useValue: {}
     },

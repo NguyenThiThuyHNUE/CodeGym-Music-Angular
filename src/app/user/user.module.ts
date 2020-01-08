@@ -30,15 +30,15 @@ import {ProfileComponent} from './body/info/profile/profile.component';
 import {PlaylistComponent} from './body/info/playlist/playlist.component';
 import {EtcComponent} from './body/main/etc/etc.component';
 import {NewComponent} from './body/info/playlist/new/new.component';
-import {SongsComponent} from './body/music/songs/songs.component';
 import {MusicModule} from './body/music/music.module';
 import {SingerModule} from './body/singer/singer.module';
-
+import {SongComponent} from './body/main/song/song.component';
+import { NowPlayComponent } from './footer/now-play/now-play.component';
 
 @NgModule({
   declarations: [UserComponent, HeaderComponent, BodyComponent, LoginComponent, AuthComponent,
     FooterComponent, MainComponent, ConfirmEqualValidatorDirective,
-    InfoComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent],
+    InfoComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent, SongComponent, NowPlayComponent],
   entryComponents: [LoginComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent],
   exports: [
     HeaderComponent,

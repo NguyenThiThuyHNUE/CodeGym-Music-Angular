@@ -1,0 +1,168 @@
+.now-play {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height: 7rem;
+  z-index: 2 !important;
+
+  .now-play-box {
+    justify-content: space-around !important;
+  }
+}
+
+.image-music-now-playing {
+  width: 100%;
+  height: 355px;
+}
+
+.npl-image {
+  display: flex;
+  padding: 1rem !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.npl-playlist {
+  h6, h3 {
+    color: white !important;
+  }
+
+  .npl-playlist-title {
+    padding: 1rem;
+    justify-content: space-between;
+    color: white;
+  }
+}
+
+
+.now-playing {
+  width: 70%;
+  display: flex;
+  padding: 0 20px;
+  background-color: #1d1633;
+  border-radius: .5rem;
+  align-items: center;
+
+
+  .control-box {
+    margin-left: 3rem;
+    margin-right: 2rem;
+    display: flex;
+    width: 3rem;
+    height: 3rem;
+    justify-content: center;
+    align-items: center;
+    color: #bd177a;
+    font-size: 1.5rem;
+
+    .btnControl {
+      background-color: #1d1633;
+      color: #bd177a;
+      font-size: 1.5rem;
+      border: none;
+      outline: 0;
+      transition: all ease 0.5s;
+
+      &.play {
+        .fa-pause {
+          transform: rotate(180deg);
+          display: none;
+        }
+      }
+
+      &.pause {
+        .fa-play {
+          transform: rotate(180deg);
+          display: none;
+        }
+      }
+    }
+  }
+
+  .info {
+    flex-basis: 70%;
+    color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    .seekBar {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      .mat-slider-horizontal {
+        height: 48px;
+        width: 100%;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .timing {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .volume-control {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    display: flex;
+    width: 1rem;
+    height: 3rem;
+    align-items: center;
+    color: #bd177a;
+    font-size: 1.5rem;
+
+    .mat-seekBar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 3rem;
+      height: 90px;
+      bottom: 5rem;
+      right: 2.5rem;
+    }
+
+    .ng-star-inserted {
+      background-color: #1d1633;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 3rem;
+      height: 8rem;
+      bottom: 90px;
+      right: 2.5rem;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .repeat-control {
+    display: flex;
+    width: 3rem;
+    height: 3rem;
+    align-items: center;
+    color: white;
+    font-size: 1.5rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    .repeat {
+      color: #bd177a;
+    }
+
+    .fa-redo {
+      font-size: 1rem;
+    }
+  }
+}
