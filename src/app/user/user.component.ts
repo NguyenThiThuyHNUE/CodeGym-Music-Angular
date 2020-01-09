@@ -9,6 +9,11 @@ export class UserComponent implements OnInit {
 
   constructor() {
   }
+
   ngOnInit(): void {
+  }
+
+  songResponse($event: any) {
+    console.log($event);
   }
 }

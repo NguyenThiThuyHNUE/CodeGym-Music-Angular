@@ -14,6 +14,8 @@ const routes: Routes = [
       {path: 'singer', loadChildren: './body/singer/singer.module#SingerModule'}
     ]
   },
+
+
 ];
 
 @NgModule({

@@ -1,0 +1,11 @@
+<img class="singer-avatar" src="{{song.avatar}}" alt="../../../../../assets/img/bg-img/bg-7.jpg"
+     (mouseleave)="hidePlayIcon()"
+     (mouseenter)="showPlayIcon()"
+     (click)="onClick(song)">
+<div class="play-icon" *ngIf="playIcon">
+  <i class="fa fa-play"></i>
+</div>
+<div class="song-singer">
+  <h6>{{song.name}}</h6>
+  <span>{{song.singer}}</span>
+</div>
