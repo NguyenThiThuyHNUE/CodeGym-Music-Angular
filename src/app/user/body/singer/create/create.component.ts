@@ -97,7 +97,7 @@ export class CreateComponent implements OnInit {
 
   startUpdateSongToServer() {
     this.singerService.create(this.addSingerForm.value).subscribe(response => {
-      this.router.navigate(['/home']).then(() => {
+      this.router.navigate(['/singer']).then(() => {
         alert(response.message);
       });
     });

@@ -33,6 +33,7 @@ import {NewComponent} from './body/info/playlist/new/new.component';
 import {SongsComponent} from './body/music/songs/songs.component';
 import {MusicModule} from './body/music/music.module';
 import {SingerModule} from './body/singer/singer.module';
+// import { CommentComponent } from './body/comment/comment.component';
 
 
 @NgModule({
