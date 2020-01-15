@@ -1,95 +1,27 @@
 <div class="breadcumb-area bg-img bg-overlay2"
      style="background-image: url(../../../../assets/img/bg-img/breadcumb.jpg);">
+  <div class="header-image">
+    <img src="../../../../assets/img/bg-img/bg-7.jpg"/></div>
   <div class="bradcumbContent">
     <h2>{{user.name}}</h2>
   </div>
 </div>
 <div class="about-us-area section-padding-100-0">
-  <div class="container">
-    <div class="row">
-      <!-- About Thumbnail -->
-      <div class="col-12 col-lg-6">
-        <div class="about-thumbnail mb-100">
-          <img src="{{user.image}}" alt="">
-
-        </div>
-      </div>
-      <!-- About Content -->
-      <div class="col-12 col-lg-6">
-        <div class="about--content mb-100">
-          <h4>{{user.email}} <br>
-            <div class="d-flex justify-content-between">I’m  {{user.name}}
-              <button (click)="showFormUpdate()" mat-button class="btn-update">Update</button>
-            </div>
-          </h4>
-
-          <p>Nulla pretium tincidunt felis, nec sollicitudin mauris lobortis in. Aliquam eu feugiat ligula, laoreet
-            efficitur nulla. Morbi nec neque porta, elementum massa at, vehicula nunc. Nulla facilisi. Donec id purus eu
-            lectus imperdiet varius. Curabitur consectetur nunc sem, vitae cursus enim tempor eget. Praesent
-            pellentesque nisi urna, sit amet suscipit ligula posuere id. Aenean id tortor vel quam ornare gravida.
-            Phasellus luctus feugiat nunc, quis vulputate ipsum convallis quis. Integer vel nulla erat. Donec erat
-            metus, luctus quis maximus quis, volutpat eu tellus. Interdum et malesuada fames ac ante ipsum primis in
-            faucibus.</p>
-          <!-- Key Notes -->
-          <ul class="key-notes">
-            <li>
-              <div class="check"><img src="../../../../assets/img/core-img/check.png" alt=""></div>
-              Donec id purus eu lectus imperdiet varius
-            </li>
-            <li>
-              <div class="check"><img src="../../../../assets/img/core-img/check.png" alt=""></div>
-              Id purus eu lectus imperdiet var
-            </li>
-            <li>
-              <div class="check"><img src="../../../../assets/img/core-img/check.png" alt=""></div>
-              Donec id purus eu lectus imperdiet varius
-            </li>
-            <li>
-              <div class="check"><img src="../../../../assets/img/core-img/check.png" alt=""></div>
-              Id purus eu lectus imperdiet var
-            </li>
-          </ul>
-        </div>
-      </div>
+  <div class="profile-nav row col-sm-12 col-md-12 col-lg-12">
+    <div class="profile-nav-item-on-left">
+      <a routerLinkActive="deep-pink" routerLink="all">All</a>
+      <a routerLinkActive="deep-pink" routerLink="favorite">Favorite</a>
+      <a routerLinkActive="deep-pink" routerLink="track">Tracks</a>
+      <a routerLinkActive="deep-pink" routerLink="playlist">Playlist</a>
+    </div>
+    <div class="profile-nav-item-on-right">
+      <button class="profile-edit-button" (click)="showProfile()">Edit</button>
+      <button class="profile-edit-button">Share</button>
+    </div>
+  </div>
+  <div class="row profile-content">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
-
-<div class="career-timeline-area section-padding-100">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="section-heading">
-          <div class=""><h2>My Playlist</h2>
-            <button data-backdrop="false" (click)="showPlaylistCreateForm()" mat-button class="newPlaylist">+ New
-              Playlist
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-12">
-        <div class="row mb-4" *ngFor="let playlist of playlists">
-          <div class="row">
-            <div class="col-md-2 ml-5">
-              <img src="../../../../assets/img/bg-img/bg-7.jpg" alt="">
-            </div>
-            <div class="cold-md-8">
-              <p (click)="showSongsInPlaylist(playlist.id)" class="playListName">{{playlist.namePlaylist}}</p>
-              <p class="playDescription">Playlist Description</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Side Thumbs -->
-    <div class="first-img">
-      <img src="../../../../assets/img/bg-img/man.png" alt="">
-    </div>
-    <div class="second-img">
-      <img src="../../../../assets/img/bg-img/microphone.png" alt="">
-    </div>
-  </div>

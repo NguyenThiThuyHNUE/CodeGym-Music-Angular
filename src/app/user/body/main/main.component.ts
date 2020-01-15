@@ -20,6 +20,7 @@ import {MainService} from '../../../service/main.service';
 export class MainComponent implements OnInit {
   songs: IMusic[];
   playIcon: boolean;
+  newSongs: IMusic[];
 
   constructor(
     private songService: SongService,
@@ -29,11 +30,18 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.getSongs();
+    this.getNewSongs();
   }
 
   getSongs() {
     return this.songService.getAll().subscribe(musics => {
       this.songs = musics.data;
+    });
+  }
+
+  getNewSongs() {
+    return this.songService.getNewSongs().subscribe(musics => {
+      this.newSongs = musics.data;
     });
   }
 

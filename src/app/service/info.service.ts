@@ -22,7 +22,8 @@ export class InfoService {
 
   static createProfileConfigDialog() {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '40%';
+    dialogConfig.width = '80%';
+    dialogConfig.height = '80%';
     return dialogConfig;
   }
 

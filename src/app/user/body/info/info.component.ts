@@ -6,6 +6,8 @@ import {User} from '../../../interface/user';
 import {timer} from 'rxjs';
 import {InfoService} from '../../../service/info.service';
 import {UserService} from '../../../service/user.service';
+import {SongService} from '../../../service/song.service';
+import {IMusic} from '../../../interface/i-music';
 
 @Component({
   selector: 'app-info',
@@ -17,10 +19,12 @@ export class InfoComponent implements OnInit {
   playlists: Playlist[];
   user: User;
   playlist: Playlist;
+  newSongs: IMusic[];
 
   constructor(public dialog: MatDialog,
               private zone: NgZone,
               private playlistService: PlaylistService,
+              private songService: SongService,
               private infoService: InfoService,
   ) {
     if (!this.user) {
@@ -34,7 +38,7 @@ export class InfoComponent implements OnInit {
     this.updatePlaylistAfterFiveSecond();
   }
 
-  showFormUpdate() {
+  showProfile() {
     this.infoService.showFormUpdate();
   }
 
