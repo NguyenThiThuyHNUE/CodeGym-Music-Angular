@@ -35,17 +35,18 @@ import {SingerModule} from './body/singer/singer.module';
 import {SongComponent} from './body/main/song/song.component';
 import {NowPlayComponent} from './footer/now-play/now-play.component';
 import {UploadComponent} from './body/upload/upload.component';
-import { AllComponent } from './body/info/all/all.component';
-import { FavoriteComponent } from './body/info/favorite/favorite.component';
-import { TrackComponent } from './body/info/track/track.component';
-import { CtPlaylistComponent } from './body/info/ct-playlist/ct-playlist.component';
-import { ChangePasswordComponent } from './body/info/profile/change-password/change-password.component';
+import {AllComponent} from './body/info/all/all.component';
+import {FavoriteComponent} from './body/info/favorite/favorite.component';
+import {TrackComponent} from './body/info/track/track.component';
+import {CtPlaylistComponent} from './body/info/ct-playlist/ct-playlist.component';
+import {ChangePasswordComponent} from './body/info/profile/change-password/change-password.component';
 
 @NgModule({
   declarations: [UserComponent, HeaderComponent, BodyComponent, LoginComponent, AuthComponent,
     FooterComponent, MainComponent, ConfirmEqualValidatorDirective,
-    InfoComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent, SongComponent, NowPlayComponent, UploadComponent, AllComponent, FavoriteComponent, TrackComponent, CtPlaylistComponent, ChangePasswordComponent],
-  entryComponents: [LoginComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent],
+    InfoComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent, SongComponent, NowPlayComponent, UploadComponent,
+    AllComponent, FavoriteComponent, TrackComponent, CtPlaylistComponent, ChangePasswordComponent],
+  entryComponents: [LoginComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent, ChangePasswordComponent],
   exports: [
     HeaderComponent,
     BodyComponent,

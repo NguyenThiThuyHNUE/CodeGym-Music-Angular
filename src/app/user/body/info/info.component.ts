@@ -34,8 +34,8 @@ export class InfoComponent implements OnInit {
 
   ngOnInit() {
     this.getUserCredentialToFillUpInterface();
-    this.getPlaylists();
-    this.updatePlaylistAfterFiveSecond();
+    // this.getPlaylists();
+    // this.updatePlaylistAfterFiveSecond();
   }
 
   showProfile() {

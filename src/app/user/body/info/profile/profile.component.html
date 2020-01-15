@@ -13,14 +13,14 @@
             <mat-card-title>Account</mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <p>Email: Some Emails</p>
-            <p>Password: <a href="#">Change Password</a></p>
+            <p>Email: {{oldEmail}}</p>
+            <p>Password: <a class="change-password" (click)="showFormChangePassword()">Change Password</a></p>
           </mat-card-content>
         </mat-card>
       </div>
 
       <div class="col-sm-9 col-md-9 col-lg-9">
-        <mat-card>
+        <mat-card class="mat-card-profile">
           <mat-card-header>
             <mat-card-title>Edit Your Profile</mat-card-title>
           </mat-card-header>

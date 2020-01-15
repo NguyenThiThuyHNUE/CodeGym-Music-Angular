@@ -1,5 +1,14 @@
+.mat-card-profile {
+  height: 30rem
+}
+
 .mat-card-account {
-  height: 9.6rem;
+  height: 13.2rem;
+
+  .change-password {
+    color: blue !important;
+    cursor: pointer;
+  }
 }
 
 button.profile-update-button-img {
