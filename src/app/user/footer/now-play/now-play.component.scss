@@ -34,6 +34,17 @@
   }
 }
 
+.play-icon1 {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  bottom: .5rem;
+  font-size: 1rem;
+  max-height: 0;
+  left: 44rem;
+  color: #bd177a;
+}
+
 
 .now-playing {
   width: 70%;
@@ -166,3 +177,4 @@
     }
   }
 }
+

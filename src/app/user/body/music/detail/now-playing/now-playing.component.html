@@ -47,6 +47,14 @@
                       </span>
                         </a>
                       </td>
+                      <td class="">
+                        <a routerLink="/home/music/delete/{{song.id}}" class="table-link danger dropdown-item"
+                           (click)="onClick(song.id)">
+                      <span class="fa-stack">
+                      <i class="fa fa-comment-o fa-stack-1x fa-inverse" style="color: red"></i>
+                      </span>
+                        </a>
+                      </td>
                     </tr>
                   </div>
                 </div>

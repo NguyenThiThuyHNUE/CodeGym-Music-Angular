@@ -24,6 +24,7 @@ export class DetailComponent implements OnInit {
     this.musicService.getMusics().subscribe(songs => {
       this.songs = songs.data;
       this.song = songs.data.find(song => song.id === this.idSong);
+      // this.idSong = this.song.id;
     });
     this.getCurrentUrl();
   }

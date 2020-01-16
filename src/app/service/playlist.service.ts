@@ -34,7 +34,6 @@ export class PlaylistService {
   createPlaylist(info) {
     return this.http.post<Response>(Url + '/api/playlist/create', info);
   }
-
   updatePlaylist(playlistId, data) {
     return this.http.post(Url + `/api/playlist/update/${playlistId}`, data);
   }

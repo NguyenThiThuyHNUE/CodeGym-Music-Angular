@@ -1,0 +1,13 @@
+<mat-card>
+  <form [formGroup]="createForm" (ngSubmit)="createComment()">
+    <mat-form-field>
+      <input formControlName="comment" matInput placeholder="Enter Comment">
+      <mat-hint align="end" *ngIf="comment.invalid && (comment.dirty || comment.touched)">
+        <span class="text-danger" *ngIf="comment.errors.required">Your Comment</span>
+      </mat-hint>
+    </mat-form-field>
+    <button [disabled]="!createForm.valid" type="submit" mat-button color="primary">
+      Create
+    </button>
+  </form>
+</mat-card>

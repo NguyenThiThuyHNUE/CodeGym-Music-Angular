@@ -32,6 +32,7 @@ import {EtcComponent} from './body/main/etc/etc.component';
 import {NewComponent} from './body/info/playlist/new/new.component';
 import {MusicModule} from './body/music/music.module';
 import {SingerModule} from './body/singer/singer.module';
+
 import {SongComponent} from './body/main/song/song.component';
 import {NowPlayComponent} from './footer/now-play/now-play.component';
 import {UploadComponent} from './body/upload/upload.component';

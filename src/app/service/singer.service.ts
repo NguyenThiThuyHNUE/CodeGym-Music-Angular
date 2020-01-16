@@ -4,7 +4,7 @@ import {AngularFireStorage} from '@angular/fire/storage';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IMessage} from '../interface/i-message';
-import {Response} from "../interface/response";
+import {Response} from '../interface/response';
 
 const webBackEndUrl = 'localhost:8000';
 
