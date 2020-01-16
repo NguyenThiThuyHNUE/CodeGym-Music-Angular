@@ -13,18 +13,11 @@ import {Playlist} from '../../../../interface/playlist';
 export class CtPlaylistComponent implements OnInit {
   userId: number;
   playlists: Playlist[];
-  leftPlaylists: Playlist[];
-  rightPlaylists: Playlist[];
   imageSrc = '../../../../../assets/img/bg-img/bg-7.jpg';
+  p = 1;
 
   constructor(private infoService: InfoService, private zone: NgZone,
               private playlistService: PlaylistService) {
-    if (this.leftPlaylists) {
-      this.leftPlaylists = [];
-    }
-    if (this.rightPlaylists) {
-      this.rightPlaylists = [];
-    }
   }
 
   ngOnInit() {
@@ -45,27 +38,11 @@ export class CtPlaylistComponent implements OnInit {
   }
 
   handleGetPlaylistsResponse(response) {
-    this.separateToTwoArray(response.data);
     return this.playlists = response.data;
-  }
-
-  separateToTwoArray(array) {
-    for (let i = 0; i < array.length; i++) {
-      if (this.isOdd(i)) {
-        this.leftPlaylists.push(array[i]);
-      } else {
-        this.rightPlaylists.push(array[i]);
-      }
-    }
-    console.log({leftArray: this.leftPlaylists, rightArray: this.rightPlaylists});
   }
 
   isOdd(inputNumber) {
     return inputNumber % 2;
-  }
-
-  distinguishEvenAndOdd() {
-
   }
 
   createPlaylist() {

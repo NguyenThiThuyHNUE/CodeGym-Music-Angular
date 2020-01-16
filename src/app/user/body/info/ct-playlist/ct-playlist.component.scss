@@ -14,10 +14,12 @@
 }
 
 .playlist-result {
-  margin-top: 3rem;
+  .playlist-item {
+    margin-top: 3rem;
+  }
 
   .playlist-item-content {
-    h3 {
+    h5 {
       color: white;
     }
   }

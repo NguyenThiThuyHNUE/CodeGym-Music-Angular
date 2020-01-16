@@ -40,6 +40,7 @@ import {FavoriteComponent} from './body/info/favorite/favorite.component';
 import {TrackComponent} from './body/info/track/track.component';
 import {CtPlaylistComponent} from './body/info/ct-playlist/ct-playlist.component';
 import {ChangePasswordComponent} from './body/info/profile/change-password/change-password.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [UserComponent, HeaderComponent, BodyComponent, LoginComponent, AuthComponent,
@@ -76,6 +77,7 @@ import {ChangePasswordComponent} from './body/info/profile/change-password/chang
     _MatMenuDirectivesModule,
     MatMenuModule,
     MatIconModule,
+    NgxPaginationModule,
     MatSelectModule,
   ]
 
