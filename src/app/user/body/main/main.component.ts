@@ -21,6 +21,8 @@ export class MainComponent implements OnInit {
   songs: IMusic[];
   playIcon: boolean;
   newSongs: IMusic[];
+  vnSongs: IMusic[];
+  usSongs: IMusic[];
 
   constructor(
     private songService: SongService,
@@ -31,6 +33,20 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.getSongs();
     this.getNewSongs();
+    this.getVnSongs();
+    this.getUsSongs();
+  }
+
+  getVnSongs() {
+    return this.songService.getVnSongs().subscribe((songs) => {
+      this.handleGetVnSongs(songs);
+    });
+  }
+
+  getUsSongs() {
+    return this.songService.getUsSongs().subscribe((songs) => {
+      this.handleGetUsSongs(songs);
+    });
   }
 
   getSongs() {
@@ -45,15 +61,13 @@ export class MainComponent implements OnInit {
     });
   }
 
-  showEtc(songId) {
-    this.mainService.showEtc(songId);
+  handleGetVnSongs(songs) {
+    this.vnSongs = songs.data.data;
+    console.log(songs);
   }
 
-  hidePlayIcon() {
-    return this.playIcon = false;
-  }
-
-  showPlayIcon() {
-    return this.playIcon = true;
+  handleGetUsSongs(songs) {
+    this.usSongs = songs.data.data;
+    console.log(songs);
   }
 }

@@ -1,0 +1,47 @@
+<div *ngIf="!playlists" class="playlist-not-result">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <h3>You haven't created any Playlist</h3>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <button (click)="createPlaylist()" mat-raised-button color="accent">Create Playlist</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="playlists" class="playlist-result">
+  <div class="row">
+    <div *ngFor="let playlist of leftPlaylists" class="col-sm-6 col-md-6 col-lg-6">
+      <div class="row">
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <div class="playlist-item-image">
+            <img src="{{imageSrc}}" alt="">
+          </div>
+        </div>
+        <div class="col-sm-8 col-md-8 col-lg-8">
+          <div class="row playlist-item-content">
+            <h3>Playlist Name</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let playlist of rightPlaylists" class="col-sm-6 col-md-6 col-lg-6">
+      <div class="row">
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <div class="playlist-item-image">
+            <img src="{{imageSrc}}" alt="">
+          </div>
+        </div>
+        <div class="col-sm-8 col-md-8 col-lg-8">
+          <div class="row playlist-item-content">
+            <h3>Playlist Name</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
