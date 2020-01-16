@@ -26,7 +26,7 @@ export class SongService {
   }
 
   create(musicInfo): Observable<Response> {
-    return this.http.post<Response>(Url + '/api/music/create/', musicInfo);
+    return this.http.post<Response>(Url + '/api/music/create', musicInfo);
   }
 
   getAll() {
@@ -35,6 +35,10 @@ export class SongService {
 
   getSong(songId) {
     return this.http.get<Response>(Url + `/api/song/${songId}`);
+  }
+
+  getNewSongs() {
+    return this.http.get<Response>(Url + `/api/new-song`);
   }
 
   edit(songId, musicInfo): Observable<Response> {

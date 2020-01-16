@@ -68,6 +68,10 @@ export class UserService {
     return this.http.post(Url + `/api/update?token=${localStorage.getItem('token')}`, updateInfo);
   }
 
+  changePassword(data) {
+   return this.http.post<Response>(Url + '/api/changePassword', data);
+  }
+
   saveDataToLocalStorage(response: any) {
     localStorage.setItem('id', response.id);
     localStorage.setItem('name', response.name);

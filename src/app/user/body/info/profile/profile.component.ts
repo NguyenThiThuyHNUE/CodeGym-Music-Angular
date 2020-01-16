@@ -42,6 +42,10 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
   }
 
+  showFormChangePassword() {
+    this.profileService.showFormChangePassword();
+  }
+
   userUpdate() {
     if (this.isUpdateImage()) {
       this.setUpFileImageInUploadService();
@@ -56,7 +60,6 @@ export class ProfileComponent implements OnInit {
   }
 
   handleUpdateResponse(response) {
-    // this.updateUserCredentialInInterface();
     this.resetUpdateForm();
     this.updateUserCredentialInInterface();
   }

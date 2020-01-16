@@ -25,10 +25,9 @@ export class UploadService {
       this.taskUploadImg = this.startUploadImageToFireBase(this.firePathImg);
     }
     if (file) {
-      console.log('update file');
       this.firePathFile = this.setUpPathToFileInFireBase();
       this.fireRefFile = this.setUpFileRefInFireBase(this.firePathFile);
-      this.taskUploadFile = this.startUploadImageToFireBase(this.firePathFile);
+      this.taskUploadFile = this.startUploadFileToFireBase(this.firePathFile);
     }
   }
 
@@ -48,12 +47,16 @@ export class UploadService {
     return this.songService.uploadImg(firePathImg, this.selectFileImg);
   }
 
+  startUploadFileToFireBase(firePath) {
+    return this.songService.uploadMp3(firePath, this.selectFile);
+  }
+
   setSelectFileImg(selectFileImg) {
     this.selectFileImg = selectFileImg;
   }
 
   setSelectFile(selectFile) {
-    this.selectFileImg = selectFile;
+    this.selectFile = selectFile;
   }
 
   startUpload(image?, file?) {

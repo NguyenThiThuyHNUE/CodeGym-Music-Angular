@@ -1,14 +1,18 @@
 <mat-tab-group selectedIndex="">
-  <mat-tab label="Login">
+  <mat-tab class="login-tab" label="Login">
     <mat-card>
       <form class="tp-form" [formGroup]="loginForm" (ngSubmit)="userLogin()">
         <mat-card-content>
 
           <!--  Email   -->
           <div class="">
-            <mat-form-field appearance="fill" hideRequiredMarker class="tp-full-width">
-              <mat-label>Email</mat-label>
-              <input matInput type="email" formControlName="emailLogin" email required>
+            <mat-form-field floatLabel="never" appearance="fill" hideRequiredMarker class="tp-full-width">
+              <input class="input-email" matInput placeholder="Email" type="email" formControlName="emailLogin" email
+                     required>
+              <mat-icon *ngIf="emailLogin.invalid && (emailLogin.dirty || !emailLogin.touched)" matPrefix><i
+                class="far fa-envelope-open"></i></mat-icon>
+              <mat-icon *ngIf="!emailLogin.invalid && (emailLogin.dirty || emailLogin.touched)" matPrefix><i
+                class="far fa-envelope"></i></mat-icon>
               <mat-hint align="end" *ngIf="emailLogin.invalid && (emailLogin.dirty || emailLogin.touched)">
                 <span class="text-danger" *ngIf="emailLogin.errors.required">Email is required</span>
                 <span class="text-danger" *ngIf="emailLogin.errors.email">Email Format incorrectly</span>
@@ -18,17 +22,22 @@
 
           <!--  Password    -->
           <div class="">
-            <mat-form-field appearance="fill" class="tp-full-width">
-              <mat-label>Password</mat-label>
-              <input type="password" matInput formControlName="passwordLogin" required>
+            <mat-form-field floatLabel="never" appearance="fill" class="tp-full-width">
+              <input class="input-password" type="password" placeholder="Password" matInput
+                     formControlName="passwordLogin" required>
+              <mat-icon *ngIf="passwordLogin.invalid && (passwordLogin.dirty || !passwordLogin.touched)" matPrefix><i
+                class="fas fa-unlock"></i></mat-icon>
+              <mat-icon *ngIf="!passwordLogin.invalid && (passwordLogin.dirty || passwordLogin.touched)" matPrefix><i
+                class="fas fa-lock"></i></mat-icon>
               <mat-hint align="end" *ngIf="passwordLogin.invalid && (passwordLogin.dirty || passwordLogin.touched)">
                 <span class="text-danger" *ngIf="passwordLogin.errors.required">Password can not empty!!!</span>
               </mat-hint>
             </mat-form-field>
           </div>
         </mat-card-content>
-        <mat-card-actions align="end">
-          <button [disabled]="!loginForm.valid" [hidden]="!buttonStatus" type="submit" mat-button color="primary">
+        <mat-card-actions class="btn-tab-actions" align="end">
+          <button [disabled]="!loginForm.valid" [hidden]="!buttonStatus" class="login-btn" type="submit" mat-button
+                  color="primary">
             Login
           </button>
 
@@ -36,10 +45,11 @@
 
       </form>
       <mat-card-actions align="end">
-        <button  [hidden]="!buttonStatus" (click)="facebooklogin()" type="submit" mat-button color="primary">
-          Login facebook
+        <button [hidden]="!buttonStatus" (click)="facebooklogin()" class="loginFb-btn" type="submit" mat-button
+                color="primary">
+          <span class="login-btn-item">Login facebook</span>
+          <div><i class="fab fa-facebook-f"></i></div>
         </button>
-<!--        {{user.name}}-->
 
       </mat-card-actions>
     </mat-card>
@@ -50,9 +60,10 @@
         <mat-card-content>
           <!--  Name  -->
           <div class="">
-            <mat-form-field hideRequiredMarker class="tp-full-width" appearance="fill">
-              <mat-label>Name</mat-label>
-              <input matInput type="text" formControlName="name" required>
+            <mat-form-field floatLabel="never" hideRequiredMarker class="tp-full-width" appearance="fill">
+              <input class="input-name" matInput placeholder="Enter Your Name" type="text" formControlName="name"
+                     required>
+              <mat-icon matPrefix><i class="fas fa-user"></i></mat-icon>
               <mat-hint align="end" *ngIf="name.invalid && (name.dirty || name.touched)">
                 <span class="text-danger" *ngIf="name.errors.required">Name is required</span>
               </mat-hint>
@@ -62,8 +73,12 @@
           <!--  Email   -->
           <div class="">
             <mat-form-field appearance="fill" hideRequiredMarker class="tp-full-width">
-              <mat-label>Email</mat-label>
-              <input matInput type="email" formControlName="email" email required>
+              <input class="input-email" matInput placeholder="Enter Your Email" type="email" formControlName="email"
+                     email required>
+              <mat-icon *ngIf="email.invalid && (email.dirty || !email.touched)" matPrefix><i
+                class="far fa-envelope-open"></i></mat-icon>
+              <mat-icon *ngIf="!email.invalid && (email.dirty || email.touched)" matPrefix><i
+                class="far fa-envelope"></i></mat-icon>
               <mat-hint align="end" *ngIf="email.invalid && (email.dirty || email.touched)">
                 <span class="text-danger" *ngIf="email.errors.required">Email is required</span>
                 <span class="text-danger" *ngIf="email.errors.email">Email Format incorrectly</span>
@@ -74,8 +89,12 @@
           <!--  Password    -->
           <div class="">
             <mat-form-field appearance="fill" class="tp-full-width">
-              <mat-label>Password</mat-label>
-              <input type="password" matInput formControlName="password" required>
+              <input class="input-password" placeholder="Enter Password" type="password" matInput
+                     formControlName="password" required>
+              <mat-icon *ngIf="password.invalid && (password.dirty || !password.touched)" matPrefix><i
+                class="fas fa-unlock"></i></mat-icon>
+              <mat-icon *ngIf="!password.invalid && (password.dirty || password.touched)" matPrefix><i
+                class="fas fa-lock"></i></mat-icon>
               <mat-hint align="end" *ngIf="password.invalid && (password.dirty || password.touched)">
                 <span class="text-danger" *ngIf="password.errors.required">Password can not empty!!!</span>
                 <span class="text-danger" *ngIf="password.errors.minlength">Password has at least 8 character!!!</span>
@@ -86,9 +105,16 @@
           <!--  confirmPassword    -->
           <div class="">
             <mat-form-field appearance="fill" class="tp-full-width">
-              <mat-label>Confirm Password</mat-label>
-              <input appConfirmEqualValidator="password" type="password" matInput formControlName="confirmPassword"
+              <input class="input-password" placeholder="Confirm Password" appConfirmEqualValidator="password"
+                     type="password" matInput
+                     formControlName="confirmPassword"
                      required>
+              <mat-icon *ngIf="confirmPassword.invalid && (confirmPassword.dirty || !confirmPassword.touched)"
+                        matPrefix><i
+                class="fas fa-unlock"></i></mat-icon>
+              <mat-icon *ngIf="!confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)"
+                        matPrefix><i
+                class="fas fa-lock"></i></mat-icon>
               <mat-hint align="end"
                         *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
                 <span class="text-danger"
@@ -108,12 +134,13 @@
             </mat-expansion-panel>
           </div>
 
-          <div class="">
+          <div class="mt-3">
             <mat-checkbox>I Agree</mat-checkbox>
           </div>
         </mat-card-content>
         <mat-card-actions align="end">
-          <button [disabled]="!registerForm.valid" [hidden]="!buttonStatus" type="submit" mat-button color="primary">
+          <button class="btn-register" [disabled]="!registerForm.valid" [hidden]="!buttonStatus" type="submit"
+                  mat-button color="primary">
             Register
           </button>
         </mat-card-actions>

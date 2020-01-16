@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 /* tslint:disable */
 import {MusicService} from '../../../service/music.service';
 import {IMusic} from '../../../interface/i-music';
@@ -19,6 +19,8 @@ import {MainService} from '../../../service/main.service';
 })
 export class MainComponent implements OnInit {
   songs: IMusic[];
+  playIcon: boolean;
+  newSongs: IMusic[];
 
   constructor(
     private songService: SongService,
@@ -28,6 +30,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.getSongs();
+    this.getNewSongs();
   }
 
   getSongs() {
@@ -36,7 +39,21 @@ export class MainComponent implements OnInit {
     });
   }
 
+  getNewSongs() {
+    return this.songService.getNewSongs().subscribe(musics => {
+      this.newSongs = musics.data;
+    });
+  }
+
   showEtc(songId) {
     this.mainService.showEtc(songId);
+  }
+
+  hidePlayIcon() {
+    return this.playIcon = false;
+  }
+
+  showPlayIcon() {
+    return this.playIcon = true;
   }
 }

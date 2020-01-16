@@ -1,3 +1,47 @@
+.login-tab {
+  overflow: hidden;
+  height: 100%;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-label {
+  top: 1.5375em;
+  margin-top: -.5em;
+}
+
+html.cdk-global-scrollblock {
+  overflow: hidden;
+}
+
+mat-card.mat-card.ng-star-inserted {
+  border-radius: 0 !important;
+  overflow: hidden;
+}
+
+mat-dialog-container#mat-dialog-0 {
+  overflow: hidden;
+}
+
+.btn-tab-actions {
+  margin-top: 5rem;
+}
+
+.mat-form-field-infix {
+  margin-left: .6rem !important;
+}
+
+.mat-form-field-flex {
+  margin-bottom: 1rem;
+}
+
+input.input-email, input.input-password, input.input-name {
+  font-size: 1.2rem;
+}
+
+.mat-form-field-invalid .mat-input-element, .mat-warn .mat-input-element {
+  font-size: 1.2rem;
+  caret-color: #f44336;
+}
+
 .tp-form {
   min-width: 150px;
   max-width: 500px;
@@ -6,4 +50,42 @@
 
 .tp-full-width {
   width: 100%;
+}
+
+mat-card-actions.mat-card-actions.mat-card-actions-align-end {
+  margin-bottom: 0;
+}
+
+button.mat-button.mat-button-base.mat-primary {
+  width: 100%;
+  height: 3rem;
+
+  span.mat-button-wrapper {
+    color: beige;
+  }
+}
+
+.login-btn {
+  background-color: #f50;
+}
+
+.btn-register {
+  background-color: #00ba00;
+}
+
+.login-btn-item {
+  position: relative !important;
+  top: 6px !important;
+}
+
+.loginFb-btn {
+  background-color: blue;
+  color: black;
+}
+
+i.fab.fa-facebook-f {
+  position: relative;
+  left: 13rem;
+  bottom: 2rem;
+  font-size: 2rem;
 }
