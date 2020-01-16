@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 import {MusicRoutingModule} from './music-routing.module';
 import {MusicComponent} from './music.component';
 import {CreateComponent} from './create/create.component';
+// import {CreateComponent} from './detail/comment/create/create.component';
 import {DeleteComponent} from './delete/delete.component';
 import {EditComponent} from './edit/edit.component';
 import {DetailComponent} from './detail/detail.component';
@@ -25,31 +26,34 @@ import {SongsComponent} from './songs/songs.component';
 import {ChangeNamePLComponent} from './songs/change-name-pl/change-name-pl.component';
 import {UserModule} from '../../user.module';
 import { CommentComponent } from './detail/comment/comment.component';
+import {MatListModule} from '@angular/material/list';
+import { CreateCommentComponent } from './detail/comment/create-comment/create-comment.component';
 
 
 @NgModule({
   declarations: [MusicComponent, CreateComponent, DeleteComponent, EditComponent, DetailComponent,
-    NowPlayingComponent, SongsComponent, ChangeNamePLComponent, CommentComponent,
+    NowPlayingComponent, SongsComponent, ChangeNamePLComponent, CommentComponent, CreateCommentComponent,
   ],
-  entryComponents: [SongsComponent, ChangeNamePLComponent],
-  imports: [
-    MusicRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-    MatProgressBarModule,
-    SnotifyModule,
-    MatExpansionModule,
-    MatCheckboxModule,
-    MatSliderModule,
-    MatTabsModule,
-    MatRadioModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatDialogModule,
-  ]
+  entryComponents: [SongsComponent, ChangeNamePLComponent, CommentComponent, CreateComponent, CreateCommentComponent],
+    imports: [
+        MusicRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        CommonModule,
+        MatProgressBarModule,
+        SnotifyModule,
+        MatExpansionModule,
+        MatCheckboxModule,
+        MatSliderModule,
+        MatTabsModule,
+        MatRadioModule,
+        MatInputModule,
+        MatButtonModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatDialogModule,
+        MatListModule,
+    ]
 })
 export class MusicModule {
 }

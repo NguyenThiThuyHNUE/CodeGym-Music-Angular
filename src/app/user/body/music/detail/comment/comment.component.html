@@ -1,1 +1,19 @@
-<p>comment works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Comments
+    </mat-card-title>
+    <mat-card-subtitle>
+      <button mat-button (click)="newComment()">Create IComment</button>
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let comment of comments">
+        <button mat-button>{{comment.comment}}</button>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+<app-create-comment *ngIf="isPlay"></app-create-comment>

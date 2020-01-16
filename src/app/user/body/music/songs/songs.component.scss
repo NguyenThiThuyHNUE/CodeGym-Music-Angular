@@ -42,3 +42,10 @@
     cursor: pointer;
   }
 }
+
+.material-icons {
+  &:hover {
+    cursor: pointer;
+    color: white;
+  }
+}

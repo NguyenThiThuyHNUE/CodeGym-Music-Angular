@@ -28,6 +28,7 @@ export class PlaylistComponent implements OnInit {
     private fb: FormBuilder,
     private Notify: SnotifyService,
     private playListService: PlaylistService) {
+    console.log(songId);
   }
 
   ngOnInit() {
@@ -38,6 +39,7 @@ export class PlaylistComponent implements OnInit {
 
   putSongToPlaylist(playlistId) {
     this.playListService.setUpDataSongToPutToPlaylist(playlistId, this.songId);
+    console.log(this.songId.id);
     this.playListService.putSongToPlaylist()
       .subscribe((response) => {
         this.handleAddSongToPlaylistResponse(response);
@@ -47,6 +49,7 @@ export class PlaylistComponent implements OnInit {
   getPlaylists() {
     this.playListService.getPlaylists(this.userId)
       .subscribe((response) => {
+        console.log(this.handleGetPlaylistResponse(response));
         this.handleGetPlaylistResponse(response);
       });
 

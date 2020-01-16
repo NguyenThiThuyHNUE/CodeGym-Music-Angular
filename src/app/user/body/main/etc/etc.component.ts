@@ -5,6 +5,7 @@ import {MatDialogRef} from '@angular/material';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {Inject} from '@angular/core';
 import {MainService} from '../../../../service/main.service';
+import {IMusic} from '../../../../interface/i-music';
 
 @Component({
   selector: 'app-etc',
@@ -12,9 +13,11 @@ import {MainService} from '../../../../service/main.service';
   styleUrls: ['./etc.component.scss'], encapsulation: ViewEncapsulation.None
 })
 export class EtcComponent implements OnInit {
+  animal: string;
+  name: string;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public song: IMusic,
     public dialog: MatDialog,
     private mainService: MainService,
     private dialogRef: MatDialogRef<PlaylistComponent>,
@@ -24,12 +27,21 @@ export class EtcComponent implements OnInit {
   ngOnInit() {
   }
 
+
   closeEtc() {
     return this.dialogRef.close();
   }
 
   showPlaylists() {
     this.closeEtc();
-    this.mainService.showPlaylists(this.data);
+    this.mainService.showPlaylists(this.song);
   }
+
+  showComments() {
+    this.closeEtc();
+    this.mainService.showComments(this.song);
+    this.mainService.getMusicId(this.song);
+    console.log(this.song);
+  }
+
 }
