@@ -230,7 +230,7 @@ export class EtcComponent implements OnInit {
   }
 
   addSongToPlaylist(playlistId) {
-    this.playListService.setUpDataSongToPutToPlaylist(playlistId, this.song.id);
+    this.playListService.setUpDataSongToPutOrRemoveInPlaylist(playlistId, this.song.id);
     this.playListService.putSongToPlaylist()
       .subscribe((response) => {
         this.handleAddSongToPlaylistResponse(response);
