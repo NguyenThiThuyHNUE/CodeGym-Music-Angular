@@ -29,6 +29,11 @@ export class MainComponent implements OnInit {
     this.getVnSongs();
     this.getUsSongs();
     this.getDataWhenEtcClosed();
+    this.getSongsUserHasLiked();
+  }
+
+  getSongsUserHasLiked() {
+    // this.songService.
   }
 
   getDataWhenEtcClosed() {

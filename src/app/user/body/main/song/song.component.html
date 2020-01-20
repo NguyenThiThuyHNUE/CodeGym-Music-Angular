@@ -8,6 +8,9 @@
   <div class="etc-icon" *ngIf="icon">
     <i (click)="showEtc()" class="fas fa-ellipsis-h color-to-pink"></i>
   </div>
+  <div class="etc-icon" *ngIf="icon">
+    <app-heart [songId]="song.id"></app-heart>
+  </div>
 </div>
 <div class="song-singer">
   <h6>{{song.name}}</h6>

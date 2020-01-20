@@ -1,10 +1,12 @@
-form.header-query-wraper.ng-dirty.ng-valid.ng-touched {
-  max-height: 3.5rem !important;
-}
-
 .header-button-find {
   bottom: 3.5rem;
   left: 71%;
+}
+
+.header-query-wrapper {
+  span.ng-tns-c10-1.ng-star-inserted {
+    color: white;
+  }
 }
 
 span.ng-tns-c8-0.ng-star-inserted, input#mat-input-0 {
