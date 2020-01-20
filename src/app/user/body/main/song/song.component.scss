@@ -1,4 +1,8 @@
-.play-icon.ng-star-inserted {
+.wrapper-icon-image {
+  max-height: 9rem !important;
+}
+
+.play-icon {
   display: flex;
   justify-content: center;
   position: relative;
@@ -8,6 +12,17 @@
   max-height: 0;
 }
 
+.color-to-pink {
+  cursor: pointer;
+  color: deeppink !important;
+}
+
+.etc-icon {
+  bottom: 10rem;
+  display: flex;
+  position: relative;
+  left: 8rem;
+}
 
 
 img.singer-avatar {

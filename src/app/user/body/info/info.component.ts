@@ -75,6 +75,6 @@ export class InfoComponent implements OnInit {
     this.user.id = UserService.getUserId();
     this.user.email = UserService.getUserEmail();
     this.user.name = UserService.getUserName();
-    this.user.image = UserService.getUserImage();
+    this.user.image = UserService.getUserAvatar();
   }
 }

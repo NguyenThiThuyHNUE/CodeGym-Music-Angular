@@ -4,12 +4,13 @@ import {MusicService} from '../../../service/music.service';
 import {IMusic} from '../../../interface/i-music';
 import {AudioService} from '../../../service/audio.service';
 import {Observable} from 'rxjs';
-import {MatSliderChange} from '@angular/material';
+import {MatDialogRef, MatSliderChange} from '@angular/material';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {PlaylistComponent} from '../info/playlist/playlist.component';
 import {EtcComponent} from './etc/etc.component';
 import {SongService} from '../../../service/song.service';
 import {MainService} from '../../../service/main.service';
+import {SharedService} from '../../../service/shared.service';
 
 @Component({
   selector: 'app-main',
@@ -26,8 +27,9 @@ export class MainComponent implements OnInit {
 
   constructor(
     private songService: SongService,
+    private shareService: SharedService,
     private mainService: MainService,
-  ) {
+    private dialogRef: MatDialogRef<EtcComponent>) {
   }
 
   ngOnInit() {
@@ -35,6 +37,28 @@ export class MainComponent implements OnInit {
     this.getNewSongs();
     this.getVnSongs();
     this.getUsSongs();
+    this.getDataWhenEtcClosed();
+  }
+
+  getDataWhenEtcClosed() {
+    this.shareService.songDelete.subscribe((data) => {
+      this.removeSongInInterface(data);
+    });
+  }
+
+  removeSongInInterface(data) {
+    if (this.isUsType(data.category)) {
+      this.removeSongInUsArray(data);
+    }
+    return this.vnSongs.splice(this.vnSongs.indexOf(data), 1);
+  }
+
+  removeSongInUsArray(data) {
+    return this.usSongs.splice(this.usSongs.indexOf(data), 1);
+  }
+
+  isUsType(data) {
+    return data === 'US';
   }
 
   getVnSongs() {
@@ -63,11 +87,9 @@ export class MainComponent implements OnInit {
 
   handleGetVnSongs(songs) {
     this.vnSongs = songs.data.data;
-    console.log(songs);
   }
 
   handleGetUsSongs(songs) {
     this.usSongs = songs.data.data;
-    console.log(songs);
   }
 }

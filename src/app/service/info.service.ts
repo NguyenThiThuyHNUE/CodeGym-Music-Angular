@@ -56,7 +56,7 @@ export class InfoService {
     return playlist.namePlaylist;
   }
 
-  private openSongDiaLog(dialogConfig) {
+  openSongDiaLog(dialogConfig) {
     this.dialog.open(SongsComponent, dialogConfig);
   }
 }

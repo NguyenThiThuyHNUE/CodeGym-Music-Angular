@@ -39,7 +39,7 @@ export class NowPlayComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.pauseMusic();
-    this.musicSrc = this.currentSong.musicUrl;
+    this.musicSrc = this.currentSong.file;
     this.setAudio(this.musicSrc);
     this.setStartTime();
     this.setRemainTime();

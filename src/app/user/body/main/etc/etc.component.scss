@@ -1,5 +1,111 @@
+.edit-song-tp-full-width {
+  width: 100%
+}
+
+.comment-song-tp-full-width {
+  width: 50%
+}
+
+button.edit-song-button-img {
+  bottom: 2rem;
+  left: 1.5rem;
+}
+
+.edit-song-button-img {
+  display: inline-block;
+  position: relative;
+  height: 26px;
+  padding: 2px 11px 2px 10px;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  background-color: #fff;
+  cursor: pointer;
+  color: #333;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  font-weight: 100;
+  text-align: center;
+  vertical-align: baseline;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  box-sizing: border-box;
+}
+
+
 .cdk-global-scrollblock {
   position: static !important;
   width: initial !important;
   overflow-y: inherit !important;
+}
+
+.etc-list {
+  position: fixed;
+  z-index: 123;
+  padding-left: 0px;
+}
+
+.etc-content {
+  padding-left: 0px;
+  padding-right: 0px;
+  left: 15%;
+
+  .playlist-item-content {
+    &:hover {
+      cursor: pointer;
+      color: deeppink
+    }
+  }
+
+  .tp-full-width {
+    width: 50%;
+  }
+
+  .etc-comment-section {
+    .etc-comment-section-icon {
+      font-size: 1.5rem;
+      margin-top: 1rem;
+      margin-left: .5rem;
+    }
+
+    img {
+      margin-right: 1rem;
+    }
+
+    display: flex;
+    align-items: center;
+  }
+}
+
+.color-to-pink {
+  cursor: pointer;
+  color: deeppink;
+}
+
+.black {
+  color: black !important;
+}
+
+.playlist-item-add-to {
+  margin-top: 0;
+
+  button {
+    display: inline-block;
+    position: relative;
+    height: 26px;
+    margin: 0 5px 0 0;
+    padding: 2px 11px 2px 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+    background-color: #fff;
+    cursor: pointer;
+    color: #333;
+    font-size: 14px;
+    line-height: 20px;
+    white-space: nowrap;
+    font-weight: 100;
+    text-align: center;
+    vertical-align: baseline;
+  }
 }

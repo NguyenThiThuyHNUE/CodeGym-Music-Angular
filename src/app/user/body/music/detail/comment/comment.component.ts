@@ -14,39 +14,27 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 })
 export class CommentComponent implements OnInit {
   userId: number;
-  musicId: number;
   currentSong: IMusic;
   comments: IComment [];
   isPlay = false;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: IMusic, private commentService: CommentService,
+  constructor(@Inject(MAT_DIALOG_DATA) public data: IMusic,
+              private commentService: CommentService,
               private sharedService: SharedService) {
   }
 
   ngOnInit() {
     this.setUserId();
-    this.getComments();
   }
 
   newComment() {
     this.commentService.showFormCreateComment(this.data);
   }
 
-  getComments() {
-    this.commentService.getAll(this.userId, this.musicId)
-      .subscribe((response) => {
-        this.handleGetCommentstResponse(response);
-      });
-
-  }
-
-  private handleGetCommentstResponse(response) {
-    return this.comments = response.data;
-  }
-
   private setUserId() {
     this.userId = UserService.getUserId();
   }
+
 
   // private setMusicId() {
   //   this.userId = MusicService.getMusicId();

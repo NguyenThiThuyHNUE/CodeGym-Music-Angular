@@ -1,13 +1,14 @@
-<img class="singer-avatar" src="{{song.avatar}}" alt="../../../../../assets/img/bg-img/bg-7.jpg"
-     (mouseleave)="hidePlayIcon()"
-     (mouseenter)="showPlayIcon()"
-     (click)="onClick(song)">
-<div class="play-icon" *ngIf="playIcon">
-  <i class="fa fa-play"></i>
+<div (mouseleave)="hidePlayIcon()"
+     (mouseenter)="showPlayIcon()" class="wrapper-icon-image">
+  <img class="singer-avatar" src="{{song.avatar}}" alt="../../../../../assets/img/bg-img/bg-7.jpg"
+       (click)="onClick(song)">
+  <div class="play-icon" *ngIf="icon">
+    <i class="fa fa-play color-to-pink"></i>
+  </div>
+  <div class="etc-icon" *ngIf="icon">
+    <i (click)="showEtc()" class="fas fa-ellipsis-h color-to-pink"></i>
+  </div>
 </div>
-
-
-
 <div class="song-singer">
   <h6>{{song.name}}</h6>
   <span>{{song.singer}}</span>

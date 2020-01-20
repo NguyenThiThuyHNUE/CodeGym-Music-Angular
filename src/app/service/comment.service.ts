@@ -5,26 +5,27 @@ import {Response} from '../interface/response';
 import {Url} from '../../../url-project';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {CreateCommentComponent} from '../user/body/music/detail/comment/create-comment/create-comment.component';
+import {MainService} from './main.service';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class CommentService {
 
-  constructor(private http: HttpClient,
-              public dialog: MatDialog) {
-  }
+    constructor(private http: HttpClient,
+                public dialog: MatDialog) {
+    }
 
-  create(comentInfo): Observable<Response> {
-    return this.http.post<Response>(Url + '/api/comment/create/', comentInfo);
-  }
+    create(commentInfo): Observable<Response> {
+        return this.http.post<Response>(Url + '/api/comment/create/', commentInfo);
+    }
 
-  getAll(userID, singerId) {
-    return this.http.get(Url + `/api/comments/${userID}/${singerId}`);
-  }
+    getAllCommentOfSong(songId) {
+        return this.http.get(Url + `/api/comments/${songId}`);
+    }
 
-  showFormCreateComment(dialogConfig) {
-    console.log(dialogConfig);
-    this.dialog.open(CreateCommentComponent, dialogConfig);
-  }
+    showFormCreateComment(config) {
+        const dialogConfig = MainService.createConfigDialog(config);
+        this.dialog.open(CreateCommentComponent, dialogConfig);
+    }
 }

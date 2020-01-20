@@ -12,6 +12,7 @@ import {SongData} from '../interface/song-data';
 export class MainService {
   musicId: number;
   data: SongData;
+
   constructor(public dialog: MatDialog) {
   }
 
@@ -21,17 +22,10 @@ export class MainService {
     return dialogConfig;
   }
 
-  getMusicId(songId) {
-    // console.log(dialogConfig.data.id);
-    // this.musicId = dialogConfig.data.id;
-    // console.log(this.musicId);
-    // return this.musicId;
-    // console.log(this.data.songId);
-    // return this.data.songId;
-  }
-
   showEtc(song) {
     const dialogConfig = MainService.createConfigDialog(song);
+    dialogConfig.height = '70%';
+    dialogConfig.width = '70%';
     this.dialog.open(EtcComponent, dialogConfig);
   }
 
@@ -42,6 +36,7 @@ export class MainService {
 
   showComments(config) {
     const dialogConfig = MainService.createConfigDialog(config);
+
     this.dialog.open(CommentComponent, dialogConfig);
   }
 

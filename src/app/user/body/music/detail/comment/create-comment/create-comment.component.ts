@@ -43,9 +43,7 @@ export class CreateCommentComponent implements OnInit {
   }
 
   getMusicId() {
-    const songId = this.mainService.getMusicId(this.song);
-    console.log(this.song);
-    return this.mainService.getMusicId(this.song);
+    return this.song.id;
   }
 
   private handleResponse(response: Response) {
