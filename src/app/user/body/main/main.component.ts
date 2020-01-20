@@ -1,15 +1,7 @@
-import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
-/* tslint:disable */
-import {MusicService} from '../../../service/music.service';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {IMusic} from '../../../interface/i-music';
-import {AudioService} from '../../../service/audio.service';
-import {Observable} from 'rxjs';
-import {MatDialogRef, MatSliderChange} from '@angular/material';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {PlaylistComponent} from '../info/playlist/playlist.component';
-import {EtcComponent} from './etc/etc.component';
+import {MatDialog} from '@angular/material/dialog';
 import {SongService} from '../../../service/song.service';
-import {MainService} from '../../../service/main.service';
 import {SharedService} from '../../../service/shared.service';
 
 @Component({
@@ -20,7 +12,6 @@ import {SharedService} from '../../../service/shared.service';
 })
 export class MainComponent implements OnInit {
   songs: IMusic[];
-  playIcon: boolean;
   newSongs: IMusic[];
   vnSongs: IMusic[];
   usSongs: IMusic[];
@@ -28,8 +19,8 @@ export class MainComponent implements OnInit {
   constructor(
     private songService: SongService,
     private shareService: SharedService,
-    private mainService: MainService,
-    private dialogRef: MatDialogRef<EtcComponent>) {
+    public dialog: MatDialog,
+  ) {
   }
 
   ngOnInit() {

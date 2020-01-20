@@ -1,0 +1,16 @@
+<form style="max-height: 3.5rem" class="header-query-wrapper" [formGroup]="form">
+  <mat-form-field (click)="FocusInput()">
+    <input
+      (blur)="unFocusInput()"
+      formControlName="searchInput"
+      [(ngModel)]="searchValue"
+      autocomplete="off"
+      matInput placeholder="Search Singer or Songs"
+      type="text">
+  </mat-form-field>
+  <button class="header-button-find" mat-button><i class="fas fa-search"></i></button>
+</form>
+<div *ngIf="searchValue && (willShowResult || isFocusInput)" (mouseenter)="showResult()" (mouseleave)="hideResult()"
+     class="query-result">
+  <app-result [queryValue]="searchValue"></app-result>
+</div>

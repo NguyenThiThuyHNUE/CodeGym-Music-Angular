@@ -8,3 +8,15 @@
   }
 }
 
+.header-query {
+  max-height: 3rem;
+  max-width: 19%;
+  position: relative;
+  top: .1rem;
+  border-radius: .5rem;
+  background-color: #1d1633;
+  padding-left: 1rem;
+}
+form.header-query-wraper.ng-dirty.ng-valid.ng-touched {
+  max-height: 3.5rem !important;
+}
