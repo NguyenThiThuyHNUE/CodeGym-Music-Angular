@@ -42,11 +42,15 @@ export class PlaylistService {
     return this.http.post(Url + '/api/playlist/song', this.data);
   }
 
+  removeSongFromPlaylist() {
+    return this.http.post(Url + '/api/playlist/song/remove', this.data);
+  }
+
   getSongsInPlaylist(playlistId) {
     return this.http.get<SongResponse>(Url + `/api/playlist/songs/${playlistId}`);
   }
 
-  setUpDataSongToPutToPlaylist(playlistId, songId) {
+  setUpDataSongToPutOrRemoveInPlaylist(playlistId, songId) {
     this.data.playlistId = playlistId;
     this.data.userId = UserService.getUserId();
     this.data.songId = songId;

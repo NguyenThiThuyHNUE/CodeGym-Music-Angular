@@ -6,12 +6,17 @@
   <mat-card-header *ngFor="let song of songs">
     <img mat-card-avatar src="https://material.angular.io/assets/img/examples/shiba1.jpg" class="avatar">
     <mat-card-title class="playlistItem">
-      <a (click)="closeDialog()" routerLink="home/music/detail/{{song.id}}">{{song.name}}</a>
+      <div class="song-item-title">
+        <div class=""><a (click)="closeDialog()" routerLink="home/music/detail/{{song.id}}">{{song.name}}</a></div>
+        <div (click)="removeFromPlaylist(song.id)" class=""><i class="fas fa-trash-alt trash-icon"></i></div>
+      </div>
+
     </mat-card-title>
 
 
     <mat-card-subtitle>
-      {{song.singer}}
+
+      <div class="">{{song.singer}}</div>
     </mat-card-subtitle>
 
 
