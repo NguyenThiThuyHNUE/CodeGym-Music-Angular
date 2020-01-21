@@ -19,14 +19,8 @@ export class ProfileComponent implements OnInit {
   oldName = localStorage.getItem('name');  // Name to fill up form update
   oldEmail = localStorage.getItem('email'); // Name to fill up form update
   selectFileImg: File = null; // Catch event select Image
-  updateForm = this.fb.group({ // Form update
-    id: localStorage.getItem('id'),
-    newName: [''],
-    newImage: [''],
-    newEmail: [''],
-    newPassword: [''],
-    confirmPassword: [''],
-  });
+  updateForm: any;
+  oldImage = UserService.getUserAvatar();
 
   constructor(private fb: FormBuilder,
               private dialogRef: MatDialogRef<ProfileComponent>,
@@ -40,6 +34,15 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.setUpFormUpdate();
+  }
+
+  setUpFormUpdate() {
+    this.updateForm = this.fb.group({ // Form update
+      id: UserService.getUserId(),
+      newName: [''],
+      newImage: [''],
+    });
   }
 
   showFormChangePassword() {
@@ -50,9 +53,9 @@ export class ProfileComponent implements OnInit {
     if (this.isUpdateImage()) {
       this.setUpFileImageInUploadService();
       this.startUpload();
-      this.getCallBack();
+      return this.getCallBack();
     }
-    this.startUpdateUserInfo();
+    return this.startUpdateUserInfo();
   }
 
   onSelectFileImg(event) {
@@ -61,23 +64,23 @@ export class ProfileComponent implements OnInit {
 
   handleUpdateResponse(response) {
     this.resetUpdateForm();
-    this.updateUserCredentialInInterface();
-  }
-
-  updateUserCredentialInInterface() {
-    this.userService.getUserCredential()
-      .subscribe((response: any) => {
-        this.handleResponse(response);
-      }, (error) => this.handleResponseError());
+    this.notifyForUserThatIsUpdateInfoSuccess(response);
+    this.setDataCurrently(response);
+    this.saveDataToLocalStorage(response);
   }
 
   handleResponse(response) {
     this.notifyForUserThatIsUpdateInfoSuccess(response);
+    this.setDataCurrently(response);
     this.saveDataToLocalStorage(response);
   }
 
+  setDataCurrently(response) {
+    this.oldImage = response.data.image;
+  }
+
   saveDataToLocalStorage(response: any) {
-    this.userService.saveDataToLocalStorage(response);
+    this.userService.saveDataToLocalStorage(response.data);
   }
 
   handleResponseError() {
@@ -146,6 +149,6 @@ export class ProfileComponent implements OnInit {
   }
 
   private isUpdateImage() {
-    return this.updateForm.value.newImage !== '';
+    return this.selectFileImg !== null;
   }
 }

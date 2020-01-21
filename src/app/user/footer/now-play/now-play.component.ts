@@ -3,6 +3,7 @@ import {AudioService} from '../../../service/audio.service';
 import {IMusic} from '../../../interface/i-music';
 import {timer} from 'rxjs';
 import {SharedService} from '../../../service/shared.service';
+import {MainService} from '../../../service/main.service';
 
 const DEFAULT_VOLUME = 0.5;
 
@@ -24,6 +25,7 @@ export class NowPlayComponent implements OnInit, OnChanges {
 
   constructor(private audio: AudioService,
               private sharedService: SharedService,
+              private mainService: MainService
   ) {
     if (!this.song) {
       this.song = {};
@@ -31,20 +33,21 @@ export class NowPlayComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log(this.currentSong);
     this.audio.audio.volume = DEFAULT_VOLUME;
     this.audio.audio.muted = false;
   }
 
   ngOnChanges() {
     this.pauseMusic();
-    this.musicSrc = this.currentSong.musicUrl;
+    this.musicSrc = this.currentSong.file;
     this.setAudio(this.musicSrc);
     this.setStartTime();
     this.setRemainTime();
     this.playMusic();
   }
-
+  showListOption() {
+    return this.mainService.showEtc(this.currentSong);
+  }
   setAudio(musicSrc) {
     return this.audio.setAudio(musicSrc);
   }

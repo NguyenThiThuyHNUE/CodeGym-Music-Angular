@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IMusic} from '../../../../interface/i-music';
 import {SharedService} from '../../../../service/shared.service';
+import {MainService} from '../../../../service/main.service';
 
 @Component({
   selector: 'app-song',
@@ -9,10 +10,11 @@ import {SharedService} from '../../../../service/shared.service';
 })
 export class SongComponent implements OnInit {
   @Input() song: IMusic;
-  playIcon: boolean;
+  @Input() songsUserHasLiked: number[];
+  icon: boolean;
   isPlay: boolean;
 
-  constructor(private sharedService: SharedService) {
+  constructor(private sharedService: SharedService, private mainService: MainService) {
   }
 
   ngOnInit() {
@@ -22,22 +24,24 @@ export class SongComponent implements OnInit {
       }
       this.isPlay = false;
       return this.hidePlayIcon();
-
     });
+  }
+
+  showEtc() {
+    this.mainService.showEtc(this.song);
   }
 
   hidePlayIcon() {
     if (!this.isPlay) {
-      return this.playIcon = false;
+      return this.icon = false;
     }
   }
 
   showPlayIcon() {
-    return this.playIcon = true;
+    return this.icon = true;
   }
 
   onClick(song: IMusic) {
-
     this.sharedService.emitChange(song);
   }
 }

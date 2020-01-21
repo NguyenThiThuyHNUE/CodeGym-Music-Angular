@@ -1,15 +1,8 @@
-import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
-/* tslint:disable */
-import {MusicService} from '../../../service/music.service';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {IMusic} from '../../../interface/i-music';
-import {AudioService} from '../../../service/audio.service';
-import {Observable} from 'rxjs';
-import {MatSliderChange} from '@angular/material';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {PlaylistComponent} from '../info/playlist/playlist.component';
-import {EtcComponent} from './etc/etc.component';
+import {MatDialog} from '@angular/material/dialog';
 import {SongService} from '../../../service/song.service';
-import {MainService} from '../../../service/main.service';
+import {SharedService} from '../../../service/shared.service';
 
 @Component({
   selector: 'app-main',
@@ -19,18 +12,68 @@ import {MainService} from '../../../service/main.service';
 })
 export class MainComponent implements OnInit {
   songs: IMusic[];
-  playIcon: boolean;
   newSongs: IMusic[];
+  vnSongs: IMusic[];
+  usSongs: IMusic[];
+  songsUserHasLiked: number[];
 
   constructor(
     private songService: SongService,
-    private mainService: MainService,
+    private shareService: SharedService,
+    public dialog: MatDialog,
   ) {
   }
 
   ngOnInit() {
     this.getSongs();
     this.getNewSongs();
+    this.getVnSongs();
+    this.getUsSongs();
+    this.getDataWhenEtcClosed();
+    this.getSongsUserHasLiked();
+  }
+
+  getSongsUserHasLiked() {
+    this.songService.getSongsUserHasLiked().subscribe((response) => {
+      this.handleGetSongsUserHasLikedResponse(response);
+    });
+  }
+
+  handleGetSongsUserHasLikedResponse(response) {
+    this.songsUserHasLiked = response.data;
+  }
+
+  getDataWhenEtcClosed() {
+    this.shareService.songDelete.subscribe((data) => {
+      this.removeSongInInterface(data);
+    });
+  }
+
+  removeSongInInterface(data) {
+    if (this.isUsType(data.category)) {
+      this.removeSongInUsArray(data);
+    }
+    return this.vnSongs.splice(this.vnSongs.indexOf(data), 1);
+  }
+
+  removeSongInUsArray(data) {
+    return this.usSongs.splice(this.usSongs.indexOf(data), 1);
+  }
+
+  isUsType(data) {
+    return data === 'US';
+  }
+
+  getVnSongs() {
+    return this.songService.getVnSongs().subscribe((songs) => {
+      this.handleGetVnSongs(songs);
+    });
+  }
+
+  getUsSongs() {
+    return this.songService.getUsSongs().subscribe((songs) => {
+      this.handleGetUsSongs(songs);
+    });
   }
 
   getSongs() {
@@ -45,15 +88,11 @@ export class MainComponent implements OnInit {
     });
   }
 
-  showEtc(songId) {
-    this.mainService.showEtc(songId);
+  handleGetVnSongs(songs) {
+    this.vnSongs = songs.data.data;
   }
 
-  hidePlayIcon() {
-    return this.playIcon = false;
-  }
-
-  showPlayIcon() {
-    return this.playIcon = true;
+  handleGetUsSongs(songs) {
+    this.usSongs = songs.data.data;
   }
 }

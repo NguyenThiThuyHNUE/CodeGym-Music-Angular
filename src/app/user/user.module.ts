@@ -40,13 +40,19 @@ import {FavoriteComponent} from './body/info/favorite/favorite.component';
 import {TrackComponent} from './body/info/track/track.component';
 import {CtPlaylistComponent} from './body/info/ct-playlist/ct-playlist.component';
 import {ChangePasswordComponent} from './body/info/profile/change-password/change-password.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+import {QueryComponent} from './header/query/query.component';
+import {ResultComponent} from './header/query/result/result.component';
+import {HeartComponent} from './icon/heart/heart.component';
 
 @NgModule({
   declarations: [UserComponent, HeaderComponent, BodyComponent, LoginComponent, AuthComponent,
     FooterComponent, MainComponent, ConfirmEqualValidatorDirective,
-    InfoComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent, SongComponent, NowPlayComponent, UploadComponent,
+    InfoComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent, SongComponent, NowPlayComponent,
+    UploadComponent, QueryComponent, ResultComponent, HeartComponent,
     AllComponent, FavoriteComponent, TrackComponent, CtPlaylistComponent, ChangePasswordComponent],
   entryComponents: [LoginComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent, ChangePasswordComponent],
+
   exports: [
     HeaderComponent,
     BodyComponent,
@@ -76,6 +82,7 @@ import {ChangePasswordComponent} from './body/info/profile/change-password/chang
     _MatMenuDirectivesModule,
     MatMenuModule,
     MatIconModule,
+    NgxPaginationModule,
     MatSelectModule,
   ]
 

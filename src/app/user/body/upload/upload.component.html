@@ -1,0 +1,77 @@
+<div class="about-us-area section-padding-100-0 bg-img bg-overlay"
+     style="background-image: url(../../../../assets/img/bg-img/bg-4.jpg);" id="about">
+  <div class="container">
+    <div class="row upload-tab">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <div *ngIf="!fileMp3" class="row upload-row justify-content-center">
+          <h3 class="upload-text">Chose or Drag file to Upload</h3>
+        </div>
+
+        <div *ngIf="!fileMp3" class="row justify-content-center">
+          <div class="btn-upload">
+            <button class="" mat-button (click)="file.click()">Upload file</button>
+          </div>
+        </div>
+
+        <div *ngIf="fileMp3" class="row col-sm-12 col-md-12 col-lg-12">
+          <div *ngIf="innerProgress" class="row upload-progress col-sm-12 col-md-12 col-lg-12">
+            <div class="upload-progress-inner" [ngStyle]="{'width': innerProgress}"></div>
+          </div>
+          <div class="card card-upload">
+            <div class="card-header upload-card-header">
+              <img src="../../../../assets/img/music.jpeg" height="50"
+                   width="50"/>
+              <div class="upload-card-header-item">
+                {{fileMp3.name}}
+              </div>
+            </div>
+            <div class="car-body">
+              <form [formGroup]="uploadForm" (ngSubmit)="uploadFile()">
+                <div class="row upload-card-body-item col-sm-12 col-md-12 col-lg-12">
+                  <mat-form-field class="upload-mat-form-field">
+                    <label>Name Song</label>
+                    <input formControlName="name" matInput type="text">
+                  </mat-form-field>
+                </div>
+
+                <div class="row upload-card-body-item col-sm-12 col-md-12 col-lg-12">
+                  <mat-form-field class="upload-mat-form-field">
+                    <label>Singer, Group, Team</label>
+                    <input formControlName="singer" matInput type="text">
+                  </mat-form-field>
+                </div>
+
+                <div class="row upload-card-body-item col-sm-12 col-md-12 col-lg-12">
+                  <mat-form-field class="upload-mat-form-field">
+                    <label>Categories</label>
+                    <mat-select [(value)]="optionSelected">
+                      <mat-option (click)="clickOption(this.optionSelected)" value="US">US</mat-option>
+                      <mat-option (click)="clickOption(this.optionSelected)" value="VN">VN</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="row upload-btn-form upload-card-body-item col-sm-12 col-md-12 col-lg-12">
+                  <button mat-raised-button (click)="uploadCancel()">Cancel</button>
+                  <button mat-raised-button color="primary" type="submit">Upload</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="upload-image">
+            <img src="{{image}}" alt="">
+            <div class="">
+              <button (click)="img.click()">
+                <i class="fa fa-camera" aria-hidden="true"></i>
+                Select Image
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <input (change)="onSelectFileMp3($event)" class="input-upload" type="file" accept="audio/*" #file>
+  <input (change)="onSelectImage($event)" class="input-upload" type="file" accept="image/*" #img>
+</div>

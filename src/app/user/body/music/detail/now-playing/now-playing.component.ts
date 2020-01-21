@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, Input, OnInit, OnChanges, SimpleChanges, OnDestroy} from '@angular/core';
 import {IMusic} from '../../../../../interface/i-music';
 import {MusicService} from '../../../../../service/music.service';
 import {ActivatedRoute, Event, NavigationEnd, Router} from '@angular/router';
@@ -15,14 +15,15 @@ const DEFAULT_VOLUME = 0.5;
   templateUrl: './now-playing.component.html',
   styleUrls: ['./now-playing.component.scss']
 })
-export class NowPlayingComponent implements OnInit, OnChanges {
+export class NowPlayingComponent implements OnInit, OnChanges, OnDestroy {
+
   @Input() nowPlaying: IMusic;
   musicSrc: string;
   showVolume = false;
   startTime: any;
   remainTime: any;
   seekBarInner: any;
-  isRepeat = false;
+  isRepeat = true;
   isPlay = true;
   pageLoad = 0;
   song: IMusic;
@@ -69,6 +70,10 @@ export class NowPlayingComponent implements OnInit, OnChanges {
     this.audio.audio.muted = false;
     this.audio.audio.autoplay = false;
     this.changeIconToPlay();
+  }
+
+  ngOnDestroy(): void {
+    this.audio.pauseAudio();
   }
 
   getCurrentSong() {

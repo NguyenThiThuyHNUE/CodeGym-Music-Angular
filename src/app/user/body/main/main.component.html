@@ -1,6 +1,6 @@
 <!-- ##### About Us Area Start ##### -->
 <div class="about-us-area section-padding-100-0 bg-img bg-overlay"
-     style="background-image: url(../../../assets/img/bg-img/bg-4.jpg);" id="about">
+     style="background-image: url(../../../../assets/img/bg-img/bg-4.jpg);" id="about">
   <div class="container">
     <div class="row">
       <!-- About Thumbnail -->
@@ -31,14 +31,14 @@
 <!-- ##### Upcoming Shows Area Start ##### -->
 <div class="upcoming-shows-area section-padding-100">
   <div class="container row">
-    <div class="col-md-2 col-lg-2" *ngFor="let song of newSongs">
-      <app-song [song]="song"></app-song>
+    <div class="col-md-2 col-lg-2" *ngFor="let song of vnSongs">
+      <app-song [songsUserHasLiked]="songsUserHasLiked" [song]="song"></app-song>
     </div>
   </div>
 
   <div class="container row songs-list-02">
-    <div class="col-md-2 col-lg-2" *ngFor="let song of songs">
-      <app-song [song]="song"></app-song>
+    <div class="col-md-2 col-lg-2" *ngFor="let song of usSongs">
+      <app-song [songsUserHasLiked]="songsUserHasLiked" [song]="song"></app-song>
     </div>
   </div>
 

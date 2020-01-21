@@ -2,7 +2,7 @@
   <div class="col-sm-12 col-md-12 col-lg-12">
     <div class="row">
       <div class="col-sm-3 col-md-3 col-lg-3">
-        <img class="profile-update-img" src="../../../../../assets/img/bg-img/bg-7.jpg"/>
+        <img class="profile-update-img" src="{{oldImage}}"/>
         <button class="profile-update-button-img" (click)="img.click()">
           <i class="fa fa-camera" aria-hidden="true"></i>
           Select Image
@@ -24,82 +24,84 @@
           <mat-card-header>
             <mat-card-title>Edit Your Profile</mat-card-title>
           </mat-card-header>
-          <mat-card-content>
-            <mat-form-field floatLabel="never" class="tp-full-width">
-              <mat-label>
-                Display Name
-              </mat-label>
-              <input matInput type="text">
-            </mat-form-field>
+          <form [formGroup]="updateForm" (ngSubmit)="userUpdate()">
+            <mat-card-content>
+              <mat-form-field floatLabel="never" class="tp-full-width">
+                <mat-label>
+                  Display Name
+                </mat-label>
+                <input formControlName="newName" matInput type="text">
+              </mat-form-field>
 
-            <div class="row">
-              <div class="col-sm-6 col-md-6 col-lg-6">
-                <mat-form-field floatLabel="never" class="tp-full-width">
-                  <mat-label>
-                    First Name
-                  </mat-label>
-                  <input matInput type="text">
-                </mat-form-field>
+              <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                  <mat-form-field floatLabel="never" class="tp-full-width">
+                    <mat-label>
+                      First Name
+                    </mat-label>
+                    <input matInput type="text">
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                  <mat-form-field floatLabel="never" class="tp-full-width">
+                    <mat-label>
+                      Last Name
+                    </mat-label>
+                    <input matInput type="text">
+                  </mat-form-field>
+                </div>
               </div>
-              <div class="col-sm-6 col-md-6 col-lg-6">
-                <mat-form-field floatLabel="never" class="tp-full-width">
-                  <mat-label>
-                    Last Name
-                  </mat-label>
-                  <input matInput type="text">
-                </mat-form-field>
-              </div>
-            </div>
 
-            <div class="row">
-              <div class="col-sm-6 col-md-6 col-lg-6">
-                <mat-form-field floatLabel="never" class="tp-full-width">
-                  <mat-label>
-                    Phone Number
-                  </mat-label>
-                  <input matInput type="tel">
-                </mat-form-field>
+              <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                  <mat-form-field floatLabel="never" class="tp-full-width">
+                    <mat-label>
+                      Phone Number
+                    </mat-label>
+                    <input matInput type="tel">
+                  </mat-form-field>
 
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                  <mat-form-field floatLabel="never" class="tp-full-width">
+                    <mat-select placeholder="Gender">
+                      <mat-option value="US">Male</mat-option>
+                      <mat-option value="VN">FeMale</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
               </div>
-              <div class="col-sm-6 col-md-6 col-lg-6">
-                <mat-form-field floatLabel="never" class="tp-full-width">
-                  <mat-select placeholder="Gender">
-                    <mat-option value="US">Male</mat-option>
-                    <mat-option value="VN">FeMale</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-            </div>
 
-            <div class="row">
-              <div class="col-sm-6 col-md-6 col-lg-6">
-                <mat-form-field floatLabel="never" class="tp-full-width">
-                  <mat-label>
-                    City
-                  </mat-label>
-                  <input matInput type="text">
-                </mat-form-field>
+              <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                  <mat-form-field floatLabel="never" class="tp-full-width">
+                    <mat-label>
+                      City
+                    </mat-label>
+                    <input matInput type="text">
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                  <mat-form-field floatLabel="never" class="tp-full-width">
+                    <mat-label>
+                      Country
+                    </mat-label>
+                    <input matInput type="text">
+                  </mat-form-field>
+                </div>
               </div>
-              <div class="col-sm-6 col-md-6 col-lg-6">
-                <mat-form-field floatLabel="never" class="tp-full-width">
-                  <mat-label>
-                    Country
-                  </mat-label>
-                  <input matInput type="text">
-                </mat-form-field>
-              </div>
-            </div>
 
-            <mat-form-field floatLabel="never" class="tp-full-width">
-              <mat-label>Tell me about yourself, The shorter the better</mat-label>
-              <textarea matInput type="text"></textarea>
-            </mat-form-field>
-          </mat-card-content>
+              <mat-form-field floatLabel="never" class="tp-full-width">
+                <mat-label>Tell me about yourself, The shorter the better</mat-label>
+                <textarea matInput type="text"></textarea>
+              </mat-form-field>
+            </mat-card-content>
 
-          <mat-card-actions>
-            <button mat-button>Cancle</button>
-            <button mat-button>Save Profile</button>
-          </mat-card-actions>
+            <mat-card-actions>
+              <button mat-button>Cancel</button>
+              <button type="submit" mat-button>Save Profile</button>
+            </mat-card-actions>
+          </form>
         </mat-card>
       </div>
     </div>
@@ -107,67 +109,3 @@
 </div>
 
 <input (change)="onSelectFileImg($event)" style="display: none" type="file" accept="image/*" #img>
-
-<!--<mat-tab-group selectedIndex="">-->
-<!--  <mat-tab label="Update">-->
-<!--    <mat-card>-->
-<!--      <form class="tp-form" [formGroup]="updateForm" (ngSubmit)="userUpdate()">-->
-<!--        <mat-card-content>-->
-<!--          &lt;!&ndash;  Name   &ndash;&gt;-->
-<!--          <div class="">-->
-<!--            <mat-form-field appearance="fill" hideRequiredMarker class="tp-full-width">-->
-<!--              <mat-label>Name</mat-label>-->
-<!--              <input matInput type="text" formControlName="newName" value="{{oldName}}">-->
-<!--            </mat-form-field>-->
-<!--          </div>-->
-
-<!--          &lt;!&ndash;  Image  &ndash;&gt;-->
-<!--          <div class="">-->
-<!--            <mat-label>Image</mat-label>-->
-<!--            <input type="file" formControlName="newImage" (change)="onSelectFileImg($event)">-->
-<!--          </div>-->
-
-<!--          &lt;!&ndash;  Email   &ndash;&gt;-->
-<!--          <div class="">-->
-<!--            <mat-form-field appearance="fill" hideRequiredMarker class="tp-full-width">-->
-<!--              <mat-label>Email</mat-label>-->
-<!--              <input matInput type="email" formControlName="newEmail" email value="{{oldEmail}}">-->
-<!--              <mat-hint align="end" *ngIf="newEmail.invalid && (newEmail.dirty || newEmail.touched)">-->
-<!--                <span class="text-danger" *ngIf="newEmail.errors.email">Email Format incorrectly</span>-->
-<!--              </mat-hint>-->
-<!--            </mat-form-field>-->
-<!--          </div>-->
-
-<!--          &lt;!&ndash;  Password    &ndash;&gt;-->
-<!--          <div class="">-->
-<!--            <mat-form-field appearance="fill" class="tp-full-width">-->
-<!--              <mat-label>Password</mat-label>-->
-<!--              <input type="password" matInput formControlName="newPassword">-->
-<!--              <mat-hint align="end" *ngIf="newPassword.invalid && (newPassword.dirty || newPassword.touched)">-->
-<!--              </mat-hint>-->
-<!--            </mat-form-field>-->
-<!--          </div>-->
-
-<!--          &lt;!&ndash;  confirmPassword    &ndash;&gt;-->
-<!--          <div class="">-->
-<!--            <mat-form-field appearance="fill" class="tp-full-width">-->
-<!--              <mat-label>Confirm Password</mat-label>-->
-<!--              <input appConfirmEqualValidator="newPassword" type="password" matInput formControlName="confirmPassword">-->
-<!--              <mat-hint align="end"-->
-<!--                        *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">-->
-<!--                <span class="text-danger"-->
-<!--                      *ngIf="confirmPassword.errors?.notEqual">Confirm Password not matched!!!</span>-->
-<!--              </mat-hint>-->
-<!--            </mat-form-field>-->
-<!--          </div>-->
-<!--        </mat-card-content>-->
-<!--        <mat-card-actions align="end">-->
-<!--          <button type="submit" mat-button color="primary">-->
-<!--            Update-->
-<!--          </button>-->
-
-<!--        </mat-card-actions>-->
-<!--      </form>-->
-<!--    </mat-card>-->
-<!--  </mat-tab>-->
-<!--</mat-tab-group>-->

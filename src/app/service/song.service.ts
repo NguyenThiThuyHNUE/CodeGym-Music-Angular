@@ -5,6 +5,8 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Url} from '../../../url-project';
 import {Response} from '../interface/response';
+import {UserService} from './user.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +41,30 @@ export class SongService {
 
   getNewSongs() {
     return this.http.get<Response>(Url + `/api/new-song`);
+  }
+
+  getUserSongs() {
+    return this.http.get<Response>(Url + `/api/user/songs?token=` + UserService.getUserToken());
+  }
+
+  getUsSongs() {
+    return this.http.get<Response>(Url + `/api/song-Us`);
+  }
+
+  getVnSongs() {
+    return this.http.get<Response>(Url + `/api/song-Vn`);
+  }
+
+  likeSong(userId, songId) {
+    return this.http.get<Response>(Url + `/api/song/${userId}/like/${songId}?token=${localStorage.getItem('token')}`);
+  }
+
+  dislikeSong(userId, songId) {
+    return this.http.get<Response>(Url + `/api/song/${userId}/disLike/${songId}?token=${localStorage.getItem('token')}`);
+  }
+
+  getSongsUserHasLiked() {
+    return this.http.get<Response>(Url + `/api/song/user/has/liked?token=${localStorage.getItem('token')}`);
   }
 
   edit(songId, musicInfo): Observable<Response> {

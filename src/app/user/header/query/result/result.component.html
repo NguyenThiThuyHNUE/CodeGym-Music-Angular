@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="result-song">
+    <div class="col-md-12">
+      <div class="row mb-1 song-item" *ngFor="let song of this.songResult">
+        <img class="thumb" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
+        <div class="col-md-8">
+          <a routerLink="/home/music/detail/{{song.id}}"> <h6>{{song.name}}</h6></a><br>
+          <span>{{song.singer}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

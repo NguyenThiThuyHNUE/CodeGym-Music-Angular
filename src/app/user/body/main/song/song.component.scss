@@ -1,4 +1,8 @@
-.play-icon.ng-star-inserted {
+.wrapper-icon-image {
+  max-height: 9rem !important;
+}
+
+.play-icon {
   display: flex;
   justify-content: center;
   position: relative;
@@ -7,6 +11,19 @@
   font-size: 3rem;
   max-height: 0;
 }
+
+.color-to-pink {
+  cursor: pointer;
+  color: deeppink !important;
+}
+
+.etc-icon {
+  bottom: 10rem;
+  display: flex;
+  position: relative;
+  left: 8rem;
+}
+
 
 img.singer-avatar {
   width: 155px;
@@ -56,6 +73,7 @@ i.fas.fa-ellipsis-h {
     color: #bd177a;
   }
 }
+
 
 .image-main {
   width: 84px;

@@ -5,4 +5,5 @@ export interface IMusic {
   singer?: string;
   avatar?: string;
   musicUrl?: string;
+  file?: string;
 }

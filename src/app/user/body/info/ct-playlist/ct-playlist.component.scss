@@ -1,0 +1,27 @@
+.playlist-not-result {
+  display: block;
+  justify-content: center;
+  margin: 10rem;
+  padding-left: 16rem;
+
+  h3 {
+    color: white;
+  }
+
+  button {
+    margin: 0 0 0 9rem;
+  }
+}
+
+.playlist-result {
+  .playlist-item {
+    margin-top: 3rem;
+  }
+
+  .playlist-item-content {
+    margin-bottom: 0;
+    h5 {
+      color: white;
+    }
+  }
+}

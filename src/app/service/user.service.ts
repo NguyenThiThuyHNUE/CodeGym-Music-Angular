@@ -14,6 +14,10 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
+  static getUserToken() {
+    return localStorage.getItem('token');
+  }
+
   static getUserName() {
     return localStorage.getItem('name');
   }
@@ -26,8 +30,19 @@ export class UserService {
     return +localStorage.getItem('id');
   }
 
-  static getUserImage() {
+  static getUserImageWithoutCheckExist() {
     return localStorage.getItem('image');
+  }
+
+  static isUserHasImage() {
+    return !!UserService.getUserImageWithoutCheckExist();
+  }
+
+  static getUserAvatar() {
+    if (!UserService.isUserHasImage()) {
+      return '../../../assets/img/bg-img/bg-7.jpg';
+    }
+    return UserService.getUserImageWithoutCheckExist();
   }
 
   userRegister(info) {
@@ -69,7 +84,7 @@ export class UserService {
   }
 
   changePassword(data) {
-   return this.http.post<Response>(Url + '/api/changePassword', data);
+    return this.http.post<Response>(Url + '/api/changePassword', data);
   }
 
   saveDataToLocalStorage(response: any) {

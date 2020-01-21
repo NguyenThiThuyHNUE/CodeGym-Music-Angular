@@ -18,7 +18,8 @@ export class AllComponent implements OnInit {
   }
 
   getNewSongs() {
-    return this.songService.getNewSongs().subscribe(musics => {
+    return this.songService.getUserSongs().subscribe(musics => {
+      console.log(musics);
       this.newSongs = musics.data;
     });
   }
