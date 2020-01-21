@@ -63,6 +63,10 @@ export class SongService {
     return this.http.get<Response>(Url + `/api/song/${userId}/disLike/${songId}?token=${localStorage.getItem('token')}`);
   }
 
+  getSongsUserHasLiked() {
+    return this.http.get<Response>(Url + `/api/song/user/has/liked?token=${localStorage.getItem('token')}`);
+  }
+
   edit(songId, musicInfo): Observable<Response> {
     return this.http.put<Response>(Url + `/api/music/edit/${songId}`, musicInfo);
   }

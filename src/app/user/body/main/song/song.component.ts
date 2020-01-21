@@ -10,6 +10,7 @@ import {MainService} from '../../../../service/main.service';
 })
 export class SongComponent implements OnInit {
   @Input() song: IMusic;
+  @Input() songsUserHasLiked: number[];
   icon: boolean;
   isPlay: boolean;
 
@@ -23,7 +24,6 @@ export class SongComponent implements OnInit {
       }
       this.isPlay = false;
       return this.hidePlayIcon();
-
     });
   }
 
@@ -42,7 +42,6 @@ export class SongComponent implements OnInit {
   }
 
   onClick(song: IMusic) {
-
     this.sharedService.emitChange(song);
   }
 }

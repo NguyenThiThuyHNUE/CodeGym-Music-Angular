@@ -32,13 +32,13 @@
 <div class="upcoming-shows-area section-padding-100">
   <div class="container row">
     <div class="col-md-2 col-lg-2" *ngFor="let song of vnSongs">
-      <app-song [song]="song"></app-song>
+      <app-song [songsUserHasLiked]="songsUserHasLiked" [song]="song"></app-song>
     </div>
   </div>
 
   <div class="container row songs-list-02">
     <div class="col-md-2 col-lg-2" *ngFor="let song of usSongs">
-      <app-song [song]="song"></app-song>
+      <app-song [songsUserHasLiked]="songsUserHasLiked" [song]="song"></app-song>
     </div>
   </div>
 

@@ -9,7 +9,7 @@
     <i (click)="showEtc()" class="fas fa-ellipsis-h color-to-pink"></i>
   </div>
   <div class="etc-icon" *ngIf="icon">
-    <app-heart [songId]="song.id"></app-heart>
+    <app-heart [songsUserHasLiked]="songsUserHasLiked" [songId]="song.id"></app-heart>
   </div>
 </div>
 <div class="song-singer">

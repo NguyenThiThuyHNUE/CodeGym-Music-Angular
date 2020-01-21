@@ -9,6 +9,7 @@ import {SnotifyService} from 'ng-snotify';
 })
 export class HeartComponent implements OnInit {
   @Input() songId: number;
+  @Input() songsUserHasLiked: number[];
   isLike: boolean;
   userId = +localStorage.getItem('id');
 
@@ -17,6 +18,19 @@ export class HeartComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.changeColorInInterfaceWhenReceiveData();
+    console.log(this.songsUserHasLiked);
+  }
+
+  changeColorInInterfaceWhenReceiveData() {
+    if (this.isThisSongExistInData()) {
+      return this.isLike = this.likeSong();
+    }
+    return this.isLike = this.disLikeSong();
+  }
+
+  isThisSongExistInData() {
+    return this.songsUserHasLiked.includes(this.songId);
   }
 
   clickOnIcon() {
@@ -25,6 +39,7 @@ export class HeartComponent implements OnInit {
   }
 
   private checkIconIsLikeOrUnlike() {
+    console.log(this.songsUserHasLiked);
     return this.isLike;
   }
 
@@ -52,6 +67,7 @@ export class HeartComponent implements OnInit {
   }
 
   private handleResponse(response) {
+    this.songsUserHasLiked.push(this.songId);
     this.notifyForUserThatLikeASongIsSuccess();
   }
 
@@ -98,6 +114,7 @@ export class HeartComponent implements OnInit {
   }
 
   private notifyForUserThatDisLikeASongIsSuccess() {
+    this.songsUserHasLiked.splice(this.songsUserHasLiked.indexOf(this.songId), 1);
     this.Notify.success('DisLike a Song', {timeout: 3000});
 
   }

@@ -15,6 +15,7 @@ export class MainComponent implements OnInit {
   newSongs: IMusic[];
   vnSongs: IMusic[];
   usSongs: IMusic[];
+  songsUserHasLiked: number[];
 
   constructor(
     private songService: SongService,
@@ -33,7 +34,13 @@ export class MainComponent implements OnInit {
   }
 
   getSongsUserHasLiked() {
-    // this.songService.
+    this.songService.getSongsUserHasLiked().subscribe((response) => {
+      this.handleGetSongsUserHasLikedResponse(response);
+    });
+  }
+
+  handleGetSongsUserHasLikedResponse(response) {
+    this.songsUserHasLiked = response.data;
   }
 
   getDataWhenEtcClosed() {
