@@ -16,10 +16,8 @@ export class HeartComponent implements OnInit {
   constructor(private songService: SongService,
               private Notify: SnotifyService) {
   }
-
   ngOnInit() {
     this.changeColorInInterfaceWhenReceiveData();
-    console.log(this.songsUserHasLiked);
   }
 
   changeColorInInterfaceWhenReceiveData() {
@@ -39,7 +37,6 @@ export class HeartComponent implements OnInit {
   }
 
   private checkIconIsLikeOrUnlike() {
-    console.log(this.songsUserHasLiked);
     return this.isLike;
   }
 

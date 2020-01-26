@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {AudioService} from '../../../service/audio.service';
 import {IMusic} from '../../../interface/i-music';
 import {timer} from 'rxjs';
@@ -14,6 +14,7 @@ const DEFAULT_VOLUME = 0.5;
 })
 export class NowPlayComponent implements OnInit, OnChanges {
   @Input() currentSong: IMusic;
+  @Output() isStop = new EventEmitter<boolean>();
   isPlay: boolean;
   song: IMusic;
   seekBarInner: any;
@@ -22,6 +23,7 @@ export class NowPlayComponent implements OnInit, OnChanges {
   showVolume = false;
   isRepeat = false;
   musicSrc: string;
+  nextSong = false;
 
   constructor(private audio: AudioService,
               private sharedService: SharedService,
@@ -38,25 +40,31 @@ export class NowPlayComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.pauseMusic();
+    console.log('now play');
+    this.resetCurrentSong();
     this.musicSrc = this.currentSong.file;
     this.setAudio(this.musicSrc);
     this.setStartTime();
     this.setRemainTime();
     this.playMusic();
   }
+
+  resetCurrentSong() {
+    this.pauseMusic();
+    this.audio.setAudio(null);
+    this.audio.audio.load();
+  }
+
+  isSongEnded() {
+    return this.audio.audio.ended;
+  }
+
   showListOption() {
     return this.mainService.showEtc(this.currentSong);
   }
+
   setAudio(musicSrc) {
     return this.audio.setAudio(musicSrc);
-  }
-
-  changeIconToPlay() {
-    const timer$ = timer(2000, 3000);
-    timer$.subscribe(() => {
-      this.isPlay = (this.convertToSecond(this.remainTime) > 0);
-    });
   }
 
   convertToSecond(time) {
@@ -70,8 +78,16 @@ export class NowPlayComponent implements OnInit, OnChanges {
       data => {
         this.audio.audio.loop = this.isRepeat;
         this.remainTime = data;
+        if (this.checkConditionToNextSong(data)) {
+          this.isStop.emit(true);
+          this.nextSong = true;
+        }
       }
     );
+  }
+
+  checkConditionToNextSong(data) {
+    return this.convertToSecond(data) === 0 && this.convertToSecond(this.startTime) > 0 && !this.nextSong;
   }
 
   setStartTime() {
@@ -98,13 +114,33 @@ export class NowPlayComponent implements OnInit, OnChanges {
   }
 
   playMusic() {
+    const isPlaying = !this.makeSureSongIsNotPlayed;
+    if (!isPlaying) {
+      this.showIconPlay();
+      this.setFlatValue();
+      return this.audio.playAudio();
+    }
+  }
+
+  makeSureSongIsNotPlayed() {
+    return this.convertToSecond(this.remainTime) > 0 && !this.audio.audio.paused && !this.audio.audio.ended;
+  }
+
+  setFlatValue() {
+    this.nextSong = false;
+  }
+
+  showIconPlay() {
     this.isPlay = true;
-    return this.audio.playAudio();
   }
 
   pauseMusic() {
-    this.isPlay = false;
+    this.hideIconPlay();
     return this.audio.pauseAudio();
+  }
+
+  hideIconPlay() {
+    this.isPlay = false;
   }
 
   scrollVolume(event) {

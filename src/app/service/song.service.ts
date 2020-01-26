@@ -48,11 +48,15 @@ export class SongService {
   }
 
   getUsSongs() {
-    return this.http.get<Response>(Url + `/api/song-Us`);
+    return this.http.get<Response>(Url + `/api/song-US`);
   }
 
   getVnSongs() {
-    return this.http.get<Response>(Url + `/api/song-Vn`);
+    return this.http.get<Response>(Url + `/api/song-VN`);
+  }
+
+  getTheSameSongs(category) {
+    return this.http.get<Response>(Url + `/api/song-${category}`);
   }
 
   likeSong(userId, songId) {

@@ -83,4 +83,4 @@
     </div>
   </div>
 </footer>
-<app-now-play [currentSong]="currentSong" *ngIf="isPlay"></app-now-play>
+<app-now-play (isStop)="isSongEnded($event)" [currentSong]="currentSong" *ngIf="isPlay"></app-now-play>

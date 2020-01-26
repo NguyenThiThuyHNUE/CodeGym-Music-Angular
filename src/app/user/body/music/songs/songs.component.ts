@@ -7,6 +7,7 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ChangeNamePLComponent} from './change-name-pl/change-name-pl.component';
 import {timer} from 'rxjs';
 import {SnotifyService} from 'ng-snotify';
+import {SharedService} from '../../../../service/shared.service';
 
 @Component({
   selector: 'app-songs',
@@ -22,6 +23,7 @@ export class SongsComponent implements OnInit {
               public dialog: MatDialog,
               private Notify: SnotifyService,
               public  dialogRef: MatDialogRef<SongsComponent>,
+              public shareService: SharedService,
               private playlistService: PlaylistService) {
   }
 
@@ -30,6 +32,18 @@ export class SongsComponent implements OnInit {
     timer$.subscribe(() => this.getNewName());
     this.playlistName = this.playlist.playlistName;
     this.getSongsInPlaylist();
+  }
+
+  listenSong(song) {
+    this.shareService.currentSongChange(song);
+    this.shareService.listTheSameSongsChange(this.removeCurrentSongInArray(song));
+    this.closeDialog();
+  }
+
+  removeCurrentSongInArray(song) {
+    const listSongs = this.songs;
+    listSongs.splice(listSongs.indexOf(song), 1);
+    return listSongs;
   }
 
   getSongsInPlaylist() {
