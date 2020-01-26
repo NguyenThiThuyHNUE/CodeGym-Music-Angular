@@ -8,21 +8,28 @@ export class SharedService {
   // Observable string sources
   playlistName = new Subject<any>();
   songDelete = new Subject<any>();
-  emitChangeSource = new Subject<IMusic>();
   songsUserHasLiked = new Subject<any>();
+  listTheSameSongs = new Subject<any>();
+  currentSong = new Subject<any>();
+
   // Observable string streams
-  changeEmitted$ = this.emitChangeSource.asObservable();
   playlistNameEmitted = this.playlistName.asObservable();
   songDeleteEmitted = this.songDelete.asObservable();
   songsUserHasLikedEmitted = this.songsUserHasLiked.asObservable();
+  listTheSameSongsEmitted = this.listTheSameSongs.asObservable();
+  currentSongEmitted = this.currentSong.asObservable();
 
   // Service message commands
+  listTheSameSongsChange(change) {
+    this.listTheSameSongs.next(change);
+  }
+
   songsUserHasLikedChange(change) {
     this.songsUserHasLiked.next(change);
   }
 
-  emitChange(change: any) {
-    this.emitChangeSource.next(change);
+  currentSongChange(change: any) {
+    this.currentSong.next(change);
   }
 
   songDeleteChange(change) {
