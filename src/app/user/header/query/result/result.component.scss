@@ -7,6 +7,10 @@
   overflow-y: scroll;
   padding: 1rem;
 
+  .result-song-name-song {
+    margin-bottom: 0;
+  }
+
   .song-item {
     color: white;
     padding: .5rem !important;
@@ -16,6 +20,7 @@
       &:hover {
         cursor: pointer;
       }
+
       color: white;
     }
   }

@@ -6,17 +6,26 @@ import {Observable} from 'rxjs';
 import {Url} from '../../../url-project';
 import {Response} from '../interface/response';
 import {UserService} from './user.service';
+import {IMusic} from '../interface/i-music';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class SongService {
-  music: AngularFireList<any>;
 
   constructor(private angularFireDatabase: AngularFireDatabase,
               private angularFireStorage: AngularFireStorage,
               private http: HttpClient) {
+  }
+  music: AngularFireList<any>;
+
+  static getSongImage(song: IMusic) {
+    if (!song.avatar) {
+      // tslint:disable-next-line:max-line-length
+      return 'https://firebasestorage.googleapis.com/v0/b/codegym-music-d1055.appspot.com/o/music%2Fbg-7.jpg?alt=media&token=fde1a560-92b5-4bf8-977b-33c26332496d';
+    }
+    return song.avatar;
   }
 
   uploadImg(firePathImg, selectFileImg) {
@@ -47,8 +56,20 @@ export class SongService {
     return this.http.get<Response>(Url + `/api/user/songs?token=` + UserService.getUserToken());
   }
 
+  getSingerSongs(singerId) {
+    return this.http.get<Response>(Url + `/api/singer/songs/${singerId}`);
+  }
+
   getUsSongs() {
     return this.http.get<Response>(Url + `/api/song-US`);
+  }
+
+  getTopViewsSongs() {
+    return this.http.get<Response>(Url + `/api/top-views/songs`);
+  }
+
+  getFavoriteSongs() {
+    return this.http.get<Response>(Url + `/api/favorite/songs`);
   }
 
   getVnSongs() {
@@ -71,8 +92,8 @@ export class SongService {
     return this.http.get<Response>(Url + `/api/song/user/has/liked?token=${localStorage.getItem('token')}`);
   }
 
-  edit(songId, musicInfo): Observable<Response> {
-    return this.http.put<Response>(Url + `/api/music/edit/${songId}`, musicInfo);
+  edit(musicInfo): Observable<Response> {
+    return this.http.put<Response>(Url + `/api/music/edit`, musicInfo);
   }
 
   delete(songId): Observable<Response> {

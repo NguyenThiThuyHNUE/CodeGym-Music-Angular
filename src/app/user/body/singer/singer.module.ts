@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {SingerComponent} from './singer.component';
 import {CreateComponent} from './create/create.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -16,14 +16,23 @@ import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialogModule} from '@angular/material/dialog';
 import {SingerRoutingModule} from './singer-routing.module';
+import {MatSelectModule} from '@angular/material';
+import { SingerInfoComponent } from './singer-info/singer-info.component';
 
 @NgModule({
-  declarations: [SingerComponent, CreateComponent],
+  declarations: [SingerComponent, CreateComponent, SingerInfoComponent],
+  entryComponents: [CreateComponent, SingerInfoComponent],
   imports: [
     SingerRoutingModule,
     CommonModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule
   ]
 })
-export class SingerModule { }
+export class SingerModule {
+}

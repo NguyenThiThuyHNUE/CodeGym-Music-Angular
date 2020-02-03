@@ -28,10 +28,15 @@ export class SongsComponent implements OnInit {
   }
 
   ngOnInit() {
-    const timer$ = timer(2000, 5000);
-    timer$.subscribe(() => this.getNewName());
     this.playlistName = this.playlist.playlistName;
     this.getSongsInPlaylist();
+    this.isChangeNamePlaylist();
+  }
+
+  isChangeNamePlaylist() {
+    this.shareService.playlistNameEmitted.subscribe((data) => {
+      this.playlistName = data.data.namePlaylist;
+    });
   }
 
   listenSong(song) {

@@ -6,6 +6,7 @@ import {MatDialogRef} from '@angular/material';
 import {SnotifyService} from 'ng-snotify';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {AuthService, SocialUser, FacebookLoginProvider} from 'angularx-social-login';
+import {SharedService} from '../../../service/shared.service';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private shareService: SharedService,
     public dialog: MatDialog,
     private Notify: SnotifyService,
     private userService: UserService,
@@ -42,18 +44,18 @@ export class LoginComponent implements OnInit {
     passwordLogin: ['', [Validators.required]]
   });
 
+  ngOnInit() {
+  }
+
   facebooklogin() {
     this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then((userData) => {
       this.user = userData;
       this.resetLoginForm();
-      console.log(userData);
       this.userService.userLoginFacebook(userData).subscribe((data) => {
         localStorage.setItem('token', data.access_token);
+        this.shareService.isLoginChange(true);
       });
     });
-  }
-
-  ngOnInit() {
   }
 
 
@@ -117,6 +119,7 @@ export class LoginComponent implements OnInit {
   handleLoginResponse(res) {
     this.userService.saveToken(res);
     this.buttonStatus = true;
+    this.shareService.isLoginChange(true);
     this.resetLoginForm();
   }
 
@@ -154,7 +157,7 @@ export class LoginComponent implements OnInit {
 
   handleRegisterResponse(res) {
     this.buttonStatus = true;
-    this.Notify.success(`Register Success, Please Login ${res.data.name}`, 'Congratulations', {timeout: 7000});
+    this.Notify.success(`Register Success, Please Login ${res.data.name}`, 'Congratulations', {timeout: 1000});
     this.resetRegisterForm();
     this.showFormLogin();
   }

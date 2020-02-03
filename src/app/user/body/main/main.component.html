@@ -1,26 +1,12 @@
 <!-- ##### About Us Area Start ##### -->
 <div class="about-us-area section-padding-100-0 bg-img bg-overlay"
-     style="background-image: url(../../../../assets/img/bg-img/bg-4.jpg);" id="about">
-  <div class="container">
+     id="about">
+  <div class="mt-5 container">
     <div class="row">
       <!-- About Thumbnail -->
-      <div class="col-12 col-lg-6">
+      <div class="col-12">
         <div class="about-thumbnail mb-100">
-          <img src="../../../assets/img/bg-img/bg-5.jpg" alt="">
-        </div>
-      </div>
-      <!-- About Content -->
-      <div class="col-12 col-lg-6">
-        <div class="about-content mb-100">
-          <h4>Hello, It’s Michael Smithson</h4>
-          <p>Nulla pretium tincidunt felis, nec sollicitudin mauris lobortis in. Aliquam eu feugiat ligula, laoreet
-            efficitur nulla. Morbi nec neque porta, elementum massa at, vehicula nunc. Nulla facilisi. Donec id purus eu
-            lectus imperdiet varius. Curabitur consectetur nunc sem, vitae cursus enim tempor eget. Praesent
-            pellentesque nisi urna, sit amet suscipit ligula posuere id. Aenean id tortor vel quam ornare gravida.
-            Phasellus luctus feugiat nunc, quis vulputate ipsum convallis quis. Integer vel nulla erat. Donec erat
-            metus, luctus quis maximus quis, volutpat eu tellus. Interdum et malesuada fames ac ante ipsum primis in
-            faucibus.</p>
-          <img src="../../../assets/img/core-img/signature.png" alt="">
+          <img src="../../../../assets/img/bg-img/bg-4.jpg" alt="">
         </div>
       </div>
     </div>
@@ -29,15 +15,48 @@
 <!-- ##### About Us Area End ##### -->
 
 <!-- ##### Upcoming Shows Area Start ##### -->
-<div class="upcoming-shows-area section-padding-100">
-  <div class="container row">
-    <div class="col-md-2 col-lg-2" *ngFor="let song of vnSongs">
+<div class="pt-4 upcoming-shows-area section-padding-100">
+  <div class="row mb-3 title-field">
+    <h3>New</h3>
+  </div>
+  <div class="row songs-list-01">
+    <div class="col-md-2 col-lg-2" *ngFor="let song of newSongs">
       <app-song [songsUserHasLiked]="songsUserHasLiked" [song]="song"></app-song>
     </div>
   </div>
 
-  <div class="container row songs-list-02">
+  <div class="row mb-3 title-field">
+    <h3>Top Songs</h3>
+  </div>
+  <div class="row songs-list-02">
+    <div class="col-md-2 col-lg-2" *ngFor="let song of topViewsSongs">
+      <app-song [songsUserHasLiked]="songsUserHasLiked" [song]="song"></app-song>
+    </div>
+  </div>
+
+  <div class="row mb-3 title-field">
+    <h3>Favorite</h3>
+  </div>
+  <div class="row songs-list-02">
+    <div class="col-md-2 col-lg-2" *ngFor="let song of favoriteSongs">
+      <app-song [songsUserHasLiked]="songsUserHasLiked" [song]="song"></app-song>
+    </div>
+  </div>
+
+  <div class="row mb-3 title-field">
+    <h3>US/UK</h3>
+  </div>
+  <div class="row songs-list-02">
     <div class="col-md-2 col-lg-2" *ngFor="let song of usSongs">
+      <app-song [songsUserHasLiked]="songsUserHasLiked" [song]="song"></app-song>
+    </div>
+  </div>
+
+  <div class="row mb-3 title-field">
+    <h3>VPOP</h3>
+  </div>
+  <div class="row songs-list-03">
+    <div class="col-md-2 col-lg-2" *ngFor="let song of vnSongs">
       <app-song [songsUserHasLiked]="songsUserHasLiked" [song]="song"></app-song>
     </div>
   </div>

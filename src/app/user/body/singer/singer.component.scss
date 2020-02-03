@@ -6,3 +6,22 @@
 div {
   color: white;
 }
+
+.top-singer-wrapper {
+  h2, h5 {
+    color: white;
+  }
+
+  .top-singer-name-singer-item {
+    &:hover {
+      cursor: pointer;
+      color: deeppink;
+    }
+  }
+
+  .top-singer-image-item {
+    border-radius: 50%;
+    width: 52px;
+    height: 52px;
+  }
+}

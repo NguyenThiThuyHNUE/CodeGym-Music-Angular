@@ -2,10 +2,20 @@
   <div class="result-song">
     <div class="col-md-12">
       <div class="row mb-1 song-item" *ngFor="let song of this.songResult">
-        <img class="thumb" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="">
+        <img class="thumb" src="{{song.avatar}}" alt="">
         <div class="col-md-8">
-          <a routerLink="/home/music/detail/{{song.id}}"> <h6>{{song.name}}</h6></a><br>
-          <span>{{song.singer}}</span>
+          <h6 class="result-song-name-song" (click)="listenSong(song)">{{song.name}}</h6>
+          <small>{{song.singer}}</small>
+        </div>
+      </div>
+
+      <h6 style="color:white">Singer and Actor</h6>
+
+      <div class="row mb-1 song-item" *ngFor="let singer of this.singerResult">
+        <img class="thumb" src="{{singer.avatar}}" alt="">
+        <div class="col-md-8">
+          <h6 (click)="showSingerInfo(singer)" class="result-song-name-song">{{singer.name}}</h6>
+          <small>Singer</small>
         </div>
       </div>
     </div>

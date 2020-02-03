@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {SongService} from '../../../service/song.service';
 import {SnotifyService} from 'ng-snotify';
+import {UserService} from '../../../service/user.service';
+import {SharedService} from '../../../service/shared.service';
 
 @Component({
   selector: 'app-heart',
@@ -11,11 +13,13 @@ export class HeartComponent implements OnInit {
   @Input() songId: number;
   @Input() songsUserHasLiked: number[];
   isLike: boolean;
-  userId = +localStorage.getItem('id');
+  userId = UserService.getUserId();
 
   constructor(private songService: SongService,
+              private shareService: SharedService,
               private Notify: SnotifyService) {
   }
+
   ngOnInit() {
     this.changeColorInInterfaceWhenReceiveData();
   }

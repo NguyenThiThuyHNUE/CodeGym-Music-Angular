@@ -60,32 +60,6 @@ export class EditComponent implements OnInit {
     this.setUpFileAndImageService();
     this.startUpload();
     this.getCallBackImage();
-    // this.song.id = this.editFormMusic.value.id;
-    // this.song.name = this.editFormMusic.value.name;
-    // this.song.singer = this.editFormMusic.value.singer;
-    // this.song.description = this.editFormMusic.value.description;
-    // const firePathAvatar = `music/${this.selectFileAvatar.name}`;
-    // const firePathMp3 = `music/${this.selectFileMp3.name}`;
-    // const fireRefAvatar = this.angularFireStorage.ref(firePathAvatar);
-    // const fireRefMp3 = this.angularFireStorage.ref(firePathMp3);
-    // this.databaseList = this.angularFireDatabase.list('/list');
-    // this.songService.uploadImg(firePathAvatar, this.selectFileAvatar).snapshotChanges().pipe(
-    //   finalize(() => {
-    //     fireRefAvatar.getDownloadURL().subscribe((url) => {
-    //       this.song.avatar = url;
-    //     });
-    //   })).subscribe();
-    // this.songService.uploadMp3(firePathMp3, this.selectFileMp3).snapshotChanges().pipe(
-    //   finalize(() => {
-    //     fireRefMp3.getDownloadURL().subscribe((url) => {
-    //       this.song.musicUrl = url;
-    //       this.songService.edit(this.songId, this.song).subscribe(response => {
-    //         this.router.navigate(['/home']).then(() => {
-    //           alert(response.message);
-    //         });
-    //       });
-    //     });
-    //   })).subscribe();
   }
 
   getCallBackImage() {
@@ -103,7 +77,7 @@ export class EditComponent implements OnInit {
   }
 
   startUpdateSongToServer() {
-    this.songService.edit(this.songId, this.editFormMusic.value).subscribe(response => {
+    this.songService.edit(this.editFormMusic.value).subscribe(response => {
       this.router.navigate(['/home']).then(() => {
         alert(response.message);
       });

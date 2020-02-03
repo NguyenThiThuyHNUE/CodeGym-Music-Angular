@@ -1,8 +1,15 @@
-<ng-template [ngIf]="user.isLoggedIn()"><div><a style="color: #ffffff" [matMenuTriggerFor]="menu"  >{{name}}</a></div></ng-template>
-<ng-template [ngIf]="user.isLoggedInFacebook()"><div><a style="color: #ffffff" [matMenuTriggerFor]="menu"  >{{users.name}}</a></div></ng-template>
+<ng-template [ngIf]="user.isLoggedIn()">
+  <div><a style="color: #ffffff" [matMenuTriggerFor]="menu">{{name}}</a></div>
+</ng-template>
+<ng-template [ngIf]="user.isLoggedInFacebook()">
+  <div><a style="color: #ffffff" [matMenuTriggerFor]="menu">{{users.name}}</a></div>
+</ng-template>
 
 <mat-menu #menu="matMenu">
+  <span mat-menu-item (click)="showProfile()">Profile</span>
+  <span mat-menu-item  >Likes</span>
+  <span mat-menu-item>Who Follow</span>
+  <span mat-menu-item>Tracks</span>
   <a mat-menu-item (click)="logout()">Logout</a>
-  <a mat-menu-item routerLink="/home/info">Profile</a>
 </mat-menu>
 

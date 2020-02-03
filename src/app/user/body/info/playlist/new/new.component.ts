@@ -34,8 +34,10 @@ export class NewComponent implements OnInit {
   }
 
   createPlaylist() {
-    this.sharedService.newPlaylist(this.createForm.value);
-    this.resetForm();
+    this.playListService.createPlaylist(this.createForm.value).subscribe((response) => {
+      this.sharedService.newPlaylist(response);
+      this.resetForm();
+    });
   }
 
   get namePlaylist() {

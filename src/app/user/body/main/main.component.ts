@@ -15,7 +15,10 @@ export class MainComponent implements OnInit {
   newSongs: IMusic[];
   vnSongs: IMusic[];
   usSongs: IMusic[];
+  topViewsSongs: IMusic[];
+  favoriteSongs: IMusic[];
   songsUserHasLiked: number[];
+  indexOfSong: number = null;
 
   constructor(
     private songService: SongService,
@@ -25,12 +28,16 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getSongs();
-    this.getNewSongs();
-    this.getVnSongs();
-    this.getUsSongs();
+    this.getAllSongs();
     this.getDataWhenEtcClosed();
     this.getSongsUserHasLiked();
+    this.isLoginChange();
+  }
+
+  isLoginChange() {
+    this.shareService.isLoginEmitted.subscribe((isLogin) => {
+      this.getSongsUserHasLiked();
+    });
   }
 
   getSongsUserHasLiked() {
@@ -44,24 +51,29 @@ export class MainComponent implements OnInit {
   }
 
   getDataWhenEtcClosed() {
-    this.shareService.songDelete.subscribe((data) => {
-      this.removeSongInInterface(data);
+    this.doUserDeleteSong();
+    this.doUserEditSong();
+  }
+
+  doUserEditSong() {
+    this.shareService.songUpdateEmitted.subscribe((data: { oldSong: IMusic, newSong: IMusic }) => {
+      this.getAllSongs();
     });
   }
 
-  removeSongInInterface(data) {
-    if (this.isUsType(data.category)) {
-      this.removeSongInUsArray(data);
-    }
-    return this.vnSongs.splice(this.vnSongs.indexOf(data), 1);
+  getAllSongs() {
+    this.getSongs();
+    this.getNewSongs();
+    this.getTopViewsSong();
+    this.getVnSongs();
+    this.getUsSongs();
+    this.getFavoriteSongs();
   }
 
-  removeSongInUsArray(data) {
-    return this.usSongs.splice(this.usSongs.indexOf(data), 1);
-  }
-
-  isUsType(data) {
-    return data === 'US';
+  doUserDeleteSong() {
+    this.shareService.songDeleteEmitted.subscribe((data) => {
+      this.getAllSongs();
+    });
   }
 
   getVnSongs() {
@@ -84,7 +96,19 @@ export class MainComponent implements OnInit {
 
   getNewSongs() {
     return this.songService.getNewSongs().subscribe(musics => {
-      this.newSongs = musics.data;
+      this.newSongs = musics.data.data;
+    });
+  }
+
+  getTopViewsSong() {
+    return this.songService.getTopViewsSongs().subscribe(musics => {
+      this.topViewsSongs = musics.data.data;
+    });
+  }
+
+  getFavoriteSongs() {
+    return this.songService.getFavoriteSongs().subscribe(musics => {
+      this.favoriteSongs = musics.data;
     });
   }
 

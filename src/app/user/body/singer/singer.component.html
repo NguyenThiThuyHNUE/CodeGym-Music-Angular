@@ -1,23 +1,171 @@
-<div class="about-us-area section-padding-100-0 bg-img bg-overlay"
+<div class="mb-5 about-us-area section-padding-100-0 bg-img bg-overlay"
      style="background-image: url(../../../../assets/img/bg-img/bg-4.jpg);" id="about">
-  <div class="container">
+  <div class="container top-singer-wrapper">
+    <br>
+    <br>
     <div class="row">
-      <div class="col-12">
-        <div class="section-heading">
-          <h2>TOP Singer</h2>
-          <h6>Sed porta cursus enim, vitae maximus felis luctus iaculis.</h6>
+      <div class="col-sm-8 col-md-8 col-lg-8">
+        <div class="row mb-4">
+          <h2>Top Singer in Months</h2>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <div class="row mb-4">
+              <div class="d-flex align-items-center col-sm-1 col-md-1 col-lg-1">
+                <span>1</span>
+              </div>
+              <div class="col-sm-3 col-md-3 col-lg-3">
+                <img src="{{singers[0].avatar}}" class="top-singer-image-item"/>
+              </div>
+
+              <div class="d-flex align-items-center ml-0 pl-0 col-sm-8 col-md-8 col-lg-8">
+                <span (click)="showSingerInfo(singers[0])"
+                      class="top-singer-name-singer-item">{{singers[0].name}}</span>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="d-flex align-items-center col-sm-1 col-md-1 col-lg-1">
+                <span>2</span>
+              </div>
+              <div class="col-sm-3 col-md-3 col-lg-3">
+                <img src="{{singers[1].avatar}}" class="top-singer-image-item"/>
+              </div>
+
+              <div class="d-flex align-items-center ml-0 pl-0 col-sm-8 col-md-8 col-lg-8">
+                <span (click)="showSingerInfo(singers[1])"
+                      class="top-singer-name-singer-item">{{singers[1].name}}</span>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="d-flex align-items-center col-sm-1 col-md-1 col-lg-1">
+                <span>3</span>
+              </div>
+              <div class="col-sm-3 col-md-3 col-lg-3">
+                <img *ngIf="singers[2].avatar" src="{{singers[2].avatar}}" class="top-singer-image-item"/>
+                <img *ngIf="!singers[2].avatar" src="../../../../assets/img/bg-img/bg-7.jpg"
+                     class="top-singer-image-item"/>
+              </div>
+
+              <div class="d-flex align-items-center ml-0 pl-0 col-sm-8 col-md-8 col-lg-8">
+                <span (click)="showSingerInfo(singers[2])"
+                      class="top-singer-name-singer-item">{{singers[2].name}}</span>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="d-flex align-items-center col-sm-1 col-md-1 col-lg-1">
+                <span>4</span>
+              </div>
+              <div class="col-sm-3 col-md-3 col-lg-3">
+                <img *ngIf="singers[3].avatar" src="{{singers[3].avatar}}" class="top-singer-image-item"/>
+                <img *ngIf="!singers[3].avatar" src="../../../../assets/img/bg-img/bg-7.jpg"
+                     class="top-singer-image-item"/>
+              </div>
+
+              <div class="d-flex align-items-center ml-0 pl-0 col-sm-8 col-md-8 col-lg-8">
+                <span (click)="showSingerInfo(singers[3])"
+                      class="top-singer-name-singer-item">{{singers[3].name}}</span>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="d-flex align-items-center col-sm-1 col-md-1 col-lg-1">
+                <span>5</span>
+              </div>
+              <div class="col-sm-3 col-md-3 col-lg-3">
+                <img *ngIf="singers[4].avatar" src="{{singers[4].avatar}}" class="top-singer-image-item"/>
+                <img *ngIf="!singers[4].avatar" src="../../../../assets/img/bg-img/bg-7.jpg"
+                     class="top-singer-image-item"/>
+              </div>
+
+              <div class="d-flex align-items-center ml-0 pl-0 col-sm-8 col-md-8 col-lg-8">
+                <span (click)="showSingerInfo(singers[4])"
+                      class="top-singer-name-singer-item">{{singers[4].name}}</span>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <div class="row mb-4">
+              <div class="d-flex align-items-center col-sm-1 col-md-1 col-lg-1">
+                <span>6</span>
+              </div>
+              <div class="col-sm-3 col-md-3 col-lg-3">
+                <img *ngIf="singers[5].avatar" src="{{singers[5].avatar}}" class="top-singer-image-item"/>
+                <img *ngIf="!singers[5].avatar" src="../../../../assets/img/bg-img/bg-7.jpg"
+                     class="top-singer-image-item"/>
+              </div>
+
+              <div class="d-flex align-items-center ml-0 pl-0 col-sm-8 col-md-8 col-lg-8">
+                <span (click)="showSingerInfo(singers[5])"
+                      class="top-singer-name-singer-item">{{singers[5].name}}</span>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="d-flex align-items-center col-sm-1 col-md-1 col-lg-1">
+                <span>7</span>
+              </div>
+              <div class="col-sm-3 col-md-3 col-lg-3">
+                <img *ngIf="singers[6].avatar" src="{{singers[6].avatar}}" class="top-singer-image-item"/>
+                <img *ngIf="!singers[6].avatar" src="../../../../assets/img/bg-img/bg-7.jpg"
+                     class="top-singer-image-item"/>
+              </div>
+
+              <div class="d-flex align-items-center ml-0 pl-0 col-sm-8 col-md-8 col-lg-8">
+                <span (click)="showSingerInfo(singers[6])"
+                      class="top-singer-name-singer-item">{{singers[6].name}}</span>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="d-flex align-items-center col-sm-1 col-md-1 col-lg-1">
+                <span>8</span>
+              </div>
+              <div class="col-sm-3 col-md-3 col-lg-3">
+                <img *ngIf="singers[7].avatar" src="{{singers[7].avatar}}" class="top-singer-image-item"/>
+                <img *ngIf="!singers[7].avatar" src="../../../../assets/img/bg-img/bg-7.jpg"
+                     class="top-singer-image-item"/>
+              </div>
+
+              <div class="d-flex align-items-center ml-0 pl-0 col-sm-8 col-md-8 col-lg-8">
+                <span (click)="showSingerInfo(singers[7])"
+                      class="top-singer-name-singer-item">{{singers[7].name}}</span>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="d-flex align-items-center col-sm-1 col-md-1 col-lg-1">
+                <span>9</span>
+              </div>
+              <div class="col-sm-3 col-md-3 col-lg-3">
+                <img *ngIf="singers[8].avatar" src="{{singers[8].avatar}}" class="top-singer-image-item"/>
+                <img *ngIf="!singers[8].avatar" src="../../../../assets/img/bg-img/bg-7.jpg"
+                     class="top-singer-image-item"/>
+              </div>
+
+              <div class="d-flex align-items-center ml-0 pl-0 col-sm-8 col-md-8 col-lg-8">
+                <span (click)="showSingerInfo(singers[8])"
+                      class="top-singer-name-singer-item">{{singers[8].name}}</span>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="d-flex align-items-center col-sm-1 col-md-1 col-lg-1">
+                <span>10</span>
+              </div>
+              <div class="col-sm-3 col-md-3 col-lg-3">
+                <img *ngIf="singers[9].avatar" src="{{singers[9].avatar}}" class="top-singer-image-item"/>
+                <img *ngIf="!singers[9].avatar" src="../../../../assets/img/bg-img/bg-7.jpg"
+                     class="top-singer-image-item"/>
+              </div>
+
+              <div class="d-flex align-items-center ml-0 pl-0 col-sm-8 col-md-8 col-lg-8">
+                <span (click)="showSingerInfo(singers[9])"
+                      class="top-singer-name-singer-item">{{singers[9].name}}</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="row" *ngFor="let singer of singers">
-      <!--      <a routerLink="/home/singer/create">Add Singer</a>-->
-      <div class="col-md-3 col-lg-3">
-        <img class="singer-avatar" src="../../../../assets/img/bg-img/bg-7.jpg" alt="">
-      </div>
-      <div class="col-md-9 col-lg-9">
-        <div class="">Singer Name: {{singer.name}}</div>
-        <div class="">Singer Description: {{singer.description}}</div>
+      <div class="col-sm-4 col-md-4 col-lg-4">
+        <img *ngIf="singers[0].avatar" style="height: 430px" src="{{singers[0].avatar}}"/>
+        <img *ngIf="!singers[0].avatar" style="height: 430px" src="../../../../assets/img/bg-img/bg-7.jpg"/>
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
-.songs-list-02 {
-  margin-top: 5rem;
+.songs-list-01, .songs-list-02 {
+  margin-bottom: 6rem
 }
 
 .upcoming-shows-area.section-padding-100 {
@@ -11,7 +11,13 @@
 
 }
 
+.title-field {
+  padding-left: 13px;
 
+  h3 {
+    color: white;
+  }
+}
 
 .custom-mat-tab {
   .mat-tab-body-content {

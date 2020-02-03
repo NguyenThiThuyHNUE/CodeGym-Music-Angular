@@ -33,7 +33,6 @@ button.edit-song-button-img {
   box-sizing: border-box;
 }
 
-
 .cdk-global-scrollblock {
   position: static !important;
   width: initial !important;
@@ -50,6 +49,19 @@ button.edit-song-button-img {
   padding-left: 0px;
   padding-right: 0px;
   left: 15%;
+
+  .update-song-image-wrapper {
+
+    img {
+      height: 167px;
+      width: 172px;
+    }
+  }
+
+  .comment-content {
+    width: 600px;
+    margin-left: 3.5rem;
+  }
 
   .playlist-item-content {
     &:hover {

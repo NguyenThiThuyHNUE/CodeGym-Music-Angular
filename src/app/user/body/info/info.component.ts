@@ -15,7 +15,7 @@ import {IMusic} from '../../../interface/i-music';
   styleUrls: ['./info.component.scss']
 })
 export class InfoComponent implements OnInit {
-
+  thisPage = 'tracks';
   playlists: Playlist[];
   user: User;
   playlist: Playlist;
@@ -38,8 +38,16 @@ export class InfoComponent implements OnInit {
     // this.updatePlaylistAfterFiveSecond();
   }
 
+  showTracks() {
+    this.thisPage = 'tracks';
+  }
+
+  showPlaylists() {
+    this.thisPage = 'playlists';
+  }
+
   showProfile() {
-    this.infoService.showFormUpdate();
+    this.thisPage = 'profile';
   }
 
   showPlaylistCreateForm() {

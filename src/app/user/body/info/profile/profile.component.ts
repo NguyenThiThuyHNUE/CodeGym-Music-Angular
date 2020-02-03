@@ -8,6 +8,7 @@ import {finalize} from 'rxjs/operators';
 import {SongService} from '../../../../service/song.service';
 import {UploadService} from '../../../../service/upload.service';
 import {ProfileService} from '../../../../service/profile.service';
+import {SharedService} from '../../../../service/shared.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,14 +17,15 @@ import {ProfileService} from '../../../../service/profile.service';
 
 })
 export class ProfileComponent implements OnInit {
-  oldName = localStorage.getItem('name');  // Name to fill up form update
-  oldEmail = localStorage.getItem('email'); // Name to fill up form update
-  selectFileImg: File = null; // Catch event select Image
+  oldName: string;
+  oldEmail: string;
+  selectFileImg: File = null;
   updateForm: any;
-  oldImage = UserService.getUserAvatar();
+  oldImage = '../../../../../assets/img/bg-img/bg-7.jpg';
 
   constructor(private fb: FormBuilder,
               private dialogRef: MatDialogRef<ProfileComponent>,
+              private sharedService: SharedService,
               private angularFireStorage: AngularFireStorage,
               private Notify: SnotifyService,
               private userService: UserService,
@@ -35,7 +37,18 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.setUpFormUpdate();
+    this.setUpDataInInterface();
   }
+
+  setUpDataInInterface() {
+    this.oldName = UserService.getUserName();
+    this.oldEmail = UserService.getUserEmail();
+    this.oldImage = UserService.getUserAvatar();
+  }
+
+  // isUserHasImage() {
+  //   return UserService.getUserAvatar() !== 'null';
+  // }
 
   setUpFormUpdate() {
     this.updateForm = this.fb.group({ // Form update
@@ -67,6 +80,11 @@ export class ProfileComponent implements OnInit {
     this.notifyForUserThatIsUpdateInfoSuccess(response);
     this.setDataCurrently(response);
     this.saveDataToLocalStorage(response);
+    this.changeDataInInterface(response);
+  }
+
+  changeDataInInterface(response) {
+    this.sharedService.newUserNameChange(response);
   }
 
   handleResponse(response) {
@@ -110,7 +128,7 @@ export class ProfileComponent implements OnInit {
   }
 
   private notifyForUserThatIsUpdateInfoSuccess(res) {
-    this.Notify.success(`Update Success`, {timeout: 3000});
+    this.Notify.success(`Update Success`, {timeout: 1000});
   }
 
   get newName() {

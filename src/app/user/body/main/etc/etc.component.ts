@@ -1,6 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {PlaylistComponent} from '../../info/playlist/playlist.component';
 import {MatDialogRef} from '@angular/material';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {Inject} from '@angular/core';
@@ -12,12 +11,12 @@ import {SnotifyService} from 'ng-snotify';
 import {PlaylistService} from '../../../../service/playlist.service';
 import {Playlist} from '../../../../interface/playlist';
 import {InfoService} from '../../../../service/info.service';
-import {NewComponent} from '../../info/playlist/new/new.component';
 import {SharedService} from '../../../../service/shared.service';
 import {FormBuilder} from '@angular/forms';
 import {UploadService} from '../../../../service/upload.service';
 import {finalize} from 'rxjs/operators';
 import {SongService} from '../../../../service/song.service';
+import {SingerService} from '../../../../service/singer.service';
 
 @Component({
   selector: 'app-etc',
@@ -27,15 +26,20 @@ import {SongService} from '../../../../service/song.service';
 export class EtcComponent implements OnInit {
   @ViewChild('commentTextArea', {static: false}) el: ElementRef;
   isClick: boolean;
+  // tslint:disable-next-line:max-line-length
+  playlistsImage = 'https://firebasestorage.googleapis.com/v0/b/codegym-music-d1055.appspot.com/o/music%2Fbg-7.jpg?alt=media&token=fde1a560-92b5-4bf8-977b-33c26332496d';
+  singersInInterface: string;
   comments: any[];
+  isAnyComments = false;
+  isThisSongBelongsToUser = false;
   isPage = 'comments';
   playlists: Playlist[];
-  imgDisplayInInterfaceSrc = '../../../../../assets/img/bg-img/bg-7.jpg';
+  imgDisplayInInterfaceSrc: string | ArrayBuffer;
   updateForm: any;
   selectFileImg: File = null;
-  oldSongImage: string;
   singers: string;
   singerUserHasChose: any;
+  listSinger: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public song: IMusic,
@@ -49,15 +53,44 @@ export class EtcComponent implements OnInit {
     private mainService: MainService,
     private commentService: CommentService,
     private songService: SongService,
+    private singerService: SingerService,
     private dialogRef: MatDialogRef<EtcComponent>
   ) {
   }
 
   ngOnInit() {
+    this.getSingers();
+    this.isThisSongBeLongToUser();
     this.getSongComments();
     this.getUserPlaylists();
     this.setIsClickFalse();
+    this.setDataInInterface();
     this.declareData();
+  }
+
+  setDataInInterface() {
+    this.imgDisplayInInterfaceSrc = SongService.getSongImage(this.song);
+  }
+
+  getSingers() {
+    this.singerService.getSingers().subscribe((response) => {
+      this.listSinger = response.data;
+    });
+  }
+
+  chooseSinger(singer) {
+    if (this.isSingersExist()) {
+      return this.handleNewSingerIsChose(singer);
+    }
+    return this.handleNewSingerIsAssigned(singer);
+  }
+
+  isThisSongBeLongToUser() {
+    this.song.singers.forEach((singer) => {
+      if (singer.user_id === UserService.getUserId()) {
+        return this.isThisSongBelongsToUser = true;
+      }
+    });
   }
 
   deleteSong() {
@@ -80,17 +113,11 @@ export class EtcComponent implements OnInit {
     this.singers = '';
   }
 
-  clickOption(value: string) {
-    if (this.isSingersExist()) {
-      return this.handleNewSingerIsChose(value);
-    }
-    return this.handleNewSingerIsAssigned(value);
-  }
-
   handleNewSingerIsAssigned(value) {
-    this.singerUserHasChose.push(value);
-    this.singers += value;
-    return this.updateForm.value.newSinger = this.singers;
+    this.singerUserHasChose = [];
+    this.singersInInterface = '';
+    this.singerUserHasChose.push(value.id);
+    this.singersInInterface += value.name;
   }
 
   handleNewSingerIsChose(value) {
@@ -101,17 +128,16 @@ export class EtcComponent implements OnInit {
   }
 
   handleSingerIsNotDuplicate(value) {
-    this.singerUserHasChose.push(value);
-    this.singers += `, ${value}`;
-    return this.updateForm.value.newSinger = this.singers;
+    this.singerUserHasChose.push(value.id);
+    this.singersInInterface += `, ${value.name}`;
   }
 
   doesUserChooseSingerAgain(value) {
-    return !!this.singerUserHasChose.includes(value);
+    return !!this.singerUserHasChose.includes(value.id);
   }
 
   isSingersExist() {
-    return !!this.singers;
+    return !!this.singersInInterface;
   }
 
   songUpdate() {
@@ -124,7 +150,8 @@ export class EtcComponent implements OnInit {
   }
 
   startUpdateSong() {
-    this.songService.edit(this.song.id, this.updateForm.value)
+    this.setUpPreData();
+    this.songService.edit(this.updateForm.value)
       .subscribe((response) => {
         this.handleUpdateResponse(response);
       });
@@ -132,6 +159,16 @@ export class EtcComponent implements OnInit {
 
   handleUpdateResponse(response) {
     this.Notify.success(response.message, {timeout: 1000});
+    this.setUpDataInInterface({oldSong: this.song, newSong: response.data});
+    this.closeEtcDialog();
+  }
+
+  setUpDataInInterface(data) {
+    this.sharedService.songUpdateChange(data);
+  }
+
+  closeEtcDialog() {
+    this.dialogRef.close();
   }
 
   getCallBack() {
@@ -149,7 +186,7 @@ export class EtcComponent implements OnInit {
   }
 
   setUrlImgInUpdateForm(url) {
-    this.oldSongImage = url;
+    this.updateForm.value.newImage = url;
   }
 
   startUpload() {
@@ -166,17 +203,29 @@ export class EtcComponent implements OnInit {
 
   onSelectFileImg(event) {
     this.selectFileImg = event.target.files[0] as File;
+    this.setDataToFillInterface(event);
+  }
+
+  setDataToFillInterface(event) {
+    if (event.target.files[0]) {
+      const reader: FileReader = new FileReader();
+
+      reader.onload = (progressEvent) => { // called once readAsDataURL is completed
+        this.imgDisplayInInterfaceSrc = reader.result;
+      };
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+    }
   }
 
   declareData() {
-    this.updateForm = this.fb.group({ // Form update
+    this.updateForm = this.fb.group({
       songId: this.song.id,
       newName: [''],
-      newSinger: [''],
+      newSingers: [''],
       newImage: [''],
     });
     this.singerUserHasChose = [];
-    this.singersValue();
   }
 
   showEditField() {
@@ -192,6 +241,10 @@ export class EtcComponent implements OnInit {
       this.createPlaylistInServer(playlistData);
       this.sharedService.resetEmitted();
     });
+  }
+
+  setUpPreData() {
+    this.updateForm.value.newSingers = this.singerUserHasChose;
   }
 
   createPlaylistInServer(playlistData) {
@@ -248,7 +301,11 @@ export class EtcComponent implements OnInit {
   }
 
   handleGetCommentsResponse(response) {
-    this.comments = response.data;
+    if (response.data.length > 0) {
+      this.isAnyComments = true;
+      this.comments = response.data;
+    }
+    return;
   }
 
   setIsClickFalse() {
@@ -272,7 +329,6 @@ export class EtcComponent implements OnInit {
     }, error => {
       this.handleErrorCreateComment(error);
     });
-    this.pushNewCommentToInterface(this.setUpDataToPushInterface(content));
     return this.setIsClickTrue();
   }
 
@@ -284,6 +340,7 @@ export class EtcComponent implements OnInit {
     this.Notify.success(response.message, {timeout: 1000});
     this.resetValueInTextArea();
     this.setIsClickFalse();
+    this.getSongComments();
   }
 
   pushNewCommentToInterface(data) {

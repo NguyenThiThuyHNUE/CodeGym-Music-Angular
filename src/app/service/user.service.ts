@@ -40,7 +40,8 @@ export class UserService {
 
   static getUserAvatar() {
     if (!UserService.isUserHasImage()) {
-      return '../../../assets/img/bg-img/bg-7.jpg';
+      // tslint:disable-next-line:max-line-length
+      return 'https://firebasestorage.googleapis.com/v0/b/codegym-music-d1055.appspot.com/o/music%2Fbg-7.jpg?alt=media&token=fde1a560-92b5-4bf8-977b-33c26332496d';
     }
     return UserService.getUserImageWithoutCheckExist();
   }

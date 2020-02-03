@@ -5,6 +5,8 @@ import {finalize} from 'rxjs/operators';
 import {SongService} from '../../../service/song.service';
 import {SnotifyService} from 'ng-snotify';
 import {UserService} from '../../../service/user.service';
+import {SingerService} from '../../../service/singer.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-upload',
@@ -12,6 +14,7 @@ import {UserService} from '../../../service/user.service';
   styleUrls: ['./upload.component.scss']
 })
 export class UploadComponent implements OnInit {
+
   image: string | ArrayBuffer = '../../../../assets/img/music-02.jpeg';
   fileMp3: any;
   fileImage: any;
@@ -19,16 +22,62 @@ export class UploadComponent implements OnInit {
   uploadForm: any;
   innerProgress: any;
   userId: number;
+  singersInInterface: string;
+  listSinger: any[];
+  singerUserHasChose: string[];
 
   constructor(private uploadService: UploadService,
+              private router: Router,
               private songService: SongService,
+              private singerService: SingerService,
               private Notify: SnotifyService,
               private fb: FormBuilder) {
   }
 
   ngOnInit() {
+    this.getSingers();
     this.getUserId();
     this.setForm();
+  }
+
+  getSingers() {
+    this.singerService.getSingers().subscribe((response) => {
+      this.listSinger = response.data;
+    });
+  }
+
+  chooseSinger(singer) {
+    if (this.isSingersExist()) {
+      return this.handleNewSingerIsChose(singer);
+    }
+    return this.handleNewSingerIsAssigned(singer);
+  }
+
+  handleNewSingerIsAssigned(value) {
+    this.singerUserHasChose = [];
+    this.singersInInterface = '';
+    this.singerUserHasChose.push(value.id);
+    this.singersInInterface += value.name;
+  }
+
+  handleSingerIsNotDuplicate(value) {
+    this.singerUserHasChose.push(value.id);
+    this.singersInInterface += `, ${value.name}`;
+  }
+
+  handleNewSingerIsChose(value) {
+    if (!this.doesUserChooseSingerAgain(value)) {
+      this.handleSingerIsNotDuplicate(value);
+    }
+    return;
+  }
+
+  doesUserChooseSingerAgain(value) {
+    return !!this.singerUserHasChose.includes(value.id);
+  }
+
+  isSingersExist() {
+    return !!this.singersInInterface;
   }
 
   getUserId() {
@@ -101,10 +150,15 @@ export class UploadComponent implements OnInit {
   }
 
   uploadToServer() {
-    console.log(this.uploadForm.value);
+    this.setUpPreData();
     this.songService.create(this.uploadForm.value).subscribe((response) => {
       this.Notify.success(response.message, {timeout: 1000});
+      this.router.navigate(['/home']).then();
     });
+  }
+
+  setUpPreData() {
+    this.uploadForm.value.singers = this.singerUserHasChose;
   }
 
   startUpload() {
@@ -123,7 +177,7 @@ export class UploadComponent implements OnInit {
       {
         userId: this.userId,
         name: ['', [Validators.required]],
-        singer: ['', [Validators.required]],
+        singers: ['', [Validators.required]],
         file: ['', [Validators.required]],
         avatar: ['', [Validators.required]],
         category: ['', [Validators.required]],
@@ -131,8 +185,8 @@ export class UploadComponent implements OnInit {
     this.uploadForm.value.avatar = this.image;
   }
 
-  get singer() {
-    return this.uploadForm.get('singer');
+  get singers() {
+    return this.uploadForm.get('singers');
   }
 
   get file() {

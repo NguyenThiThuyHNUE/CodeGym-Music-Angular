@@ -28,11 +28,11 @@ export class PlaylistService {
   }
 
   getPlaylists(userId) {
-    return this.http.get(Url + `/api/playlists/${userId}`);
+    return this.http.get<Response>(Url + `/api/playlists/${userId}`);
   }
 
   createPlaylist(info) {
-    return this.http.post<Response>(Url + '/api/playlist/create', info);
+    return this.http.post<Response>('http://localhost:8000/api/playlist/create', info);
   }
   updatePlaylist(playlistId, data) {
     return this.http.post(Url + `/api/playlist/update/${playlistId}`, data);

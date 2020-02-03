@@ -1,0 +1,26 @@
+.singer-list-field {
+  position: fixed;
+  z-index: 123;
+  padding-left: 0px;
+}
+
+.playlist-item-content {
+  padding-left: .9rem;
+}
+
+.singer-info-content, .singer-playlists, .singer-songs {
+  padding-left: 0px;
+  padding-right: 0px;
+  left: 15%;
+
+  p {
+    margin-bottom: 0;
+  }
+
+  .color-to-pink {
+    &:hover {
+      color: deeppink;
+      cursor: pointer;
+    }
+  }
+}

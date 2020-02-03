@@ -27,23 +27,16 @@
 
             <!-- Nav Start -->
             <div class="classynav">
-              <ul>
+              <ul style="margin-top: 1.5rem">
                 <li><a routerLink="/home">Home</a></li>
-                <li><a href="about-us.html">About us</a></li>
-                <li><a href="#">Pages</a>
-                </li>
                 <li><a routerLink="upload">Upload</a>
-                </li>
-                <li><a routerLink="music">Music</a>
-                </li>
-                <li><a href="#">Mega Menu</a>
                 </li>
                 <li><a [matMenuTriggerFor]="singer">Singer</a>
                 </li>
               </ul>
 
               <!-- Social Button -->
-              <div class="top-social-info">
+              <div style="margin-top: 1rem" class="top-social-info">
                 <a href="#"><i class="fab fa-twitter-square"></i></a>
                 <a href="#"><i class="fab fa-facebook-square"></i></a>
                 <a *ngIf="!user.isLoggedIn()" class="auth classynav" (click)="showFormLogin()">Login</a>
@@ -64,5 +57,5 @@
 
 <mat-menu #singer="matMenu">
   <a mat-menu-item routerLink="/home/singer">List</a>
-  <a mat-menu-item routerLink="/home/singer/create">Create Singer</a>
+  <span mat-menu-item (click)="showDialogCreateSinger()">Create Singer</span>
 </mat-menu>

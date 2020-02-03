@@ -1,52 +1,66 @@
-<div class="about-us-area section-padding-100-0 bg-img bg-overlay">
-  <div class="container">
-    <p class="page-title">Create Singer</p>
-    <hr>
+<div class="col-sm-12 col-md-12 col-lg-12 wrapper-create-form">
+  <mat-card>
     <div class="row">
-      <div class="col-lg-12">
-        <form [formGroup]="addSingerForm" (ngSubmit)="onUpLoad()">
-          <div class="form-group">
-            <label><b>Name Singer:</b></label>
-            <input class="form-control"
-                   formControlName="name" required>
-            <div *ngIf="name.invalid && (name.dirty || name.touched)"
-                 class="alert alert-danger">
-              <div *ngIf="name.errors.required">
-                Tên Ca si không được để trống !
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label><b>Avatar:</b></label>
-            <input type="file" class="form-control" formControlName="avatar" (change)="onSelectFileAvatar($event)">
-            <div *ngIf="avatar.invalid && (avatar.dirty || avatar.touched)"
-                 class="alert alert-danger">
-              <div *ngIf="avatar.errors.required">
-                Ảnh đại diện ca si không được để trống !
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label><b>Description:</b></label>
-            <!-- <input type="text" class="form-control" formControlName="description">-->
-            <textarea class="form-control" formControlName="description" cols="30" rows="10"></textarea>
-            <div *ngIf="description.invalid && (description.dirty || description.touched)"
-                 class="alert alert-danger">
-              <div *ngIf="description.errors.required">
-                Gioi thieu ca si không được để trống !
-              </div>
-            </div>
-          </div>
+      <div class="justify-content-end d-flex col-sm-6 col-md-6 col-lg-6">
+        <h3>New Singer</h3>
+      </div>
+      <div class="row">
+        <div class="mt-3 col-sm-3 col-md-3 col-lg-3">
+          <img class="edit-song-update-img" src="{{singerImage}}"/>
+          <button class="create-singer-button-image" (click)="img.click()">
+            <i class="fa fa-camera" aria-hidden="true"></i>
+            Select Image
+          </button>
+        </div>
 
-          <button type="submit" class="btn btn-primary" [disabled]="!addSingerForm.valid">Create</button>
-          <button class="btn btn-danger ml-2" routerLink="/home">Cancel</button>
-        </form>
+        <div class="col-sm-9 col-md-9 col-lg-9">
+          <mat-card class="mat-card-profile">
+            <form [formGroup]="addSingerForm" (ngSubmit)="onUpLoad()">
+              <mat-card-content>
+                <mat-form-field floatLabel="never" class="create-singer-tp-full-width">
+                  <mat-label>
+                    Singer Name
+                  </mat-label>
+                  <input formControlName="singerName" matInput type="text">
+                </mat-form-field>
+
+                <div class="row">
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <mat-form-field floatLabel="never" class="create-singer-tp-full-width">
+                      <mat-select formControlName="singerGender" placeholder="Choose Gender">
+                        <mat-option value="Male">Male</mat-option>
+                        <mat-option value="FeMale">FeMale</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <mat-form-field floatLabel="never" class="create-singer-tp-full-width">
+                      <mat-label>
+                        Nickname
+                      </mat-label>
+                      <input formControlName="singerNickName" matInput type="text">
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <mat-form-field floatLabel="never" class="create-singer-tp-full-width">
+                  <mat-label>Describer somethings about Singer</mat-label>
+                  <textarea formControlName="singerDes" matInput type="text"></textarea>
+                </mat-form-field>
+              </mat-card-content>
+
+              <mat-card-actions>
+                <button mat-button>Cancel</button>
+                <button type="submit" color="accent" mat-raised-button>Submit</button>
+              </mat-card-actions>
+            </form>
+          </mat-card>
+        </div>
       </div>
     </div>
-  </div>
+  </mat-card>
 </div>
 
 
-
-
-
+<input (change)="onSelectFileAvatar($event)" style="display: none" type="file" accept="image/*" #img>

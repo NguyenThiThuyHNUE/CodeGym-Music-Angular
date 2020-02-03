@@ -3,6 +3,8 @@ import {UserService} from '../../../service/user.service';
 import {SnotifyService} from 'ng-snotify';
 import {AuthService} from 'angularx-social-login';
 import {SocialUser} from 'angularx-social-login';
+import {ProfileService} from '../../../service/profile.service';
+import {SharedService} from '../../../service/shared.service';
 
 @Component({
   selector: 'app-auth',
@@ -16,20 +18,33 @@ export class AuthComponent implements OnInit {
 
   constructor(public user: UserService,
               public Notify: SnotifyService,
+              private sharedService: SharedService,
+              private profileService: ProfileService,
               private authService: AuthService) {
   }
 
   ngOnInit() {
     this.getUserCredential();
+    this.isNewUserNameUpdate();
+  }
+
+  isNewUserNameUpdate() {
+    this.sharedService.newUserNameEmitted.subscribe((data) => {
+      this.name = data.data.name;
+    });
+  }
+
+  showProfile() {
+    this.profileService.showProfile();
   }
 
   logout() {
-     this.Notify.success(`Logout Success, Goodbye ${this.name}`, 'Congratulations', {timeout: 3000});
+    this.Notify.success(`Logout Success, Goodbye ${this.name}`, 'Congratulations', {timeout: 1000});
     this.user.logout();
   }
 
   handleResponse(response) {
-    this.Notify.success(`Login Success, Welcome ${response.name}`, 'Congratulations', {timeout: 3000});
+    this.Notify.success(`Login Success, Welcome ${response.name}`, 'Congratulations', {timeout: 1000});
     this.saveDataToLocalStorage(response);
     this.setUserName();
   }

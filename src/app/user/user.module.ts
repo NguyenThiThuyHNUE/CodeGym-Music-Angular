@@ -51,7 +51,8 @@ import {HeartComponent} from './icon/heart/heart.component';
     InfoComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent, SongComponent, NowPlayComponent,
     UploadComponent, QueryComponent, ResultComponent, HeartComponent,
     AllComponent, FavoriteComponent, TrackComponent, CtPlaylistComponent, ChangePasswordComponent],
-  entryComponents: [LoginComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent, ChangePasswordComponent],
+  entryComponents: [LoginComponent, ProfileComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent, ChangePasswordComponent,
+    InfoComponent],
 
   exports: [
     HeaderComponent,

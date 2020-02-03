@@ -1,19 +1,27 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>
-      Play list
-    </mat-card-title>
-    <mat-card-subtitle>
-      <button mat-button (click)="newPlaylist()">Create Playlist</button>
-    </mat-card-subtitle>
-  </mat-card-header>
+<div class="col-sm-12 col-md-12 col-lg-12 singer-songs">
+  <div *ngIf="!playlists.length > 0" class="justify-content-center align-items-center row">
+    You haven't any playlist
+  </div>
+  <div class="justify-content-center align-items-center row">
+    <button (click)="newPlaylist()"
+            mat-raised-button color="accent">New Playlist
+    </button>
+  </div>
 
-  <mat-card-content>
-    <mat-list>
-      <mat-list-item *ngFor="let playlist of playlists">
-        <button mat-button (click)="putSongToPlaylist(playlist.id)">{{playlist.namePlaylist}}</button>
-      </mat-list-item>
-    </mat-list>
-  </mat-card-content>
-</mat-card>
-
+  <div *ngFor="let playlist of playlists" class="row mb-3">
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <img style="width: 100%" src="{{imgDisplayInInterfaceSrc}}" alt="">
+    </div>
+    <div class="col-sm-7 col-md-7 col-lg-7">
+      <p (click)="showSongsInPlaylist(playlist.id)" class="color-to-pink mb-0">{{playlist.namePlaylist}}</p>
+    </div>
+    <div class="d-flex justify-content-center align-items-center col-sm-3 col-md-3 col-lg-3">
+      <button (click)="playPlaylist(playlist.id)" class="profile-playlist-button">
+        Play Playlist
+      </button> &nbsp;
+      <button class="profile-playlist-button">
+        <i class="fas fa-ellipsis-h"></i> More
+      </button>
+    </div>
+  </div>
+</div>

@@ -5,7 +5,11 @@ import {SnotifyService} from 'ng-snotify';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {Playlist} from '../../../../interface/playlist';
 import {UserService} from '../../../../service/user.service';
+import {InfoService} from '../../../../service/info.service';
 import {timer} from 'rxjs';
+import {SharedService} from '../../../../service/shared.service';
+import {SongResponse} from '../../../../interface/song-response';
+import {IMusic} from '../../../../interface/i-music';
 
 @Component({
   selector: 'app-playlist',
@@ -19,22 +23,58 @@ export class PlaylistComponent implements OnInit {
     user_id: UserService.getUserId(),
     namePlaylist: ['', Validators.required],
   });
-
+  imgDisplayInInterfaceSrc = '../../../../../assets/img/bg-img/bg-7.jpg';
   userId: number;
   playlists: Playlist[];
+  isPlayPlaylist: boolean;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public songId: any,
     private fb: FormBuilder,
     private Notify: SnotifyService,
+    private shareService: SharedService,
+    private infoService: InfoService,
     private playListService: PlaylistService) {
-    console.log(songId);
   }
 
   ngOnInit() {
     this.setUserId();
-    this.updatePlaylistFromTwoToFiveSeconds();
     this.getPlaylists();
+  }
+
+  playPlaylist(playlistId) {
+    if (this.isPlayPlaylist) {
+      this.Notify.info('Playlist is Playing', {timeout: 1500});
+    } else {
+      this.getSongsInPlaylist(playlistId);
+    }
+  }
+
+  private handleGetSongsInPlaylistResponse(response: SongResponse) {
+    if (response.data) {
+      return this.Notify.error('You haven\'t any song in playlist', {timeout: 1500});
+    }
+    const songsInPlaylist = response.data;
+    this.shareService.currentSongChange(songsInPlaylist[0]);
+    this.shareService.listTheSameSongsChange(this.removeCurrentSongInArray(songsInPlaylist[0], songsInPlaylist));
+    this.isPlayPlaylist = true;
+  }
+
+  removeCurrentSongInArray(song, listSong) {
+    const listSongs = listSong;
+    listSongs.splice(listSongs.indexOf(song), 1);
+    return listSongs;
+  }
+
+  getSongsInPlaylist(playlistId) {
+    this.playListService.getSongsInPlaylist(playlistId)
+      .subscribe((response) => {
+        this.handleGetSongsInPlaylistResponse(response);
+      });
+  }
+
+  showSongsInPlaylist(playlistId) {
+    this.infoService.showSongsInPlaylist(playlistId, this.playlists);
   }
 
   putSongToPlaylist(playlistId) {
@@ -48,7 +88,6 @@ export class PlaylistComponent implements OnInit {
   getPlaylists() {
     this.playListService.getPlaylists(this.userId)
       .subscribe((response) => {
-        console.log(this.handleGetPlaylistResponse(response));
         this.handleGetPlaylistResponse(response);
       });
 
@@ -64,20 +103,17 @@ export class PlaylistComponent implements OnInit {
 
   newPlaylist() {
     this.playListService.showFormCreatePlaylist();
+    this.shareService.playlistNameEmitted.subscribe((name) => {
+     this.getPlaylists();
+    });
   }
 
   private handleGetPlaylistResponse(response) {
-    return this.playlists = response.data;
+    this.playlists = response.data;
+    console.log(this.playlists);
   }
 
   private setUserId() {
     this.userId = UserService.getUserId();
-  }
-
-  private updatePlaylistFromTwoToFiveSeconds() {
-    const time$ = timer(2000, 5000);
-    time$.subscribe(() => {
-      this.getPlaylists();
-    });
   }
 }

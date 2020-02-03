@@ -6,5 +6,6 @@ export interface IMusic {
   avatar?: string;
   musicUrl?: string;
   file?: string;
-  category?: string
+  category?: string;
+  singers?: [{ name: string, user_id: number }];
 }

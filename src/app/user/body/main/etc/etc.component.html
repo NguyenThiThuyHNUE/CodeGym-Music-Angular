@@ -8,10 +8,11 @@
         <button class="mt-3" mat-raised-button (click)="showPlaylistField()">Playlist</button>
       </li>
       <li>
-        <button class="mt-3" mat-raised-button (click)="showEditField()">Edit</button>
+        <button *ngIf="isThisSongBelongsToUser" class="mt-3" mat-raised-button (click)="showEditField()">Edit</button>
       </li>
       <li>
-        <button class="mt-3" mat-raised-button (click)="showDeleteField()">Delete</button>
+        <button *ngIf="isThisSongBelongsToUser" class="mt-3" mat-raised-button (click)="showDeleteField()">Delete
+        </button>
       </li>
     </ol>
   </div>
@@ -21,8 +22,8 @@
       <div class="row justify-content-center">
         <h3>Comment</h3>
       </div>
-      <div class="etc-content-no-result">
-        <h6 *ngIf="comments">No any comment in this song</h6>
+      <div *ngIf="!isAnyComments" class="etc-content-no-result">
+        <h6>No any comment in this song</h6>
       </div>
       <div *ngFor="let comment of comments" class="row mt-3">
         <div class="col-sm-12 col-md-12 col-lg-12">
@@ -36,7 +37,7 @@
             </mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
-            <p>{{comment.comment}}</p>
+            <p class="comment-content">{{comment.comment}}</p>
           </mat-card-content>
         </div>
       </div>
@@ -75,7 +76,7 @@
           <div class="row">
             <div class="col-sm-4 col-md-4 col-lg-4">
               <div class="playlist-item-image">
-                <img src="{{imgDisplayInInterfaceSrc}}" alt="">
+                <img src="{{playlistsImage}}" alt="">
               </div>
             </div>
             <div class="col-sm-8 col-md-8 col-lg-8">
@@ -87,100 +88,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </mat-card>
-  </div>
-
-  <div *ngIf="isPage === 'edit'" class="col-sm-10 col-md-10 col-lg-10 etc-content">
-    <mat-card>
-      <div class="row">
-        <div class="justify-content-end d-flex col-sm-6 col-md-6 col-lg-6">
-          <h3>Edit Your Song</h3>
-        </div>
-        <div class="row">
-          <div class="mt-3 col-sm-3 col-md-3 col-lg-3">
-            <img class="edit-song-update-img" src="{{imgDisplayInInterfaceSrc}}"/>
-            <button class="edit-song-button-img" (click)="img.click()">
-              <i class="fa fa-camera" aria-hidden="true"></i>
-              Select Image
-            </button>
-          </div>
-
-          <div class="col-sm-9 col-md-9 col-lg-9">
-            <mat-card class="mat-card-profile">
-              <form [formGroup]="updateForm" (ngSubmit)="songUpdate()">
-                <mat-card-content>
-                  <mat-form-field floatLabel="never" class="edit-song-tp-full-width">
-                    <mat-label>
-                      Name Song
-                    </mat-label>
-                    <input formControlName="newName" matInput type="text">
-                  </mat-form-field>
-
-                  <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-6">
-                      <mat-form-field floatLabel="never" class="edit-song-tp-full-width">
-                        <mat-select placeholder="Gender">
-                          <mat-option (click)="clickOption('Male')" value="US">Male</mat-option>
-                          <mat-option (click)="clickOption('FeMale')" value="VN">FeMale</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6">
-                      <mat-form-field floatLabel="never" class="edit-song-tp-full-width">
-                        <mat-label>
-                          Singer
-                        </mat-label>
-                        <input readonly value="{{singers}}" formControlName="newName" matInput type="text">
-                      </mat-form-field>
-                    </div>
-                  </div>
-
-                  <mat-form-field floatLabel="never" class="edit-song-tp-full-width">
-                    <mat-label>Description</mat-label>
-                    <textarea matInput type="text"></textarea>
-                  </mat-form-field>
-
-                  <mat-form-field floatLabel="never" class="edit-song-tp-full-width">
-                    <mat-label>You put Lirycs here if you have</mat-label>
-                    <textarea matInput type="text"></textarea>
-                  </mat-form-field>
-                </mat-card-content>
-
-                <mat-card-actions>
-                  <button mat-button>Cancel</button>
-                  <button type="submit" color="accent" mat-raised-button>Save Change</button>
-                </mat-card-actions>
-              </form>
-            </mat-card>
-          </div>
-        </div>
-      </div>
-    </mat-card>
-  </div>
-
-  <div *ngIf="isPage === 'delete'" class="col-sm-10 col-md-10 col-lg-10 etc-content">
-    <mat-card>
-      <div class="row d-flex pl-3">
-        <h3>Permanently delete this song?
-        </h3>
-      </div>
-      <div class="row">
-        <div class="col-sm-3 col-md-3 col-lg-3">
-          <img class="edit-song-update-img" src="{{imgDisplayInInterfaceSrc}}"/>
-        </div>
-
-        <div class="col-sm-9 col-md-9 col-lg-9">
-          <mat-card-content>
-            <p>Removing this song is irreversible. You will lose all the plays, likes and comments for this song with
-              no way to get them back.</p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button>Cancel</button>
-            <button (click)="deleteSong()" color="accent" mat-raised-button>Delete Song</button>
-          </mat-card-actions>
         </div>
       </div>
     </mat-card>

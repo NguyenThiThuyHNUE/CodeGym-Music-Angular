@@ -1,1 +1,114 @@
-<p>track works!</p>
+<div *ngIf="page === 'list'" class="col-sm-12 col-md-12 col-lg-12 singer-songs">
+  <div *ngFor="let song of userSongs" class="row mb-3">
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <img style="width: 100%" src="{{song.avatar}}" alt="">
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6">
+      <p class="mb-0">{{song.name}}</p>
+      <p><small>{{singerName}}</small></p>
+    </div>
+    <div class="d-flex justify-content-center align-items-center col-sm-4 col-md-4 col-lg-4">
+      <button (click)="listenSong(song)" class="profile-playlist-button">
+        Play Song
+      </button> &nbsp;
+      <button (click)="editSong(song)" class="mr-1 profile-playlist-button">
+        <i class="fas fa-ellipsis-h"></i> Edit
+      </button>
+      <button (click)="deleteSong(song)" class="profile-playlist-button">
+        <i class="fas fa-ellipsis-h"></i> delete
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+<div *ngIf="page === 'edit'" class="col-sm-12 col-md-12 col-lg-12 etc-content">
+  <div class="row">
+    <div class="justify-content-end d-flex col-sm-6 col-md-6 col-lg-6">
+      <h3>Edit Your Song</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="update-song-image-wrapper mt-3 col-sm-3 col-md-3 col-lg-3">
+      <img class="edit-song-update-img" src="{{imgDisplayInInterfaceSrc}}"/>
+      <button class="edit-song-button-img" (click)="img.click()">
+        <i class="fa fa-camera" aria-hidden="true"></i>
+        Select Image
+      </button>
+    </div>
+
+    <div class="col-sm-9 col-md-9 col-lg-9">
+      <div class="mat-card-profile">
+        <form [formGroup]="updateForm" (ngSubmit)="songUpdate()">
+          <mat-card-content>
+            <mat-form-field floatLabel="never" class="edit-song-tp-full-width">
+              <mat-label>
+                Name Song
+              </mat-label>
+              <input formControlName="newName" matInput type="text">
+            </mat-form-field>
+
+            <div class="row">
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <mat-form-field floatLabel="never" class="edit-song-tp-full-width">
+                  <label>Choose Singer</label>
+                  <mat-select>
+                    <mat-option *ngFor="let singer of listSinger" (click)="chooseSinger(singer)"
+                    >{{singer.name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <mat-form-field floatLabel="never" class="edit-song-tp-full-width">
+                  <label>Singer, Group, Team</label>
+                  <input value="{{singersInInterface}}" readonly matInput type="text">
+                </mat-form-field>
+              </div>
+            </div>
+
+            <mat-form-field floatLabel="never" class="edit-song-tp-full-width">
+              <mat-label>Description</mat-label>
+              <textarea matInput type="text"></textarea>
+            </mat-form-field>
+
+            <mat-form-field floatLabel="never" class="edit-song-tp-full-width">
+              <mat-label>You put Lirycs here if you have</mat-label>
+              <textarea matInput type="text"></textarea>
+            </mat-form-field>
+          </mat-card-content>
+
+          <mat-card-actions>
+            <button mat-button>Cancel</button>
+            <button type="submit" color="accent" mat-raised-button>Save Change</button>
+          </mat-card-actions>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="page === 'delete'" class="col-sm-12 col-md-12 col-lg-12 etc-content">
+    <div class="row d-flex pl-3">
+      <h3>Permanently delete this song?
+      </h3>
+    </div>
+    <div class="row">
+      <div class="col-sm-3 col-md-3 col-lg-3">
+        <img class="edit-song-update-img" src="{{imgDisplayInInterfaceSrc}}"/>
+      </div>
+
+      <div class="col-sm-9 col-md-9 col-lg-9">
+        <mat-card-content>
+          <p>Removing this song is irreversible. You will lose all the plays, likes and comments for this song with
+            no way to get them back.</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>Cancel</button>
+          <button (click)="clickDeleteSong()" color="accent" mat-raised-button>Delete Song</button>
+        </mat-card-actions>
+      </div>
+    </div>
+</div>
+
+<input (change)="onSelectFileImg($event)" style="display: none" type="file" accept="image/*" #img>

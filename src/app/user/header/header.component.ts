@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {LoginComponent} from './login/login.component';
 import {UserService} from '../../service/user.service';
+import {SingerService} from '../../service/singer.service';
 
 @Component({
   selector: 'app-header',
@@ -10,10 +11,15 @@ import {UserService} from '../../service/user.service';
 })
 export class HeaderComponent implements OnInit {
   constructor(public dialog: MatDialog,
+              private singerService: SingerService,
               public user: UserService) {
   }
 
   ngOnInit() {
+  }
+
+  showDialogCreateSinger() {
+    this.singerService.showCreateSingerFormDialog();
   }
 
   showFormLogin() {

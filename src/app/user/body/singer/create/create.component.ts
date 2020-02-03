@@ -1,14 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {AngularFireStorage} from '@angular/fire/storage';
-import {MusicService} from '../../../../service/music.service';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Song} from '../../../../song';
 import {finalize} from 'rxjs/operators';
 import {SingerService} from '../../../../service/singer.service';
 import {UploadService} from '../../../../service/upload.service';
-import {SongService} from '../../../../service/song.service';
+import {SnotifyService} from 'ng-snotify';
+import {MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-create',
@@ -16,13 +15,17 @@ import {SongService} from '../../../../service/song.service';
   styleUrls: ['./create.component.scss']
 })
 export class CreateComponent implements OnInit {
-
   selectFileAvatar: File = null;
   addSingerForm: any;
   selectFileMp3: File = null;
+  singerImage: string | ArrayBuffer = '../../../../../assets/img/bg-img/bg-7.jpg';
+  singers: string;
+  singerUserHasChose: any;
 
   constructor(private fb: FormBuilder,
               private router: Router,
+              private Notify: SnotifyService,
+              private dialogRef: MatDialogRef<CreateComponent>,
               private angularFireStorage: AngularFireStorage,
               private singerService: SingerService,
               private angularFireDatabase: AngularFireDatabase,
@@ -37,38 +40,66 @@ export class CreateComponent implements OnInit {
 
   onSelectFileAvatar(event) {
     this.selectFileAvatar = event.target.files[0] as File;
-    // console.log(this.selectFileAvatar);
+    this.setDataToFillInterface(event);
+  }
 
+  setDataToFillInterface(event) {
+    if (event.target.files[0]) {
+      const reader: FileReader = new FileReader();
+
+      reader.onload = (progressEvent) => { // called once readAsDataURL is completed
+        this.singerImage = reader.result;
+      };
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+    }
   }
 
   onSelectFileMp3(event) {
     this.selectFileMp3 = event.target.files[0] as File;
   }
 
+  clickOption(value: string) {
+    this.addSingerForm.value.singerGender = value;
+  }
+
+  handleNewSingerIsAssigned(value) {
+    this.singerUserHasChose.push(value);
+    this.singers += value;
+  }
+
+  handleNewSingerIsChose(value) {
+    if (!this.doesUserChooseSingerAgain(value)) {
+      this.handleSingerIsNotDuplicate(value);
+    }
+    return;
+  }
+
+  handleSingerIsNotDuplicate(value) {
+    this.singerUserHasChose.push(value);
+    this.singers += `, ${value}`;
+  }
+
+  doesUserChooseSingerAgain(value) {
+    return !!this.singerUserHasChose.includes(value);
+  }
+
+  isSingersExist() {
+    return !!this.singers;
+  }
+
   onUpLoad() {
     this.setUpFileAndImageService();
     this.startUpload();
     this.getCallBackImage();
-    // this.song.name = this.addSingerForm.value.name;
-    // this.song.singer = this.addSingerForm.value.singer;
-    // this.song.description = this.addSingerForm.value.description;
-    // const firePathAvatar = `music/${this.selectFileAvatar.name}`;
-    // const fireRefAvatar = this.angularFireStorage.ref(firePathAvatar);
-    // // this.databaseList = this.angularFireDatabase.list('/list');
-    // const taskUploadAvatar = this.singerService.uploadAvatar(firePathAvatar, this.selectFileAvatar);
-    // taskUploadAvatar.percentageChanges().subscribe(percent => {
-    //   this.uploadPercent = percent;
-    // });
-    // taskUploadAvatar.snapshotChanges().pipe(
-    //   finalize(() => {
-    //     fireRefAvatar.getDownloadURL().subscribe((url) => {
-    //       this.song.avatar = url;
-    //     });
-    //   })).subscribe();
   }
 
   get name() {
     return this.addSingerForm.get('name');
+  }
+
+  get singerGender() {
+    return this.addSingerForm.get('singerGender');
   }
 
   get description() {
@@ -98,14 +129,15 @@ export class CreateComponent implements OnInit {
   startUpdateSongToServer() {
     this.singerService.create(this.addSingerForm.value).subscribe(response => {
       this.router.navigate(['/singer']).then(() => {
-        alert(response.message);
+        this.Notify.success(response.message, {timeout: 1000});
+        this.dialogRef.close();
       });
     });
   }
 
   getImgDownloadUrl(fireRefImg) {
     fireRefImg.getDownloadURL().subscribe((url) => {
-      this.addSingerForm.value.avatar = url;
+      this.addSingerForm.value.singerAvatar = url;
       this.startUpdateSongToServer();
     });
   }
@@ -113,9 +145,11 @@ export class CreateComponent implements OnInit {
   setForm() {
     this.addSingerForm = this.fb.group(
       {
-        name: ['', [Validators.required]],
-        description: ['', [Validators.required]],
-        avatar: ['', [Validators.required]],
+        singerName: ['', [Validators.required]],
+        singerDes: [''],
+        singerGender: ['', [Validators.required]],
+        singerAvatar: ['', [Validators.required]],
+        singerNickName: [''],
       });
   }
 

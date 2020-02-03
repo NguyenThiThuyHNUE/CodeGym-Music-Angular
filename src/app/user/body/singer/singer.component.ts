@@ -27,4 +27,8 @@ export class SingerComponent implements OnInit {
   handleGetSingerResponse(response) {
     this.singers = response.data;
   }
+
+  showSingerInfo(singer) {
+    this.singerService.showSingerInfo(singer);
+  }
 }

@@ -1,6 +1,19 @@
 .login-tab {
   overflow: hidden;
   height: 100%;
+
+}
+
+mat-icon.auth-icon.mat-icon.notranslate.material-icons.mat-icon-no-color.ng-star-inserted {
+  display: flex !important;
+  position: relative !important;
+  bottom: 17px !important;
+}
+
+mat-icon.auth-icon.mat-icon.notranslate.material-icons.mat-icon-no-color {
+  display: flex;
+  position: relative;
+  bottom: 17px;
 }
 
 .mat-form-field-appearance-fill .mat-form-field-label {
@@ -30,7 +43,9 @@ mat-dialog-container#mat-dialog-0 {
 }
 
 .mat-form-field-flex {
-  margin-bottom: 1rem;
+  .input-email, .input-password, .input-name {
+    margin-bottom: 1rem;
+  }
 }
 
 input.input-email, input.input-password, input.input-name {

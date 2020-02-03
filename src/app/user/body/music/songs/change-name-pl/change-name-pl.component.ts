@@ -4,6 +4,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {PlaylistService} from '../../../../../service/playlist.service';
 import {SnotifyService} from 'ng-snotify';
 import {SongsComponent} from '../songs.component';
+import {SharedService} from '../../../../../service/shared.service';
 
 @Component({
   selector: 'app-change-name-pl',
@@ -19,6 +20,7 @@ export class ChangeNamePLComponent implements OnInit {
               private dialogRefSongs: MatDialogRef<SongsComponent>,
               @Inject(MAT_DIALOG_DATA) public playlistId: any,
               private fb: FormBuilder,
+              private sharedService: SharedService,
               private Notify: SnotifyService,
               private playlistService: PlaylistService
   ) {
@@ -38,7 +40,7 @@ export class ChangeNamePLComponent implements OnInit {
   }
 
   handleUpdateResponse(response) {
-    localStorage.setItem('newNamePlaylist', this.updateForm.value.newNamePlaylist);
+    this.sharedService.newPlaylist(response);
     this.Notify.success('Rename Success', {timeout: 3000});
     this.dialogRef.close();
   }

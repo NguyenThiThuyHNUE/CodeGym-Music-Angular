@@ -4,6 +4,10 @@
   background: linear-gradient(to right, #cc1573, #5722a9);
   display: flex;
 
+  .upload-form-select {
+    width: 100%
+  }
+
   .upload-progress {
     background-color: deeppink;
     padding-left: 0px;
