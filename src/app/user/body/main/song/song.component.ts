@@ -5,67 +5,89 @@ import {MainService} from '../../../../service/main.service';
 import {SongService} from '../../../../service/song.service';
 
 @Component({
-    selector: 'app-song',
-    templateUrl: './song.component.html',
-    styleUrls: ['./song.component.scss']
+  selector: 'app-song',
+  templateUrl: './song.component.html',
+  styleUrls: ['./song.component.scss']
 })
 export class SongComponent implements OnInit {
-    @Input() song: IMusic;
-    @Input() songsUserHasLiked: number[];
-    icon: boolean;
-    isPlay: boolean;
-    listTheSameSongs: IMusic[];
+  @Input() song: IMusic;
+  @Input() songsUserHasLiked: number[];
+  icon: boolean;
+  isPlay: boolean;
+  listTheSameSongs: IMusic[];
 
-    constructor(private sharedService: SharedService,
-                private songService: SongService,
-                private mainService: MainService) {
-    }
+  constructor(private sharedService: SharedService,
+              private songService: SongService,
+              private mainService: MainService) {
+  }
 
-    ngOnInit() {
-        this.handleWhenUserHoverToThisSong();
-        this.getTheSameSongsWhenUserClickThisSong();
-    }
+  ngOnInit() {
+    this.handleWhenUserHoverToThisSong();
+    this.isSongPlayingThisSong();
+  }
 
-    getTheSameSongsWhenUserClickThisSong() {
-        this.songService.getTheSameSongs(this.song.category).subscribe((response) => {
-            this.handleGetTheSameSongsResponse(response);
-        });
-    }
+  isSongPlayingThisSong() {
+    this.sharedService.songPlayingEmitted.subscribe((dataSong) => {
+      if (this.checkSongPlayingThisSong(dataSong)) {
+        this.icon = true;
+        return this.isPlay = true;
+      }
+      this.isPlay = false;
+      return this.hidePlayIcon();
+    });
+  }
 
-    handleGetTheSameSongsResponse(response) {
-        this.listTheSameSongs = response.data.data;
-    }
+  checkSongPlayingThisSong(dataSong) {
+    return this.song.name === dataSong.name;
+  }
 
-    handleWhenUserHoverToThisSong() {
-        this.sharedService.currentSongEmitted.subscribe((song) => {
-            if (this.isCurrentSongIsThisSong(song)) {
-                return this.isPlay = true;
-            }
-            this.isPlay = false;
-            return this.hidePlayIcon();
-        });
-    }
+  getTheSameSongsWhenUserClickThisSong(currentSong) {
+    this.songService.getTheSameSongs(this.song.category).subscribe((response) => {
+      response.data.data.splice(currentSong, 1);
+      this.handleGetTheSameSongsResponse(response);
+    });
+  }
 
-    isCurrentSongIsThisSong(song) {
-        return song.id === this.song.id;
-    }
+  handleGetTheSameSongsResponse(response) {
+    this.sharedService.listTheSameSongsChange(response.data.data);
+  }
 
-    showEtc() {
-        this.mainService.showEtc(this.song);
-    }
+  handleWhenUserHoverToThisSong() {
+    this.sharedService.currentSongEmitted.subscribe((song) => {
+      if (this.isCurrentSongIsThisSong(song)) {
+        return this.isPlay = true;
+      }
+      this.isPlay = false;
+      return this.hidePlayIcon();
+    });
+  }
 
-    hidePlayIcon() {
-        if (!this.isPlay) {
-            return this.icon = false;
-        }
-    }
+  isCurrentSongIsThisSong(song) {
+    return song.id === this.song.id;
+  }
 
-    showPlayIcon() {
-        return this.icon = true;
-    }
+  showEtc() {
+    this.mainService.showEtc(this.song);
+  }
 
-    onClick(song: IMusic) {
-        this.sharedService.currentSongChange(song);
-        this.sharedService.listTheSameSongsChange(this.listTheSameSongs);
+  hidePlayIcon() {
+    if (!this.isPlay) {
+      return this.icon = false;
     }
+  }
+
+  showPlayIcon() {
+    return this.icon = true;
+  }
+
+  onClick(song: IMusic) {
+    this.sharedService.currentSongChange(song);
+    this.getTheSameSongsWhenUserClickThisSong(song);
+  }
+
+  removeCurrentSongInArray(song) {
+    const listSongs = this.listTheSameSongs;
+    listSongs.splice(listSongs.indexOf(song), 1);
+    return listSongs;
+  }
 }

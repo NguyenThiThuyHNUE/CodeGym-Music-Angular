@@ -35,12 +35,16 @@ export class AuthComponent implements OnInit {
   }
 
   showProfile() {
-    this.profileService.showProfile();
+    this.profileService.showProfile('info');
+  }
+
+  showTracks() {
+    this.profileService.showProfile('tracks');
   }
 
   logout() {
     this.Notify.success(`Logout Success, Goodbye ${this.name}`, 'Congratulations', {timeout: 1000});
-    this.user.logout();
+    UserService.logout();
   }
 
   handleResponse(response) {
@@ -50,7 +54,8 @@ export class AuthComponent implements OnInit {
   }
 
   handleResponseError() {
-    this.user.logout();
+    this.Notify.error('You have been Logout', {timeout: 3000});
+    UserService.logout();
   }
 
   saveDataToLocalStorage(response: any) {
@@ -64,7 +69,14 @@ export class AuthComponent implements OnInit {
           this.handleResponse(response);
         }, (error) => this.handleResponseError());
     }
+    this.checkTokenOutDate();
     return this.setUserName();
+  }
+
+  checkTokenOutDate() {
+    this.user.getUserCredential().subscribe((response: any) => {
+      this.handleResponse(response);
+    }, (error) => this.handleResponseError());
   }
 
   private checkTokenOrUserIdExist() {

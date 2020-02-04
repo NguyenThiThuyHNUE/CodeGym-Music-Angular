@@ -36,7 +36,20 @@ export class TrackComponent implements OnInit {
 
   ngOnInit() {
     this.getSingers();
-    this.getUserSongs();
+  }
+
+  listenListTracks(event) {
+    switch (event.action) {
+      case 'delete':
+        this.deleteSong(event.data);
+        break;
+      case 'edit':
+        this.editSong(event.data);
+        break;
+      case 'listen':
+        this.listenSong(event.data);
+        break;
+    }
   }
 
   clickDeleteSong() {
@@ -177,14 +190,16 @@ export class TrackComponent implements OnInit {
     this.song = song;
     this.declareData();
     this.page = 'delete';
-    console.log(this.page);
   }
 
   editSong(song) {
     this.song = song;
     this.declareData();
     this.page = 'edit';
-    console.log(this.page);
+  }
+
+  cancelAction() {
+    this.page = 'list';
   }
 
   listenSong(song) {

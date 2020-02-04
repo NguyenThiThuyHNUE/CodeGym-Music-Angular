@@ -29,7 +29,12 @@ export class FooterComponent implements OnInit {
 
   nextSong() {
     this.putCurrentSongToOldListOldSongs(this.currentSong);
+    if (!this.listSongs[this.indexSong]) {
+      this.indexSong++;
+      return this.nextSong();
+    }
     this.currentSong = this.listSongs[this.indexSong];
+    this.sharedService.songPlayingChange(this.currentSong);
     this.indexSong++;
   }
 

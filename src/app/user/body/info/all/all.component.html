@@ -1,16 +1,49 @@
 <div class="row">
-  <div class="col-sm-12 col-md-12 col-lg-12">
-    <div class="all-content">
-      <h3>Recent</h3>
-
-      <div class="row">
-        <div class="all-content-list-song">
-          <div class=" col-md-2 col-lg-2" *ngFor="let song of newSongs">
-            <app-song [song]="song"></app-song>
+  <div class="col-sm-4 col-md-4 col-lg-4">
+    <mat-card>
+      <mat-card-content>
+        <div class="row"><img style="width:100%" class="" src="{{userAvatar}}"/></div>
+        <div class="row">
+          <div class="col-sm-5 col-md-5 col-lg-5">
+            <p>Tracks:</p>
+            <p>Playlist:</p>
+            <p>Video:</p>
+          </div>
+          <div class="col-sm-7 col-md-7 col-lg-7">
+            <p>{{userSongs.length}}</p>
+            <p>{{playlists.length}}</p>
+            <p>0</p>
           </div>
         </div>
-      </div>
-    </div>
 
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="col-sm-8 col-md-8 col-lg-8">
+    <mat-card>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-sm-5 col-md-5 col-lg-5">
+            <p>Email:</p>
+            <p>First Name:</p>
+            <p>Last Name:</p>
+            <p>Phone Number:</p>
+            <p>City:</p>
+            <p>Country:</p>
+            <p>Bio:</p>
+          </div>
+          <div class="col-sm-7 col-md-7 col-lg-7">
+            <p>{{userEmail}}</p>
+            <p>Some First Name</p>
+            <p>Some Last Name</p>
+            <p>Some Phone Number</p>
+            <p>Some City</p>
+            <p>Some Country</p>
+            <p>Some Bio</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>

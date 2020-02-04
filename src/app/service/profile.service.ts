@@ -23,15 +23,16 @@ export class ProfileService {
     return dialogConfig;
   }
 
-  static showProfileConfigDialog() {
+  static showProfileConfigDialog(action: string) {
     const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = action;
     dialogConfig.width = '70%';
     dialogConfig.height = '70%';
     return dialogConfig;
   }
 
-  showProfile() {
-    const dialogConfig = ProfileService.showProfileConfigDialog();
+  showProfile(action: string) {
+    const dialogConfig = ProfileService.showProfileConfigDialog(action);
     this.dialog.open(InfoComponent, dialogConfig);
   }
 

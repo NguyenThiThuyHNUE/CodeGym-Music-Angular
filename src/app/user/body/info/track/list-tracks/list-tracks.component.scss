@@ -1,24 +1,8 @@
-.color-to-pink {
-  &:hover {
-    cursor: pointer;
-    color: deeppink;
-  }
-}
-
-
-.edit-song-tp-full-width{
-  width: 100%
-}
-
-button.edit-song-button-img {
-  bottom: 2rem;
-  left: 1.5rem;
-}
-
-.edit-song-button-img {
+.profile-playlist-button {
   display: inline-block;
   position: relative;
   height: 26px;
+  margin: 0;
   padding: 2px 11px 2px 10px;
   border: 1px solid #e5e5e5;
   border-radius: 3px;

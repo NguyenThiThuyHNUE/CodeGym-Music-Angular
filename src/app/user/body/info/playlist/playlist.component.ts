@@ -51,7 +51,7 @@ export class PlaylistComponent implements OnInit {
   }
 
   private handleGetSongsInPlaylistResponse(response: SongResponse) {
-    if (response.data) {
+    if (!response.data) {
       return this.Notify.error('You haven\'t any song in playlist', {timeout: 1500});
     }
     const songsInPlaylist = response.data;
@@ -104,13 +104,12 @@ export class PlaylistComponent implements OnInit {
   newPlaylist() {
     this.playListService.showFormCreatePlaylist();
     this.shareService.playlistNameEmitted.subscribe((name) => {
-     this.getPlaylists();
+      this.getPlaylists();
     });
   }
 
   private handleGetPlaylistResponse(response) {
     this.playlists = response.data;
-    console.log(this.playlists);
   }
 
   private setUserId() {

@@ -13,7 +13,9 @@ export class SharedService {
   songsUserHasLiked = new Subject<any>();
   listTheSameSongs = new Subject<any>();
   currentSong = new Subject<any>();
+  songPlaying = new Subject<any>();
   isLogin = new Subject<any>();
+  isChangePassword = new Subject<any>();
 
   // Observable string streams
   playlistNameEmitted = this.playlistName.asObservable();
@@ -23,11 +25,21 @@ export class SharedService {
   songsUserHasLikedEmitted = this.songsUserHasLiked.asObservable();
   listTheSameSongsEmitted = this.listTheSameSongs.asObservable();
   currentSongEmitted = this.currentSong.asObservable();
+  songPlayingEmitted = this.songPlaying.asObservable();
   isLoginEmitted = this.isLogin.asObservable();
+  isChangePasswordEmitted = this.isChangePassword.asObservable();
 
   // Service message commands
   listTheSameSongsChange(change) {
     this.listTheSameSongs.next(change);
+  }
+
+  songPlayingChange(change) {
+    this.songPlaying.next(change);
+  }
+
+  isPasswordChange(change) {
+    this.isChangePassword.next(change);
   }
 
   newUserNameChange(change) {

@@ -2,10 +2,13 @@
   <div class="row now-play-box">
     <div style="" class="now-playing">
       <div class="control-box">
-        <button (click)="playOrPause()" class="btn btnControl"
+        <button style="margin-right: .5rem" (click)="playOrPause()" class="btn btnControl"
                 [ngClass]="{'play': !isPlay, 'pause': isPlay}">
           <i class="fa fa-play"></i>
           <i class="fa fa-pause"></i>
+        </button>
+        <button (click)="nextSongInPlaylist()" class="btn btnControl">
+          <i class="fas fa-angle-double-right"></i>
         </button>
       </div>
 

@@ -18,10 +18,11 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {SingerRoutingModule} from './singer-routing.module';
 import {MatSelectModule} from '@angular/material';
 import { SingerInfoComponent } from './singer-info/singer-info.component';
+import {UserModule} from '../../user.module';
 
 @NgModule({
-  declarations: [SingerComponent, CreateComponent, SingerInfoComponent],
-  entryComponents: [CreateComponent, SingerInfoComponent],
+  declarations: [SingerComponent, CreateComponent],
+  entryComponents: [CreateComponent],
   imports: [
     SingerRoutingModule,
     CommonModule,
@@ -31,7 +32,8 @@ import { SingerInfoComponent } from './singer-info/singer-info.component';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    UserModule
   ]
 })
 export class SingerModule {

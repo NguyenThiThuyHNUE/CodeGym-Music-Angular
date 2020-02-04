@@ -44,26 +44,29 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {QueryComponent} from './header/query/query.component';
 import {ResultComponent} from './header/query/result/result.component';
 import {HeartComponent} from './icon/heart/heart.component';
+import { UserSingerComponent } from './body/info/user-singer/user-singer.component';
+import { ListTracksComponent } from './body/info/track/list-tracks/list-tracks.component';
+import {SingerInfoComponent} from './body/singer/singer-info/singer-info.component';
 
 @NgModule({
   declarations: [UserComponent, HeaderComponent, BodyComponent, LoginComponent, AuthComponent,
-    FooterComponent, MainComponent, ConfirmEqualValidatorDirective,
+    FooterComponent, MainComponent, ConfirmEqualValidatorDirective, SingerInfoComponent,
     InfoComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent, SongComponent, NowPlayComponent,
     UploadComponent, QueryComponent, ResultComponent, HeartComponent,
-    AllComponent, FavoriteComponent, TrackComponent, CtPlaylistComponent, ChangePasswordComponent],
+    AllComponent, FavoriteComponent, TrackComponent, CtPlaylistComponent, ChangePasswordComponent, UserSingerComponent, ListTracksComponent],
   entryComponents: [LoginComponent, ProfileComponent, ProfileComponent, PlaylistComponent, EtcComponent, NewComponent, ChangePasswordComponent,
-    InfoComponent],
+    InfoComponent, SingerInfoComponent],
 
   exports: [
     HeaderComponent,
     BodyComponent,
-    FooterComponent
+    FooterComponent,
+    ListTracksComponent
   ],
   imports: [
     UserRoutingModule,
     MatListModule,
     MusicModule,
-    SingerModule,
     MatProgressBarModule,
     SnotifyModule,
     MatSelectModule,

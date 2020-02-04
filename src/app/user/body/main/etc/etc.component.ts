@@ -270,6 +270,13 @@ export class EtcComponent implements OnInit {
   showFormCreatePlaylist() {
     this.infoService.showPlaylistCreateForm();
     this.listenCreateDialogWhenClosed();
+    this.inspectPlaylistChange();
+  }
+
+  inspectPlaylistChange() {
+    this.sharedService.playlistNameEmitted.subscribe((data) => {
+      this.getUserPlaylists();
+    });
   }
 
   getUserPlaylists() {

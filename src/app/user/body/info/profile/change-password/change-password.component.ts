@@ -4,6 +4,9 @@ import {UserService} from '../../../../../service/user.service';
 import {SnotifyService} from 'ng-snotify';
 import {ProfileService} from '../../../../../service/profile.service';
 import {MatDialogRef} from '@angular/material';
+import {InfoComponent} from '../../info.component';
+import {ProfileComponent} from '../profile.component';
+import {SharedService} from '../../../../../service/shared.service';
 
 @Component({
   selector: 'app-change-password',
@@ -17,6 +20,7 @@ export class ChangePasswordComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private Notify: SnotifyService,
               public dialogRefChangePassword: MatDialogRef<ChangePasswordComponent>,
+              private shareService: SharedService,
               private profileService: ProfileService,
               private userService: UserService) {
   }
@@ -37,12 +41,15 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   handleChangePasswordResponse(response) {
-    this.Notify.success(response.message, {timeout: 1000});
+    this.Notify.success(response.message, {timeout: 3000});
     this.closeChangePasswordDialog();
   }
 
   closeChangePasswordDialog() {
-    return this.dialogRefChangePassword.close();
+    UserService.logout();
+    this.dialogRefChangePassword.close();
+    this.shareService.isPasswordChange(true);
+
   }
 
   setUpForm() {

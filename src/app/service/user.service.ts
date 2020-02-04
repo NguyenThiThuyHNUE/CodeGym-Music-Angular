@@ -6,6 +6,7 @@ import {map} from 'rxjs/operators';
 import {LoginResponse} from '../interface/login-response';
 import {Observable} from 'rxjs';
 import {TokenRespone} from '../interface/token-respone';
+import {Response} from '../interface/response';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,14 @@ export class UserService {
     return UserService.getUserImageWithoutCheckExist();
   }
 
+  static logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('id');
+    localStorage.removeItem('email');
+    localStorage.removeItem('name');
+    localStorage.removeItem('image');
+  }
+
   userRegister(info) {
     return this.http.post<IUserResponse>(Url + '/api/register', info);
   }
@@ -56,14 +65,6 @@ export class UserService {
 
   userLoginFacebook(userCredential) {
     return this.http.post<LoginResponse>(Url + '/api/facebook/login', userCredential);
-  }
-
-  logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('id');
-    localStorage.removeItem('email');
-    localStorage.removeItem('name');
-    localStorage.removeItem('image');
   }
 
   isLoggedIn() {
@@ -79,13 +80,16 @@ export class UserService {
       return this.http.get<TokenRespone>(Url + `/api/me?token=${localStorage.getItem('token')}`);
     }
   }
+  getSingerOfUser(): Observable<Response> {
+      return this.http.get<Response>(Url + `/api/user-singer?token=${UserService.getUserToken()}`);
+  }
 
   updateUser(updateInfo) {
     return this.http.post(Url + `/api/update?token=${localStorage.getItem('token')}`, updateInfo);
   }
 
   changePassword(data) {
-    return this.http.post<Response>(Url + '/api/changePassword', data);
+    return this.http.post<Response>(Url + `/api/changePassword?token=${UserService.getUserToken()}`, data);
   }
 
   saveDataToLocalStorage(response: any) {

@@ -2,18 +2,37 @@
   <div class="col-sm-1 col-md-1 col-lg-1 info-list-option">
     <ol>
       <li>
-        <button (click)="showTracks()" mat-raised-button>Tracks</button>
+        <button class="info-button" [ngClass]="{'to-pink': thisPage === 'info'}"
+                (click)="showInfo()" mat-raised-button>Your Account
+        </button>
       </li>
       <li>
-        <button (click)="showPlaylists()" class="mt-3" mat-raised-button>Playlists</button>
+        <button [ngClass]="{'to-pink': thisPage === 'tracks'}" class="mt-3 info-button" (click)="showTracks()" mat-raised-button>
+          Tracks
+        </button>
       </li>
       <li>
-        <button (click)="showProfile()" class="mt-3" mat-raised-button>Edit</button>
+        <button [ngClass]="{'to-pink': thisPage === 'playlists'}" (click)="showPlaylists()" class="mt-3 info-button"
+                mat-raised-button>Playlists
+        </button>
       </li>
       <li>
-        <button class="mt-3" mat-raised-button>Delete</button>
+        <button [ngClass]="{'to-pink': thisPage === 'profile'}" (click)="showProfile()" class="mt-3 info-button" mat-raised-button>
+          Edit
+        </button>
+      </li>
+      <li>
+        <button [ngClass]="{'to-pink': thisPage === 'singer'}" (click)="showSinger()" class="mt-3 info-button" mat-raised-button>
+         Your Singer
+        </button>
       </li>
     </ol>
+  </div>
+
+  <div *ngIf="thisPage == 'info'" class="col-sm-10 col-md-10 col-lg-10 info-all-content">
+    <mat-card>
+      <app-all></app-all>
+    </mat-card>
   </div>
 
   <div *ngIf="thisPage == 'tracks'" class="col-sm-10 col-md-10 col-lg-10 info-all-content">
@@ -33,33 +52,10 @@
       <app-playlist></app-playlist>
     </mat-card>
   </div>
+
+  <div *ngIf="thisPage == 'singer'" class="col-sm-10 col-md-10 col-lg-10 info-all-content">
+    <mat-card>
+      <app-user-singer></app-user-singer>
+    </mat-card>
+  </div>
 </div>
-
-
-<!--<div class="breadcumb-area bg-img bg-overlay2"-->
-<!--     style="background-image: url(../../../../assets/img/bg-img/breadcumb.jpg);">-->
-<!--  <div class="header-image">-->
-<!--    <img src="../../../../assets/img/bg-img/bg-7.jpg"/></div>-->
-<!--  <div class="bradcumbContent">-->
-<!--    <h2>{{user.name}}</h2>-->
-<!--  </div>-->
-<!--</div>-->
-<!--<div class="about-us-area section-padding-100-0">-->
-<!--  <div class="profile-nav row col-sm-12 col-md-12 col-lg-12">-->
-<!--    <div class="profile-nav-item-on-left">-->
-<!--      <a routerLinkActive="deep-pink" routerLink="all">All</a>-->
-<!--      <a routerLinkActive="deep-pink" routerLink="favorite">Favorite</a>-->
-<!--      <a routerLinkActive="deep-pink" routerLink="track">Tracks</a>-->
-<!--      <a routerLinkActive="deep-pink" routerLink="playlist">Playlist</a>-->
-<!--    </div>-->
-<!--    <div class="profile-nav-item-on-right">-->
-<!--      <button class="profile-edit-button" (click)="showProfile()">Edit</button>-->
-<!--      <button class="profile-edit-button">Share</button>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <div class="row profile-content">-->
-<!--    <div class="col-sm-12 col-md-12 col-lg-12">-->
-<!--      <router-outlet></router-outlet>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->

@@ -4,7 +4,7 @@
 <hr>
 <mat-card class="matCard">
   <mat-card-header class="mb-3" *ngFor="let song of songs">
-    <img mat-card-avatar src="https://material.angular.io/assets/img/examples/shiba1.jpg" class="avatar">
+    <img mat-card-avatar src="{{song.avatar}}" class="avatar">
     <mat-card-title class="playlistItem">
       <div class="song-item-title">
         <div class=""><span (click)="listenSong(song)">{{song.name}}</span></div>

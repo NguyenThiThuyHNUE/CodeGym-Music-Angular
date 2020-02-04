@@ -102,7 +102,7 @@ export class ProfileComponent implements OnInit {
   }
 
   handleResponseError() {
-    this.userService.logout();
+    UserService.logout();
   }
 
   resetUpdateForm() {

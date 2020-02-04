@@ -40,13 +40,16 @@ export class NowPlayComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    console.log('now play');
     this.resetCurrentSong();
     this.musicSrc = this.currentSong.file;
     this.setAudio(this.musicSrc);
     this.setStartTime();
     this.setRemainTime();
     this.playMusic();
+  }
+
+  nextSongInPlaylist() {
+    this.isStop.emit(true);
   }
 
   resetCurrentSong() {
@@ -87,7 +90,7 @@ export class NowPlayComponent implements OnInit, OnChanges {
   }
 
   checkConditionToNextSong(data) {
-    return this.convertToSecond(data) === 0 && this.convertToSecond(this.startTime) > 0 && !this.nextSong;
+    return this.convertToSecond(data) === 0 && this.convertToSecond(this.startTime) > 0 && !this.nextSong && !this.isRepeat;
   }
 
   setStartTime() {
