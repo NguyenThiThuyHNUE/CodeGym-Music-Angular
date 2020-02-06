@@ -1,8 +1,13 @@
 .fas, .fa-heart {
   color: white;
+
   &:hover {
     cursor: pointer;
   }
+}
+
+.color-to-black {
+  color: black
 }
 
 .color-change {

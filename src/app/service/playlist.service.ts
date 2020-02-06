@@ -31,9 +31,22 @@ export class PlaylistService {
     return this.http.get<Response>(Url + `/api/playlists/${userId}`);
   }
 
+  getPlaylistLiked() {
+    return this.http.get<Response>(Url + `/api/playlist/liked?token=${UserService.getUserToken()}`);
+  }
+
+  likePlaylist(PlaylistId) {
+    return this.http.get<Response>(Url + `/api/playlist/like/${PlaylistId}?token=${localStorage.getItem('token')}`);
+  }
+
+  DislikePlaylist(PlaylistId) {
+    return this.http.get<Response>(Url + `/api/playlist/Dislike/${PlaylistId}?token=${localStorage.getItem('token')}`);
+  }
+
   createPlaylist(info) {
     return this.http.post<Response>('http://localhost:8000/api/playlist/create', info);
   }
+
   updatePlaylist(playlistId, data) {
     return this.http.post(Url + `/api/playlist/update/${playlistId}`, data);
   }

@@ -1,0 +1,11 @@
+
+.hover-to-pink {
+  &:hover {
+    cursor: pointer;
+    color: deeppink;
+  }
+}
+
+p {
+  color: white
+}

@@ -1,5 +1,15 @@
-<div class="songTitle"><h3 class="songTitleItem">Songs</h3> <h6 class="namePlaylist">{{playlistName}} &nbsp; <i
-  class="fas fa-pencil-alt" (click)="changeName()"></i></h6>
+<div class="songTitle">
+  <h3 class="songTitleItem">Songs</h3>
+  <div class="song-title-wrapper">
+    <button (click)="playPlaylist()" class="profile-playlist-button">
+      Play Playlist
+    </button> &nbsp;
+    <button class="profile-playlist-button">
+      <app-heart [playlistId]="playlist.playlistId" [action]="{type: 'playlist'}" [page]="'singerInfo'"></app-heart>
+    </button> &nbsp;
+  </div>
+  <h6 class="namePlaylist">{{playlistName}} &nbsp; <i
+    class="fas fa-pencil-alt" (click)="changeName()"></i></h6>
 </div>
 <hr>
 <mat-card class="matCard">

@@ -1,26 +1,71 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {IMusic} from '../../../../../interface/i-music';
 import {SongService} from '../../../../../service/song.service';
+import {SharedService} from '../../../../../service/shared.service';
+import {PlaylistService} from '../../../../../service/playlist.service';
+import {UserService} from '../../../../../service/user.service';
+import {SnotifyService} from 'ng-snotify';
 
 @Component({
   selector: 'app-list-tracks',
   templateUrl: './list-tracks.component.html',
   styleUrls: ['./list-tracks.component.scss']
 })
-export class ListTracksComponent implements OnInit {
+export class ListTracksComponent implements OnInit, OnChanges {
+  @ViewChild('addPlaylistBtn', {static: false}) addPlaylistBtn: ElementRef;
+  playlists: any[];
+  hidePlaylist = false;
   list: IMusic[];
   @Input() getSongOf: { who: string; id: number };
+  @Input() positionHeight: number;
   @Output() action = new EventEmitter<{ action: string, data: IMusic }>();
   song: IMusic;
   page = 'list';
   songsUserHasLiked: number[];
 
-  constructor(private songService: SongService) {
+  // tslint:disable-next-line:max-line-length
+
+  constructor(private songService: SongService,
+              private Notify: SnotifyService,
+              private playListService: PlaylistService, private shareService: SharedService) {
   }
 
   ngOnInit() {
     this.getSongs();
     this.getSongsUserHasLiked();
+    this.getPlaylists();
+  }
+
+  getAction(event) {
+    switch (event.action) {
+      case 'delete':
+        this.deleteSong(event.data);
+        break;
+      case 'edit':
+        this.editSong(event.data);
+        break;
+      case 'listen':
+        this.listenSong(event.data);
+        break;
+    }
+  }
+
+  getPlaylists() {
+    this.playListService.getPlaylists(UserService.getUserId())
+      .subscribe((response) => {
+        this.handleGetPlaylistResponse(response);
+      });
+  }
+
+  private handleGetPlaylistResponse(response) {
+    this.playlists = response.data;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+  }
+
+  addPlaylist(song) {
+    this.hidePlaylist = true;
   }
 
   getSongsUserHasLiked() {
@@ -63,4 +108,17 @@ export class ListTracksComponent implements OnInit {
   deleteSong(song: IMusic) {
     this.action.emit({action: 'delete', data: song});
   }
+
+  putSongToPlaylist(playlistId, songId) {
+    this.playListService.setUpDataSongToPutOrRemoveInPlaylist(playlistId, songId);
+    this.playListService.putSongToPlaylist()
+      .subscribe((response) => {
+        this.handleAddSongToPlaylistResponse(response);
+      });
+  }
+
+  handleAddSongToPlaylistResponse(response) {
+    this.Notify.success(response.message, {timeout: 1000});
+  }
+
 }

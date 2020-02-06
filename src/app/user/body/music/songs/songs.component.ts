@@ -18,6 +18,7 @@ import {SharedService} from '../../../../service/shared.service';
 export class SongsComponent implements OnInit {
   songs: IMusic[];
   private playlistName: string;
+  isPlayPlaylist: boolean;
 
   constructor(@Inject(MAT_DIALOG_DATA) public playlist: any,
               public dialog: MatDialog,
@@ -31,6 +32,24 @@ export class SongsComponent implements OnInit {
     this.playlistName = this.playlist.playlistName;
     this.getSongsInPlaylist();
     this.isChangeNamePlaylist();
+  }
+
+  playPlaylist() {
+    if (this.isPlayPlaylist) {
+      this.Notify.info('Playlist is Playing', {timeout: 1500});
+    } else {
+      this.listenPlaylist();
+    }
+  }
+
+  listenPlaylist() {
+    if (this.songs.length === 0) {
+      return this.Notify.error('You haven\'t any song in playlist', {timeout: 1500});
+    }
+    this.shareService.currentSongChange(this.songs[0]);
+    this.shareService.listTheSameSongsChange(this.removeCurrentSongInArray(this.songs[0]));
+    this.isPlayPlaylist = true;
+    this.getSongsInPlaylist();
   }
 
   isChangeNamePlaylist() {
@@ -60,6 +79,7 @@ export class SongsComponent implements OnInit {
 
   private handleGetSongsInPlaylistResponse(response: SongResponse) {
     this.songs = response.data;
+
   }
 
   changeName() {

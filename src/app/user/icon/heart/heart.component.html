@@ -1,1 +1,3 @@
-<i (click)="clickOnIcon()" [ngClass]="{'color-change': isLike}" class="fas fa-heart"></i>
+<span (click)="clickOnIcon()"><i [ngClass]="{'color-change': isLike, 'color-to-black': page === 'singerInfo'}"
+                                 class="fas fa-heart"></i> <span
+  *ngIf="page === 'singerInfo'"> Like</span></span>

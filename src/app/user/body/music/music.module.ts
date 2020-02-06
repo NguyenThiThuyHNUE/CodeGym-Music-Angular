@@ -25,35 +25,35 @@ import {NowPlayingComponent} from './detail/now-playing/now-playing.component';
 import {SongsComponent} from './songs/songs.component';
 import {ChangeNamePLComponent} from './songs/change-name-pl/change-name-pl.component';
 import {UserModule} from '../../user.module';
-import { CommentComponent } from './detail/comment/comment.component';
+import {CommentComponent} from './detail/comment/comment.component';
 import {MatListModule} from '@angular/material/list';
-import { CreateCommentComponent } from './detail/comment/create-comment/create-comment.component';
+import {CreateCommentComponent} from './detail/comment/create-comment/create-comment.component';
 
 
 @NgModule({
   declarations: [MusicComponent, CreateComponent, DeleteComponent, EditComponent, DetailComponent,
-    NowPlayingComponent, SongsComponent, ChangeNamePLComponent, CommentComponent, CreateCommentComponent,
+    NowPlayingComponent, ChangeNamePLComponent, CommentComponent, CreateCommentComponent,
   ],
-  entryComponents: [SongsComponent, ChangeNamePLComponent, CommentComponent, CreateComponent, CreateCommentComponent],
-    imports: [
-        MusicRoutingModule,
-        ReactiveFormsModule,
-        FormsModule,
-        CommonModule,
-        MatProgressBarModule,
-        SnotifyModule,
-        MatExpansionModule,
-        MatCheckboxModule,
-        MatSliderModule,
-        MatTabsModule,
-        MatRadioModule,
-        MatInputModule,
-        MatButtonModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatDialogModule,
-        MatListModule,
-    ]
+  entryComponents: [ChangeNamePLComponent, CommentComponent, CreateComponent, CreateCommentComponent],
+  imports: [
+    MusicRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    CommonModule,
+    MatProgressBarModule,
+    SnotifyModule,
+    MatExpansionModule,
+    MatCheckboxModule,
+    MatSliderModule,
+    MatTabsModule,
+    MatRadioModule,
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatDialogModule,
+    MatListModule,
+  ]
 })
 export class MusicModule {
 }

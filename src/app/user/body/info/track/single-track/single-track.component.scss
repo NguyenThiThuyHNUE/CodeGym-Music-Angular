@@ -1,39 +1,5 @@
-.singer-list-field {
-  position: fixed;
-  z-index: 123;
-  padding-left: 0px;
-}
-
-.playlist-item-content {
-  padding-left: .9rem;
-}
-
-.singer-info-content, .singer-playlists, .singer-songs {
-  padding-left: 0px;
-  padding-right: 0px;
-  left: 15%;
-
-  p {
-    margin-bottom: 0;
-  }
-
-  .color-to-pink {
-    &:hover {
-      color: deeppink;
-      cursor: pointer;
-    }
-  }
-}
-
-.hide {
-  display: none;
-}
-
-.singer-info-button {
-  width: 8rem;
-  height: 3rem;
-}
 .profile-playlist-button {
+  right: 6.2rem;
   display: inline-block;
   position: relative;
   height: 26px;
@@ -54,4 +20,31 @@
   -moz-user-select: none;
   -ms-user-select: none;
   box-sizing: border-box;
+}
+
+.list-playlist {
+  padding: 10px;
+  border-radius: 10px;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(to right, #cc1573, #5722a9) !important;
+  left: 25rem;
+  z-index: 123;
+  bottom: 2.5rem;
+
+  .hover-to-pink {
+    &:hover {
+      cursor: pointer;
+      color: deeppink;
+    }
+  }
+
+  p {
+    color: white
+  }
+}
+
+.hide {
+  display: none
 }

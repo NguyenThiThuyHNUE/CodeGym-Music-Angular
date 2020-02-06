@@ -7,6 +7,8 @@ import {IMusic} from '../interface/i-music';
 export class SharedService {
   // Observable string sources
   playlistName = new Subject<any>();
+  position = new Subject<any>();
+  likeOrDisLikeSong = new Subject<any>();
   newUserName = new Subject<any>();
   songDelete = new Subject<any>();
   songUpdate = new Subject<any>();
@@ -19,6 +21,8 @@ export class SharedService {
 
   // Observable string streams
   playlistNameEmitted = this.playlistName.asObservable();
+  positionEmitted = this.position.asObservable();
+  likeOrDisLikeSongEmitted = this.likeOrDisLikeSong.asObservable();
   songDeleteEmitted = this.songDelete.asObservable();
   songUpdateEmitted = this.songUpdate.asObservable();
   newUserNameEmitted = this.newUserName.asObservable();
@@ -32,6 +36,9 @@ export class SharedService {
   // Service message commands
   listTheSameSongsChange(change) {
     this.listTheSameSongs.next(change);
+  }
+  likeOrDisLikeSongChange(change) {
+    this.likeOrDisLikeSong.next(change);
   }
 
   songPlayingChange(change) {
